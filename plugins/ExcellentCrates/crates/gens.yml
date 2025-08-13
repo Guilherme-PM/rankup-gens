@@ -1,0 +1,694 @@
+Name: Gens Crate
+Description: []
+ItemProvider:
+  Type: VANILLA
+  Tag:
+    Value: '{components:{"minecraft:custom_name":{bold:0b,extra:["Gens Crate"],italic:0b,obfuscated:0b,strikethrough:0b,text:"",underlined:0b},"minecraft:profile":{id:[I;-850160402,1534147744,-2009838519,1945945916],name:"1ff041976a09dd05",properties:[{name:"textures",value:"eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMWZmMDQxOTc2YTA5ZGQwNTNlM2QxZDRlNjExYWFjMDk1OTRkNzRmYzcxYTBlYzRkYTAxMTA0MTZkMzE3ZGJhOCJ9fX0="}]},"minecraft:tooltip_display":{hidden_components:["minecraft:mooshroom/variant","minecraft:custom_data","minecraft:writable_book_content","minecraft:provides_trim_material","minecraft:weapon","minecraft:container","minecraft:bucket_entity_data","minecraft:tropical_fish/pattern","minecraft:use_cooldown","minecraft:villager/variant","minecraft:damage_resistant","minecraft:lock","minecraft:cat/variant","minecraft:frog/variant","minecraft:block_state","minecraft:pot_decorations","minecraft:llama/variant","minecraft:glider","minecraft:rarity","minecraft:block_entity_data","minecraft:cat/collar","minecraft:suspicious_stew_effects","minecraft:unbreakable","minecraft:parrot/variant","minecraft:axolotl/variant","minecraft:cow/variant","minecraft:damage","minecraft:entity_data","minecraft:use_remainder","minecraft:potion_contents","minecraft:intangible_projectile","minecraft:repair_cost","minecraft:painting/variant","minecraft:consumable","minecraft:enchantable","minecraft:creative_slot_lock","minecraft:break_sound","minecraft:lodestone_tracker","minecraft:wolf/sound_variant","minecraft:tropical_fish/base_color","minecraft:tropical_fish/pattern_color","minecraft:salmon/size","minecraft:tool","minecraft:bundle_contents","minecraft:wolf/variant","minecraft:container_loot","minecraft:can_place_on","minecraft:firework_explosion","minecraft:map_id","minecraft:bees","minecraft:fox/variant","minecraft:base_color","minecraft:blocks_attacks","minecraft:debug_stick_state","minecraft:stored_enchantments","minecraft:enchantment_glint_override","minecraft:death_protection","minecraft:trim","minecraft:food","minecraft:profile","minecraft:equippable","minecraft:sheep/color","minecraft:rabbit/variant","minecraft:potion_duration_scale","minecraft:provides_banner_patterns","minecraft:map_post_processing","minecraft:note_block_sound","minecraft:written_book_content","minecraft:attribute_modifiers","minecraft:horse/variant","minecraft:repairable","minecraft:charged_projectiles","minecraft:enchantments","minecraft:instrument","minecraft:ominous_bottle_amplifier","minecraft:banner_patterns","minecraft:can_break","minecraft:map_color","minecraft:jukebox_playable","minecraft:fireworks","minecraft:chicken/variant","minecraft:dyed_color","minecraft:max_stack_size","minecraft:shulker/color","minecraft:map_decorations","minecraft:recipes","minecraft:wolf/collar","minecraft:pig/variant","minecraft:max_damage"]}},count:1,id:"minecraft:player_head"}'
+    DataVersion: 4325
+ItemStackable: false
+Permission_Required: false
+Preview:
+  Enabled: true
+  Id: gens
+Animation:
+  Enabled: true
+  Id: spinningwheel
+Opening:
+  Cooldown: 0
+Key:
+  Required: true
+  Ids:
+  - gens
+Block:
+  Positions:
+  - -31,101,21,world
+  Pushback:
+    Enabled: true
+  Hologram:
+    Enabled: true
+    Template: default
+    Y_Offset: 0.0
+  Effect:
+    Model: none
+    Particle:
+      Name: BLOCK_CRUMBLE
+      Material: STONE
+Milestones:
+  Repeatable: false
+_dataver: 600
+Rewards:
+  List:
+    netherite_sword:
+      Type: ITEM
+      PreviewData:
+        Type: VANILLA
+        Tag:
+          Value: '{components:{"minecraft:custom_name":{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"Netherite Sword",underlined:0b}],text:""},"minecraft:enchantments":{"minecraft:fire_aspect":2,"minecraft:looting":3,"minecraft:sharpness":5,"minecraft:unbreaking":3}},count:1,id:"minecraft:netherite_sword"}'
+          DataVersion: 4325
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: true
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:enchantments":{"minecraft:fire_aspect":2,"minecraft:looting":3,"minecraft:sharpness":5,"minecraft:unbreaking":3}},count:1,id:"minecraft:netherite_sword"}'
+            DataVersion: 4325
+    netherite_pickaxe:
+      Type: ITEM
+      PreviewData:
+        Type: VANILLA
+        Tag:
+          Value: '{components:{"minecraft:custom_name":{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"Netherite Pickaxe",underlined:0b}],text:""},"minecraft:enchantments":{"minecraft:efficiency":5,"minecraft:fortune":3,"minecraft:unbreaking":3}},count:1,id:"minecraft:netherite_pickaxe"}'
+          DataVersion: 4325
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: true
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:enchantments":{"minecraft:efficiency":5,"minecraft:fortune":3,"minecraft:unbreaking":3}},count:1,id:"minecraft:netherite_pickaxe"}'
+            DataVersion: 4325
+    netherite_axe:
+      Type: ITEM
+      PreviewData:
+        Type: VANILLA
+        Tag:
+          Value: '{components:{"minecraft:custom_name":{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"Netherite Axe",underlined:0b}],text:""},"minecraft:enchantments":{"minecraft:efficiency":5,"minecraft:unbreaking":3}},count:1,id:"minecraft:netherite_axe"}'
+          DataVersion: 4325
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: true
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:enchantments":{"minecraft:efficiency":5,"minecraft:unbreaking":3}},count:1,id:"minecraft:netherite_axe"}'
+            DataVersion: 4325
+    netherite_shovel:
+      Type: ITEM
+      PreviewData:
+        Type: VANILLA
+        Tag:
+          Value: '{components:{"minecraft:custom_name":{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"Netherite Shovel",underlined:0b}],text:""},"minecraft:enchantments":{"minecraft:efficiency":5,"minecraft:unbreaking":3}},count:1,id:"minecraft:netherite_shovel"}'
+          DataVersion: 4325
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: true
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:enchantments":{"minecraft:efficiency":5,"minecraft:unbreaking":3}},count:1,id:"minecraft:netherite_shovel"}'
+            DataVersion: 4325
+    netherite_helmet:
+      Type: ITEM
+      PreviewData:
+        Type: VANILLA
+        Tag:
+          Value: '{components:{"minecraft:custom_name":{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"Netherite Helmet",underlined:0b}],text:""},"minecraft:enchantments":{"minecraft:protection":4,"minecraft:unbreaking":3}},count:1,id:"minecraft:netherite_helmet"}'
+          DataVersion: 4325
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: true
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:enchantments":{"minecraft:protection":4,"minecraft:unbreaking":3}},count:1,id:"minecraft:netherite_helmet"}'
+            DataVersion: 4325
+    netherite_chestplate:
+      Type: ITEM
+      PreviewData:
+        Type: VANILLA
+        Tag:
+          Value: '{components:{"minecraft:custom_name":{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"Netherite Chestplate",underlined:0b}],text:""},"minecraft:enchantments":{"minecraft:protection":4,"minecraft:unbreaking":3}},count:1,id:"minecraft:netherite_chestplate"}'
+          DataVersion: 4325
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: true
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:enchantments":{"minecraft:protection":4,"minecraft:unbreaking":3}},count:1,id:"minecraft:netherite_chestplate"}'
+            DataVersion: 4325
+    netherite_leggings:
+      Type: ITEM
+      PreviewData:
+        Type: VANILLA
+        Tag:
+          Value: '{components:{"minecraft:custom_name":{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"Netherite Leggings",underlined:0b}],text:""},"minecraft:enchantments":{"minecraft:protection":4,"minecraft:unbreaking":3}},count:1,id:"minecraft:netherite_leggings"}'
+          DataVersion: 4325
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: true
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:enchantments":{"minecraft:protection":4,"minecraft:unbreaking":3}},count:1,id:"minecraft:netherite_leggings"}'
+            DataVersion: 4325
+    netherite_boots:
+      Type: ITEM
+      PreviewData:
+        Type: VANILLA
+        Tag:
+          Value: '{components:{"minecraft:custom_name":{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"Netherite Boots",underlined:0b}],text:""},"minecraft:enchantments":{"minecraft:protection":4,"minecraft:unbreaking":3}},count:1,id:"minecraft:netherite_boots"}'
+          DataVersion: 4325
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: true
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:enchantments":{"minecraft:protection":4,"minecraft:unbreaking":3}},count:1,id:"minecraft:netherite_boots"}'
+            DataVersion: 4325
+    netherite_upgrade_smithing_template:
+      Type: ITEM
+      PreviewData:
+        Type: VANILLA
+        Tag:
+          Value: '{components:{"minecraft:custom_name":{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"Netherite Upgrade",underlined:0b}],text:""}},count:1,id:"minecraft:netherite_upgrade_smithing_template"}'
+          DataVersion: 4325
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: true
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{count:1,id:"minecraft:netherite_upgrade_smithing_template"}'
+            DataVersion: 4325
+    beacon:
+      Type: ITEM
+      PreviewData:
+        Type: VANILLA
+        Tag:
+          Value: '{components:{"minecraft:custom_name":{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"Beacon",underlined:0b}],text:""}},count:1,id:"minecraft:beacon"}'
+          DataVersion: 4325
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: true
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{count:1,id:"minecraft:beacon"}'
+            DataVersion: 4325
+    diamond_block:
+      Type: ITEM
+      PreviewData:
+        Type: VANILLA
+        Tag:
+          Value: '{components:{"minecraft:custom_name":{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"Diamond Block ",underlined:0b},{color:"gray",italic:0b,text:"(x64)"}],text:""}},count:64,id:"minecraft:diamond_block"}'
+          DataVersion: 4325
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: true
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{count:64,id:"minecraft:diamond_block"}'
+            DataVersion: 4325
+    emerald_block:
+      Type: ITEM
+      PreviewData:
+        Type: VANILLA
+        Tag:
+          Value: '{components:{"minecraft:custom_name":{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"Emerald Block ",underlined:0b},{color:"gray",italic:0b,text:"(x64)"}],text:""}},count:64,id:"minecraft:emerald_block"}'
+          DataVersion: 4325
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: true
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{count:64,id:"minecraft:emerald_block"}'
+            DataVersion: 4325
+    gold_block:
+      Type: ITEM
+      PreviewData:
+        Type: VANILLA
+        Tag:
+          Value: '{components:{"minecraft:custom_name":{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"Gold Block ",underlined:0b},{color:"gray",italic:0b,text:"(x64)"}],text:""}},count:64,id:"minecraft:gold_block"}'
+          DataVersion: 4325
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: true
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{count:64,id:"minecraft:gold_block"}'
+            DataVersion: 4325
+    iron_block:
+      Type: ITEM
+      PreviewData:
+        Type: VANILLA
+        Tag:
+          Value: '{components:{"minecraft:custom_name":{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"Iron Block ",underlined:0b},{color:"gray",italic:0b,text:"(x64)"}],text:""}},count:64,id:"minecraft:iron_block"}'
+          DataVersion: 4325
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: true
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{count:64,id:"minecraft:iron_block"}'
+            DataVersion: 4325
+    elytra:
+      Type: ITEM
+      PreviewData:
+        Type: VANILLA
+        Tag:
+          Value: '{components:{"minecraft:custom_name":{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"Elytra ",underlined:0b},{color:"gray",italic:0b,text:"(x1)"}],text:""}},count:1,id:"minecraft:elytra"}'
+          DataVersion: 4325
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: true
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{count:1,id:"minecraft:elytra"}'
+            DataVersion: 4325
+    3_generator_slots:
+      Type: ITEM
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: false
+      PreviewData:
+        Tag:
+          Value: '{}'
+          DataVersion: 4189
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:custom_data":{ExtraGens:3},"minecraft:custom_name":{extra:[{bold:1b,color:"#38A5FF",italic:0b,obfuscated:0b,strikethrough:0b,text:"3",underlined:0b},{bold:1b,color:"#38A5FF",italic:0b,obfuscated:0b,strikethrough:0b,text:"+",underlined:0b},{bold:1b,color:"#39A5FE",italic:0b,obfuscated:0b,strikethrough:0b,text:" ",underlined:0b},{bold:1b,color:"#3CA6FE",italic:0b,obfuscated:0b,strikethrough:0b,text:"G",underlined:0b},{bold:1b,color:"#3FA8FF",italic:0b,obfuscated:0b,strikethrough:0b,text:"E",underlined:0b},{bold:1b,color:"#42A9FF",italic:0b,obfuscated:0b,strikethrough:0b,text:"N",underlined:0b},{bold:1b,color:"#46ABFE",italic:0b,obfuscated:0b,strikethrough:0b,text:"E",underlined:0b},{bold:1b,color:"#4BADFE",italic:0b,obfuscated:0b,strikethrough:0b,text:"R",underlined:0b},{bold:1b,color:"#50AFFF",italic:0b,obfuscated:0b,strikethrough:0b,text:"A",underlined:0b},{bold:1b,color:"#55B2FF",italic:0b,obfuscated:0b,strikethrough:0b,text:"T",underlined:0b},{bold:1b,color:"#5AB4FF",italic:0b,obfuscated:0b,strikethrough:0b,text:"O",underlined:0b},{bold:1b,color:"#5FB6FF",italic:0b,obfuscated:0b,strikethrough:0b,text:"R",underlined:0b},{bold:1b,color:"#63B8FE",italic:0b,obfuscated:0b,strikethrough:0b,text:"
+              ",underlined:0b},{bold:1b,color:"#66B9FE",italic:0b,obfuscated:0b,strikethrough:0b,text:"S",underlined:0b},{bold:1b,color:"#69BBFF",italic:0b,obfuscated:0b,strikethrough:0b,text:"L",underlined:0b},{bold:1b,color:"#6CBCFE",italic:0b,obfuscated:0b,strikethrough:0b,text:"O",underlined:0b},{bold:1b,color:"#6DBCFF",italic:0b,obfuscated:0b,strikethrough:0b,text:"T",underlined:0b},{bold:1b,color:"#6EBDFF",italic:0b,obfuscated:0b,strikethrough:0b,text:"S",underlined:0b}],text:""},"minecraft:enchantment_glint_override":1b,"minecraft:lore":["",{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"ᴀᴅᴅs
+              ",underlined:0b},{bold:0b,color:"#F9E83D",italic:0b,obfuscated:0b,strikethrough:0b,text:"+3 ",underlined:0b},{color:"white",italic:0b,text:"ʙᴏɴᴜs ɢᴇɴᴇʀᴀᴛᴏʀ sʟᴏᴛ"}],text:""},{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"ᴍᴀxɪᴍᴜᴍ ʙᴏɴᴜs ɢᴇɴᴇʀᴀᴛᴏʀs: ",underlined:0b},{bold:0b,color:"#F9E83D",italic:0b,obfuscated:0b,strikethrough:0b,text:"50",underlined:0b}],text:""},"",{extra:[{bold:0b,color:"yellow",italic:0b,obfuscated:0b,strikethrough:0b,text:"Click here to use!",underlined:0b}],text:""},"",{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"",underlined:0b}],text:""}]},count:1,id:"minecraft:heart_of_the_sea"}'
+            DataVersion: 4325
+    2_generator_slots:
+      Type: ITEM
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: false
+      PreviewData:
+        Tag:
+          Value: '{}'
+          DataVersion: 4189
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:custom_data":{ExtraGens:2},"minecraft:custom_name":{extra:[{bold:1b,color:"#38A5FF",italic:0b,obfuscated:0b,strikethrough:0b,text:"2",underlined:0b},{bold:1b,color:"#38A5FF",italic:0b,obfuscated:0b,strikethrough:0b,text:"+",underlined:0b},{bold:1b,color:"#39A5FE",italic:0b,obfuscated:0b,strikethrough:0b,text:" ",underlined:0b},{bold:1b,color:"#3CA6FE",italic:0b,obfuscated:0b,strikethrough:0b,text:"G",underlined:0b},{bold:1b,color:"#3FA8FF",italic:0b,obfuscated:0b,strikethrough:0b,text:"E",underlined:0b},{bold:1b,color:"#42A9FF",italic:0b,obfuscated:0b,strikethrough:0b,text:"N",underlined:0b},{bold:1b,color:"#46ABFE",italic:0b,obfuscated:0b,strikethrough:0b,text:"E",underlined:0b},{bold:1b,color:"#4BADFE",italic:0b,obfuscated:0b,strikethrough:0b,text:"R",underlined:0b},{bold:1b,color:"#50AFFF",italic:0b,obfuscated:0b,strikethrough:0b,text:"A",underlined:0b},{bold:1b,color:"#55B2FF",italic:0b,obfuscated:0b,strikethrough:0b,text:"T",underlined:0b},{bold:1b,color:"#5AB4FF",italic:0b,obfuscated:0b,strikethrough:0b,text:"O",underlined:0b},{bold:1b,color:"#5FB6FF",italic:0b,obfuscated:0b,strikethrough:0b,text:"R",underlined:0b},{bold:1b,color:"#63B8FE",italic:0b,obfuscated:0b,strikethrough:0b,text:"
+              ",underlined:0b},{bold:1b,color:"#66B9FE",italic:0b,obfuscated:0b,strikethrough:0b,text:"S",underlined:0b},{bold:1b,color:"#69BBFF",italic:0b,obfuscated:0b,strikethrough:0b,text:"L",underlined:0b},{bold:1b,color:"#6CBCFE",italic:0b,obfuscated:0b,strikethrough:0b,text:"O",underlined:0b},{bold:1b,color:"#6DBCFF",italic:0b,obfuscated:0b,strikethrough:0b,text:"T",underlined:0b},{bold:1b,color:"#6EBDFF",italic:0b,obfuscated:0b,strikethrough:0b,text:"S",underlined:0b}],text:""},"minecraft:enchantment_glint_override":1b,"minecraft:lore":["",{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"ᴀᴅᴅs
+              ",underlined:0b},{bold:0b,color:"#F9E83D",italic:0b,obfuscated:0b,strikethrough:0b,text:"+2 ",underlined:0b},{color:"white",italic:0b,text:"ʙᴏɴᴜs ɢᴇɴᴇʀᴀᴛᴏʀ sʟᴏᴛ"}],text:""},{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"ᴍᴀxɪᴍᴜᴍ ʙᴏɴᴜs ɢᴇɴᴇʀᴀᴛᴏʀs: ",underlined:0b},{bold:0b,color:"#F9E83D",italic:0b,obfuscated:0b,strikethrough:0b,text:"50",underlined:0b}],text:""},"",{extra:[{bold:0b,color:"yellow",italic:0b,obfuscated:0b,strikethrough:0b,text:"Click here to use!",underlined:0b}],text:""},"",{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"",underlined:0b}],text:""}]},count:1,id:"minecraft:heart_of_the_sea"}'
+            DataVersion: 4325
+    1_generator_slot:
+      Type: ITEM
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: false
+      PreviewData:
+        Tag:
+          Value: '{}'
+          DataVersion: 4189
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:custom_data":{ExtraGens:1},"minecraft:custom_name":{extra:[{bold:1b,color:"#38A5FF",italic:0b,obfuscated:0b,strikethrough:0b,text:"1",underlined:0b},{bold:1b,color:"#38A5FF",italic:0b,obfuscated:0b,strikethrough:0b,text:"+",underlined:0b},{bold:1b,color:"#3AA5FF",italic:0b,obfuscated:0b,strikethrough:0b,text:" ",underlined:0b},{bold:1b,color:"#3CA7FE",italic:0b,obfuscated:0b,strikethrough:0b,text:"G",underlined:0b},{bold:1b,color:"#3FA8FE",italic:0b,obfuscated:0b,strikethrough:0b,text:"E",underlined:0b},{bold:1b,color:"#43AAFF",italic:0b,obfuscated:0b,strikethrough:0b,text:"N",underlined:0b},{bold:1b,color:"#48ACFF",italic:0b,obfuscated:0b,strikethrough:0b,text:"E",underlined:0b},{bold:1b,color:"#4DAEFE",italic:0b,obfuscated:0b,strikethrough:0b,text:"R",underlined:0b},{bold:1b,color:"#53B1FF",italic:0b,obfuscated:0b,strikethrough:0b,text:"A",underlined:0b},{bold:1b,color:"#58B3FE",italic:0b,obfuscated:0b,strikethrough:0b,text:"T",underlined:0b},{bold:1b,color:"#5DB5FF",italic:0b,obfuscated:0b,strikethrough:0b,text:"O",underlined:0b},{bold:1b,color:"#62B7FE",italic:0b,obfuscated:0b,strikethrough:0b,text:"R",underlined:0b},{bold:1b,color:"#66B9FF",italic:0b,obfuscated:0b,strikethrough:0b,text:"
+              ",underlined:0b},{bold:1b,color:"#69BAFF",italic:0b,obfuscated:0b,strikethrough:0b,text:"S",underlined:0b},{bold:1b,color:"#6BBCFF",italic:0b,obfuscated:0b,strikethrough:0b,text:"L",underlined:0b},{bold:1b,color:"#6DBCFF",italic:0b,obfuscated:0b,strikethrough:0b,text:"O",underlined:0b},{bold:1b,color:"#6EBDFF",italic:0b,obfuscated:0b,strikethrough:0b,text:"T",underlined:0b}],text:""},"minecraft:enchantment_glint_override":1b,"minecraft:lore":["",{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"ᴀᴅᴅs
+              ",underlined:0b},{bold:0b,color:"#F9E83D",italic:0b,obfuscated:0b,strikethrough:0b,text:"+1 ",underlined:0b},{color:"white",italic:0b,text:"ʙᴏɴᴜs ɢᴇɴᴇʀᴀᴛᴏʀ sʟᴏᴛ"}],text:""},{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"ᴍᴀxɪᴍᴜᴍ ʙᴏɴᴜs ɢᴇɴᴇʀᴀᴛᴏʀs: ",underlined:0b},{bold:0b,color:"#F9E83D",italic:0b,obfuscated:0b,strikethrough:0b,text:"50",underlined:0b}],text:""},"",{extra:[{bold:0b,color:"yellow",italic:0b,obfuscated:0b,strikethrough:0b,text:"Click here to use!",underlined:0b}],text:""},"",{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"",underlined:0b}],text:""}]},count:1,id:"minecraft:heart_of_the_sea"}'
+            DataVersion: 4325
+    ___3x3_:
+      Type: ITEM
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: false
+      PreviewData:
+        Tag:
+          Value: '{}'
+          DataVersion: 4189
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:custom_name":{extra:[{bold:0b,color:"#FCEB3E",italic:0b,obfuscated:0b,strikethrough:0b,text:"★ ʙᴏɴᴇ ᴍᴇᴀʟ 3x3 ★",underlined:0b}],text:""},"minecraft:enchantment_glint_override":1b,"minecraft:lore":["",{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"ᴛʜɪs ʜᴏᴇ ᴀʟʟᴏᴡs ʏᴏᴜ ᴛᴏ ʙᴏɴᴇ ᴍᴇᴀʟ",underlined:0b}],text:""},{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"ᴄʀᴏᴘs ɪɴ ᴀ 3x3 ᴀʀᴇᴀ",underlined:0b}],text:""},"",{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"sᴛᴀᴛɪsᴛɪᴄs:",underlined:0b}],text:""},{extra:["
+              ",{bold:0b,color:"#FF00FF",italic:0b,obfuscated:0b,strikethrough:0b,text:"☄ ",underlined:0b},{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"ʀᴀᴅɪᴜs: ",underlined:0b},{bold:0b,color:"#FF00FF",italic:0b,obfuscated:0b,strikethrough:0b,text:"3x3",underlined:0b}],text:""},"",{extra:[{bold:0b,color:"#FDD224",italic:0b,obfuscated:0b,strikethrough:0b,text:"Right click to use!",underlined:0b}],text:""},"",{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"",underlined:0b}],text:""}]},count:1,id:"minecraft:bone_meal"}'
+            DataVersion: 4325
+    ___3x3__1:
+      Type: ITEM
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: false
+      PreviewData:
+        Tag:
+          Value: '{}'
+          DataVersion: 4189
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:custom_name":{extra:[{bold:0b,color:"#FCEB3E",italic:0b,obfuscated:0b,strikethrough:0b,text:"★ ᴍᴀɢɪᴄ ʜᴏᴇ 3x3 ★",underlined:0b}],text:""},"minecraft:enchantment_glint_override":1b,"minecraft:lore":["",{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"ᴛʜɪs ʜᴏᴇ ᴀʟʟᴏᴡs ʏᴏᴜ ᴛᴏ ᴄᴏʟʟᴇᴄᴛ",underlined:0b}],text:""},{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"ᴀʟʟ ᴄʀᴏᴘs ɪɴ ᴀ 3x3 ᴀʀᴇᴀ",underlined:0b}],text:""},"",{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"sᴛᴀᴛɪsᴛɪᴄs:",underlined:0b}],text:""},{extra:["
+              ",{bold:0b,color:"#FF00FF",italic:0b,obfuscated:0b,strikethrough:0b,text:"☄ ",underlined:0b},{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"ʀᴀᴅɪᴜs: ",underlined:0b},{bold:0b,color:"#FF00FF",italic:0b,obfuscated:0b,strikethrough:0b,text:"3x3",underlined:0b}],text:""},"",{extra:[{bold:0b,color:"#FDD224",italic:0b,obfuscated:0b,strikethrough:0b,text:"Left click to use!",underlined:0b}],text:""},"",{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"",underlined:0b}],text:""}]},count:1,id:"minecraft:diamond_hoe"}'
+            DataVersion: 4325
+    magic_egg:
+      Type: ITEM
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: false
+      PreviewData:
+        Tag:
+          Value: '{}'
+          DataVersion: 4189
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:custom_data":{PetEgg:1},"minecraft:custom_name":{extra:[{bold:0b,color:"green",italic:0b,obfuscated:0b,strikethrough:0b,text:"Magic Egg",underlined:0b}],text:""},"minecraft:lore":["",{extra:[{bold:0b,color:"gray",italic:0b,obfuscated:0b,strikethrough:0b,text:"ᴀғᴛᴇʀ ᴘʟᴀᴄɪɴɢ, ʏᴏᴜ ᴡɪʟʟ ʀᴇᴄᴇɪᴠᴇ",underlined:0b}],text:""},{extra:[{bold:0b,color:"gray",italic:0b,obfuscated:0b,strikethrough:0b,text:"ᴀ ʀᴀɴᴅᴏᴍ ᴘᴇᴛ ᴡɪᴛʜ ᴀ ʀᴀɴᴅᴏᴍ",underlined:0b}],text:""},{extra:[{bold:0b,color:"gray",italic:0b,obfuscated:0b,strikethrough:0b,text:"ʀᴀʀɪᴛʏ
+              ᴛʜᴀᴛ ᴡɪʟʟ ɪɴᴄʀᴇᴀsᴇ ʏᴏᴜʀ",underlined:0b}],text:""},{extra:[{bold:0b,color:"gray",italic:0b,obfuscated:0b,strikethrough:0b,text:"ᴍᴏɴᴇʏ ᴀɴᴅ ᴛᴏᴋᴇɴ ᴍᴜʟᴛɪᴘʟɪᴇʀ",underlined:0b}],text:""},"",{extra:[{bold:0b,color:"green",italic:0b,obfuscated:0b,strikethrough:0b,text:"Right click to use!",underlined:0b}],text:""}],"minecraft:profile":{id:[I;-1956330180,140136033,-1257889009,1648663322],properties:[{name:"textures",value:"eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOWU1OWE4MjNkNTIzYTMyNDJjNWMzODNmYjU2YmEzNzMxNjM5NDIwMmVlYmJlZThlYmI1NGY2MmRjYmFmYjJhYSJ9fX0="}]}},count:1,id:"minecraft:player_head"}'
+            DataVersion: 4325

@@ -1,0 +1,47 @@
+prefix: ''
+kitDoesNotExists: '&cThe kit %kit% &cdoesn''t exists.'
+kitNoPermissions: '&cYou don''t have permissions to claim this kit.'
+noSpaceError: '&cYou don''t have enough space in your inventory.'
+commandReload: '&aConfig Reloaded.'
+commandGiveError: '&cYou need to use: /kit give <kit> <player>'
+commandGiveError2: '&cThere was an error giving the kit: %error%'
+commandGiveCorrect: '&aKit %kit% &agiven to &e%player%&a!'
+commandClaimError: '&cYou need to use: /kit claim <kit>'
+commandCreateError: '&cYou need to use: /kit create <name>'
+commandDeleteError: '&cYou need to use: /kit delete <name>'
+commandResetError: '&cYou need to use: /kit reset <kit> <player>'
+commandEditError: '&cYou need to use: /kit edit <kit>'
+commandPreviewError: '&cYou need to use: /kit preview <kit>'
+commandOpenError: '&cYou need to use: /kit open <inventory> <player>'
+commandDoesNotExists: '&cThat command doesn''t exists.'
+playerNotOnline: '&cPlayer %player% &cis not online.'
+oneTimeError: '&cYou can''t claim this kit again.'
+cooldownError: '&cYou need to wait %time% &cto claim this kit again.'
+kitReceived: '&aKit &6&l%kit% &areceived!'
+kitAlreadyExists: '&cThe kit %kit% &calready exists on the config.'
+inventoryEmpty: '&cYou need at least 1 item on your inventory to create a kit.'
+kitCreated: '&aKit %kit% &acreated correctly.'
+kitNotAddedToInventory: '&eIt was not possible to automatically add the kit to the
+  inventory. There is no more space left.'
+kitAddedToInventory: '&eKit item added to the %inventory% &edefault inventory on slot
+  %slot%&e!'
+noPermissions: '&cYou don''t have permissions for that.'
+kitDeleted: '&aKit %kit% &adeleted correctly.'
+playerDataNotFound: '&cNo data found for player %player%&c.'
+kitResetCorrect: '&aKit %kit% &areset for %player%&a!'
+cantPreviewError: '&cYou can''t preview this kit.'
+requirementsMessageStatusSymbolTrue: '&a&l✔'
+requirementsMessageStatusSymbolFalse: '&c&l✖'
+requirementsError: '&cYou dont''t have the necessary requirements to buy this!'
+seconds: s
+minutes: m
+hours: h
+days: d
+cooldownPlaceholderReady: '&aReady to claim'
+pluginCriticalErrors: '&cThe plugin has detected some errors. Check them using /kit
+  verify'
+kitPreviewDisabled: '&cKit preview is disabled.'
+inventoryNotExists: '&cThat inventory doesn''t exists.'
+kitResetCorrectAll: '&aKit &7%kit% &areset for &7all players&a!'
+
+

@@ -1,0 +1,1255 @@
+# This script was written by Xqedii and sharing is not allowed!
+# You can change and edit everything in this file if you want
+
+# Dungeons
+
+on toggling gliding:
+	if x-coordinates of player < -1400:
+		cancel event
+
+command /dungeonhelp:
+	aliases: dungeonshelp
+	trigger:
+		if player is in world "world":
+			if z-coords of player < -1000:
+				set {_x} to chest inventory with 3 rows named {Config::GUIS::DungeonsHelp::%{Bedrock::%player%}%}
+				set slot 11 of {_x} to {Config::GUIS::DungeonsHelp::Slot1}
+				set slot 12 of {_x} to {Config::GUIS::DungeonsHelp::Slot2}
+				set slot 13 of {_x} to {Config::GUIS::DungeonsHelp::Slot3}
+				set slot 14 of {_x} to {Config::GUIS::DungeonsHelp::Slot4}
+				set slot 15 of {_x} to {Config::GUIS::DungeonsHelp::Slot5}
+				open {_x} for player
+
+function checkopentime():
+	set {_list::*} to all players
+	if {_list::1} is set:
+		set {_time} to placeholder "localtime_timezone_CET" from {_list::1}
+		loop {Config::Dungeons::DungeonStartTime::*}:
+			if "%{_time}%" contains "%loop-value%":
+				set {_open} to true
+		loop {Config::Dungeons::DungeonEndTime::*}:
+			if "%{_time}%" contains "%loop-value%":
+				set {_close} to true
+		if {_open} is true:
+			if {Dungeons-Open} is not true:
+				startdungeon()
+		if {_close} is true:
+			if {Dungeons-Open} is true:
+				closedungeons()
+				set {_mess} to {Config::Dungeons::DungeonTitle}
+				replace all "{PREFIX}" with {Config::Dungeons::DungeonPrefix} in {_mess}
+				send formatted {_mess} to all players
+				send "" to all players
+				send {Config::Dungeons::DungeonClosed::1} to all players
+				send "" to all players
+				send {Config::Dungeons::DungeonClosed::2} to all players
+				send {Config::Dungeons::DungeonClosed::3} to all players
+				send "" to all players
+				loop 150 times:
+					play sound "entity.allay.ambient_without_item" with volume 0.2 and pitch 0.5+(loop-value/100) for all players
+on join:
+	if player's gamemode is spectator:
+		set player's gamemode to survival
+		teleport player to {spawn}
+function dungeondoor():
+	loop {Dungeon-Door::Loc::*}:
+		add 1 to {_or}
+		set {_easein-speed} to 0.003
+		set {_easein-strength} to 7
+		set {_loc} to location at loop-value
+		if {Dungeon-Door1::Orientation::%{_or}%} is 2:
+			remove 3.001 from x-coordinates of {_loc}
+		else:
+			add 0.999 to x-coordinates of {_loc}
+		set pitch of {_loc} to 0
+		set yaw of {_loc} to 90
+		delete {_air}
+		loop 30 times:
+			add 1 to {_air}
+			add 1 to {_l}
+			if {Dungeon-Door::Orientation::%{_or}%} is 2:
+				add 1 to x-coordinates of {_loc}
+			else:
+				add 1 to z-coordinates of {_loc}
+			if {_l} > 5:
+				set {_l} to 1
+				if {Dungeon-Door::Orientation::%{_or}%} is 2:
+					remove 5 from x-coordinates of {_loc}
+				else:
+					remove 5 from z-coordinates of {_loc}
+				add 1 to y-coordinates of {_loc}
+			if block at {_loc} is air:
+				set block at {_loc} to barrier
+			spawn block display at {_loc}:
+				set name of entity to "BBB%{_or}%"
+				if {_l} is 2 or 3 or 4:
+					set display block data of entity to chiseled stone bricks
+				else:
+					set display block data of entity to stone bricks
+				if {_air} is 26 or 30:
+					set display block data of entity to air
+				set display scale of entity to vector(1,1,1)
+				set display teleport duration of entity to 5
+				set interpolation start of entity to 20
+				set interpolation duration of entity to 70 ticks
+
+function finaldoor():
+	set {_loc} to {Dungeon-DoorFinal}
+	launch trailing flickering ball large coloured lime fading to magenta at location 1 above and 5.5 in front and 4.5 right of {Dungeon-DoorFinal} with duration 0
+	loop 108 times:
+		add 1 to {_air}
+		add 1 to {_l}
+		add 1 to z-coordinates of {_loc}
+		if {_l} > 9:
+			set {_l} to 1
+			remove 9 from z-coordinates of {_loc}
+			add 1 to y-coordinates of {_loc}
+		if block at {_loc} is air:
+			set block at {_loc} to barrier
+		spawn block display at {_loc}:
+			set name of entity to "BBBFinal"
+			if {_l} is 3 or 4 or 5 or 6 or 7:
+				set display block data of entity to chiseled stone bricks
+			else:
+				set display block data of entity to stone bricks
+			set display scale of entity to vector(1,1,1)
+			set display teleport duration of entity to 5
+			set interpolation start of entity to 20
+			set interpolation duration of entity to 70 ticks
+
+
+on right click on barrier:
+	if player is in world "world":
+		if z-coords of player < -1000:
+			barriercheck(player, clicked block)
+on left click on barrier:
+	if player is in world "world":
+		if z-coords of player < -1000:
+			cancel event
+			barriercheck(player, clicked block)
+
+function barriercheck(player: player, block: location):
+	loop all entities in radius 0.9 around {_block}:
+		set {_x} to name of loop-value
+		if {_x} contains "BBB":
+			if {Dungeons::Keys} > 0:
+				if {_X} is "BBB6":
+					if {Dungeon-RoomCleared} < 4:
+						play sound "entity.illusioner.mirror_move" with pitch 2 for {_player}
+						send {Config::Dungeons::GateLater} to {_player}
+						stop
+				if {_X} is "BBB8":
+					if {Dungeon-RoomCleared} < 5:
+						play sound "entity.illusioner.mirror_move" with pitch 2 for {_player}
+						send {Config::Dungeons::GateLater} to {_player}
+						stop
+				remove 1 from {Dungeons::Keys}
+				set {_mess} to {Config::Dungeons::GateOpen}
+				replace all "{PLAYER}" with "%{_player}%" in {_mess}
+				loop {Dungeons::Players::*}:
+					send {_mess} to loop-value-2 parsed as offline player
+					play sound "entity.player.levelup" with pitch 2 for loop-value-2 parsed as offline player
+				opendoor({_x})
+			else:
+				play sound "entity.illusioner.mirror_move" with pitch 2 for {_player}
+				if {_x} is "BBB1":
+					send {Config::Dungeons::StartGate} to {_player}
+					play sound "entity.illusioner.mirror_move" with pitch 2 for {_player}
+				else if {_X} is "BBBFinal":
+					send {Config::Dungeons::BossGate} to {_player}
+					play sound "entity.illusioner.mirror_move" with pitch 2 for {_player}
+				else:
+					send {Config::Dungeons::NoKey} to {_player}
+					play sound "entity.illusioner.mirror_move" with pitch 2 for {_player}
+			stop loop
+
+
+function opendoor(door: text):
+	set {_a} to {_door}
+	replace all "BBB" with "" in {_a}
+	set {Dungeon-CurrentRoom} to {_a} parsed as number
+	loop all block displays:
+		if name of loop-block display is {_door}:
+			add loop-block display to {_entity::*}
+			if block at loop-block display is barrier:
+				set block at loop-block display to air
+	set {_easein-speed} to 0.003
+	set {_easein-strength} to 7
+	set {_lv} to 30
+	if {_door} is "BBBFinal":
+		add 20 to {_lv}
+	loop {_lv} times:
+		loop {_entity::*}:
+			show 100 stone block breaking at loop-value-2
+			play sound "block.stone.break" with pitch (random number between 0.5 and 0.9) at loop-value-2
+			set {_loc} to location at loop-value-2
+			remove {_easein-speed}*(loop-value-1*{_easein-strength}) from y-coords of {_loc}
+			teleport loop-value-2 to {_loc}
+		wait 1 tick
+	loop {_entity::*}:
+		kill loop-value-1
+	if {_door} is "BBB3" or "BBB4" or "BBB2":
+		wave({Dungeon-CurrentRoom})
+	if {_door} is "BBB9":
+		set {Dungeon-CurrentRoom} to 4
+		wave(4)
+	if {_door} is "BBB7":
+		set {Dungeon-CurrentRoom} to 3
+		wave(3)
+	if {_door} is "BBB8":
+		wait 2 seconds
+		bossfight()
+
+on right click on trapped chest:
+	if player is in world "world":
+		if z-coordinates of player < -1000:
+			cancel event
+
+on right click on chest:
+	if player is in world "world":
+		if z-coordinates of player < -1000:
+			cancel event
+			set {_loc} to location at targeted block
+			if block at {_loc} is chest:
+				set block at {_loc} to trapped chest[facing=south]
+				if {_loc} is {Dungeon::Chests::1}:
+					if {Dungeon-ChestAreaStart} is not set:
+						play sound "enchant.thorns.hit" with volume 2 and pitch 1 at {_loc}
+						make 150 of crit at {_loc} with extra 0.5
+						set {Dungeon-ChestAreaStart} to true
+						set block at {_loc} to air
+						wave(6)
+						stop
+				set {_mess} to {Config::Dungeons::FoundChest}
+				replace all "{PLAYER}" with "%player%" in {_mess}
+				loop {Dungeons::Players::*}:
+					send {_mess} to loop-value parsed as offline player
+				set {_a} to "Tool" or "Gen"
+				if {_a} is "Tool":
+					set {_tool} to "Axe" or "Pickaxe" or "Hoe"
+					set {_level} to random integer between 15 and 27
+					give player {Gens::Tool::%{_tool}%::%{_level}%}
+					set {_mess} to {Config::Dungeons::Received}
+					replace all "{ITEM}" with "&6&lTool" in {_mess}
+					replace all "{LEVEL}" with "%{_level}%" in {_mess}
+					send {_mess} to player
+				if {_a} is "Gen":
+					set {_level} to random integer between 14 and 21
+					give player {Generatory::%{_level}%}
+					set {_mess} to {Config::Dungeons::Received}
+					replace all "{ITEM}" with "&6&lGenerator" in {_mess}
+					replace all "{LEVEL}" with "%{_level}%" in {_mess}
+					send {_mess} to player
+				play sound "block.beacon.power_select" with pitch 1.5 at {_loc}
+				if {Dungeon::Chests::1} is {_loc}:
+					make 100 of flame at location 0.25 under {_loc} with extra 0.25
+				else:
+					make 400 of witch at location 0.25 under {_loc} with extra 1
+				loop 15 times:
+					if loop-value is 5:
+						chestanim({_loc})
+						wait 1 tick
+						set block at {_loc} to air
+					dungeonanimation(location 0.2 under {_loc})
+					wait 2 tick
+
+function chestanim(loc: location):
+	play sound "item.trident.return" with pitch 0.5 at {_loc}
+	spawn item display at location at {_loc}:
+		set display item of entity to chest
+		set interpolation start of entity to 0
+		set interpolation duration of entity to 20 ticks
+		set {_q} to display right rotation of entity rotated around vector(0,180,0)
+		set display right rotation of entity to {_q}
+		set display scale of entity to vector(1,1,1)
+		set display teleport duration of entity to 100
+		set {_e} to entity
+	wait 2 tick
+	set display item of {_e} to chest
+	teleport {_e} to location 4.5 above {_loc}
+	set display scale of {_e} to vector(0,0,0)
+	play sound "item.trident.riptide_3" with pitch 0.5 at {_loc}
+	loop 10 times:
+		set interpolation start of {_e} to 0
+		set {_q} to display right rotation of {_e} rotated around vector(0,45,0)
+		set display right rotation of {_e} to {_q}
+		wait 6 ticks
+	kill {_e}
+	wait 1 tick
+function dungeonanimation(loc: location):
+	spawn item display at location 1 under {_loc}:
+		set {_check} to location 0.2 above {_loc}
+		if {_check} is {Dungeon::Chests::1}:
+			chance of 50%:
+				set display item of entity to orange stained glass
+			else:
+				set display item of entity to yellow stained glass
+		else:
+			set display item of entity to magenta stained glass
+		set interpolation start of entity to 0
+		set interpolation duration of entity to 15 ticks
+		set display scale of entity to vector(4,0.1,4)
+		set display teleport duration of entity to 100
+		set {_e} to entity
+	wait 1 tick
+	teleport {_e} to location 4.5 above {_loc}
+	set display scale of {_e} to vector(0,0,0)
+	loop 10 times:
+		set interpolation start of {_e} to 0
+		set {_q} to display right rotation of {_e} rotated around vector(0,45,0)
+		set display right rotation of {_e} to {_q}
+		wait 6 ticks
+	kill {_e}
+	wait 1 tick
+
+
+on death:
+	if victim is a player:
+		if victim is in world "world":
+			if z-coordinates of victim < -1000:
+				cancel event
+				wait 1 tick
+				feed victim
+				teleport victim to {DungeonsSpawn}
+				send {Config::Dungeons::Death::*} to victim
+				loop 5 times:
+					play sound "entity.experience_orb.pickup" with pitch 1.3-(loop-value/10) for victim
+					wait 0.15 second
+				play sound "entity.experience_orb.pickup" with pitch 1.1 for victim
+				wait 0.15 second
+				play sound "entity.experience_orb.pickup" with pitch 1.2 for victim
+
+function dungeonsbossbar(player: player, title: text, id: text, progress: number, color: color):
+	set {_bar} to boss bar with id "%{_id}%" with title "%{_title}%" with color {_color} with progress {_progress}
+	set bar style of {_bar} to solid_bar
+	add {_player} to {_bar}
+
+command /dungeon:
+	aliases: dungeons
+	trigger:
+		if {Dungeons-Open} is not true:
+			send {Config::Dungeons::DungeonsClosed}
+			if player has permission "*":
+				send ""
+				send " &c&lADMIN INFO"
+				send " &7You can start it using &a/adminpanel dungeons start"
+				send ""
+			stop
+		if {Dungeons::Players::*} contains "%player%":
+			send {Config::Dungeons::AlreadyInDungeons}
+			stop
+		else:
+			if {Dungeons-End} is true:
+				send {Config::Dungeons::Finished}
+				stop
+			execute console command "gadgetsmenu reset all %player%"
+			teleport player to {DungeonsSpawn}
+			delete boss bar with id "NextWave-%player%"
+			delete boss bar with id "InfoBar-%player%"
+			send {Config::Dungeons::YouJoined}
+			set {_mess} to {Config::Dungeons::PlayerJoined}
+			replace all "{PLAYER}" with "%player%" in {_mess}
+			replace all "{PLAYERS}" with "%size of {Dungeons::Players::*}+1%" in {_mess}
+			loop {Dungeons::Players::*}:
+				send {_mess} to loop-value parsed as offline player
+			add "%player%" to {Dungeons::Players::*}
+			set {_progress} to (size of {Dungeons::Players::*}/{Config::Dungeons::RequiredPlayers})*100
+			set {_color2} to "&a"
+			if {_progress} > 99:
+				set {_color2} to "&6"
+			set {_btitle} to {Config::Dungeons::WaitingForPlayers}
+			replace all "{PREFIX}" with {Config::Dungeons::DungeonPrefix} in {_btitle}
+			replace all "{CURRENT}" with "%{_color2}%%size of {Dungeons::Players::*}%" in {_btitle}
+			replace all "{REQUIRED}" with "%{Config::Dungeons::RequiredPlayers}%" in {_btitle}
+			if size of {Dungeons::Players::*} < {Config::Dungeons::RequiredPlayers}:
+				loop {Dungeons::Players::*}:
+					if {Dungeons-Started} is not true:
+						dungeonsbossbar(loop-value parsed as offline player, {_btitle}, "Dungeons-%loop-value%", {_progress}, red)
+			if {Dungeon-WaveData} is not "starting":
+				if {Dungeons-Started} is true:
+					if {Dungeon-ReqKills}-{Dungeon-CurrentKills} > 0:
+						set {_progress} to ({Dungeon-CurrentKills}/{Dungeon-ReqKills})*100
+						set {_btitle} to {Config::Dungeons::NextWaveIn}
+						replace all "{KILLS}" with "%{Dungeon-ReqKills}-{Dungeon-CurrentKills}%" in {_btitle}
+						dungeonsbossbar(player, {_btitle}, "NextWave-%player%", {_progress}, yellow)
+						set {_bar} to boss bar with id "NextWave-%player%"
+						set bar progress of {_bar} to {_progress}
+			if {Dungeon-BossFight} is true:
+				set {_btitle} to {Config::Dungeons::BossHealthBar}
+				replace all "{HP}" with "%{Config::Dungeons::BossHealth}%" in {_btitle}
+				replace all "{MAXHP}" with "%{Config::Dungeons::BossHealth}%" in {_btitle}
+				dungeonsbossbar(player, {_btitle}, "Boss-%player%", ({Dungeon-BossHealth}/{Config::Dungeons::BossHealth})*100, red)
+				set {_bar} to boss bar with id "Boss-%player%"
+				set bar style of {_bar} to segmented 6
+			wait 1 second
+			if {Dungeons-Data} is not "starting":
+				if size of {Dungeons::Players::*} >= {Config::Dungeons::RequiredPlayers}:
+					set {Dungeons-Data} to "starting"
+					if {Dungeons-Started} is not true:
+						dungeonstart()
+						set {_mess} to {Config::Dungeons::Sarting}
+						replace all "{SECONDS}" with "%{Config::Dungeons::Counter}%" in {_mess} 
+						loop {Dungeons::Players::*}:
+							send {_mess}  to loop-value parsed as offline player
+							play sound "block.note_block.pling" with pitch 0.5 for loop-value parsed as offline player
+							set {_title1} to {Config::Dungeons::StartSoon::1}
+							set {_title2} to {Config::Dungeons::StartSoon::2}
+							replace all "{SECONDS}" with "%{Config::Dungeons::Counter}%" in {_title1}
+							replace all "{SECONDS}" with "%{Config::Dungeons::Counter}%" in {_title2}
+							send loop-value parsed as offline player title {_title1} with subtitle {_title2} for 1 second
+
+function bossfight():
+	set {Dungeon-BossFight} to true
+	set {_loc} to location 3 above {Dungeon-Spawn::8}
+	set yaw of {_loc} to 90
+	spawn chicken at location 3 under {Dungeon-Spawn::8}
+	add nbt compound of "{Silent:1}" to nbt compound of last spawned chicken
+	set max health of last spawned chicken to 99999
+	heal last spawned chicken
+	set name of last spawned chicken to "&6&l» &c&lCHICKEN ?!? &6&l«"
+	loop {Dungeons::Players::*}:
+		animation(loop-value parsed as offline player)
+	wait 0.5 second
+	spawn phantom at {_loc}
+	add nbt compound of "{Size:25,NoAI:1}" to nbt compound of last spawned phantom
+	set name of last spawned phantom to "&6&l» &c&lBOSS &6&l«"
+	make 200 of lava at {_loc} with extra 1
+	loop {Dungeons::Players::*}:
+		startCinematic(loop-value parsed as offline player, "Dungeon", false)
+	particle1({_loc})
+	set {Dungeon-BossHealth} to {Config::Dungeons::BossHealth}
+	wait 1 seconds
+	spawnmobs()
+	wait 7 seconds
+	set {_btitle} to {Config::Dungeons::BossHealthBar}
+	replace all "{HP}" with "%{Config::Dungeons::BossHealth}%" in {_btitle}
+	replace all "{MAXHP}" with "%{Config::Dungeons::BossHealth}%" in {_btitle}
+	loop {Dungeons::Players::*}:
+		dungeonsbossbar(loop-value parsed as offline player, {_btitle}, "Boss-%loop-value%", 100, red)
+		set {_bar} to boss bar with id "Boss-%loop-value%"
+		set bar style of {_bar} to segmented_6
+	spawnmini()
+
+function particle1(loc: location):
+	make 400 of lava at {_loc} with offset vector(19, 12, 19) with extra 1
+
+every 12 seconds:
+	checkopentime()
+	if {Dungeon-BossFight} is true:
+		load chunk at {Dungeon-Spawn::8}
+		wait 1 second
+		if {Dungeon-AirAttack} is true:
+			set {Dungeon-AirAttack} to false
+			airattack()
+		else:
+			set {Dungeon-AirAttack} to true
+		set {_list::*} to 1 and 2 and 3 and 4 and 5
+		remove {Dungeon-LastInt} from {_list::*}
+		if size of all mobs in world "world" > 55:
+			remove 2 from {_list::*}
+			remove 4 from {_list::*}
+		if size of phantoms in world "world" > 9:
+			remove 4 from {_list::*}
+		if {Dungeon-BossHealth} > {Config::Dungeons::BossHealth}/1.2:
+			remove 5 from {_list::*}
+		if size of all mobs in world "world" < 35:
+			spawnmobs()
+		set {_a} to random element out of {_list::*}
+		set {Dungeon-LastInt} to {_a}
+		if {_a} is 1:
+			groundattack()
+		if {_a} is 2:
+			spawnmobs()
+		if {_a} is 4:
+			spawnmini()
+		if {_a} is 5:
+			spawnlava()
+
+
+function airattack():
+	loop all players in radius 25 around {Dungeon-Spawn::8}:
+		add loop-player to {_list::*}
+	set {_player} to random element out of {_list::*}
+	loop 5 times:
+		if {Dungeon-BossFight} is not true:
+			stop
+		loop all chickens in radius 1 around location 3 under {Dungeon-Spawn::8}:
+			set {_detect} to loop-entity
+		loop all phantoms in radius 1 around location 3 above {Dungeon-Spawn::8}:
+			set {_phantom} to loop-entity
+		if {_detect} is set:
+			if {_player} is set:
+				make {_detect} look at {_player}
+		if {_phantom} is not set:
+			stop
+		if {_player} is not set:
+			stop
+		wait 1 second
+		if distance between {_phantom} and {_player} > 25:
+			stop
+		drawAttack({_phantom}, {_player})
+		set {_loc} to location 3 above {Dungeon-Spawn::8}
+		set {_pitch} to pitch of {_detect}
+		set pitch of {_loc} to pitch of {_detect}-20
+		set yaw of {_loc} to yaw of {_detect}
+		teleport {_phantom} to {_loc}
+		wait 1 second
+
+function groundattack():
+	loop 20 times:
+		loop all blocks in radius loop-value around location 1 under {Dungeon-Spawn::8}:
+			if loop-block is air:
+				if {_list::%location at loop-block%} is not set:
+					if y-coordinates of loop-block is 108.5:
+						set {_list::%location at loop-block%} to true
+						if {Dungeon-BossFight} is not true:
+							stop
+						chance of 30%:
+							spawn evoker fangs at location 0.5 under loop-block
+		wait 0.2 second
+
+
+function spawnmobs():
+	play sound "entity.elder_guardian.curse" with volume 5 and pitch 0.8 at {_loc1}
+	loop 20 times:
+		loop all blocks in radius loop-value around location 1 under {Dungeon-Spawn::8}:
+			if loop-block is air:
+				if {_list::%location at loop-block%} is not set:
+					if y-coordinates of loop-block is 108.5:
+						set {_list::%location at loop-block%} to true
+						if {Dungeon-BossFight} is not true:
+							stop
+						chance of 2%:
+							set {_a} to "zombie" or "skeleton"
+							chance of 10%:
+								if {Dungeon-BossHealth} < {Config::Dungeons::BossHealth}/2:
+									set {_a} to "blaze"
+							if {_a} is "zombie":
+								spawn zombie at loop-block
+							if {_a} is "skeleton":
+								spawn skeleton at loop-block
+							if {_a} is "blaze":
+								spawn blaze at loop-block
+							set max health of last spawned entity to 30
+							heal last spawned entity
+							set display name of last spawned entity to entityname(last spawned entity)
+							chance of 30*{Config::Dungeons::GlobDiff}%:
+								set helmet of last spawned entity to iron helmet or golden helmet
+								chance of 30*{Config::Dungeons::GlobDiff}%:
+									enchant last spawned entity's helmet with protection 2
+							chance of 30*{Config::Dungeons::GlobDiff}%:
+								set chestplate of last spawned entity to iron chestplate or golden chestplate
+								chance of 30*{Config::Dungeons::GlobDiff}%:
+									enchant last spawned entity's chestplate with protection 2
+							chance of 30*{Config::Dungeons::GlobDiff}%:
+								set leggings of last spawned entity to iron leggings or golden leggings
+								chance of 30*{Config::Dungeons::GlobDiff}%:
+									enchant last spawned entity's leggings with protection 2
+							chance of 30*{Config::Dungeons::GlobDiff}%:
+								set boots of last spawned entity to iron boots or golden boots
+								chance of 30*{Config::Dungeons::GlobDiff}%:
+									enchant last spawned entity's boots with protection 2
+							chance of 30*{Config::Dungeons::GlobDiff}%:
+								if {_a} is "zombie":
+									set last spawned entity's tool to iron sword or golden sword
+								else:
+									enchant last spawned entity's tool with power 2
+							chance of 30*{Config::Dungeons::GlobDiff}%:
+								apply strength 1 to last spawned entity for 999 days
+							chance of 30*{Config::Dungeons::GlobDiff}%:
+								apply speed 1 to last spawned entity for 999 days
+							make 5 of cloud at loop-block with extra 0.1
+							make 400 of cloud at loop-block with extra 0.1
+							play sound "entity.chicken.egg" with pitch 1 at loop-block
+		wait 0.2 second
+
+function spawnmini():
+	loop 7 times:
+		loop all blocks in radius loop-value+13 around location 1 under {Dungeon-Spawn::8}:
+			if loop-block is air:
+				if {_list::%location at loop-block%} is not set:
+					if y-coordinates of loop-block is 114.5:
+						set {_list::%location at loop-block%} to true
+						if {Dungeon-BossFight} is not true:
+							stop
+						chance of 1%:
+							add 1 to {_max}
+							drawMagicLine(location 4 above {Dungeon-Spawn::8}, location at loop-block)
+							if {_max} is 6:
+								stop
+		wait 0.2 second
+
+
+function spawnlava():
+	play sound "entity.ender_dragon.growl" with volume 5 and pitch 0.9 at {Dungeon-Spawn::8}
+	loop 5 times:
+		add 1 to {_a}
+		if {_a} is 1:
+			set {_item} to red stained glass
+		else if {_a} is 2:
+			set {_item} to orange stained glass
+		else:
+			set {_item} to yellow stained glass
+		spawn item display at location at location 7 under {Dungeon-Spawn::8}:
+			set display item of entity to {_item}
+			set display scale of entity to vector(40,3,40)
+			set display teleport duration of entity to 200
+			set {_e%{_a}%} to entity
+	particle1({Dungeon-Spawn::8})
+	loop 5 times:
+		teleport {_e%loop-value%} to location 1.3+((loop-value/10)*3.9) under {Dungeon-Spawn::8}
+	wait 2 tick
+	loop 20 times:
+		make 400 of flame at {Dungeon-Spawn::8} with offset vector(1, 1, 1) with extra 1
+		wait 1 tick
+	loop 40 times:
+		loop all phantoms in radius 1 around location 3 above {Dungeon-Spawn::8}:
+			set {_phantom} to loop-entity
+		set {_location} to location at {_phantom}
+		add 45 to yaw of {_location}
+		teleport {_phantom} to {_location}
+		loop all players in radius 28 around {Dungeon-Spawn::8}:
+			if y-coordinates of loop-player < 111:
+				damage loop-player by 0.5
+				ignite loop-player for 1 second
+		wait 0.25 second
+		if mod(loop-value, 4) is 0:
+			make 400 of lava at {Dungeon-Spawn::8} with offset vector(19, 1, 19) with extra 1
+		if loop-value is 32:
+			loop 5 times:
+				teleport {_e%loop-value-2%} to location 7 under {Dungeon-Spawn::8}
+	wait 2 seconds
+	loop 5 times:
+		kill {_e%loop-value%}
+
+
+
+function drawMagicLine(loc1: location, loc2: location):
+	play sound "item.trident.riptide_3" with volume 5 and pitch (random number between 0.5 and 1) at {_loc1}
+	set {_v} to vector from {_loc1} to {_loc2}
+	set vector length of {_v} to 0.3
+	set {_y} to floor((distance between {_loc1} and {_loc2}) / 0.3)/2
+	loop floor((distance between {_loc1} and {_loc2}) / 0.3) times:
+		add 1 to {_z}
+		set {_sineValue} to sin((({_z} / round({_y})) * 180))
+		set y-coords of {_loc1} to y-coords of {_loc1} + (0.50 * {_sineValue})
+		make 1 flame at {_loc1}
+		set {_loc1} to {_loc1} ~ {_v}
+		add 1 to {_a}
+		if {_a} > 0:
+			wait 1 ticks
+			set {_a} to 0
+	if {Dungeon-BossFight} is true:
+		spawn phantom at {_loc2}
+		set display name of last spawned phantom to entityname(last spawned phantom)
+		make 5 of cloud at {_loc2} with extra 0.1
+		play sound "entity.chicken.egg" with pitch 1 at {_loc2}
+function drawLavaLine(loc1: location, loc2: location):
+	set {_v} to vector from {_loc1} to {_loc2}
+	set vector length of {_v} to 0.3
+	set {_y} to floor((distance between {_loc1} and {_loc2}) / 0.3)/2
+	loop floor((distance between {_loc1} and {_loc2}) / 0.3) times:
+		add 1 to {_z}
+		set {_sineValue} to sin((({_z} / round({_y})) * 180))
+		set y-coords of {_loc1} to y-coords of {_loc1} + (0.50 * {_sineValue})
+		make 1 of flame at {_loc1}
+		set {_loc1} to {_loc1} ~ {_v}
+		add 1 to {_a}
+		if {_a} > 0:
+			wait 1 ticks
+			set {_a} to 0
+
+
+function drawAttack(loc1: location, loc2: location):
+	set {_v} to vector from {_loc1} to {_loc2}
+	set vector length of {_v} to 0.8
+	play sound "entity.wither.shoot" with volume 5 and pitch 1 at {Dungeon-Spawn::8}
+	loop floor((distance between {_loc1} and {_loc2}) / 0.8) times:
+		play sound "block.stone.break" with volume 2 and pitch 2 at {_loc1}
+		make 1 of sonic boom at {_loc1}
+		make 1 of explosion at {_loc1}
+		set {_loc1} to {_loc1} ~ {_v}
+		wait 1 tick
+	loop all players in radius 4 around {_loc2}:
+		damage loop-player by 1.5
+		push loop-player upwards with speed 0.9
+		set {_direction} to vector from {Dungeon-Spawn::8} to loop-player
+		push loop-player {_direction} with speed 0.5
+	play sound "entity.generic.explode" with volume 2 and pitch 1 at {_loc1}
+	make 100 of explosion at {_loc2}
+
+command /leave:
+	trigger:
+		if {Dungeons::Players::*} contains "%player%":
+			send {Config::Dungeons::YouLeft}
+			teleport player to {spawn}
+			remove "%player%" from {Dungeons::Players::*}
+			resetBossbar(player)
+			set {_mess} to {Config::Dungeons::PlayerLeft}
+			replace all "{PLAYER}" with "%player%" in {_mess}
+			replace all "{REAMINING}" with "%size of {Dungeons::Players::*}%" in {_mess}
+			loop {Dungeons::Players::*}:
+				send {_mess} to loop-value parsed as offline player
+			if {Dungeons-Started} is not true:
+				if size of {Dungeons::Players::*} < {Config::Dungeons::RequiredPlayers}:
+					delete {Dungeons-Data}
+					set {_progress} to (size of {Dungeons::Players::*}/{Config::Dungeons::RequiredPlayers})*100
+					set {_btitle} to {Config::Dungeons::WaitingForPlayers}
+					replace all "{PREFIX}" with {Config::Dungeons::DungeonPrefix} in {_btitle}
+					replace all "{CURRENT}" with "%size of {Dungeons::Players::*}%" in {_btitle}
+					replace all "{REQUIRED}" with "%{Config::Dungeons::RequiredPlayers}%" in {_btitle}
+					loop {Dungeons::Players::*}:
+						dungeonsbossbar(loop-value parsed as offline player, {_btitle}, "Dungeons-%loop-value%", {_progress}, red)
+		else:
+			send {Config::Dungeons::NotInDungeons}
+
+on join:
+	resetBossbar(player)
+
+function resetBossbar(player: player):
+	delete boss bar with id "Dungeons-%{_player}%"
+	delete boss bar with id "Boss-%{_player}%"
+	delete boss bar with id "NextWave-%{_player}%"
+	delete boss bar with id "InfoBar-%{_player}%"
+
+on quit:
+	if {Dungeons::Players::*} contains "%player%":
+		remove "%player%" from {Dungeons::Players::*}
+		set {_mess} to {Config::Dungeons::PlayerLeft}
+		replace all "{PLAYER}" with "%player%" in {_mess}
+		replace all "{REAMINING}" with "%size of {Dungeons::Players::*}%" in {_mess}
+		loop {Dungeons::Players::*}:
+			send {_mess} to loop-value parsed as offline player
+		if {Dungeons-Started} is not true:
+			if size of {Dungeons::Players::*} < {Config::Dungeons::RequiredPlayers}:
+				delete {Dungeons-Data}
+				set {_progress} to (size of {Dungeons::Players::*}/{Config::Dungeons::RequiredPlayers})*100
+				set {_btitle} to {Config::Dungeons::WaitingForPlayers}
+				replace all "{PREFIX}" with {Config::Dungeons::DungeonPrefix} in {_btitle}
+				replace all "{CURRENT}" with "%size of {Dungeons::Players::*}%" in {_btitle}
+				replace all "{REQUIRED}" with "%{Config::Dungeons::RequiredPlayers}%" in {_btitle}
+				loop {Dungeons::Players::*}:
+					dungeonsbossbar(loop-value parsed as offline player, {_btitle}, "Dungeons-%loop-value%", {_progress}, red)
+
+on join:
+	if player is in world "world":
+		if z-coordinates of player < -1000:
+			teleport player to {spawn}
+function dungeonstart():
+	loop {Dungeons::Players::*}:
+		delete boss bar with id "Dungeons-%loop-value%"
+		set {_starting} to {Config::Dungeons::StartingBar}
+		replace all "{SECONDS}" with "%{Config::Dungeons::Counter}%" in {_starting}
+		infobar({_starting}, loop-value parsed as offline player, {Config::Dungeons::Counter}, "green", {Config::Dungeons::Counter}, 0)
+on command:
+	if {Dungeons::Players::*} contains "%player%":
+		if {Config::Dungeons::AvailableCommands::*} contains command:
+			stop
+		else:
+			if player has permission "dungeon.commandbypass":
+				stop
+			else:
+				cancel event
+				send {Config::Dungeons::CommandDisabled::*}
+on damage:
+	if victim is a player:
+		if damage cause is fall:
+			if victim is in world "world":
+				if x-coordinates of victim < -1042:
+					cancel event
+					send {Config::PVMine::FallIntoLava} to victim
+					teleport victim to {DungeonsSpawn}
+
+function wave(room: number):
+	if {Dungeons-End} is true:
+		stop
+	if {Dungeon-Wave::%{_room}%} > 3:
+		stop
+	if {Dungeon-WaveData} is not "starting":
+		if {Dungeon-Wave::%{_room}%} is 3:
+			if {Dungeons::Keys} < 1:
+				if {_room} is 2:
+					opendoor("BBB5")
+				if {_room} is 3:
+					opendoor("BBB7")
+				if {_room} is 4:
+					opendoor("BBB4")
+					opendoor("BBB9")
+				if {_room} is 3:
+					opendoor("BBB3")
+				if {_room} is 6:
+					set block at {Dungeon::Chests::1} to chest[facing=south]
+					make 100 of happy villager at {Dungeon::Chests::1} with offset vector(1.5, 1.5, 1.5) with extra 0.2
+				add 1 to {Dungeon-Wave::%{_room}%}
+				add 1 to {Dungeons::Keys}
+				add 1 to {Dungeon-RoomCleared}
+				loop {Dungeons::Players::*}:
+					set {_mess} to {Config::Dungeons::RoomCleared}
+					replace all "{ROOM}" with "%{Dungeon-RoomCleared}%" in {_mess}
+					send {_mess} to loop-value parsed as offline player
+					send {Config::Dungeons::KeyReceived} to loop-value parsed as offline player
+					infobar({Config::Dungeons::KeyReceivedBar}, loop-value parsed as offline player, 4, "green", 0, 0)
+			stop
+		set {Dungeon-WaveData} to "starting"
+		wait 1 second
+		add 1 to {Dungeon-Wave::%{_room}%}
+		loop {Dungeons::Players::*}:
+			play sound "block.note_block.hat" with pitch 1.5 for loop-value parsed as offline player
+			set {_color} to "green"
+			if {_room} is 6:
+				set {_color} to "red"
+			set {_infoMess} to {Config::Dungeons::WaveStarting}
+			replace all "{WAVE}" with "%{Dungeon-Wave::%{_room}%}%" in {_infoMess}
+			replace all "{SECONDS}" with "5" in {_infoMess}
+			infobar({_infoMess}, loop-value parsed as offline player, 5, {_color}, 5, {Dungeon-Wave::%{_room}%})
+		wait 5 seconds
+		make 1 of sonic boom at {Dungeon-Spawn::%{_room}%} with extra 1
+		set {Dungeon-ReqKills} to 20+({Dungeon-Wave::%{_room}%}*5)
+		set {Dungeon-CurrentKills} to 0
+		set {_btitle} to {Config::Dungeons::NextWaveIn}
+		replace all "{KILLS}" with "%{Dungeon-ReqKills}%" in {_btitle}
+		loop {Dungeons::Players::*}:
+			if {_room} is 6:
+				dungeonsbossbar(loop-value parsed as offline player, {_btitle}, "NextWave-%loop-value%", 0, red)
+			else:
+				dungeonsbossbar(loop-value parsed as offline player, {_btitle}, "NextWave-%loop-value%", 0, yellow)
+		loop {Dungeon-ReqKills}+3 times:
+			if {Dungeons-Open} is false:
+				stop
+			if {_room} is 2:
+				if mod(loop-value, 2) is 0:
+					set {_roomnew} to "2-1"
+				else:
+					set {_roomnew} to "2-2"
+			set {_entity} to "zombie" or "skeleton"
+			if {_room} is 2:
+				set {_loc} to {Dungeon-Spawn::%{_roomnew}%}
+			else:
+				set {_loc} to {Dungeon-Spawn::%{_room}%}
+			if {_room} is 2:
+				if {_roomnew} is "2-1":
+					remove 1 from z-coordinates of {_loc}
+				else:
+					add 1 to z-coordinates of {_loc}
+			else:
+				chance of 20*{Config::Dungeons::GlobDiff}%:
+					add 0.2 to x-coordinates of {_loc}
+				chance of 20*{Config::Dungeons::GlobDiff}%:
+					add 0.2 to z-coordinates of {_loc}
+				chance of 20*{Config::Dungeons::GlobDiff}%:
+					remove 0.2 from x-coordinates of {_loc}
+				chance of 20*{Config::Dungeons::GlobDiff}%:
+					remove 0.2 from z-coordinates of {_loc}
+			if {Dungeon-RoomCleared} is 4:
+				chance of 7*{Config::Dungeons::GlobDiff}%:
+					set {_entity} to "blaze"
+			if {_entity} is "skeleton":
+				spawn skeleton at {_loc}
+				if {Dungeon-RoomCleared} > 1:
+					chance of (5*{Dungeon-RoomCleared})*{Config::Dungeons::GlobDiff}%:
+						enchant last spawned skeleton's tool with power 1
+			if {_entity} is "zombie":
+				spawn zombie at {_loc}
+				if {Dungeon-RoomCleared} > 0:
+					chance of 10*{Config::Dungeons::GlobDiff}%:
+						set last spawned zombie's tool to iron sword
+						if {Dungeon-RoomCleared} > 2:
+							enchant last spawned zombie's tool with sharpness 1
+						if {Dungeon-RoomCleared} > 3:
+							enchant last spawned zombie's tool with sharpness 2
+			if {_entity} is "blaze":
+				spawn blaze at {_loc}
+			if {Dungeon-Wave::%{_room}%} < 2:
+				set max health of last spawned entity to 10+({Dungeon-RoomCleared}*3)
+			else if {Dungeon-Wave::%{_room}%} is 2:
+				set max health of last spawned entity to 15+({Dungeon-RoomCleared}*3)
+			else if {Dungeon-Wave::%{_room}%} is 3:
+				set max health of last spawned entity to 20+({Dungeon-RoomCleared}*3)
+			if max health of last spawned entity > 40:
+				set max health of last spawned entity to 6
+			heal last spawned entity
+			set {_chance} to (5*{Dungeon-RoomCleared})*{Dungeon-Wave::%{_room}%}
+			if {Dungeon-RoomCleared} > 0:
+				chance of {_chance}*{Config::Dungeons::GlobDiff}%:
+					set last spawned entity's helmet to iron helmet or golden helmet
+				chance of {_chance}*{Config::Dungeons::GlobDiff}%:
+					set last spawned entity's chestplate to iron chestplate or golden chestplate
+				chance of {_chance}*{Config::Dungeons::GlobDiff}%:
+					set last spawned entity's leggings to iron leggings or golden leggings
+				chance of {_chance}*{Config::Dungeons::GlobDiff}%:
+					set last spawned entity's boots to iron boots or golden boots
+			if {Dungeon-RoomCleared} > 2:
+				chance of {_chance}*{Config::Dungeons::GlobDiff}%:
+					enchant last spawned entity's helmet with protection 1
+				chance of {_chance}*{Config::Dungeons::GlobDiff}%:
+					enchant last spawned entity's chestplate with protection 1
+				chance of {_chance}*{Config::Dungeons::GlobDiff}%:
+					enchant last spawned entity's leggings with protection 1
+				chance of {_chance}*{Config::Dungeons::GlobDiff}%:
+					enchant last spawned entity's boots with protection 1
+			if {Dungeon-RoomCleared} > 2:
+				chance of 12*{Config::Dungeons::GlobDiff}%:
+					apply speed 1 to last spawned entity for 999 days
+			if {Dungeon-RoomCleared} > 3:
+				chance of 10*{Config::Dungeons::GlobDiff}%:
+					apply strength 1 to last spawned entity for 999 days
+			set display name of last spawned entity to entityname(last spawned entity)
+			play sound "entity.chicken.egg" with pitch (random number between 0.5 and 1) at {_loc}
+			wait 1 tick
+			push last spawned entity upwards with speed 0.8
+			if {_room} is 2:
+				set {_direction} to vector from location 0.2 under {Dungeon-Spawn::%{_roomnew}%} to last spawned entity
+				push last spawned entity {_direction} with speed 0.6
+			else:
+				set {_direction} to vector from last spawned entity to {Dungeon-Spawn::%{_room}%}
+				push last spawned entity {_direction} with speed 0.6
+		if {Dungeon-RoomCleared} is 4:
+			spawn magma cube at {_loc}
+		delete {Dungeon-WaveData}
+
+on death:
+	if "%damage cause%" is not "kill":
+		if victim is a chicken:
+			if victim is in world "world":
+				if z-coordinates of victim < -1000:
+					if victim is chicken:
+						delete victim
+						clear drops
+						make 5 of cloud at victim with extra 0.1
+						play sound "entity.chicken.egg" with pitch 0.5 at victim
+						stop
+		if victim is a monster or phantom:
+			if victim is in world "world":
+				if z-coordinates of victim < -1000:
+					add 1 to {Dungeon-CurrentKills}
+					clear drops
+					updateprogress()
+					wait 1 tick
+					set display name of victim to "&7"
+					drop 3 xp at victim
+					chance of (3*(({Dungeon-RoomCleared}+1)/2.5))*{Config::Dungeons::DropRate}%:
+						drop victim's helmet at victim
+						drop victim's chestplate at victim
+						drop victim's leggings at victim
+						drop victim's boots at victim
+					chance of (10*(({Dungeon-RoomCleared}+1)/2.5))*{Config::Dungeons::DropRate}%:
+						drop victim's tool at victim
+					chance of (18*(({Dungeon-RoomCleared}+1)/2.5))*{Config::Dungeons::DropRate}%:
+						play sound "entity.experience_orb.pickup" with pitch 2 for attacker
+						drop {GeneratoryItems::%random integer between 5+({Dungeon-RoomCleared}*2) and 20%}
+					chance of (18*(({Dungeon-RoomCleared}+1)/2.5))*{Config::Dungeons::DropRate}%:
+						add diamond to {_drops::*}
+						add emerald to {_drops::*}
+						add golden apple to {_drops::*}
+						add golden carrot to {_drops::*}
+						add saddle to {_drops::*}
+						add name tag to {_drops::*}
+						add egg to {_drops::*}
+						add carrot to {_drops::*}
+						add honey bottle to {_drops::*}
+						add pumpkin pie to {_drops::*}
+						add bread to {_drops::*}
+						add speed potion to {_drops::*}
+						add strength potion to {_drops::*}
+						add amethyst shard to {_drops::*}
+						add copper ingot to {_drops::*}
+						add glass bottle to {_drops::*}
+						add brick to {_drops::*}
+						drop random element out of {_drops::*} at victim
+						stop
+					chance of (9*(({Dungeon-RoomCleared}+1)/2.5))*{Config::Dungeons::DropRate}%:
+						play sound "entity.experience_orb.pickup" with pitch 2 for attacker
+						drop {Generatory::%random integer between (3+{Dungeon-RoomCleared}) and 5+({Dungeon-RoomCleared}*2)%} at victim
+						stop
+					chance of (9*(({Dungeon-RoomCleared}+1)/2.5))*{Config::Dungeons::DropRate}%:
+						play sound "entity.experience_orb.pickup" with pitch 2 for attacker
+						add random integer between 1 and 5 to {Tokens::%attacker%}
+						stop
+on damage:
+	if victim is in world "world":
+		if z-coordinates of victim < -1000:
+			if max health of victim > 40:
+				set max health of victim to 6
+			if {Dungeon-BossHealth} > 0:
+				if name of victim is "&6&l» &c&lCHICKEN ?!? &6&l«":
+					cancel event
+				if name of victim is "&6&l» &c&lBOSS &6&l«":
+					cancel event
+			if victim is a monster:
+				if damage cause is fall:
+					cancel event
+				wait 1 tick
+				set display name of victim to entityname(victim)
+
+function entityname(entity: entity) :: text:
+	set {_healthmax} to max health of {_entity}
+	set {_health} to health of {_entity}
+	set {_a::*} to uppercase "%{_entity}%" split at ""
+	set {_b::*} to "%{_entity}%" split at ""
+	set {_name} to {_a::1}
+	loop {_b::*}:
+		add 1 to {_a}
+		set {_name} to "%{_name}%%{_b::%{_a}+1%} ? ""%"
+	set {_ht} to {Config::Dungeons::HealthTag}
+	replace all "{NAME}" with "%{_name}%" in {_ht}
+	replace all "{HEALTH}" with "%round({_health})%" in {_ht}
+	replace all "{MAXHEALTH}" with "%round({_healthmax})%" in {_ht}
+	return {_ht}
+
+on entering region "Portal2":
+	if {Dungeons-End} is true:
+		teleport player to {spawn}
+		send ""
+		send {Config::Dungeons::PortalUsed}
+		send ""
+
+
+function updateprogress():
+	if {Dungeon-BossFight} is true:
+		remove 1 from {Dungeon-BossHealth}
+		if {Dungeon-BossHealth} < 1:
+			set {Dungeon-BossFight} to false
+			set {_mess} to {Config::Dungeons::DungeonTitle}
+			replace all "{PREFIX}" with "%{Config::Dungeons::DungeonPrefix}%" in {_mess}
+			send formatted {_mess} to all players
+			send "" to all players
+			send {Config::Dungeons::DungeonEnd::1} to all players
+			send "" to all players
+			send {Config::Dungeons::DungeonEnd::2} to all players
+			send {Config::Dungeons::DungeonEnd::3} to all players
+			send "" to all players
+			loop 150 times:
+				play sound "entity.allay.ambient_without_item" with volume 0.2 and pitch 0.5+(loop-value/100) for all players
+			loop all players:
+				delete boss bar with id "Boss-%loop-player%"
+			opendoor("BBBFinal")
+			set {Dungeons-End} to true
+			make 300 of happy villager at {Dungeon-Spawn::8} with offset vector(19, 12, 19) with extra 1
+			loop all monsters in world "world":
+				if z-coordinates of loop-entity < -1000:
+					kill loop-entity
+			loop all phantoms in world "world":
+				if z-coordinates of loop-entity < -1000:
+					kill loop-entity
+			loop all chickens in world "world":
+				if z-coordinates of loop-entity < -1000:
+					kill loop-entity
+			loop {Dungeons::Players::*}:
+				send "" to loop-value parsed as offline player 
+				send {Config::Dungeons::BossDefeated} to loop-value parsed as offline player 
+				send "" to loop-value parsed as offline player 
+				play sound "ui.toast.challenge_complete" with pitch 0.9 to loop-value parsed as offline player
+				send loop-value parsed as offline player title {Config::Dungeons::VictoryTitle::1} with subtitle {Config::Dungeons::VictoryTitle::2} for 2 seconds
+				delete boss bar with id "Boss-%loop-value%"
+				infobar({Config::Dungeons::EndBossbar}, loop-value parsed as offline player, 5, "green", 0, 0)
+				add 250 to {Tokens::%loop-value%}
+			loop 40 times:
+				make 2 of explosion at {Dungeon-Spawn::8} with offset vector(19, 12, 19) with extra 1
+				wait 1 tick
+			wait 30 seconds
+			closedungeons()
+			stop
+		set {_btitle} to {Config::Dungeons::BossHealthBar}
+		replace all "{HP}" with "%{Dungeon-BossHealth}%" in {_btitle}
+		replace all "{MAXHP}" with "%{Config::Dungeons::BossHealth}%" in {_btitle}
+		loop {Dungeons::Players::*}:
+			set {_bar} to boss bar with id "Boss-%loop-value%"
+			set bar title of {_bar} to "%{_btitle}%"
+			set bar progress of {_bar} to ({Dungeon-BossHealth}/{Config::Dungeons::BossHealth})*100
+	else:
+		if {Dungeon-CurrentKills} >= {Dungeon-ReqKills}:
+			if {Dungeon-WaveData} is not "starting":
+				loop {Dungeons::Players::*}:
+					if {Dungeons::Keys} < 1:
+						play sound "entity.player.levelup" with pitch 2 for loop-value parsed as offline player
+					delete boss bar with id "NextWave-%loop-value%"
+				if {Dungeons::Keys} < 1:
+					wave({Dungeon-CurrentRoom})
+			stop
+		set {_btitle} to {Config::Dungeons::NextWaveIn}
+		replace all "{KILLS}" with "%{Dungeon-ReqKills}-{Dungeon-CurrentKills}%" in {_btitle}
+		loop {Dungeons::Players::*}:
+			set {_progress} to ({Dungeon-CurrentKills}/{Dungeon-ReqKills})*100
+			set {_bar} to boss bar with id "NextWave-%loop-value%"
+			set bar title of {_bar} to "%{_btitle}%"
+			set bar progress of {_bar} to {_progress}
+
+
+function infobar(tekst: text, player: player, time: number, color: text, counter: number, wave: number):
+	if z-coordinates of {_player} < -1000:
+		delete boss bar with id "InfoBar-%{_player}%"
+		if {_color} is "green":
+			dungeonsbossbar({_player}, {_tekst}, "InfoBar-%{_player}%", 100, green)
+		else:
+			dungeonsbossbar({_player}, {_tekst}, "InfoBar-%{_player}%", 100, red)
+	set {_timer} to {Config::Dungeons::Counter}
+	set {_timer2} to 5
+	loop {_time}*20 times:
+		if z-coordinates of {_player} < -1000:
+			if {_counter} is 5:
+				if mod(loop-value, 20) is 0:
+					if {_timer2} > 0:
+						remove 1 from {_timer2}
+						if {_timer2} is 0:
+							set {_timer2} to 1
+							play sound "entity.experience_orb.pickup" with pitch 2 for {_player}
+						else:
+							play sound "block.note_block.hat" with pitch 1.5+(0.5-({_timer2}/10)) for {_player}
+						set {_btitle} to {Config::Dungeons::WaveStarting}
+						replace all "{WAVE}" with "%{_wave}%" in {_btitle}
+						replace all "{SECONDS}" with "%{_timer2}%" in {_btitle}
+						set {_bar} to boss bar with id "InfoBar-%{_player}%"
+						set bar title of {_bar} to "%{_btitle}%"
+			if {_counter} is {Config::Dungeons::Counter}:
+				if mod(loop-value, 20) is 0:
+					remove 1 from {_timer}
+					if size of {Dungeons::Players::*} >= {Config::Dungeons::RequiredPlayers}:
+						set {_btitle} to {Config::Dungeons::StartingBar}
+						replace all "{SECONDS}" with "%{_timer}%" in {_btitle}
+						set {_bar} to boss bar with id "InfoBar-%{_player}%"
+						set bar title of {_bar} to "%{_btitle}%"
+						if {_timer} < 6:
+							if {_timer} > 0:
+								set {_mess} to {Config::Dungeons::Sarting}
+								replace all "{SECONDS}" with "%{_timer}%" in {_mess}
+								send {_mess} to {_player}
+								set {_title1} to {Config::Dungeons::TimerTitle::1}
+								set {_title2} to {Config::Dungeons::TimerTitle::2}
+								replace all "{SECONDS}" with "%{_timer}%" in {_title1}
+								replace all "{SECONDS}" with "%{_timer}%" in {_title2}
+								if {_timer} is 5:
+									send {_player} title {_title1} with subtitle {_title2} for 2 second with 0.5 seconds fade in and 0 seconds fade out
+								else:
+									send {_player} title {_title1} with subtitle {_title2} for 2 second with 0 seconds fade in and 0 seconds fade out
+								play sound "block.note_block.pling" with pitch 0.5+(0.5-({_timer}/10)) for {_player}
+							else:
+								send {_player} title {Config::Dungeons::StartTitle::1} with subtitle {Config::Dungeons::StartTitle::2} for 2 second with 0 seconds fade in and 0.5 seconds fade out
+								play sound "entity.ender_dragon.growl" with pitch 1 for {_player}
+								if {Dungeons-Started} is not true:
+									set {Dungeons-Started} to true
+									set {Dungeon-CurrentRoom} to 1
+									opendoor("BBB1")
+									wave(1)
+					else:
+						send {Config::Dungeons::CountdownStop} to {_player}
+						delete boss bar with id "InfoBar-%{_player}%"
+						set {_progress} to (size of {Dungeons::Players::*}/{Config::Dungeons::RequiredPlayers})*100
+						set {_btitle} to {Config::Dungeons::WaitingForPlayers}
+						replace all "{PREFIX}" with {Config::Dungeons::DungeonPrefix} in {_btitle}
+						replace all "{CURRENT}" with "%size of {Dungeons::Players::*}%" in {_btitle}
+						replace all "{REQUIRED}" with "%{Config::Dungeons::RequiredPlayers}%" in {_btitle}
+						dungeonsbossbar({_player}, {_btitle}, "Dungeons-%{_player}%", {_progress}, red)
+						stop
+			set {_bar} to boss bar with id "InfoBar-%{_player}%"
+			set {_value} to 100-(loop-value/{_time}*5)
+			set bar progress of {_bar} to {_value}
+			wait 1 tick
+	loop all players:
+		delete boss bar with id "InfoBar-%{_player}%"
+
+function startdungeon():
+	loop {Dungeon::Chests::*}:
+		set block at loop-value to chest[facing=south]
+	clear {Dungeons::Players::*}
+	set {Dungeons::Keys} to 0
+	delete {Dungeons-Data}
+	delete {Dungeons-End}
+	delete {Dungeons-Started}
+	delete {Dungeon-ReqKills}
+	delete {Dungeon-CurrentKills}
+	delete {Dungeon-WaveData}
+	delete {Dungeon-ChestAreaStart}
+	delete {Dungeon-AirAttack}
+	set {Dungeon-RoomCleared} to 0
+	set {_areas::*} to 1 and 2 and 3 and 4 and 6 and 8
+	loop {_areas::*}:
+		set {Dungeon-Wave::%loop-value%} to 0
+	dungeondoor()
+	finaldoor()
+	set {Dungeons-Open} to true
+	set {_mess} to {Config::Dungeons::DungeonTitle}
+	replace all "{PREFIX}" with {Config::Dungeons::DungeonPrefix} in {_mess}
+	send formatted {_mess} to all players
+	send "" to all players
+	send {Config::Dungeons::DungeonOpen::1} to all players
+	send "" to all players
+	send {Config::Dungeons::DungeonOpen::2} to all players
+	send {Config::Dungeons::DungeonOpen::3} to all players
+	send "" to all players
+	loop 150 times:
+		play sound "entity.allay.ambient_without_item" with volume 0.2 and pitch 0.5+(loop-value/100) for all players
+function closedungeons():
+	set {Dungeon-WaveData} to "starting"
+	if {Dungeons-Open} is true:
+		set {Dungeons-Open} to false
+		delete {Dungeon-BossFight}
+		clear {Dungeons::Players::*}
+		loop all players in world "world":
+			if z-coords of loop-player < -1000:
+				teleport loop-player to {spawn}
+				send loop-player title {Config::Dungeons::CloseTitle::1} with subtitle {Config::Dungeons::CloseTitle::2}
+				send {Config::Dungeons::CloseMess} to loop-player
+				play sound "block.anvil.destroy" with pitch 0.5 for loop-player
+				delete boss bar with id "InfoBar-%loop-player%"
+				delete boss bar with id "NextWave-%loop-player%"
+				delete boss bar with id "Dungeons-%loop-player%"
+				delete boss bar with id "Boss-%loop-player%"
+		loop all monsters in world "world":
+			if z-coords of loop-entity < -1000:
+				kill loop-entity
+		loop all phantoms in world "world":
+			if z-coordinates of loop-phantom < -1000:
+				kill loop-phantom
+		loop all chickens in world "world":
+			if z-coordinates of loop-chickens < -1000:
+				kill loop-chickens
+		loop all dropped items in world "world":
+			if z-coordinates of loop-dropped item < -1000:
+				kill loop-dropped item
+		loop all block displays:
+			if z-coordinates of loop-block display < -1000:
+				kill loop-block display
+
+
+on inventory click:
+	if name of current inventory of player is {Config::GUIS::DungeonsHelp::Default} or {Config::GUIS::DungeonsHelp::Bedrock}:
+		cancel event
+
+# Variables for update V1.5
+
+on load:
+	set {Dungeon-Door::Loc::1} to location at (-1511, 107, -1531) in world "world"
+	set {Dungeon-Door::Orientation::1} to 2
+	set {Dungeon-Door::Loc::2} to location at (-1502, 107, -1539) in world "world"
+	set {Dungeon-Door::Orientation::2} to 1
+	set {Dungeon-Door::Loc::3} to location at (-1522, 107, -1539) in world "world"
+	set {Dungeon-Door::Orientation::3} to 1
+	set {Dungeon-Door::Loc::4} to location at (-1506, 107, -1551) in world "world"
+	set {Dungeon-Door::Orientation::4} to 2
+	set {Dungeon-Door::Loc::5} to location at (-1466, 107, -1551) in world "world"
+	set {Dungeon-Door::Orientation::5} to 2
+	set {Dungeon-Door::Loc::6} to location at (-1510, 107, -1571) in world "world"
+	set {Dungeon-Door::Orientation::6} to 2
+	set {Dungeon-Door::Loc::7} to location at (-1530, 107, -1551) in world "world"
+	set {Dungeon-Door::Orientation::7} to 2
+	set {Dungeon-Door::Loc::8} to location at (-1522, 107, -1559) in world "world"
+	set {Dungeon-Door::Orientation::8} to 1
+	set {Dungeon-Door::Loc::8} to location at (-1502, 107, -1579) in world "world"
+	set {Dungeon-Door::Orientation::8} to 1
+	set {Dungeon-Door::Loc::9} to location at (-1522, 107, -1559) in world "world"
+	set {Dungeon-Door::Orientation::9} to 1
+	set {Dungeon-DoorFinal} to location at (-1463, 108, -1596) in world "world"
+	set {Dungeon::Chests::1} to location at (-1511.5, 108.5, -1580.5) in world "world"
+	set {Dungeon::Chests::2} to location at (-1497, 117, -1534) in world "world"
+	set {Dungeon::Chests::3} to location at (-1472, 109, -1561) in world "world"
+	set {Dungeon::Chests::4} to location at (-1552, 117, -1569) in world "world"
+	set {Dungeon-Spawn::1} to location at (-1511.5, 108, -1540.5) in world "world"
+	set {Dungeon-Spawn::3} to location at (-1531.5, 110, -1540.5) in world "world"
+	set {Dungeon-Spawn::4} to location at (-1511.5, 108, -1560.5) in world "world"
+	set {Dungeon-Spawn::2-1} to location at (-1481.5, 111, -1533.5) in world "world"
+	set {Dungeon-Spawn::2-2} to location at (-1481.5, 111, -1547.5) in world "world"
+	set {Dungeon-Spawn::6} to location at (-1511.5, 108, -1580.5) in world "world"
+	set {Dungeon-Spawn::8} to location at (-1481.5, 111, -1590.35) in world "world"
+	set {DungeonsSpawn} to location at (-1511.5, 111, -1513.5) in world "world"
+	set yaw of {DungeonsSpawn} to 180
+	closedungeons()

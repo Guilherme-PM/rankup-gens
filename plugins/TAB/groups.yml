@@ -1,0 +1,6 @@
+_DEFAULT_:
+  tabsuffix: " &8♢ &6%gens_level%🔥"
+  tagsuffix: " &8♢ &6%gens_level%🔥"
+  tabprefix: "%gens_ClanPrefix%%luckperms-prefix%&f "
+  tagprefix: "%luckperms-prefix%&f "
+  customtabname: "%gens_playernick%"

@@ -1,0 +1,329 @@
+# This script was written by Xqedii and sharing is not allowed!
+# You can change and edit everything in this file if you want
+
+# BossbarStats
+
+on quit:
+	loop 3 times:
+		delete boss bar with id "Stats%loop-value%-%player%"
+
+on join:
+	set {Bedrock::%player%} to "Default"
+	loop 3 times:
+		delete boss bar with id "Stats%loop-value%-%player%"
+	set {JoinDelay::%player%} to now
+	if "%player%" starts with {Config::Global::BedrockSupport}:
+		delete {SkipStage::%player%}
+		stop
+	else:
+		if {Config::Update35::ItemsAdderSupport} is true:
+			PackLoaded(player)
+		else:
+			wait 1 second
+			set {_packID} to random uuid
+			loadPack(player)
+
+function loadPack(player: player):
+	set {_packID} to random uuid
+	set {_version} to placeholder "viaversion_player_protocol_id" from {_player} parsed as number
+	if {_version} > 770: # Higher than 1.21.5 (so 1.21.6, 1.21.7 etc. will receive special resource pack)
+		send resource pack from url {Config::Global::ResourcePackLink-1_21_6} with uuid {_packID} with prompt {Config::Global::DownloadInfo} to {_player}
+	else:
+		send resource pack from url {Config::Global::ResourcePackLink} with uuid {_packID} with prompt {Config::Global::DownloadInfo} to {_player}
+
+command /forcepack [<text>]:
+	permission: *
+	trigger:
+		if {Config::Update35::ItemsAdderSupport} is true:
+			send "&cThis command is disabled due to ItemsAdder/Oraxen support!"
+			stop
+		if arg-1 is "*" or "all":
+			send "&aReloading pack for all players!"
+			loop all players:
+				loadPack(loop-player)
+			stop
+		if arg-1 is not set:
+			send "&cSelect player!"
+		else:
+			send "&aForced pack for &6&l%arg-1%!"
+			loadPack(arg-1 parsed as offline player)
+
+function ResPackSFX(player: player):
+	if {_player} is online:
+		if difference between {JoinDelay::%{_player}%} and now < 0.9 second:
+			stop
+		play sound "block.note_block.bell" with pitch 1 for {_player}
+		wait 2 tick
+		play sound "block.note_block.bell" with pitch 1.2 for {_player}
+		wait 2 tick
+		play sound "block.note_block.bell" with pitch 1.5 for {_player}
+
+function packLoading(player: player):
+	if {_player} is online:
+		if difference between {JoinDelay::%{_player}%} and now < 0.9 second:
+			wait 1 second
+		ResPackSFX({_player})
+		send {_player} title {Config::BossbarStats::LoadingPack::1} with subtitle {Config::BossbarStats::LoadingPack::2} for 30 seconds
+
+
+on resource pack response:
+	if player is online:
+		if {Bedrock::%player%} is "Bedrock":
+			stop
+		if player's last resource pack response is successfully load:
+			if {Config::Update35::ItemsAdderSupport} is true:
+				stop
+			PackLoaded(player)
+		if player's last resource pack response is accept:
+			if {Config::Update35::ItemsAdderSupport} is true:
+				stop
+			packLoading(player)
+			
+		if player's last resource pack response is declined or failed:
+			delete {SkipStage::%player%}
+			if {Objective::%player%} is not set:
+				set {Objective::%player%} to "BuyTool"
+				play sound "entity.illusioner.cast_spell" with pitch 1.3 for player
+			if {Config::Update35::ItemsAdderSupport} is true:
+				stop
+			if {Config::Global::ResourcePackKick} is true:
+				execute console command "kick %player% %{Config::Global::KickReason}%"
+
+function PackLoaded(player: player):
+	if {_player} is online:
+		if {Bedrock::%{_player}%} is "Default":
+			if difference between {JoinDelay::%{_player}%} and now < 0.9 second:
+				wait 1 second
+			send {_player} title "" with subtitle "" for 3 seconds with 0 seconds fade in and 0.5 seconds fade out
+			if {Config::BossbarStats::Enabled} is true:
+				bossbar({_player})
+			if {SkipStage::%{_player}%} is 7:
+				welcomeCinematic({_player})
+			wait 1.5 second
+			if {Config::BossbarStats::Enabled} is true:
+				set {_eventtitle} to {Config::Gens::EventName::EventTitle}
+				replace all "{EVENT}" with "%{GlobalEvent}%" in {_eventtitle}
+				if {GlobalEvent} is set:
+					eventTitle({_player}, {_eventtitle}, {Config::Gens::EventName::EventTitleLength})
+
+on load:
+	clear {BGBufor::*}
+	set {Data::QuestObjectives::*} to "BuyTool" and "ToolHoe" and  "ToolAxe" and  "ToolPickaxe" and  "EarnMoney" and  "BuyPickaxe" and  "Convert" and  "Upgrade" and  "EarnMoney2" and  "BuyGen", "PlaceGen", "UpgradeGen"
+	set {Data::TextBG::Available::*} to 128, 64, 32, 16, 12, 6, 5, 4, 3, 2, 1
+	set {Data::TextBG::Unicode::*} to "", "", "", "", "", "", "", "", "", "", ""
+	if {Config::BossbarStats::Enabled} is true:
+		loop all players:
+			if {Bedrock::%loop-player%} is "Default":
+				bossbar(loop-player)
+		wait 1.5 second
+		set {_eventtitle} to {Config::Gens::EventName::EventTitle}
+		replace all "{EVENT}" with "%{GlobalEvent}%" in {_eventtitle}
+		if {GlobalEvent} is set:
+			loop all players:
+				if {Bedrock::%loop-player%} is "Default":
+					eventTitle(loop-player, {_eventtitle}, {Config::Gens::EventName::EventTitleLength})
+	else:
+		loop all players:
+			loop 3 times:
+				delete boss bar with id "Stats%loop-value-2%-%loop-player%"
+
+every 1 seconds:
+	clear {BGBufor::*}
+	if {Config::BossbarStats::Enabled} is true:
+		add 1 to {BBUpdateCounter}
+		if {GlobalEvent} is set:
+			add 2 to {BBUpdateCounter}
+		if {BBUpdateCounter} >= 3:
+			delete {BBUpdateCounter}
+			loop all players:
+				if {Bedrock::%loop-player%} is "Default":
+					if "%loop-player%" starts with {Config::Global::BedrockSupport}:
+						continue
+					updatebossbar(loop-player)
+					objectiveUpdate(loop-player)
+
+function objectiveUpdate(player: player):
+	loop {Data::QuestObjectives::*}:
+		if {Objective::%{_player}%} is loop-value:
+			set {_objective} to {Config::Gens::Tutorial::%loop-value%}
+	if {Objective::%{_player}%} is "64Cobblestone":
+		set {_text} to {Config::Gens::Tutorial::64Cobblestone}
+		if {CobblestoneObj::%{_player}%} is not set:
+			set {CobblestoneObj::%{_player}%} to 0
+		replace all "{AMOUNT}" with "%{CobblestoneObj::%{_player}%}%" in {_text}
+		set {_objective} to {_text}
+	if {Objective::%{_player}%} is "UpgradeGen":
+		set {_text} to {Config::Gens::Tutorial::UpgradeGen}
+		if {UpgradeGenObj::%{_player}%} is not set:
+			set {UpgradeGenObj::%{_player}%} to 0
+		replace all "{AMOUNT}" with "%{UpgradeGenObj::%{_player}%}%" in {_text}
+		set {_objective} to {_text}
+	if {Objective::%{_player}%} is "End":
+		set {_objective} to "End"
+	set {_bar} to boss bar with id "Stats3-%{_player}%"
+	if {_objective} is set:
+		if {Objective::%{_player}%} is "End":
+			set bossbar title of {_bar} to ""
+		else:
+			set bossbar title of {_bar} to TextBackground("&6%{_objective}%")
+	else:
+		set bossbar title of {_bar} to "&6°"
+
+function bossbar(player: player):
+	if "%{_player}%" starts with {Config::Global::BedrockSupport}:
+		stop
+	wait 1 second
+	loop 3 times:
+		delete boss bar with id "Stats%loop-value%-%{_player}%"
+	wait 1 tick
+	cbossbar({_player}, "Stats1")
+	updatebossbar({_player})
+	if {Objective::%{_player}%} is not "End":
+		cbossbar({_player}, "Stats3")
+	cbossbar({_player}, "Stats2")
+	objectiveUpdate({_player})
+
+function cbossbar(player: player, title: text):
+	set {_bar} to boss bar with id "%{_title}%-%{_player}%" with title "&7" with color white with progress 100
+	set bar style of {_bar} to solid_bar
+	add {_player} to {_bar}
+
+function updatebossbar(player: player):
+	set {_money} to TextBackground("<##FFFEFD> <##f9e300>%placeholder "vault_eco_balance_formatted" from {_player}% ")
+	set {_generators} to TextBackground("<##FFFEFD> <##7dfc32>%size of {New-Generator::%{_player}%::*}%<##e0e0ff>/<##cacafc>%{GensMAX::%{_player}%}% ")
+	set {_gems} to TextBackground("<##FFFEFD> <##a9e8f7>%{Tokens::%{_player}%} ? 0% ")
+	set {_eventtimer} to ""
+	if {GlobalEvent} is set:
+		if {EventTime} > 0:
+			set {_min} to floor({EventTime} / 60)
+			set {_full_sec} to {EventTime} - ({_min} * 60)
+			set {_minstr} to "%{_min}%"
+			set {_sekstr} to "%{_full_sec}%"
+			if length of {_minstr} is 1:
+				set {_minstr} to "0%{_minstr}%"
+			if length of {_sekstr} is 1:
+				set {_sekstr} to "0%{_sekstr}%"
+			set {_time} to "%{_minstr}%:%{_sekstr}%"
+			set {_eventtimer} to TextBackground("<##FFFEFD> &f%{_time}%")
+	else:
+		delete boss bar with id "Stats-3%{_player}%"
+	set {_bar} to boss bar with id "Stats1-%{_player}%"
+	set bossbar title of {_bar} to "%{_eventtimer}%  %{_gems}%  %{_generators}%  %{_money}%"
+
+
+function eventTitle(player: player, text: text, length: number):
+	if "%{_player}%" starts with {Config::Global::BedrockSupport}:
+		stop
+	delete boss bar with id "Stats3-%{_player}%"
+	set {_bar} to boss bar with id "Stats2-%{_player}%"
+	if {Objective::%{_player}%} is not "End":
+		cbossbar({_player}, "Stats3")
+	set {_text1} to ""
+	loop {_length} times:
+		if mod(loop-value, 10) is not 0:
+			set {_text1} to "%{_text1}%  "
+		set bossbar title of {_bar} to TextBackground({_text1})
+		if mod(loop-value, 2) is 0:
+			wait 1 tick
+	loop 7 times:
+		if mod(loop-value, 2) is 0:
+			set {_title} to TextBackground("<##FFFFFD> &e%{_text}% ")
+		else:
+			set {_title} to TextBackground("<##FFFFFD> &f%{_text}% ")
+		set bossbar title of {_bar} to "%{_title}%"
+		wait 0.3 second
+
+function sfx(player: player, sound: text):
+	if {_sound} is "Sell":
+		play sound "entity.arrow.hit_player" with volume 0.5 and pitch 2 for {_player}
+		loop 5 times:
+			play sound "block.amethyst_block.resonate" with pitch 2 for {_player}
+			wait 1 tick
+	if {_sound} is "EventStart":
+		loop 2 times:
+			play sound "entity.illusioner.prepare_mirror" with volume 0.4 and pitch 1 for {_player}
+			loop 3 times:
+				play sound "entity.illusioner.prepare_mirror" with volume 0.4 and pitch 2 for {_player}
+		wait 3 tick
+		loop 5 times:
+			play sound "entity.item.pickup" with volume 0.8 and pitch 0.9+(loop-value/10) for {_player}
+			wait 2 tick
+	if {_sound} is "EventEnd":
+		loop 2 times:
+			play sound "entity.illusioner.prepare_mirror" with volume 0.4 and pitch 1 for {_player}
+			loop 3 times:
+				play sound "entity.illusioner.mirror_move" with volume 0.4 and pitch 2 for {_player}
+		wait 3 tick
+		loop 5 times:
+			play sound "entity.item.pickup" with volume 0.8 and pitch 1.5-(loop-value/10) for {_player}
+			wait 2 tick
+	if {_sound} is "PotionStart":
+		loop 5 times:
+			play sound "block.note_block.bell" with volume 1 and pitch 1+(loop-value/5) for {_player}
+			wait 2 tick
+	if {_sound} is "PotionEnd":
+		play sound "entity.illusioner.prepare_mirror" with volume 0.8 and pitch 1 for {_player}
+		wait 3 tick
+		loop 5 times:
+			play sound "entity.item.pickup" with volume 0.8 and pitch 1.5-(loop-value/10) for {_player}
+			wait 2 tick
+
+
+function TextBGFixer(target: number) :: text:
+	set {_C} to ""
+	loop {Data::TextBG::Available::*}:
+		set {_unicodes::%loop-value%} to {Data::TextBG::Unicode::%loop-counter%}
+	loop {Data::TextBG::Available::*}:
+		set {_value} to loop-value
+		while {_target} >= {_value}:
+			set {_target} to {_target}-{_value}
+			add {_value} to {_result::*}
+		if {_target} <= 0:
+			stop loop
+	set {_final} to ""
+	loop {_result::*}:
+		set {_final} to "%{_final}%%{_unicodes::%loop-value%}%%{_C}%"
+	return {_final}
+
+function TextBackground(text: text) :: text:
+	set {_a} to uncolored {_text}
+	set {_size::*} to "%{_a}%" split at ""
+	set {_bar2} to ""
+	if {BGBufor::%{_a}%} is not set:
+		loop {_size::*}:
+			add 1 to {_loopc}
+			if {_loopc} >= size of {_size::*}:
+				stop loop
+			if loop-value is "i" or "!" or ";" or ":" or "." or "|" or "," or "@": #1
+				if number of uppercase chars in "%loop-value%" > 0:
+					add 4 to {_C-bg}
+					set {_bar2} to "%{_bar2}%" #-6
+				else:
+					add 2 to {_C-bg}
+					set {_bar2} to "%{_bar2}%" #-4
+			else if loop-value is "l": #2
+				add 3 to {_C-bg}
+				set {_bar2} to "%{_bar2}%" #-5
+			else if loop-value is "t" or " " or "(" or ")" or "*" or "[" or "]": #3
+				add 4 to {_C-bg}
+				set {_bar2} to "%{_bar2}%" #-6
+			else if loop-value is "f" or "k": #4
+				add 5 to {_C-bg}
+				set {_bar2} to "%{_bar2}%" #-7
+			else if loop-value is "" or "" or "" or "" or "": #10
+				add 12 to {_C-bg}
+				set {_bar2} to "%{_bar2}%" #-14
+			else: #Default 5
+				add 6 to {_C-bg}
+				set {_bar2} to "%{_bar2}%" #-8
+		set {_bar} to TextBGFixer({_C-bg})
+		set {_spaces} to "%{_bar2}%"
+		set {_bg} to "%{_bar}%"
+		set {_final} to "%{_bg}%%{_spaces}%"
+		if length of {_bg} + length of {_spaces} >= 30:
+			set {BGBufor::%{_a}%} to "%{_bg}%%{_spaces}%"
+	else:
+		set {_final} to {BGBufor::%{_a}%}
+	replace all "@" with "" in {_text}
+	set {_title} to "<##FFFEFD>%{_final}%&r%colored {_text}%"
+	return {_title}

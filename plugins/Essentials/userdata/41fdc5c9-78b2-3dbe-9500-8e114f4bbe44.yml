@@ -1,0 +1,38 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 26.133.153.165
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 0
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1754620938647
+  login: 1754618343289
+money: '1073228664394.2133617401403'
+last-account-name: Nasserz_
+logoutlocation:
+  world: ef655639-2841-48a8-9910-fc670929e3ee
+  world-name: world
+  x: -203.52529780981476
+  y: 95.9375
+  z: -41.80124282380488
+  yaw: -141.42864990234375
+  pitch: 21.452638626098633
+lastlocation:
+  world: ef655639-2841-48a8-9910-fc670929e3ee
+  world-name: world
+  x: -1510.300000011921
+  y: 111.0
+  z: -1511.7506452415955
+  yaw: 163.2001953125
+  pitch: 9.29998779296875

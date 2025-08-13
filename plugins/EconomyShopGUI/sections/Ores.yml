@@ -1,0 +1,23 @@
+enable: true
+slot: 13
+title: ''
+hidden: false
+sub-section: false
+display-item: false
+fill-item:
+  material: AIR
+nav-bar:
+  mode: INHERIT
+item:
+  material: GOLD_INGOT
+  displayname: '&a⛏ Minérios'
+  lore:
+  - ''
+  - '&fᴄᴀᴅᴀ ᴄᴀᴛᴇɢᴏʀɪᴀ ᴄᴏɴᴛéᴍ'
+  - '&fᴅɪғᴇʀᴇɴᴛᴇs ʙʟᴏᴄᴏs ᴇ ɪᴛᴇɴs'
+  - '&fǫᴜᴇ ᴠᴏᴄê ᴘᴏᴅᴇ ᴄᴏᴍᴘʀᴀʀ ᴏᴜ ᴠᴇɴᴅᴇʀ'
+  - ''
+  - '&fᴄᴀᴛᴇɢᴏʀɪᴀ: <#24fc2a>Minérios'
+  - ''
+  - '<#fcf932>Clique aqui para selecionar!'
+  name: '&f&1'

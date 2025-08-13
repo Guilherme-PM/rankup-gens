@@ -1,0 +1,323 @@
+General:
+  Prefix: "&7"
+  NoPerms: "&cYou don't have perms for that!"
+  LayoutNotFound: "&cThere is no layout called %NAME%"
+  # This will be the replacement for the %DURATION% variable
+  TimeLayoutD: "%D%d %H%h"
+  TimeLayoutH: "%H%h %M%m"
+  TimeLayoutM: "%M%m %S%s"
+  TimeLayoutS: "%S%s"
+  FailedFetch: "&cCould not fetch the UUID of %NAME%! See console for details."
+
+
+Ban:
+  Usage: "&c/ban [player] [reason]"
+  Done: "&6&o%NAME% &7was successfully banned!"
+  AlreadyDone: "&6&o%NAME% &7has already been banned!"
+  Exempt: "&7You are not able to ban &a&o%NAME%"
+  Layout:
+  - '%PREFIX% &aPermanently banned'
+  - '&cYou are banned from this server!'
+  - '&7'
+  - "&7Reason: &b%REASON%"
+  - '&7'
+  - '&bYou are permanently banned!'
+  - "&bAppeal on https://example.com"
+  Notification:
+  - "&7"
+  - "&6&o%NAME% &7got banned by &e&o%OPERATOR%"
+  - "&7For the reason &b&o%REASON%"
+  - "&7"
+  UndoNotification: "&e&o%OPERATOR% &7unbanned &a&o%NAME%"
+
+Ipban:
+  Usage: "&c/ipban [player] [reason]"
+  Layout:
+  - '%PREFIX% &aPermanently banned'
+  - '&cYou are banned from this server!'
+  - '&7'
+  - "&7Reason: &b%REASON%"
+  - '&7'
+  - '&bYou are permanently banned!'
+  - "&bAppeal on https://example.com"
+  Notification:
+  - "&7"
+  - "&6&o%NAME% &7got banned by &e&o%OPERATOR%"
+  - "&7For the reason &b&o%REASON%"
+  - "&7"
+  IpNotCashed: "&cThere is no saved IP for %NAME%!"
+
+Tempban:
+  Usage: "&c/tempban [player] [time] [reason]"
+  MaxDuration: "&cYou are not able to ban more than %MAX%sec"
+  Layout:
+  - '&cYou are banned from this server!'
+  - '&7'
+  - "&7Reason: &b%REASON%"
+  - "&7Unban in: &b%DURATION%"
+  - '&7'
+  - '&bYou are temporarily banned!'
+  - "&bAppeal on https://example.com"
+  Notification:
+  - "&7"
+  - "&6&o%NAME% &7got banned by &e&o%OPERATOR%"
+  - "&7For the reason &e&o%REASON%"
+  - "&7This player got banned for &b&o%DURATION%"
+  - "&7"
+
+Tempipban:
+  Usage: "&c/tempipban [player] [time] [reason]"
+  MaxDuration: "&cYou are not able to ban more than %MAX%sec"
+  Layout:
+  - '&cYou are banned from this server!'
+  - '&7'
+  - "&7Reason: &b%REASON%"
+  - "&7Unban in: &b%DURATION%"
+  - '&7'
+  - '&bYou are temporarily banned!'
+  - "&bAppeal on https://example.com"
+  Notification:
+  - "&7"
+  - "&6&o%NAME% &7got banned by &e&o%OPERATOR%"
+  - "&7For the reason &e&o%REASON%"
+  - "&7This player got banned for &b&o%DURATION%"
+  - "&7"
+
+Mute:
+  Usage: "&c/mute [player] [reason]"
+  Done: "&6&o%NAME% &7was successfully muted!"
+  AlreadyDone: "&6&o%NAME% &7has already been muted!"
+  Exempt: "&7You are not able to mute &a&o%NAME%"
+  Layout:
+  - '%PREFIX% &aYou are permanently muted'
+  - "&cReason &8» &a%REASON%"
+  Notification:
+  - "&7"
+  - "&6&o%NAME% &7got muted by &e&o%OPERATOR%"
+  - "&7For the reason &b&o%REASON%"
+  - "&7"
+  UndoNotification: "&e&o%OPERATOR% &7unmuted &a&o%NAME%"
+
+Tempmute:
+  Usage: "&c/tempmute [player] [time] [reason]"
+  MaxDuration: "&cYou are not able to mute more than %MAX%sec"
+  Layout:
+  - '%PREFIX% &aYou are muted for %DURATION%'
+  - "&cReason &8» &a%REASON%"
+  Notification:
+  - "&7"
+  - "&6&o%NAME% &7got muted by &e&o%OPERATOR%"
+  - "&7For the reason &b&o%REASON%"
+  - "&7This player got muted for &a&o%DURATION%"
+  - "&7"
+
+Warn:
+  Usage: "&c/warn [player] [reason]"
+  Done: "&6&o%NAME% &7was successfully warned!"
+  Exempt: "&7You are not able to warn &a&o%NAME%"
+  Layout:
+  - '%PREFIX% &cYou received a warning'
+  - "&cReason &8» &a%REASON%"
+  - '&aYou have now &a&o%COUNT% &7warning(s) in total!'
+  Notification:
+  - "&7"
+  - "&6&o%NAME% &7got warned by &e&o%OPERATOR%"
+  - "&7For the reason &b&o%REASON%"
+  - "&7"
+
+Note:
+  Usage: "&c/note [player] [reason]"
+  Done: "&6&o%NAME% &7was successfully noted!"
+  Exempt: "&7You are not able to note &a&o%NAME%"
+  Notification:
+  - "&7"
+  - "&6&o%NAME% &7got noted by &e&o%OPERATOR%"
+  - "&7For the reason &b&o%REASON%"
+  - "&7"
+
+Tempwarn:
+  Usage: "&c/tempwarn [player] [time] [reason]"
+  MaxDuration: "&cYou are not able to warn more than %MAX%sec"
+  Layout:
+  - '%PREFIX% &cYou received a temp-warning'
+  - "&cReason &8» &a%REASON%"
+  - "&cIt will pass in &8» &a%DURATION%"
+  - '&aYou have now &a&o%COUNT% &7warning(s) in total!'
+  Notification:
+  - "&7"
+  - "&6&o%NAME% &7got temp-warned by &e&o%OPERATOR%"
+  - "&7For the reason &b&o%REASON%"
+  - "&7This warning will pass in &o%DURATION%"
+  - "&7"
+
+Kick:
+  Usage: "&c/kick [player] [reason]"
+  Done: "&6&o%NAME% &7was successfully kicked!"
+  NotOnline: "&6&o%NAME% &7is not online!"
+  Exempt: "&7You are not able to kick &a&o%NAME%"
+  Layout:
+  - '&cYou are kicked from this server!'
+  - '&7'
+  - "&7Reason: &b%REASON%"
+  - '&7'
+  - '&bYou''ve been kicked out!'
+  - "&bAppeal on https://example.com"
+  Notification:
+  - "&7"
+  - "&6&o%NAME% &7got kicked by &e&o%OPERATOR%"
+  - "&7For the reason &b&o%REASON%"
+  - "&7"
+
+
+UnBan:
+  Usage: "&c/unban [player/IP]"
+  NotPunished: "&6&o%NAME% &7is not banned!"
+  Done: "&6&o%NAME% &7was successfully unbanned!"
+  Notification: "&e&o%OPERATOR% &7unbanned &a&o%NAME%"
+
+UnMute:
+  Usage: "&c/unmute [player]"
+  NotPunished: "&6&o%NAME% &7is not muted!"
+  Done: "&6&o%NAME% &7was successfully unmuted!"
+  Notification: "&e&o%OPERATOR% &7unmuted &a&o%NAME%"
+
+UnWarn:
+  Usage: "&c/unwarn [ID]"
+  NotFound: "&cCould not find warning #%ID%"
+  Done: "&7Warn &a&o#%ID% &7was successfully deleted!"
+  Notification: "&e&o%OPERATOR% &7unwarned &a&o%NAME%"
+  Clear:
+    Empty: "&6&o%NAME% &7has no warnings!"
+    Done: "&7Cleared &a&o%COUNT% &7warnings"
+
+UnNote:
+  Usage: "&c/unnote [ID]"
+  NotFound: "&cCould not find note #%ID%"
+  Done: "&7Note &a&o#%ID% &7was successfully deleted!"
+  Notification: "&e&o%OPERATOR% &7unnoted &a&o%NAME%"
+  Clear:
+    Empty: "&6&o%NAME% &7has no notes!"
+    Done: "&7Cleared &a&o%COUNT% &anotes"
+
+UnPunish:
+  Usage: "&c/unpunish [ID]"
+  NotFound: "&cCould not find punishment #%ID%"
+  Done: "&7Punishment &a&o#%ID% &7was successfully deleted!"
+
+
+Banlist:
+  Usage: "&c/banlist [page]"
+  OutOfIndex: "&cThere is no page %PAGE%!"
+  NoEntries: "&c&oThere are no entries"
+  Header:
+  - "%PREFIX% &aBanlist:"
+  - "&c&oPlayer/IP &8| &e&oDuration &8| &a&oBanned by"
+  - "&c&oType &8> &a&oReason"
+  - "&7"
+  Entry:
+  - "&8[&e%DATE%&8]"
+  - "&c%NAME% &8| &e%DURATION% &8| &a%OPERATOR%"
+  - "&c%TYPE% &8> &a&o%REASON%"
+  - "&7"
+  Footer: "&7Page &e&o%CURRENT_PAGE% &aof &e&o%TOTAL_PAGES% &8| &aListed bans: &e&o%COUNT%"
+  PageFooter: "&7Use &e&o/banlist %NEXT_PAGE% &ato see the next page"
+
+History:
+  Usage: "&c/history [player/IP] [page]"
+  OutOfIndex: "&cThere is no page %PAGE%!"
+  NoEntries: "&c&oCould not find the history of %NAME% :("
+  Header:
+  - "%PREFIX% &aHistory for %NAME%:"
+  - "&c&oName &8| &e&oDuration &8| &a&oOperator"
+  - "&c&oType &8> &a&oReason"
+  - "&7"
+  Entry:
+  - "&8[&e%DATE%&8]"
+  - "&c%NAME% &8| &e%DURATION% &8| &a%OPERATOR%"
+  - "&c%TYPE% &8> &a&o%REASON%"
+  - "&7"
+  Footer: "&7Page &e&o%CURRENT_PAGE% &aof &e&o%TOTAL_PAGES% &8| &aTotal entries: &e&o%COUNT%"
+  PageFooter: "&7Use &e&o/history %NAME% %NEXT_PAGE% &ato see the next page"
+
+Warns:
+  Usage: "&c/warns [player/IP] [page]"
+  OutOfIndex: "&cThere is no page %PAGE%!"
+  NoEntries: "&6&o%NAME% has no warnings yet"
+  Header:
+  - "%PREFIX% &7warnings for %NAME%:"
+  - "&c&oName &8| &e&oDuration &8| &a&oWarned by"
+  - "&c&o#ID &8> &a&oReason"
+  - "&7"
+  Entry:
+  - "&8[&e%DATE%&8]"
+  - "&c%NAME% &8| &e%DURATION% &8| &a%OPERATOR%"
+  - "&c&l#%ID% &8> &a&o%REASON%"
+  - "&7"
+  Footer: "&7Page &e&o%CURRENT_PAGE% &aof &e&o%TOTAL_PAGES% &8| &aActive warnings: &e&o%COUNT%"
+  PageFooter: "&7Use &e&o/warns %NAME% %NEXT_PAGE% &ato see the next page"
+
+WarnsOwn:
+  OutOfIndex: "&cThere is no page %PAGE%!"
+  NoEntries: "&c&oYou have no warnings yet"
+  Header:
+    - "%PREFIX% &aYour warnings:"
+    - "&e&oDuration &8| &a&oWarned by"
+    - "&c&o#ID &8> &a&oReason"
+    - "&7"
+  Entry:
+    - "&8[&e%DATE%&8]"
+    - "&e%DURATION% &8| &a%OPERATOR%"
+    - "&c&l#%ID% &8> &a&o%REASON%"
+    - "&7"
+  Footer: "&7Page &e&o%CURRENT_PAGE% &aof &e&o%TOTAL_PAGES% &8| &aActive warnings: &e&o%COUNT%"
+  PageFooter: "&7Use &e&o/warns %NEXT_PAGE% &ato see the next page"
+  
+Notes:
+  Usage: "&c/notes [player/IP] [page]"
+  OutOfIndex: "&cThere is no page %PAGE%!"
+  NoEntries: "&6&o%NAME% has no notes yet"
+  Header:
+    - "&7"
+    - "%PREFIX% &aNotes for %NAME%:"
+    - "&7"
+  Entry:
+    - "&7%DATE% &8| &aBy &o%OPERATOR% &a(&c#%ID%&a)"
+    - "&8> &e%REASON%"
+    - "&7"
+  Footer: "&7Page &e&o%CURRENT_PAGE% &aof &e&o%TOTAL_PAGES% &8| &aNotes: &e&o%COUNT%"
+  PageFooter: "&7Use &e&o/notes %NAME% %NEXT_PAGE% &ato see the next page"
+
+NotesOwn:
+  OutOfIndex: "&cThere is no page %PAGE%!"
+  NoEntries: "&c&oYou have no notes yet"
+  Header:
+    - "&7"
+    - "%PREFIX% &aYour notes:"
+    - "&7"
+  Entry:
+    - "&7%DATE% &8| &aBy &o%OPERATOR% &a(&c#%ID%&a)"
+    - "&8> &e%REASON%"
+    - "&7"
+  Footer: "&7Page &e&o%CURRENT_PAGE% &aof &e&o%TOTAL_PAGES% &8| &aNotes: &e&o%COUNT%"
+  PageFooter: "&7Use &e&o/notes %NEXT_PAGE% &ato see the next page"
+
+ChangeReason:
+  Usage: "&c/change-reason [player/IP] [ID/player] [new reason]"
+  Done: "&7Punishment &a&o#%ID% &ahas successfully been updated!"
+  NotFound: "&cSorry we have not been able to find this punishment"
+
+Check:
+  Usage: "&c/check [player]"
+  Header: "&7Checking &e&o%NAME% &a(%CACHED%&a)"
+  UUID: "&cUUID &l> &a%UUID% &a(%CACHED%&a)"
+  IP: "&cIP &l> &a%IP% &a(%CACHED%&a)"
+  Geo: "&cCountry &l> &a%LOCATION%"
+  Mute: "&cMuted &l> &a%DURATION%"
+  MuteReason: "  &cReason &l> &a%REASON%"
+  Ban: "&cBanned &l> &a%DURATION%"
+  BanReason: "  &cReason &l> &a%REASON%"
+  Warn: "&cWarns &l> &a%COUNT%"
+  Note: "&cNotes &l> &a%COUNT%"
+  NotFound: "&cSorry we have not been able to find %NAME%"
+  Cached: "&7&ocached"
+  NotCached: "&c&onot cached"

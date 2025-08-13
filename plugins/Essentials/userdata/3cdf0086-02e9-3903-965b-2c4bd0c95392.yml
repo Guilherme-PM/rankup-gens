@@ -1,0 +1,30 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 26.209.93.76
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 0
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1754578186394
+  login: 1754577253663
+money: '10570132611235.000000000012'
+last-account-name: larulecio
+logoutlocation:
+  world: ef655639-2841-48a8-9910-fc670929e3ee
+  world-name: world
+  x: -43.17595521417284
+  y: 97.0625
+  z: -19.162698549445853
+  yaw: 176.0541229248047
+  pitch: 10.823899269104004

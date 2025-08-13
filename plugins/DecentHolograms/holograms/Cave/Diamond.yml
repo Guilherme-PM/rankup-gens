@@ -1,0 +1,24 @@
+location: world:-8,500:52,000:28,500
+enabled: true
+display-range: 48
+update-range: 48
+update-interval: 20
+facing: 0.0
+down-origin: false
+pages:
+- lines:
+  - content: '#ICON:Diamond'
+    height: 0.6
+  - content: '&6Mina de Diamante &e40★'
+    height: 0.3
+  - content: ''
+    height: 0.3
+  - content: '&fᴅɪsᴘᴏɴíᴠᴇʟ ᴀ ᴘᴀʀᴛɪʀ ᴅᴏ &fɴíᴠᴇʟ &e&l40'
+    height: 0.3
+  - content: '&fᴠᴀʟᴏʀ ᴅᴏ ɪᴛᴇᴍ: &a&l32.000$'
+    height: 0.3
+  - content: ''
+    height: 0.3
+  - content: '&a[ᴄᴏᴍᴘʀᴇ sᴜᴀ ᴘɪᴄᴀʀᴇᴛᴀ ɴᴏ /ᴘɪᴄᴀʀᴇᴛᴀ]'
+    height: 0.3
+  actions: {}

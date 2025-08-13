@@ -1,0 +1,1238 @@
+# This script was written by Xqedii and sharing is not allowed!
+# You can change and edit everything in this file if you want
+
+# Utils5
+
+function upgrademenu(player: player):
+	set {_x} to chest inventory with 5 rows named {Config::GUIS::ToolBoost::%{Bedrock::%{_player}%}%}
+	set slot 4 of {_x} to {_player}'s tool
+	set {_boosts::*} to "ExtraExp" and "Tokens" and "Explosion" and "Speed" and "TNT" and "MagicCircle" and "Beams" and "LuckyUpgrade" and "Radius" and "Meteor" and "UFO" and "Events" and "BlocksAura"
+	set {_names::*} to {Config::GUIS::ToolBoost::Names::*}
+	set {_items::*} to experience bottle and amethyst shard and (flint and steel) and rabbit foot and tnt and slime ball and prismarine shard and golden apple and iron hoe and magma block and lime dye and firework and sunflower
+	set {_slots::*} to 11, 12, 13, 14, 15, 20, 21, 22, 23, 24, 30, 31, 32
+
+	set {_costs::*} to 5000 and 20000 and 50000 and 100000 and 500000 and 1000000 and 2500000 and 30000000 and 500000000 and 10000000000 and 32000000000 and 64000000000 and 128000000000
+	set {_maxUpgr::*} to 100 and 100 and 10 and 100 and 25 and 10 and 25 and 100 and 50 and 50 and 25 and 15 and 5
+
+	set {_req} to 0
+	set {_reqInfo::*} to ""
+	loop {_boosts::*}:
+		clear {_works::*}
+		set {_req-%loop-counter%} to {_req}
+		set {_cost} to "%{_costs::%loop-counter%}*({BoostLevel::%{_player}%::%loop-value%}+1)%"
+		set {_worksIn::*} to {Config::GUIS::ToolBoost::WorksIn::%loop-counter%} split at "|"
+		loop {_worksIn::*}:
+			if loop-value-2 is "1":
+				add " <##fcf932>• &f%{Config::GUIS::ToolBoost::FarmNames::%loop-counter-2%}%" to {_works::*}
+		if {BoostLevel::%{_player}%::%loop-value%} is not set:
+			set {BoostLevel::%{_player}%::%loop-value%} to 0
+		if {_req} > 0:
+			if {Rebirth::%{_player}%} ? 0 < {_req}:
+				set {_Config1} to {Config::GUIS::ToolBoost::ReqRebirth}
+				replace all "{REBIRTH}" with "%{_req-%loop-counter%}%" in {_Config1}
+				set {_reqInfo%loop-counter%::*} to "" and {Config::GUIS::ToolBoost::WorksOn} and {_works::*} and "" and {_Config1}
+		if {BoostLevel::%{_player}%::%loop-value%} > 0:
+			set {_Config2} to {Config::GUIS::ToolBoost::Level}
+			replace all "{LEVEL}" with "%{BoostLevel::%{_player}%::%loop-value%}%" in {_Config2}
+			set {_topInfo-%loop-counter%} to {_Config2}
+			if {BoostLevel::%{_player}%::%loop-value%} >= {_maxUpgr::%loop-counter%}:
+				set {_bottomInfo-%loop-counter%} to {Config::GUIS::ToolBoost::Max}
+			else:
+				set {_Config3} to {Config::GUIS::ToolBoost::Upgrade}
+				replace all "{COST}" with formatnumber({_cost}) in {_Config3}
+				set {_data-%loop-counter%::*} to {_Config3} and ""
+				set {_bottomInfo-%loop-counter%} to {Config::GUIS::ToolBoost::ClickToUpgrade}
+			set {_dataX} to {BoostLevel::%{_player}%::%loop-value%}
+			set {_percent} to ({_dataX}/{_maxUpgr::%loop-counter%})*100
+			set {_Config4::*} to {Config::GUIS::ToolBoost::Progress::*}
+			replace all "{LEVEL}" with "%{_dataX}%" in {_Config4::*}
+			replace all "{PERCENT}" with "%{_percent}%" in {_Config4::*}
+			replace all "{BAR}" with upgradeBar({_dataX}, {_maxUpgr::%loop-counter%}, 15) in {_Config4::*}
+			replace all "{CURRENT}" with "%{_dataX}%" in {_Config4::*}
+			replace all "{MAX}" with "%{_maxUpgr::%loop-counter%}%" in {_Config4::*}
+			set {_progress-%loop-counter%::*} to "" and {_Config4::*} and "" and {Config::GUIS::ToolBoost::WorksOn} and {_works::*}
+		else:
+			set {_topInfo-%loop-counter%} to {Config::GUIS::ToolBoost::NotUnlocked}
+			if {Rebirth::%{_player}%} ? 0 >= {_req-%loop-counter%}:
+				set {_bottomInfo-%loop-counter%} to {Config::GUIS::ToolBoost::ClickToBuy}
+				set {_Config5} to {Config::GUIS::ToolBoost::PurchaseCost}
+				replace all "{COST}" with formatnumber({_cost}) in {_Config5}
+				set {_data-%loop-counter%::*} to {Config::GUIS::ToolBoost::WorksOn} and {_works::*} and "" and {_Config5} and ""
+			else:
+				set {_bottomInfo-%loop-counter%} to {Config::GUIS::ToolBoost::NotUnlockedYet}
+		if mod(loop-counter, 5) is 0:
+			add 1 to {_req}
+
+	loop {_slots::*}:
+		set slot loop-value of {_x} to {_items::%loop-counter%} named "&a%{_names::%loop-counter%}%" with lore {_topInfo-%loop-counter%} and "" and {Config::GUIS::ToolBoost::Desc::%{_boosts::%loop-counter%}%::*} and {_reqInfo%loop-counter%::*} and {_progress-%loop-counter%::*} and "" and {_data-%loop-counter%::*} and {_bottomInfo-%loop-counter%}
+	set slot 39 and 40 and 41 of {_x} to {Config::GUIS::ToolBoost::Back}
+	open {_x} for {_player}
+
+function upgradeBar(exp: number, req: number, icons: number) :: text:
+	set {_bar} to ""
+	set {_last} to ""
+	loop {_icons} times:
+		if {_exp} >= ({_req}/{_icons})*loop-value:
+			set {_color} to "&2"
+		else:
+			set {_color} to "&f"
+		if loop-value is {_icons}:
+			set {_last} to "&r%{_color}%☆"
+			if {_color} is "&2":
+				set {_last} to "&r%{_color}%★"
+				set {_full} to true
+		set {_bar} to "%{_bar}% %{_color}%&m %{_last}%"
+	if {_full} is true:
+		replace all "★" with "" in {_bar}
+		set {_bar} to " <##FF00FF>&m%uncolored {_bar}%&r<##FF00FF>★"
+	return {_bar}
+
+command /renascer:
+	aliases: rebirth
+	trigger:
+		rebirth(player)
+
+function rebirth(player: player):
+	set {_x} to chest inventory with 4 rows named {Config::GUIS::Rebirth::%{Bedrock::%{_player}%}%}
+	set {_level} to formatnumber("%100+({Rebirth::%{_player}%}*5)%")
+	set {_cost} to formatnumber("%50000000000*({Rebirth::%{_player}%}+1)%")
+	set {_tokens} to formatnumber("%500*({Rebirth::%{_player}%}+1)%")
+	set {_old} to formatNumber2(1+({Rebirth::%{_player}%}*0.05))
+	set {_new} to formatNumber2(1+({Rebirth::%{_player}%}*0.05)+0.05)
+	set {_item} to {Config::GUIS::Rebirth::Rebirth}
+	replace all "{REBIRTH}" with "%{Rebirth::%{_player}%}+1%" in {_item}'s name
+	replace all "{REBIRTH}" with "%{Rebirth::%{_player}%}+1%" in {_item}'s lore
+	replace all "{OLD}" with "%{_old}%" in {_item}'s lore
+	replace all "{NEW}" with "%{_new}%" in {_item}'s lore
+	set slot 13 of {_x} to {_item}
+	set {_item} to {Config::GUIS::Rebirth::Confirm}
+	replace all "{REBIRTH}" with "%{Rebirth::%{_player}%}+1%" in {_item}'s name
+	replace all "{REBIRTH}" with "%{Rebirth::%{_player}%}+1%" in {_item}'s lore
+	replace all "{LEVEL}" with "%{_level}%" in {_item}'s lore
+	replace all "{COST}" with "%{_cost}%" in {_item}'s lore
+	replace all "{TOKENS}" with "%{_tokens}%" in {_item}'s lore
+	replace all "{OLD}" with "%{_old}%" in {_item}'s lore
+	replace all "{NEW}" with "%{_new}%" in {_item}'s lore
+	set slot 30 and 31 and 32 of {_x} to {_item}
+	open {_x} for {_player}
+
+on inventory click:
+	if name of current inventory of player is {Config::GUIS::Rebirth::Default} or {Config::GUIS::Rebirth::Bedrock}:
+		cancel event
+		if clicked slot is 30 or 31 or 32:
+			if {Level::%player%} >= 100+({Rebirth::%player%}*5):
+				if player's balance is bigger or equal to 50000000000*({Rebirth::%player%}+1):
+					if {Tokens::%player%} is bigger or equal to 500*({Rebirth::%player%}+1):
+						close player's inventory
+						add 1 to {Rebirth::%player%}
+						set {Exp::%player%} to 0
+						set {Level::%player%} to 1
+						set {Tokens::%player%} to 0
+						add 3 to {GensMAX::%player%}
+						set player's balance to 0
+						rebirthAnimation(player, {Rebirth::%player%})
+						stop
+					else:
+						send {Config::Utils3::NotEnoughTokens}
+						play sound "entity.illusioner.mirror_move" with pitch 2 for player
+				else:
+					send {Config::Global::NotEnough}
+					play sound "entity.illusioner.mirror_move" with pitch 2 for player
+			else:
+				send {Config::Dungeons::GensReq}
+				play sound "entity.illusioner.mirror_move" with pitch 2 for player
+			close player's inventory
+
+function rebirthAnimation(player: player, rebirth: number):
+	rebirthSFX1({_player})
+	Effect8X({_player}, 10, 140, 10)
+	rebirthFX1({_player})
+	effect1SFX({_player})
+	play sound "ui.toast.challenge_complete" with volume 0.8 and pitch 1 for {_player}
+	set {_old} to formatNumber2(1+(({_rebirth}-1)*0.05))
+	set {_new} to formatNumber2(1+(({_rebirth}-1)*0.05)+0.05)
+	send "" to {_player}
+	set {_mess} to {Config::Utils5::Rebirth::Mess1}
+	replace all "{REBIRTH}" with "%{_rebirth}%" in {_mess}
+	send {_mess} to {_player}
+	send "" to {_player}
+	send {Config::Utils5::Rebirth::Mess2} to {_player}
+	send "" to {_player}
+	set {_mess} to {Config::Utils5::Rebirth::Mess3}
+	replace all "{OLD}" with "%{_old}%" in {_mess}
+	replace all "{NEW}" with "%{_new}%" in {_mess}
+	send {_mess} to {_player}
+	send {Config::Utils5::Rebirth::Mess4} to {_player}
+	send "" to {_player}
+	send {Config::Utils5::Rebirth::Mess5} to {_player}
+	send "" to {_player}
+	play sound "entity.player.levelup" with pitch 2 at {_player}
+	set {_title::*} to {Config::Utils5::Rebirth::Title::*}
+	replace all "{REBIRTH}" with "%{_rebirth}%" in {_title::*}
+	send {_player} title {_title::1} with subtitle {_title::2} for 5 seconds
+	loop 20 times:
+		push {_player} upwards with speed 0.09
+		wait 1 tick
+	loop 50 times:
+		push {_player} upwards with speed 0.07
+		wait 1 tick
+	loop 30 times:
+		push {_player} upwards with speed 0.09
+		wait 1 tick
+	loop 30 times:
+		push {_player} upwards with speed 0.06
+		wait 1 tick
+
+function rebirthFX1(player: player):
+	loop 10 times:
+		set {_loc} to location at {_player}
+		chance of 50%:
+			set {_X} to random number between -5 and -10
+		else:
+			set {_X} to random number between 5 and 10
+		chance of 50%:
+			set {_Z} to random number between -5 and -10
+		else:
+			set {_Z} to random number between 5 and 10
+		add {_X} to x-coordinates of {_loc}
+		add {_Z} to z-coordinates of {_loc}
+		add random integer between 0 and 5 to {_loc}
+		set {_color} to "16729351" or "16756493" or "16573618" or "5534975" or "12041215"
+		set {_n} to nbt compound from "{Silent:1b,LifeTime:18,FireworksItem:{id:firework_rocket,count:1,components:{fireworks:{flight_duration:2,explosions:[{shape:""large_ball"",has_twinkle:0,has_trail:0,colors:[I;%{_color}%]}]}}}}"
+		spawn firework at {_loc} with nbt {_n}
+		wait 0.5 second
+
+function rebirthSFX1(player: player):
+	loop 30 times:
+		play sound "block.amethyst_block.chime" with volume 2 and pitch (random number between 1.2 and 2.0) at {_player}
+		wait 4 tick
+
+
+function formatNumber2(num: number) :: text:
+	set {_check} to 3
+	if {_num} >= 10:
+		set {_check} to 4
+	if "%{_num}%" contains ".":
+		if length of "%{_num}%" is {_check}:
+			return "%{_num}%0"
+		else:
+			return "%{_num}%"
+	else:
+		return "%{_num}%.00"
+
+on death of ender dragon:
+	clear drops
+
+on place:
+	set {_a} to player's tool
+	if int tag "PetEgg" of custom nbt of {_a} is set:
+		cancel event
+		set {_loc} to location at event-block
+		Animation1(player, {_loc}, player's tool)
+		SoundAnimation({_loc})
+		Animation2({_loc})
+		remove 1 of player's tool from player
+
+function SoundAnimation(loc: location):
+	play sound "entity.illusioner.prepare_mirror" with pitch 0.5 at {_loc}
+	play sound "entity.illusioner.prepare_blindness" with pitch 2 at {_loc}
+	play sound "item.elytra.flying" with volume 0.6 and pitch 1 at {_loc}
+	loop 200 times:
+		play sound "item.armor.equip_diamond" with volume 2 and pitch 0.5+((1.2/150)*loop-value) at {_loc}
+		wait 1 tick
+	play sound "entity.generic.explode" with volume 2 and pitch 1 at {_loc}
+	play sound "entity.player.levelup" with volume 2 and pitch 0.7 at {_loc}
+	play sound "entity.illusioner.cast_spell" with volume 2 and pitch 0.7 at {_loc}
+
+function Animation1(player: player, loc: location, item: item):
+	spawn item display at {_loc}:
+		set {_entity} to the display
+		set name of {_entity} to "Pet-%{_player}%"
+		set display scale of entity to vector(1,1,1)
+		set display teleport duration of entity to 10
+		set interpolation start of entity to 0
+		set interpolation duration of entity to 10 ticks
+		set display item of {_entity} to {_item}
+	loop 20 times:
+		set interpolation start of {_entity} to 0
+		set interpolation duration of {_entity} to 10 ticks
+		set {_scale} to 1 + ((1/20)*loop-value)
+		set display scale of {_entity} to vector({_scale},{_scale},{_scale})
+		add 1.025 to y-coordinates of {_loc}
+		add 15*loop-value to yaw of {_loc}
+		teleport {_entity} to {_loc}
+		if loop-value < 20:
+			wait 0.5 second
+		else:
+			wait 0.2 second
+	show 100 end rod with speed 0.5 at {_loc}
+	show 100 firework's spark with speed 0.5 at {_loc}
+	kill {_entity}
+	effect4({_loc}, "ffffff", 6, 2, false)
+	wait 0.2 second
+	petHatch({_player})
+
+function petHatch(player: player):
+	set {_pet} to random element out of {PetList::*}
+	set {_rarity} to random integer between 1 and 6
+	givePet({_player}, {_pet}, 1, {_rarity})
+
+function Animation2(loc: location):
+	add 1 to z-coordinates of {_loc}
+	remove 2.5 from y-coordinates of {_loc}
+	spawn an enderdragon at {_loc} with nbt nbt compound from "{DragonPhase:9,Silent:1b}"
+	set health of last spawned ender dragon to -1
+
+command /farmEffect [<text>]:
+	permission: *
+	permission message: %{Config::Global::Permission}%
+	trigger:
+		set {_effects::*} to "Explosion" and "TNT" and "Meteor" and "MagicCircle" and "Beams" and "UFO" and "Events" and "BlocksAura"
+		if arg-1 is not set:
+			set {_help} to true
+		if {_effects::*} contains arg-1:
+			set {_continue} to true
+		else:
+			set {_help} to true
+		if {_help} is true:
+			set {_desc::*} to ""
+			send ""
+			send " &a&lAvailable Farm Effects:"
+			send ""
+			loop {_effects::*}:
+				set {_desc} to "%{Config::GUIS::ToolBoost::Desc::%loop-value%::*}%"
+				replace all ", " and " and " with " " in {_desc}
+				send " &6/farmEffect &a%loop-value% &3- &7%{_desc}%"
+				send ""
+			stop
+		set {_loc} to location at targeted block
+		send "&aActivated &6&l%arg-1% &aEffect!"
+		play sound "entity.player.levelup" with pitch 2 for player
+		set {_type} to "%type of block at {_loc}%"
+		if arg-1 is "Explosion":
+			effect5X({_loc}, 1+(0.15*10), player, {_type}, "Farm")
+		if arg-1 is "Tnt":
+			effect10({_loc}, player, 2.5+(0.1*25), {_type})
+		if arg-1 is "Meteor":
+			effect3({_loc}, player, {_type})
+		if arg-1 is "MagicCircle":
+			effect1({_loc}, 3+((3/10)*10), 1, player, {_type})
+		if arg-1 is "Beams":
+			effect2({_loc}, player, {_type})
+		if arg-1 is "UFO":
+			effect9({_loc}, player, {_type})
+		if arg-1 is "Events":
+			effect7({_loc}, random integer between 1 and 2, 15+(15), 3+((4/15)*15), {_type})
+		if arg-1 is "BlocksAura":
+			Effect8X(player, 5, 200+(5*100), 5)
+
+import:
+    org.bukkit.event.block.BlockFadeEvent
+
+on load:
+	set {Checks::BRAIN_CORAL} to true
+	set {Checks::BUBBLE_CORAL} to true
+	set {Checks::HORN_CORAL} to true
+	set {Checks::TUBE_CORAL} to true
+	set {Checks::FIRE_CORAL} to true
+
+on BlockFadeEvent:
+	set {_x} to "%event.getBlock().getType()%"
+	if {Checks::%{_x}%} is true:
+		cancel event
+
+
+command /toolskin:
+	aliases: toolskins, itemskin, itemskins, pickaxeskin, swordskin, axeskin, shovelskin, sword, pickaxe, axe, shovel
+	trigger:
+		toolSkins(player, "Sword")
+
+function toolSkins(player: player, category: text):
+	set {_x} to chest inventory with 5 rows named {Config::GUIS::Update35::%{Bedrock::%{_player}%}%}
+	set slot 40, 41, 42 of {_x} to {Config::GUIS::Update35::Reset}
+	set {_slots::*} to 3, 4, 5, 6, 7, 12, 13, 14, 15, 16, 21, 22, 23, 24, 25, 30, 31, 32, 33, 34
+	set {_slots2::*} to 1, 10, 19, 28
+	set {_categories::*} to "Sword", "Pickaxe", "Axe", "Shovel"
+	set {_items::*} to diamond sword, diamond pickaxe, diamond axe, diamond shovel
+	loop {_slots2::*}:
+		set {_categoryName} to {Config::GUIS::Update35::Names::%loop-counter%}
+		set {_categName} to {Config::GUIS::Update35::CategoryItem}
+		replace all "{CATEGORY}" with {_categoryName} in {_categName}
+		set {_categLore::*} to {Config::GUIS::Update35::CategoryItemLore::*}
+		replace all "{CATEGORY}" with {Config::GUIS::Update35::Names::%loop-counter%} in {_categLore::*}
+		set {_categoryItem} to {_items::%loop-counter%} named {_categName} with lore {_categLore::*}
+		loop all attribute types:
+			add default loop-value-2 modifier of {_categoryItem} to loop-value-2 modifier of {_categoryItem}
+		add hide attributes to item flags of {_categoryItem}
+		set slot loop-value of {_x} to {_categoryItem}
+	set {_costs::*} to 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500
+	set {_costMultiplier} to 5
+	set {_items::*} to diamond sword, diamond pickaxe, diamond axe, diamond shovel
+	set {_items2::*} to netherite sword, netherite pickaxe, netherite axe, netherite shovel
+	loop {_categories::*}:
+		if {_category} is loop-value:
+			set {_catPrefix} to {Config::GUIS::Update35::Names::%loop-counter%}
+			set {_item} to {_items::%loop-counter%}
+			if {_player}'s tool is {_items::%loop-counter%} or {_items2::%loop-counter%}:
+				set {_selCheck} to true
+			stop loop
+	loop all attribute types:
+		add default loop-value modifier of {_item} to loop-value modifier of {_item}
+	add hide attributes to item flags of {_item}
+	set {_names::*} to {Config::GUIS::Update35::SkinsNames::*}
+	loop {_slots::*}:
+		set {_data} to 6999+loop-counter
+		clear {_features::*}
+		if {_data} is 7000 or 7004 or 7005 or 7007 or 7009 or 7012 or 7015 or 7017:
+			add {Config::GUIS::Update35::CustomParticles} to {_features::*}
+		if {_data} is not 7012:
+			add {Config::GUIS::Update35::CustomSFX} to {_features::*}
+		if {_data} <= 7017:
+			set string tag "Skin" of custom nbt of {_item} to "%{_category}% |!| %{_data}%"
+			set {_bottom} to {Config::GUIS::Update35::Apply}
+			if {_selCheck} is true:
+				if custom model data of {_player}'s tool is {_data}:
+					set {_bottom} to {Config::GUIS::Update35::Selected}
+			if {Skins::%{_player}%::%{_category}%::%{_data}%} is set:
+				set {_name} to {Config::GUIS::Update35::SelectedName}
+				replace all "{SKIN}" with "%{_names::%loop-counter%}%" in {_name}
+				replace all "{ITEM}" with "%{_catPrefix}%" in {_name}
+				set slot loop-value of {_x} to {_item} with custom model data {_data} named {_name} with lore {Config::GUIS::Update35::SelectedLore::*} and {_features::*} and "" and {_bottom}
+			else:
+				set {_itemX} to paper with custom model data 7021
+				set string tag "Skin" of custom nbt of {_itemX} to "%{_category}% |!| %{_data}%"
+				set int tag "Cost" of custom nbt of {_itemX} to {_costs::%loop-counter%}*{_costMultiplier}
+				set {_cost} to {_costs::%loop-counter%}*{_costMultiplier}
+				set {_name} to {Config::GUIS::Update35::LockedName}
+				replace all "{SKIN}" with "%{_names::%loop-counter%}%" in {_name}
+				replace all "{ITEM}" with "%{_catPrefix}%" in {_name}
+				set {_lore2::*} to {Config::GUIS::Update35::LockedLore2::*}
+				replace all "{COST}" with "%{_cost}%" in {_lore2::*}
+				set slot loop-value of {_x} to {_itemX} named {_name} with lore {Config::GUIS::Update35::LockedLore::*} and {_features::*} and {_lore2::*}
+		else:
+			stop loop
+	open {_x} for {_player}
+
+on inventory click:
+	if name of current inventory of player is {Config::GUIS::Update35::Default} or {Config::GUIS::Update35::Bedrock}:
+		cancel event
+		if clicked inventory is player's inventory:
+			stop
+		if clicked slot is 40 or 41 or 42:
+			resetSkin(player)
+			stop
+		set {_skin} to string tag "Skin" of custom nbt of clicked slot
+		if {_skin} is set:
+			set {_data::*} to {_skin} split at " |!| "
+			if {Skins::%player%::%{_data::1}%::%{_data::2}%} is set:
+				skinSelect(player, {_data::1}, {_data::2}, true)
+			else:
+				set {_cost} to int tag "Cost" of custom nbt of clicked slot
+				if {Tokens::%player%} >= {_cost}:
+					remove {_cost} from {Tokens::%player%}
+					set {Skins::%player%::%{_data::1}%::%{_data::2}%} to true
+					skinSelect(player, {_data::1}, {_data::2}, false)
+					toolSkins(player, {_data::1})
+					send {Config::Update35::SkinPurchased}
+					play sound "entity.player.levelup" with pitch 2 for player
+				else:
+					send {Config::Global::NotEnoughShards}
+					play sound "entity.illusioner.mirror_move" with pitch 2 for player
+		else:
+			set {_slots::*} to 1, 10, 19, 28
+			set {_categories::*} to "Sword", "Pickaxe", "Axe", "Shovel"
+			loop {_slots::*}:
+				if clicked slot is loop-value:
+					toolSkins(player, {_categories::%loop-counter%})
+
+function skinReset(player: player):
+	stop
+
+on quit:
+	delete {SkinCooldown::%player%}
+
+function resetSkin(player: player):
+	set {_available1::*} to diamond sword, diamond pickaxe, diamond axe, diamond shovel
+	set {_available2::*} to netherite sword, netherite pickaxe, netherite axe, netherite shovel
+	if custom model data of {_player}'s tool >= 7000:
+		if {_available1::*} contains {_player}'s tool:
+			set {_continue} to true
+		if {_available2::*} contains {_player}'s tool:
+			set {_continue} to true
+		if {_continue} is true:
+			delete custom model data of {_player}'s tool
+			send {Config::Update35::SkinReset} to {_player}
+			play sound "entity.experience_orb.pickup" with pitch 2 for {_player}
+		else:
+			send {Config::Update35::NoSkin} to {_player}
+			play sound "entity.illusioner.mirror_move" with pitch 2 for {_player}
+	else:
+		send {Config::Update35::NoSkin} to {_player}
+		play sound "entity.illusioner.mirror_move" with pitch 2 for {_player}
+
+function skinSelect(player: player, category: text, id: text, reply: boolean):
+	set {_category::*} to "Sword", "Pickaxe", "Axe", "Shovel"
+	set {_available1::*} to diamond sword, diamond pickaxe, diamond axe, diamond shovel
+	set {_available2::*} to netherite sword, netherite pickaxe, netherite axe, netherite shovel
+	loop {_category::*}:
+		if {_category} is loop-value:
+			set {_int} to loop-counter
+	if {_player}'s tool is {_available1::%{_int}%} or {_available2::%{_int}%}:
+		if custom model data of {_player}'s tool is {_id} parsed as number:
+			send {Config::Update35::SkinAlready} to {_player}
+			play sound "entity.illusioner.mirror_move" with pitch 2 for {_player}
+			stop
+		if {SkinCooldown::%{_player}%} is not set:
+			set {SkinCooldown::%{_player}%} to now
+		else:
+			if difference between {SkinCooldown::%{_player}%} and now <= 1 second:
+				if {_reply} is true:
+					send {Config::Update35::SkinCooldown} to {_player}
+					play sound "entity.illusioner.mirror_move" with pitch 2 for {_player}
+				stop
+		set {SkinCooldown::%{_player}%} to now
+		set custom model data of {_player}'s tool to {_id} parsed as number
+		if {_reply} is true:
+			send {Config::Update35::SkinSelected} to {_player}
+			play sound "entity.player.levelup" with pitch 2 for {_player}
+	else:
+		if {_reply} is true:
+			send {Config::Update35::CantApplySkin} to {_player}
+			play sound "entity.illusioner.mirror_move" with pitch 2 for {_player}
+
+on break:
+	if event is cancelled:
+		stop
+	set {_cmd} to custom model data of player's tool
+	if {_cmd} is set:
+		skinEffect(player, {_cmd}, location at event-block, false)
+
+on damage:
+	if event is cancelled:
+		stop
+	set {_cmd} to custom model data of attacker's tool
+	if {_cmd} is set:
+		skinEffect(attacker, {_cmd}, location 1 above victim, true)
+
+
+function skinEffect(player: player, data: number, loc: location, combat: boolean):
+	set {_v} to vector(0.3, 0.3, 0.3)
+	if {_data} is 7000:
+		play sound "entity.guardian.flop" with volume 0.5 and pitch 1.5 at {_loc}
+		make 5 of bubble at {_loc} with offset {_v} with extra 0.1
+	if {_data} is 7001:
+		set {_p} to random number between 1.10 and 1.50
+		play sound "block.bubble_column.whirlpool_inside" with volume 0.15 and pitch {_p} at {_loc}
+	if {_data} is 7002:
+		play sound "block.amethyst_block.place" with volume 0.25 and pitch {_p} at {_loc}
+	if {_data} is 7003:
+		loop 3 times:
+			play sound "block.anvil.fall" with volume 0.3 and pitch 0.5 at {_loc}
+			wait 2 tick
+	if {_data} is 7004:
+		play sound "block.chain.break" with volume 0.2 and pitch 2 at {_loc}
+		make 3 of firework at {_loc} with offset {_v} with extra 0.075
+	if {_data} is 7005:
+		play sound "block.fire.ambient" with pitch 2 at {_loc}
+		make 5 of trial spawner detection at {_loc} with offset {_v} with extra 0.075
+	if {_data} is 7006:
+		play sound "block.grass.break" with volume 0.2 and pitch 1 at {_loc}
+	if {_data} is 7007:
+		play sound "block.azalea_leaves.fall" with volume 0.2 and pitch 1 at {_loc}
+		make 5 of cherry leaves at {_loc} with offset {_v} with extra 0.075
+	if {_data} is 7008:
+		play sound "block.bone_block.place" with volume 0.2 and pitch 1.3 at {_loc}
+	if {_data} is 7009:
+		play sound "block.end_portal_frame.fill" with volume 0.15 and pitch 1.3 at {_loc}
+		make 3 of portal at location 0.3 under {_loc} with offset {_v} with extra 0.075
+	if {_data} is 7010:
+		play sound "block.glass.break" with volume 0.2 and pitch 1.7 at {_loc}
+	if {_data} is 7011:
+		play sound "block.amethyst_block.hit" with volume 0.25 and pitch 1.5 at {_loc}
+	if {_data} is 7012:
+		loop 6 times:
+			particleSys(location 0.5 under {_loc}, "&c❤", false)
+	if {_data} is 7013:
+		play sound "block.amethyst_block.hit" with volume 0.25 and pitch 1 at {_loc}
+	if {_data} is 7014:
+		play sound "item.crop.plant" with volume 0.25 and pitch 1.3 at {_loc}
+	if {_data} is 7015:
+		set {_p} to random number between 1.0 and 2.0
+		play sound "entity.experience_orb.pickup" with volume 0.15 and pitch {_p} at {_loc}
+		RGBParticle(location 0.5 under {_loc}, 6)
+	if {_data} is 7016:
+		play sound "block.glass.break" with volume 0.25 and pitch 1 at {_loc}
+	if {_data} is 7017:
+		play sound "block.cave_vines.step" with volume 0.15 and pitch 1.5 at {_loc}
+		make 5 of electric spark at {_loc} with offset {_v} with extra 0.075
+		if {_combat} is true:
+			chance of 10%:
+				strike fake fake lightning at location 1 under {_loc}
+				play sound "entity.lightning_bolt.thunder" with volume 0.35 and pitch 2 at {_loc}
+				play sound "entity.lightning_bolt.impact" with volume 0.35 and pitch 2 at {_loc}
+
+
+function RGBParticle(loc: location, amount: number):
+	set {_colors::*} to formatted colored rainbow("") split at ""
+	loop {_amount} times:
+		set {_a} to random element out of {_colors::*}
+		replace all "" with "" in {_a}
+		particleSys({_loc}, "%{_a}%", false)
+
+
+function particleSys(loc: location, e: text, wait: boolean):
+	set {_a} to random integer between 0 and 3      # delay
+	set {_b} to random number between 0.05 and 0.14 # distance
+	set {_c} to random number between 4.6 and 5.6   # height
+	set {_d} to random number between 0.6 and 0.9   # scale
+	if {_wait} is true:
+		set {_a} to floor({_a}/2)
+	wait "%{_a}% ticks" parsed as timespan
+	set {_Ease-In::*} to 0, 0.1, 0.22, 0.36, 0.52, 0.68, 0.82, 0.92, 0.98, 1
+	set {_Ease-Out::*} to 1, 0.98, 0.92, 0.82, 0.68, 0.52, 0.36, 0.22, 0.1, 0
+	set yaw of {_loc} to random integer between 0 and 360
+	spawn a text display at {_loc}:
+		set {_entity} to entity
+		set display billboard of entity to center
+		set display text background color of entity to bukkitColor(0,0,0,0)
+		set display scale of entity to vector(0,0,0)
+		set interpolation start of entity to 0
+		set interpolation duration of entity to 5 tick
+		set teleport duration of entity to 1 tick
+		set display text of entity to {_e}
+	loop {_Ease-In::*}:
+		set {_loc} to location {_b} in front of {_loc}
+		add {_Ease-Out::%loop-counter%}/{_c} to y-coordinates of {_loc}
+		teleport {_entity} to {_loc}
+		set {_scale} to loop-value*{_d}
+		set display scale of {_entity} to vector({_scale},{_scale},{_scale})
+		set interpolation start of {_entity} to 0
+		set interpolation duration of {_entity} to 1 tick
+		wait 1 tick
+	loop {_Ease-Out::*}:
+		set {_loc} to location {_b} in front of {_loc}
+		remove {_Ease-In::%loop-counter%}/{_c} from y-coordinates of {_loc}
+		teleport {_entity} to {_loc}
+		set {_scale} to loop-value*{_d}
+		set display scale of {_entity} to vector({_scale},{_scale},{_scale})
+		set interpolation start of {_entity} to 0
+		set interpolation duration of {_entity} to 1 tick
+		wait 1 tick
+	wait 0.1 second
+	kill {_entity}
+
+on entering region "portal3":
+	if {SkipStage::%player%} is 7:
+		stop
+	push player upwards with speed 1.5
+	if placeholder "bskyblock_has_island" from player is "true":
+		execute player command "is go"
+	else:
+		execute player command "is create"
+
+on entering region "AFK":
+	play sound "block.note_block.bell" with pitch 2 for player
+	set {_start} to now
+	set {_x} to now
+	add 9 minutes and 59 second to {_x}
+	set {_a} to difference between now and {_x}
+	set {_am} to 1
+	set {_chance} to 50
+	set {_value} to 600
+	set {_mess} to {Config::Update35::AFKBossbar}
+	replace all "{TIME}" with timespan_format({_a}) in {_mess}
+	replace all "{CHANCE}" with "%{_chance}%" in {_mess}
+	create bossbar titled {_mess} and id "AFK-%player%" for player with progress 100 with colors purple
+	set bossbar "AFK-%player%" style to segmented 10
+	if {AFKArea.%player%} is 1:
+		stop
+	add 1 to {AFKArea.%player%}
+	wait 1 tick
+	while player is in region "AFK":
+		if {AFKArea.%player%} is 1:
+			set {_a} to difference between now and {_x}
+			remove 1 from {_value}
+			add 1 to {TotalAFK::%player%}
+			if difference between {_start} and now >= 9 minutes and 59 second:
+				set {_x} to now
+				set {_start} to now
+				set {_value} to 600
+				add 9 minutes and 59 second to {_x}
+				set {_a} to difference between now and {_x}
+				AFKReward(player)
+			set {_mess} to {Config::Update35::AFKBossbar}
+			replace all "{CHANCE}" with "%{_chance}%" in {_mess}
+			replace all "{TIME}" with timespan_format({_a}) in {_mess}
+			set {_title} to {Config::Update35::AFKArea}
+			set {_subtitle} to {Config::Update35::AFKArea2}
+			replace all "{TIME}" with timespan_format({_a}) in {_subtitle}
+			if loop-counter is 1:
+				send player title {_title} with subtitle {_subtitle} for 1.2 seconds with 0.3 seconds fade in and 0.3 seconds fade out
+			else:
+				send player title {_title} with subtitle {_subtitle} for 5 seconds with 0 seconds fade in and 0 seconds fade out
+			set bossbar "AFK-%player%" value to {_value}/6
+			set bossbar "AFK-%player%" title to {_mess}
+		else:
+			delete {AFKArea.%player%}
+			stop
+		wait 1 second
+	remove bossbar "AFK-%player%"
+	delete {AFKArea.%player%}
+	send player title {_title} with subtitle {_subtitle} for 0.1 seconds with 0 seconds fade in and 0.3 seconds fade out
+	play sound "block.note_block.bell" with pitch 1.5 for player
+
+on quit:
+	delete {AFKArea.%player%}
+
+function AFKReward(player: player):
+	set {_Chance-G} to 70
+	set {_Chance-K} to 50
+	loop 4 times:
+		if {_player} has permission "AFK.extra.%loop-value%":
+			set {_Chance-G} to 70+(loop-value*7.5)
+			set {_Chance-K} to 50+(loop-value*12.5)
+	add random integer between 1000 and 5000 to {AFKRewards::%{_player}%::Money}
+	chance of {_Chance-G}%:
+		add random integer between 5 and 15 to {AFKRewards::%{_player}%::Tokens}
+	chance of {_Chance-K}%:
+		add 1 to {AFKRewards::%{_player}%::Keys}
+	send {Config::Update35::AFKDrawn} to {_player}
+	loop 5 times:
+		play sound "block.beehive.exit" with pitch (0.7+((1.3/5)*loop-value)) for {_player}
+		wait 0.1 second
+		if loop-counter is 1:
+			play sound "entity.player.levelup" with pitch 2 for {_player}
+
+
+command /afk:
+	trigger:
+		afkGUI(player)
+
+function afkGUI(player: player):
+	set {_x} to chest inventory with 5 rows named {Config::Update35::AFK::%{Bedrock::%{_player}%}%}
+	set {_total} to "%{TotalAFK::%{_player}%} ? "0"% seconds" parsed as timespan
+	set {_total} to timespan_format({_total})
+	set {_checks::*} to "Money", "Tokens", "Keys"
+	set {_prefixes::*} to {Config::Update35::AFK::Prefixes::*}
+	set {_suffix::*} to "$", "", ""
+	loop {_checks::*}:
+		set {_amount} to {AFKRewards::%{_player}%::%loop-value%} ? 0
+		set {_c} to "x"
+		if loop-counter is 1:
+			set {_c} to ""
+		add " <##f2c622>○ &f%{_prefixes::%loop-counter%}%: <##f2c622>%{_c}%%formatNum({_amount})%%{_suffix::%loop-counter%}%" to {_rewards::*}
+	set {_item} to {Config::Update35::AFK::AFKArea}
+	replace all "{TOTAL}" with "%{_total}%" in {_item}'s lore
+	set slot 1 of {_x} to {_item}
+	set slot 19 of {_x} to paper with custom model data 7019 named {Config::Update35::AFK::Rewards} with lore {Config::Update35::AFK::RewardsLore::*} and {_rewards::*}
+
+	set {_rank} to placeholder "luckperms_suffix" from {_player}
+	set {_Chance-M} to 100
+	set {_Chance-G} to 70
+	set {_Chance-K} to 50
+	loop 4 times:
+		if {_player} has permission "AFK.extra.%loop-value%":
+			set {_Chance-G} to 70+(loop-value*7.5)
+			set {_Chance-K} to 50+(loop-value*12.5)
+	set {_item} to {Config::Update35::AFK::Informations}
+	replace all "{MONEY}" with "%{_Chance-M}%" in {_item}'s lore
+	replace all "{TOKENS}" with "%{_Chance-G}%" in {_item}'s lore
+	replace all "{KEYS}" with "%{_Chance-K}%" in {_item}'s lore
+	replace all "{RANK}" with "%{_rank}%" in {_item}'s lore
+	set slot 28 of {_x} to {_item}
+	set {_slots::*} to 3, 4, 5, 6, 7, 12, 13, 14, 15, 16, 21, 22, 23, 24, 25, 30, 31, 32, 33, 34
+	set {_data} to 7015
+	loop 4 times:
+		if {AFKRewards::%{_player}%::Money} >= 10000*loop-value:
+			add 1 to {_data}
+	set {_items::*} to paper with custom model data {_data}, amethyst shard, tripwire hook with enchantment glint
+	loop {_checks::*}:
+		if {AFKRewards::%{_player}%::%loop-value%} >= 1:
+			set {_amount} to {AFKRewards::%{_player}%::%loop-value%}
+			add 1 to {_slot}
+			if loop-counter is 1:
+				set {_prefix} to "%formatNum({_amount})%$"
+			else:
+				set {_prefix} to "x%formatNum({_amount})%"
+			set {_name} to {Config::Update35::AFK::Rew}
+			replace all "{TYPE}" with "%{Config::Update35::AFK::Prefixes::%loop-counter%}%" in {_name}
+			replace all "{PREFIX}" with "%{_prefix}%" in {_name}
+			set {_lore::*} to {Config::Update35::AFK::RewLore::*}
+			replace all "{PREFIX}" with "%{_prefix}%" in {_lore::*}
+			set slot {_slots::%{_slot}%} of {_x} to {_items::%loop-counter%} named {_name} with lore {_lore::*}
+	set slot 40, 41, 42 of {_x} to gold nugget with custom model data 7000 named {Config::Update35::AFK::ClaimName} with lore {Config::Update35::AFK::ClaimLore::*} and {_rewards::*} and {Config::Update35::AFK::ClaimLore2::*}
+	open {_x} for {_player}
+
+on inventory click:
+	if name of current inventory of player is {Config::Update35::AFK::Default} or {Config::Update35::AFK::Bedrock}:
+		cancel event
+		if clicked inventory is player's inventory:
+			stop
+		if clicked slot is 40 or 41 or 42:
+			set {_money} to {AFKRewards::%player%::Money}
+			set {_tokens} to {AFKRewards::%player%::Tokens}
+			set {_keys} to {AFKRewards::%player%::Keys}
+			if {_money}+{_tokens}+{_keys} >= 1:
+				clear {AFKRewards::%player%::*}
+				add {_money} to player's balance
+				add {_tokens} to {Tokens::%player%}
+				if {_keys} >= 1:
+					execute console command "crates key give %player% common %{_keys}%"
+				send {Config::Update35::AFKRewClaimed}
+				play sound "entity.player.levelup" with pitch 1.5 for player
+				afkGUI(player)
+			else:
+				send {Config::Update35::NothingToClaim}
+				play sound "entity.illusioner.mirror_move" with pitch 2 for player
+
+
+function formatNum(b: number) :: text:
+	return formatNum2("%{_b}%")
+
+function formatNum2(b: text) :: text:
+	if length of {_b} > 3:
+		return "%formatNum2(first length of {_b} - 3 characters of {_b})%,%last 3 characters of {_b}%"
+	return {_b}
+
+command /heal:
+	permission: essentials.heal
+	permission message: &cYou don't have permission to do that
+	cooldown: 30 seconds
+	cooldown message: &cPlease wait 30 seconds before using this command again!
+	trigger:
+		send {Config::Global::Success}
+		heal player
+command /feed:
+	permission: essentials.feed
+	permission message: &cYou don't have permission to do that
+	cooldown: 30 seconds
+	cooldown message: &cPlease wait 30 seconds before using this command again!
+	trigger:
+		send {Config::Global::Success}
+		feed player
+
+
+function confetti2(loc: location, levelUp: boolean = false):
+	set yaw of {_loc} to random integer between 0 and 360
+	set {_light} to random integer between 10 and 15
+	set {_colors::*} to "255|25|44", "255|142|0", "249|249|2", "1|171|252", "103|2|253", "241|98|248|", "255|255|1"
+	set {_i} to a potion of luck
+	set {_c::*} to random element out of {_colors::*} split at "|"
+	dye {_i} rgb({_c::1} parsed as number, {_c::2} parsed as number, {_c::3} parsed as number)
+	spawn item display at {_loc}:
+		set {_entity} to the display
+		set display scale of entity to vector(0, 0, 0)
+		set display item of entity to {_i} with custom model data 7003
+		set display brightness of entity to displayBrightness({_light},{_light})
+		set teleport duration of entity to 0.5 seconds
+	entityRotate({_entity})
+	if {_levelUp} is true:
+		entityFalling({_entity}, true, 2, 1, 0.9)
+	else:
+		entityFalling({_entity}, true, 2, 10)
+	set {_div} to random number between 3.0 and 4.0
+	if {_levelUp} is true:
+		set {_div} to {_div}*2
+	set {_Ease-InOut::*} to 0.1, 0.22, 0.36, 0.52, 0.68, 0.82, 0.92, 0.98, 1
+	loop {_Ease-InOut::*}:
+		set {_scale} to loop-value/{_div}
+		set interpolation start of {_entity} to 0
+		set interpolation duration of {_entity} to 2 tick
+		set display scale of {_entity} to vector({_scale}, 0.01, {_scale})
+		wait 2 tick
+	if {_levelUp} is true:
+		wait 0.7 seconds
+	else:
+		wait 7 seconds
+	loop reversed {_Ease-InOut::*}:
+		set {_scale} to loop-value/{_div}
+		set interpolation start of {_entity} to 0
+		set interpolation duration of {_entity} to 2 tick
+		set display scale of {_entity} to vector({_scale}, 0.01, {_scale})
+		wait 2 tick
+	kill {_entity}
+
+function confetti(loc: location, levelUp: boolean = false):
+	set pitch of {_loc} to 0
+	set {_light} to random integer between 10 and 15
+	set {_colors::*} to "255|25|44", "255|142|0", "249|249|2", "1|171|252", "103|2|253", "241|98|248|", "255|255|1"
+	set {_i} to a potion of luck
+	set {_c::*} to random element out of {_colors::*} split at "|"
+	dye {_i} rgb({_c::1} parsed as number, {_c::2} parsed as number, {_c::3} parsed as number)
+	spawn item display at {_loc}:
+		set {_entity} to the display
+		set display scale of entity to vector(0, 0, 0)
+		set display item of entity to {_i} with custom model data 7002
+		set display brightness of entity to displayBrightness({_light},{_light})
+		set teleport duration of entity to 0.5 seconds
+	set {_div} to 1.3
+	if {_levelUp} is true:
+		entityFalling({_entity}, false, 3, 0.9)
+		set {_div} to 4
+	else:
+		entityFalling({_entity}, false, 3, 7)
+	set {_Ease-InOut::*} to 0.1, 0.22, 0.36, 0.52, 0.68, 0.82, 0.92, 0.98, 1
+	loop {_Ease-InOut::*}:
+		set {_scale} to loop-value/{_div}
+		set interpolation start of {_entity} to 0
+		set interpolation duration of {_entity} to 1 tick
+		set display scale of {_entity} to vector({_scale}, {_scale}, {_scale})
+		wait 1 tick
+	if {_levelUp} is true:
+		wait 1.2 seconds
+	else:
+		wait 7 seconds
+	loop reversed {_Ease-InOut::*}:
+		set {_scale} to loop-value/{_div}
+		set interpolation start of {_entity} to 0
+		set interpolation duration of {_entity} to 1 tick
+		set display scale of {_entity} to vector({_scale}, {_scale}, {_scale})
+		wait 1 tick
+	kill {_entity}
+
+
+function effect4Anim(loc: location, color: text, unicode: text, size: number, speed: number, rotate: boolean = false, extrar: number = 0, follow: player = "" parsed as offline player, ab: number = 0):
+	set {_amount} to 1
+	remove 90 from yaw of {_loc}
+	add {_extrar} to pitch of {_loc}
+	spawn a text display at {_loc}:
+		set name of entity to "Effect4"
+		set {_display} to entity
+		if {_rotate} is true:
+			set display billboard of {_display} to center
+		set display brightness of {_display} to displayBrightness(10,10)
+		set display text shadowed of {_display} to false
+		set display scale of entity to vector(0,0,0)
+		set interpolation start of entity to 0
+		set interpolation duration of entity to 0 ticks
+		set display teleport duration of entity to 1
+		set display text opacity of {_display} to 255
+		set display text of {_display} to formatted "<##%{_color}%>%{_unicode}%"
+		set display text background color of {_display} to bukkitColor(0,0,0,0)
+	add uuid of {_display} to {Effect4List::*}
+	if {_follow} is set:
+		hide {_display} for {_follow}
+	wait 2 tick
+	set {_b} to 255
+	entitySize({_display}, {_size})
+	loop 255 times:
+		remove 15 from {_b}
+		if {_b} < 6:
+			stop loop
+		set display text opacity of {_display} to floor({_b})
+		if {_follow} is set:
+			teleport {_display} to location {_ab} above {_follow}
+		add 1 to {_x}
+		if {_x} >= {_speed}:
+			wait 1 tick
+			set {_x} to 0
+	wait 1 seconds
+	kill {_display}
+	remove uuid of {_display} from {Effect4List::*}
+
+function entityRotate(entity: entity):
+	loop 90 times:
+		set interpolation start of {_entity} to 0
+		set interpolation duration of {_entity} to 2 tick
+		rotate {_entity} around vector(1,0,0) by 20 degrees
+		wait 0.1 second
+
+function entityFalling(entity: entity, check: boolean, div: number, extra: number, slowFall: number = 1.5):
+	set {_loc} to location at {_entity}
+	loop 10+{_extra} times:
+		set teleport duration of {_entity} to 0.5 seconds
+		set {_loc} to location {_slowFall}/({_div}/1.5) under {_loc}
+		if {_check} is false:
+			add 90 to yaw of {_loc}
+		teleport {_entity} to {_loc}
+		wait 0.5 second
+
+function entitySize(entity: entity, size2: number):
+	set {_size} to 0
+	loop 20 times:
+		add {_size2}/20 to {_size}
+		set interpolation start of {_entity} to 0
+		set interpolation duration of {_entity} to 1 ticks
+		set display scale of {_entity} to vector({_size},{_size},{_size})
+		wait 1 tick
+
+
+command /xqEffects [<text>]:
+	permission: *
+	trigger:
+		if arg-1 is not set:
+			send ""
+			send " &6/xqEffects &eholo &3- &7Spawns hologram with island entrace info"
+			send " &6/xqEffects &ekillholo &3- &7Remove hologram"
+			send ""
+			stop
+		if arg-1 is "holo":
+			send "<##8fff00>Success!"
+			play sound "entity.experience_orb.pickup" with pitch 2 for player
+			set {XqHolo::Location} to location at targeted block
+			set yaw of {XqHolo::Location} to -90
+			xqHolo({XqHolo::Location})
+			stop
+		if arg-1 is "killholo":
+			delete {XqHolo::Location}
+			kill {XqHolo::Entity} parsed as entity
+		send "<##ff4545>Unknown argument!"
+		play sound "entity.villager.no" with pitch 2 for player
+
+function xqHolo(loc: location):
+	kill {XqHolo::Entity} parsed as entity
+	set {XqHolo::Height} to y-coordinates of {_loc}
+	spawn item display at {_loc}:
+		set {_entity} to entity
+		set name of {_entity} to "Skyblock main Hologram"
+		set {XqHolo::Entity} to uuid of {_entity}
+		set interpolation start of entity to 0
+		set interpolation duration of entity to 10 tick
+		set display scale of entity to vector(0,0,0)
+		set display teleport duration of entity to 2
+		set display item of entity to gold nugget with custom model data 7015
+	wait 2 tick
+	set {_Bounce-In::*} to 0, 0.1, 0.25, 0.45, 0.7, 0.9, 1.02, 1.08, 1.1, 1.09, 1.07, 1.05, 1.03, 1.01 and 1
+	loop {_Bounce-In::*}:
+		set {_scale} to loop-value*2
+		set display scale of {_entity} to vector({_scale},{_scale},{_scale})
+		set interpolation start of {_entity} to 0
+		set interpolation duration of {_entity} to 1 tick
+		wait 1 tick
+
+on load:
+	fixHolo()
+
+function fixHolo():
+	set {_loc} to location at {XqHolo::Entity} parsed as entity
+	set y-coordinates of {_loc} to {XqHolo::Height}
+	teleport {XqHolo::Entity} parsed as entity to {_loc}
+
+every 68 ticks:
+	if {XqHolo::Entity} is set:
+		if {XqHolo::Entity} parsed as entity is alive:
+			set {_entity} to {XqHolo::Entity} parsed as entity
+			if y-coordinates of {XqHolo::Entity} parsed as entity is not {XqHolo::Height}:
+				fixHolo()
+			holoAnimation({_entity}, true)
+			wait 34 ticks
+			holoAnimation({_entity}, false)
+		else:
+			xqHolo({XqHolo::Location})
+	else:
+		if {XqHolo::Location} is set:
+			xqHolo({XqHolo::Location})
+
+function holoAnimation(entity: entity, up: boolean):
+	set {_Ease-InOut::*} to 0.1, 0.22, 0.36, 0.52, 0.68, 0.82, 0.92, 0.98, 1, 0.98, 0.92, 0.82, 0.68, 0.52, 0.36, 0.22 and 0.1
+	loop {_Ease-InOut::*}:
+		set {_loc} to location at {_entity}
+		set {_value} to loop-value/14
+		if {_up} is true:
+			teleport {_entity} to location {_value} above {_loc}
+		else:
+			teleport {_entity} to location {_value} under {_loc}
+		wait 2 tick
+
+on quit:
+	delete {XqHolo::Visible::%player%}
+on load:
+	delete {XqHolo::Visible::*}
+
+function toggleAnimation(entity: entity, holo: text, toggle: boolean, player: player, bypass: boolean):
+	if {_bypass} is false:
+		if {_player}'s gamemode is spectator:
+			stop
+	set {_Bounce-In::*} to 0, 0.1, 0.25, 0.45, 0.7, 0.9, 1.05, 1.15, 1.2, 1.17, 1.13, 1.08, 1.04, 1.01 and 1
+	set {_Bounce-Out::*} to 1, 1.03, 1.08, 1.12, 1.2, 1.1, 1.05, 0.95, 0.8, 0.6, 0.4, 0.2, 0.1, 0.03 and 0
+	set {_item} to display item of {_entity}
+	if {_toggle} is false:
+		set {XqHolo::Visible::%{_player}%} to false
+		set {_locX1} to location at {_entity}
+		set yaw of {_locX1} to yaw of {XqHolo::Location}
+		spawn a item display at {_locX1}:
+			set {_temp} to entity
+			set name of {_temp} to "Skyblock Banner"
+			set display scale of entity to vector(1,1,1)
+			set interpolation start of entity to 0
+			set interpolation duration of entity to 20 ticks
+			set teleport duration of entity to 1 ticks
+			set name of entity to name of {_entity}
+			set display item of entity to {_item}
+			make entity disappear from all players
+			make entity appear to {_player}
+		set {_total} to 0
+		loop {_Bounce-In::*}:
+			add loop-value to {_total}
+		set {_factor} to 180 / {_total}
+		loop {_Bounce-Out::*}:
+			set {_scale} to loop-value*2
+			set display scale of {_temp} to vector({_scale},{_scale},{_scale})
+			set interpolation start of {_temp} to 0
+			set interpolation duration of {_temp} to 1 ticks
+			wait 1 tick
+			set {_loc} to location at {_entity}
+			set yaw of {_loc} to 0-(({_Bounce-In::%loop-counter%} * {_factor})*10.328) - yaw of {XqHolo::Location}
+			teleport {_temp} to {_loc}
+			if loop-value is 1:
+				if {XqHolo::Visible::%{_player}%} is false:
+					make {_entity} disappear from {_player}
+		kill {_temp}
+	else:
+		set {XqHolo::Visible::%{_player}%} to true
+		set {_locX1} to location at {_entity}
+		set yaw of {_locX1} to yaw of {XqHolo::Location}
+		spawn a item display at {_locX1}:
+			set {_temp} to entity
+			set name of {_temp} to "Skyblock Banner"
+			set display scale of entity to vector(0,0,0)
+			set interpolation start of entity to 0
+			set interpolation duration of entity to 5 ticks
+			set teleport duration of entity to 1 ticks
+			set name of entity to name of {_entity}
+			set display item of entity to {_item}
+			make entity disappear from all players
+			make entity appear to {_player}
+		wait 2 tick
+		set {XqHolo::Visible::%{_player}%} to true
+		set {_total} to 0
+		loop {_Bounce-Out::*}:
+			add loop-value to {_total}
+		set {_factor} to 180 / {_total}
+
+		loop {_Bounce-In::*}:
+			set {_scale} to loop-value*2
+			set display scale of {_temp} to vector({_scale},{_scale},{_scale})
+			set interpolation start of {_temp} to 0
+			set interpolation duration of {_temp} to 1 ticks
+			wait 1 tick
+			set {_loc} to location at {_entity}
+			set {_val} to ((loop-value * {_factor})*5.328)
+			set yaw of {_loc} to 180+90+{_val} - yaw of {XqHolo::Location}
+			teleport {_temp} to {_loc}
+		if {XqHolo::Visible::%{_player}%} is true:
+			make {_entity} appear to {_player}
+		wait 1 tick
+		kill {_temp}
+
+function checkDistance(player: player):
+	set {_entity} to {XqHolo::Entity} parsed as entity
+	if distance between {_player} and {XqHolo::Entity} parsed as entity >= 25:
+		visibility({_entity}, false, {_player})
+	else:
+		visibility({_entity}, true, {_player})
+
+on join:
+	make {XqHolo::Entity} parsed as entity disappear from player
+	delete {XqHolo::Visible::%player%}
+
+function visibility(entity: text, toggle: boolean, player: player):
+	if {_toggle} is false:
+		if {XqHolo::Visible::%{_player}%} ? true is true:
+			toggleAnimation({XqHolo::Entity} parsed as entity, {_entity}, {_toggle}, {_player}, false)
+	else:
+		if {XqHolo::Visible::%{_player}%} ? false is false:
+			toggleAnimation({XqHolo::Entity} parsed as entity, {_entity}, {_toggle}, {_player}, false)
+
+on world change:
+	if player is in world "world":
+		checkDistance(player)
+
+every 1 second:
+	if {XqHolo::Height} is set:
+		loop all players in world "world":
+			checkDistance(loop-player)
+on load:
+	set {PortalRegionBlocks::*} to all blocks in region "portal4"
+
+on entering region "portal4":
+	push player west with speed 1
+	push player upwards with speed 0.6
+	execute player command "dungeons"
+
+every 3 second:
+	if {Dungeons-Open} is true:
+		loop {PortalRegionBlocks::*}:
+			set {_v} to vector(0.3, 0.3, 0.3)
+			make 2 of flame at loop-value with offset {_v} with extra 0.1
+			make 2 of lava at loop-value with offset {_v} with extra 0.2
+
+command /farms:
+	aliases: farms, sawmill
+	trigger:
+		farms(player, "Farm")
+
+function farms(player: player, type: text):
+	set {_x} to chest inventory with 4 rows named {Config::Update35::Farms::%{Bedrock::%{_player}%}%}
+	set slot 1 of {_x} to {Config::Update35::Farms::Farms}
+	set slot 10 of {_x} to {Config::Update35::Farms::Mine}
+	set slot 19 of {_x} to {Config::Update35::Farms::Sawmill}
+	set slot 28 of {_x} to {Config::Update35::Farms::Pond}
+	set {_slots::*} to 3, 4, 5, 6, 7, 12, 13, 14, 15, 16, 21, 22, 23, 24, 25, 30, 31, 32, 33, 34
+	if {_type} is "Farm":
+		set {_keys::*} to {Farmkey::*}
+		set {_warps::*} to "Wheat", "Potato", "Carrot", "Beetroot", "Lilac", "Rose", "Peony", "TubeCoral", "BrainCoral", "BubbleCoral", "FireCoral", "HornCoral", "CrimsonRoots"
+	if {_type} is "Mine":
+		set {_keys::*} to {Cavekey::*}
+		set {_warps::*} to "Cobblestone", "Iron", "Gold", "Diamond", "Emerald", "Amethyst", "Honeycomb", "FireShard", "Larimar", "Mithril", "Chromit"
+		set {_placeholder::*} to cobblestone, iron ore, gold ore, diamond ore, emerald ore, amethyst block, honeycomb block, red glazed terracotta, lime glazed terracotta, light blue glazed terracotta, purple glazed terracotta
+	if {_type} is "Sawmill":
+		set {_keys::*} to {Sawmillkey::*}
+		set {_warps::*} to "Oak", "Birch", "Spruce", "DarkOak", "Jungle"
+	loop {_keys::*}:
+		set {_itemX} to {GenData::%{BlockData::%loop-value%::1}%}
+		set {_req} to {BlockData::%loop-value%::2}
+		set {_value} to int tag "ItemValue" of custom nbt of {_itemX}
+		set {_placeholder} to {_itemX}
+		if {_placeholder::%loop-counter%} is set:
+			set {_placeholder} to {_placeholder::%loop-counter%}
+		set {_name} to {Config::Update35::Farms::FarmName}
+		replace all "{NAME}" with uncolored name of {_itemX} in {_name}
+		set {_lore::*} to {Config::Update35::Farms::FarmLore::*}
+		replace all "{REQ}" with "%{_req}%" in {_lore::*}
+		replace all "{VALUE}" with "%{_value}%" in {_lore::*}
+		set {_item} to {_placeholder} with enchantment glint named {_name} with lore {_lore::*}
+		set string tag "Warp" of custom nbt of {_item} to {_warps::%loop-counter%}
+		set slot {_slots::%loop-counter%} of {_x} to {_item}
+
+	open {_x} for {_player}
+
+on inventory click:
+	if name of current inventory of player is {Config::Update35::Farms::Default} or {Config::Update35::Farms::Bedrock}:
+		cancel event
+		set {_checks::*} to 1, 10, 19
+		set {_type::*} to "Farm", "Mine", "Sawmill"
+		loop {_checks::*}:
+			if clicked slot is loop-value:
+				farms(player, {_type::%loop-counter%})
+		if clicked slot is 28:
+			close player's inventory
+			execute player command "warp Pond"
+			stop
+		set {_warp} to string tag "Warp" of custom nbt of clicked slot
+		if {_warp} is set:
+			close player's inventory
+			execute player command "warp %{_warp}%"
+
+#
+# Skript random issues fix
+#
+
+# Infinite water/lava bucket
+on bucket empty:
+	set player's tool to bucket
+
+on player filling a bucket:
+	if event-block is water:
+		set player's tool to water bucket
+	if event-block is lava:
+		set player's tool to lava bucket
+
+# Infinite tile entities
+on place:
+	if player's gamemode is survival:
+		if player's tool is painting or item frame or glow item frame:
+			set {_a} to item amount of player's tool
+			wait 1 tick
+			if item amount of player's tool is {_a}:
+				remove 1 of player's tool from player

@@ -1,0 +1,24 @@
+location: world:8,500:61,000:-13,500
+enabled: true
+display-range: 48
+update-range: 48
+update-interval: 20
+facing: 0.0
+down-origin: false
+pages:
+- lines:
+  - content: <#fc8721>&lᴄᴀᴠᴇʀɴᴀ </#fceb28><#fceb28>&lᴘʀɪᴠᴀᴅᴀ</#fc8721>
+    height: 0.3
+  - content: ''
+    height: 0.3
+  - content: '&fᴄʀɪᴇ ᴇ ᴍᴇʟʜᴏʀᴇ ᴀ sᴜᴀ ᴘʀóᴘʀɪᴀ'
+    height: 0.3
+  - content: '&fᴄᴀᴠᴇʀɴᴀ ᴘᴀʀᴀ ɢᴀɴʜᴀʀ ʙôɴᴜs ᴀᴅɪᴄɪᴏɴᴀɪs'
+    height: 0.3
+  - content: '&fᴇ ᴄᴏʟᴇᴛᴀʀ ɪᴛᴇɴs ᴍᴜɪᴛᴏ ᴍᴀɪs ʀáᴘɪᴅᴏ!'
+    height: 0.3
+  - content: ''
+    height: 0.3
+  - content: '&a[ᴄᴏᴍᴘʀᴇ ɴᴀ ʟᴏᴊᴀ /sɪᴛᴇ]'
+    height: 0.3
+  actions: {}

@@ -1,0 +1,93 @@
+cooldown: 86400
+one_time: false
+auto_armor: false
+permission_required: true
+display:
+  default:
+    id: IRON_SWORD
+    name: '&6&lgold &aKit'
+    amount: 1
+    lore:
+    - '&7This is a description of the kit.'
+    - '&7You can add multiples &alines&7.'
+  no_permission:
+    id: BARRIER
+    name: '&6&lgold &aKit'
+    amount: 1
+    lore:
+    - '&cYou don''t have permissions to claim'
+    - '&cthis kit.'
+  cooldown:
+    id: STONE_SWORD
+    name: '&c&l%kit_name% &cKit'
+    amount: 1
+    lore:
+    - '&cYou need to wait &7%time%'
+    - '&cto claim this kit again.'
+    item_flags:
+    - HIDE_ATTRIBUTES
+items:
+  '1':
+    id: DIAMOND_SWORD
+    amount: 1
+    enchants:
+    - DAMAGE_ALL;3
+    - DURABILITY;2
+  '2':
+    id: DIAMOND_PICKAXE
+    amount: 1
+    enchants:
+    - DIG_SPEED;3
+    - LOOT_BONUS_BLOCKS;1
+    - DURABILITY;2
+  '3':
+    id: DIAMOND_AXE
+    amount: 1
+    enchants:
+    - DIG_SPEED;3
+    - DURABILITY;2
+  '4':
+    id: DIAMOND_SHOVEL
+    amount: 1
+    enchants:
+    - DIG_SPEED;3
+    - DURABILITY;2
+  '5':
+    id: GOLDEN_APPLE
+    amount: 1
+  '6':
+    id: COBWEB
+    amount: 3
+  '7':
+    id: BREAD
+    amount: 3
+  '8':
+    id: ENDER_PEARL
+    amount: 1
+  '9':
+    id: WATER_BUCKET
+    amount: 1
+  '10':
+    id: DIAMOND_HELMET
+    amount: 1
+    enchants:
+    - PROTECTION_ENVIRONMENTAL;2
+    - DURABILITY;2
+  '11':
+    id: DIAMOND_CHESTPLATE
+    amount: 1
+    enchants:
+    - PROTECTION_ENVIRONMENTAL;2
+    - DURABILITY;2
+  '12':
+    id: DIAMOND_LEGGINGS
+    amount: 1
+    enchants:
+    - PROTECTION_ENVIRONMENTAL;2
+    - DURABILITY;2
+  '13':
+    id: DIAMOND_BOOTS
+    amount: 1
+    enchants:
+    - PROTECTION_ENVIRONMENTAL;2
+    - DURABILITY;2

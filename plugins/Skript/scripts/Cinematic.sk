@@ -1,0 +1,926 @@
+# This script was written by Xqedii and sharing is not allowed!
+# You can change and edit everything in this file if you want
+
+# Cinematic
+
+on join:
+	if {SkipStage::%player%} is set:
+		delete {SkipStage::%player%}
+
+on first join:
+	if {Config::Cinematic::CinematicOnJoin} is true:
+		if {SkipStage::%player%} is not set:
+			if "%player%" starts with {Config::Global::BedrockSupport}:
+				set {_stop} to true
+			else:
+				set {SkipStage::%player%} to 7
+		if {Config::Update35::ItemsAdderSupport} is true:
+			wait 6 second
+			welcomeCinematic({_player})
+	else:
+		if {Objective::%player%} is not set:
+			set {Objective::%player%} to "BuyTool"
+			play sound "entity.illusioner.cast_spell" with pitch 1.3 for player
+
+function welcomeCinematic(player: player):
+	if "%{_player}%" starts with {Config::Global::BedrockSupport}:
+		stop
+	send "" to {_player}
+	send {Config::Global::FirstMessTitle} to {_player}
+	send "" to {_player}
+	send {Config::Global::FirstMess1} to {_player}
+	send {Config::Global::FirstMess2} to {_player}
+	send "" to {_player}
+	send {Config::Global::FirstMess3} to {_player}
+	send "" to {_player}
+	play sound "entity.player.levelup" with pitch 2 for {_player}
+	wait 10 seconds
+	send {Config::Cinematic::Started} to {_player}
+	startCinematic({_player}, "Welcome", false)
+	
+on join:
+	if {Objective::%player%} is not set:
+		if {FirstJoin::%player%} is not set:
+			set {FirstJoin::%player%} to true
+			stop
+		delete {FirstJoin::%player%}
+		set {Objective::%player%} to "BuyTool"
+		play sound "entity.illusioner.cast_spell" with pitch 1.3 for player
+
+
+on command:
+	if {SkipStage::%player%} is set:
+		if player's gamemode is spectator:
+			cancel event
+			send {Config::Cinematic::CommandsOff}
+			play sound "entity.illusioner.mirror_move" with pitch 2 for player
+		else:
+			if {SkipStage::%player%} is 7:
+				cancel event
+				send {Config::Cinematic::CommandsOff}
+				play sound "entity.illusioner.mirror_move" with pitch 2 for player
+			
+command /cinematic [<text>] [<text>]:
+	permission: *
+	aliases: ce, cin
+	trigger:
+		if arg-1 is not set:
+			play sound "entity.experience_orb.pickup" with pitch 2
+			cinematic(player, "1")
+			stop
+		if arg-1 is not "create" or "delete" or "remove" or "add" or "lines" or "menu" or "play" or "edit" or "line":
+			play sound "entity.experience_orb.pickup" with pitch 2
+			send ""
+			send "  &6&lCinematic Editor"
+			send ""
+			send "  &6/ce &ecreate [name] &3- &7Creates a new GUI"
+			send "  &6/ce &edelete [name] &3- &7Deletes existing GUI"
+			send "  &6/ce &eedit [name] &3- &7Opens editing panel"
+			send "  &6/ce &eplay [name] &3- &7Starts Cinematic"
+			send "  &6/ce &elines [name] &3- &7Shows Locs Lines"
+			send "  &6/ce &emenu &3- &7Opens Cinematic menu"
+			send ""
+			stop
+		if arg-1 is "menu":
+			play sound "entity.experience_orb.pickup" with pitch 2
+			cinematic(player, "1")
+		if arg-1 is "line" or "lines":
+			if arg-2 is not set:
+				send "&cType Cinematic name!"
+			else:
+				if {CE::Data::Cinematics::*} contains arg-2:
+					loop 6 times:
+						startCinematic(player, arg-2, true)
+						wait 1 second
+				else:
+					send "&cThis Cinematic doesn't exist!"
+		if arg-1 is "play" or "start":
+			if arg-2 is not set:
+				send "&cType Cinematic name!"
+			else:
+				if {CE::Data::Cinematics::*} contains arg-2:
+					startCinematic(player, arg-2, false)
+				else:
+					send "&cThis Cinematic doesn't exist!"
+		if arg-1 is "create" or "add":
+			if arg-2 is not set:
+				send "&cType Cinematic name!"
+			else:
+				if {CE::Data::Cinematics::*} contains arg-2:
+					send "&cThis Cinematic already exist!"
+				else:
+					if arg-2 contains " ":
+						send "&cName can't contain space!"
+						stop
+					add arg-2 to {CE::Data::Cinematics::*}
+					send "&aSuccess!"
+					play sound "entity.experience_orb.pickup" with pitch 2
+		if arg-1 is "delete" or "remove":
+			if arg-2 is not set:
+				send "&cType Cinematic name!"
+			else:
+				if {CE::Data::Cinematics::*} contains arg-2:
+					set {_a} to size of {CIN-Data::%arg-2%-1::*}
+					loop 3 times:
+						clear {CIN-Data::%arg-2%-%loop-value%::*}
+						loop {_a} times:
+							delete {CIN-Data::%arg-2%-%loop-value-1%::%loop-value-2%}
+							if loop-value-1 is 3:
+								loop 6 times:
+									delete {CIN-Effects::%arg-2%::%loop-value-2%::%loop-value-3%}
+									delete {CIN-Effects::%arg-2%::%{DataInfo::%player%::2}%::%{DataInfo::%player%::3}%}
+									delete {CIN-EffectsSound::%arg-2%::%loop-value-2%::%loop-value-3%}
+									delete {CIN-EffectsSound::%arg-2%::%{DataInfo::%player%::2}%::%{DataInfo::%player%::3}%}
+					remove arg-2 from {CE::Data::Cinematics::*}
+					send "&aSuccess!"
+					play sound "entity.experience_orb.pickup" with pitch 2
+				else:
+					send "&cThis Cinematic doesn't exist!"
+function cinematic(player: player, page: text):
+	set {_max} to floor(size of {CE::Data::Cinematics::*}/27+0.99)
+	if {_max} is 0:
+		set {_nogui} to true
+		set {_max} to 1
+	if {_page} parsed as number > {_max}:
+		set {_page} to 1
+	if {_page} parsed as number < 1:
+		set {_page} to 1
+	set {_x} to chest inventory with 6 rows named "&8Cinematic&1 &8(%{_page}%/%{_max}%)"
+	if {_nogui} is true:
+		set slot 22 of {_x} to red stained glass pane named "&cError (╯°□°)╯︵ ┻━┻" with lore "" and "&7You haven't created any Cinematics yet!" and "&7Create new one using command below." and "" and "&3/cin create [name]"
+	if "%{_page}%" is not "%{_max}%":
+		set slot 41 of {_x} to arrow with enchantment glint named "&aNext Page"
+	if {_page} parsed as number > 1:
+		set slot 39 of {_x} to arrow with enchantment glint named "&aPrevious Page"
+	set slot 40 of {_x} to book named "&aLooking for help?" with lore "" and "&7Join my discord and I will" and "&7help you with setting up" and "&7your cinematics!" and "" and "&eClick here to ask!"
+	set slot 49 of {_x} to firework named "&aHello %{_player}%!" with lore "" and "&7Welcome in Cinematic Editor!" and "&7This script will help you create" and "&7amazing Cinematic in a very simple way!"  and "" and "&3Create new Cinematic using simple" and "&7command &3/cin create [name]"
+	set {_num} to 8
+	loop {CE::Data::Cinematics::*}:
+		add 1 to {_cinID}
+		if {_cinID} > ({_page} parsed as number -1)*27:
+			add 1 to {_results}
+			add 1 to {_num}
+			if {_num} > 27:
+				stop loop
+			set {_GUI} to loop-value
+			set {_item} to item frame
+			set {_prefix} to ""
+			if loop-value is "Welcome":
+				set {_item} to painting
+				set {_prefix} to "&d&nBuilt-in&r "
+			set slot {_num} of {_x} to {_item} named "%{_prefix} %&eCinematic &6&l%loop-value%" with lore "" and "&7Informations:" and " &7Locations: &e0" and " &7Duration: &a5 seconds" and "" and "&7Other:" and " &7On join: &6False" and "" and "&eClick here to edit!"
+	open {_x} for {_player}
+function addeffecttitle(player: player, cin: text, slot: number):
+	set {_x} to chest inventory with 6 rows named "&8Title Effect&2 &8> %{_cin}% > %{_slot}%"
+	set slot 13 of {_x} to firework named "&aEffects"
+	set slot 28 of {_x} to bookshelf named "&aTitle" with lore "" and "&7Show Title during Cinematic" and "&7and describe something :)"
+	set slot 40 of {_x} to arrow named "&cBack"
+	loop 6 times:
+		add 1 to {_lv}
+		if {CIN-Effects::%{_cin}%::%{_slot}%::%{_lv}%} is not set:
+			set slot 28+loop-value of {_x} to stone button named "&aAdd Title"
+			if {CIN-EffectsSound::%{_cin}%::%{_slot}%::%{_lv}%} is not set:
+				add 1 to {_AX}
+		else:
+			set {_T::*} to formatted {CIN-Effects::%{_cin}%::%{_slot}%::%{_lv}%} split at "\"
+			set slot 28+{_lv} of {_x} to book with enchantment glint named "&aTitle &6&l%loop-value%" with lore "" and "&7Title: &6%{_T::1} ? "None"%" and "&7SubTitle: &e%{_T::2} ? "None"%" and "" and "&7Duration: &a%{_T::3} ? "None"%" and "" and "&7FadeIn: &a%{_T::4} ? "None"%" and "&7FadeOut: &a%{_T::5} ? "None"%" and "&7Delay: &a%{_T::6} ? "None"%" and "" and "&eClick here to Delete!"
+	if {_AX} is 6:
+		delete {CIN-Data::%{_cin}%-3::%{_slot}%}
+	else:
+		set {CIN-Data::%{_cin}%-3::%{_slot}%} to true
+	open {_x} for {_player}
+
+function addeffectsound(player: player, cin: text, slot: number):
+	set {_x} to chest inventory with 6 rows named "&8Sound Effect&2 &8> %{_cin}% > %{_slot}%"
+	set slot 13 of {_x} to firework named "&aEffects"
+	set slot 28 of {_x} to note block named "&aSound Effects" with lore "" and "&7Play Sound Effects during" and "&7Cinematic to make it better!"
+	set slot 40 of {_x} to arrow named "&cBack"
+	loop 6 times:
+		add 1 to {_lv}
+		if {CIN-EffectsSound::%{_cin}%::%{_slot}%::%{_lv}%} is not set:
+			set slot 28+loop-value of {_x} to stone button named "&aAdd Sound"
+			if {CIN-Effects::%{_cin}%::%{_slot}%::%{_lv}%} is not set:
+				add 1 to {_AX}
+		else:
+			set {_T::*} to formatted {CIN-EffectsSound::%{_cin}%::%{_slot}%::%{_lv}%} split at "\"
+			set slot 28+{_lv} of {_x} to emerald with enchantment glint named "&aSound &6&l%loop-value%" with lore "" and "&7Sound: &6%{_T::1} ? "None"%" and "&7Pitch: &6%{_T::2} ? "None"%" and "&7Volume: &6%{_T::3} ? "None"%" and "&7Delay: &6%{_T::4} ? "None"%" and "" and "&eClick here to Delete!"
+	if {_AX} is 6:
+		delete {CIN-Data::%{_cin}%-3::%{_slot}%}
+	else:
+		set {CIN-Data::%{_cin}%-3::%{_slot}%} to true
+	open {_x} for {_player}
+
+function addeffect(player: player, cin: text, slot: number):
+	set {_x} to chest inventory with 3 rows named "&8Effects&3 &8> %{_cin}% > %{_slot}%"
+	set slot 12 of {_x} to book named "&aTitle effect" with lore "" and "&7Show Title during Cinematic" and "&7and describe something :)" and "" and "&eClick here to add!"
+	set slot 14 of {_x} to note block named "&aSound Effects" with lore "" and "&7Play Sound Effects during" and "&7Cinematic to make it better!" and "" and "&eClick here to add!"
+	open {_x} for {_player}
+
+on inventory click:
+	if name of current inventory of player contains "&8Effects&3 &8> ":
+		cancel event
+		if player don't have permission "*":
+			close player's inventory
+			stop
+		set {_a::*} to uncolored name of current inventory of player split at "> "
+		set {_cin} to {_a::2}
+		replace all " " with "" in {_cin}
+		set {_slot} to {_a::3}
+		if clicked slot is 12:
+			addeffecttitle(player, {_cin}, {_slot} parsed as number)
+		if clicked slot is 14:
+			addeffectsound(player, {_cin}, {_slot} parsed as number)
+
+on inventory click:
+	if name of current inventory of player contains "&8Sound Effect&2 &8> ":
+		cancel event
+		if player don't have permission "*":
+			close player's inventory
+			stop
+		set {_a::*} to uncolored name of current inventory of player split at "> "
+		set {_cin} to {_a::2}
+		set {_slot} to {_a::3}
+		replace all " " with "" in {_cin} and {_slot}
+		if clicked slot is 40:
+			close player's inventory
+			wait 1 tick
+			editcin(player, {_cin}, {CIN-EditorPage::%player%})
+		if clicked slot > 28:
+			if clicked slot < 35:
+				set {_a} to index of clicked slot-28
+				if {CIN-EffectsSound::%{_cin}%::%{_slot}%::%{_a}%} is set:
+					delete {CIN-EffectsSound::%{_cin}%::%{_slot}%::%{_a}%}
+					send "&aDeleted &6&l%{_a}% &aSound!"
+					addeffectsound(player, {_cin}, {_slot} parsed as number)
+				else:
+					set {DataInfoSound::%player%::*} to {_cin} and {_slot} parsed as number and {_a}
+					send ""
+					send " &6&lSOUND EDITOR"
+					send ""
+					send "  &eUse &b\&e to create Sound with Pitch"
+					send "  &eand add other Features like Volume"
+					send ""
+					send " &aExample usage:"
+					send "            &6Sound      &ePitch &aVolume  &aDelay"
+					send "  &aentity.player.levelup&7\&a2&7\&a1&7\&a1 second"
+					send ""
+					close player's inventory
+	if name of current inventory of player contains "&8Title Effect&2 &8> ":
+		cancel event
+		if player don't have permission "*":
+			close player's inventory
+			stop
+		set {_a::*} to uncolored name of current inventory of player split at "> "
+		set {_cin} to {_a::2}
+		set {_slot} to {_a::3}
+		replace all " " with "" in {_cin} and {_slot}
+		if clicked slot is 40:
+			close player's inventory
+			wait 1 tick
+			editcin(player, {_cin}, {CIN-EditorPage::%player%})
+		if clicked slot > 28:
+			if clicked slot < 35:
+				set {_a} to index of clicked slot-28
+				if {CIN-Effects::%{_cin}%::%{_slot}%::%{_a}%} is set:
+					delete {CIN-Effects::%{_cin}%::%{_slot}%::%{_a}%}
+					send "&aDeleted &6&l%{_a}% &aTitle!"
+					addeffecttitle(player, {_cin}, {_slot} parsed as number)
+				else:
+					set {DataInfo::%player%::*} to {_cin} and {_slot} parsed as number and {_a}
+					send ""
+					send " &6&lTITLE EDITOR"
+					send ""
+					send "  &eUse &b\&e to create Title with Subtitle"
+					send "  &eand add other Features like Delay"
+					send ""
+					send " &aExample usage:"
+					send "   &6Title      &eSubtitle      &aDuration   &eFadein   &6Fadeout    &cDelay"
+					send "  &aMessage&7\&aSubtitle&7\&a3 seconds&7\&a5 ticks&7\&a5 ticks&7\&a1 second"
+					send ""
+					close player's inventory
+on chat:
+	if {DataInfo::%player%::*} is set:
+		cancel event
+		set {_a::*} to colored message split at "\"
+		send ""
+		send "&6&lSUCCESS!"
+		send ""
+		send " &aTitle: &6%{_a::1} ? "&cNot Set"%"
+		send " &aSubtitle: &6%{_a::2} ? "&cNot Set"%"
+		send " &aDuration: &6%{_a::3} ? "&cNot Set"%"
+		send " &aFadein: &6%{_a::4} ? "&cNot Set"%"
+		send " &aFadeout: &6%{_a::5} ? "&cNot Set"%"
+		send " &eDelay: &6%{_a::6} ? "&cNot Set"%"
+		send ""
+		set {CIN-Effects::%{DataInfo::%player%::1}%::%{DataInfo::%player%::2}%::%{DataInfo::%player%::3}%} to message
+		addeffecttitle(player, {DataInfo::%player%::1}, {DataInfo::%player%::2})
+		delete {DataInfo::%player%::*}
+	if {DataInfoSound::%player%::*} is set:
+		cancel event
+		set {_a::*} to colored message split at "\"
+		send ""
+		send "&6&lSUCCESS!"
+		send ""
+		send " &aSound: &6%{_a::1} ? "&cNot Set"%"
+		send " &aPitch: &6%{_a::2} ? "&cNot Set"%"
+		send " &aVolume: &6%{_a::3} ? "&cNot Set"%"
+		send " &aDelay: &6%{_a::4} ? "&cNot Set"%"
+		send ""
+		set {CIN-EffectsSound::%{DataInfoSound::%player%::1}%::%{DataInfoSound::%player%::2}%::%{DataInfoSound::%player%::3}%} to message
+		addeffectsound(player, {DataInfoSound::%player%::1}, {DataInfoSound::%player%::2})
+		delete {DataInfoSound::%player%::*}
+
+function editcin(player: player, cin: text, page: number):
+	if {CIN-EditorPage::%{_player}%} is not set:
+		set {CIN-EditorPage::%{_player}%} to 1
+	else:
+		set {CIN-EditorPage::%{_player}%} to {_page}
+	set {_x} to chest inventory with 6 rows named "&8Cinematic&2 &8> %{_cin}%"
+	set {_item} to item frame
+	set {_prefix} to ""
+	if {_cin} is "Welcome":
+		set {_item} to painting
+		set {_prefix} to "&d&nBuilt-in&r "
+	set slot 4 of {_x} to {_item} named "%{_prefix}%&eCinematic &6&l%{_cin}%" with lore "" and "&7Dont know how to edit?" and "" and "&7Add ""&3Xqedii&7"" to discord" and "&7and i will try to help you!"
+	set slot 18 of {_x} to emerald named "&aLocations"
+	set slot 27 of {_x} to clock named "&aTime"
+	set slot 36 of {_x} to firework named "&aEffects"
+	set slot 46 of {_x} to arrow named "&aPrevious Page"
+	set slot 52 of {_x} to arrow named "&aNext Page"
+	set slot 49 of {_x} to lime dye named "&aPreview"
+	set slot 45 of {_x} to ender eye named "&aCenter camera"
+	set {_slot} to 17
+	loop 3 times:
+		add 1 to {_slot}
+		delete {_stoploop}
+		loop 8 times:
+			delete {_empty}
+			add 1 to {_slot}
+			if {_stoploop} is true:
+				continue
+			if loop-value-1 is 1:
+				set {_name} to "&aPosition &6&l%loop-value-2+{_page}-1%"
+			if loop-value-1 is 2:
+				set {_name} to "&aTime &6&l%loop-value-2+{_page}-1%"
+			if loop-value-1 is 3:
+				set {_name} to "&aEffect &6&l%loop-value-2+{_page}-1%"
+			set {_it1} to yellow stained glass pane
+			set {_it2} to lime stained glass pane
+			set {_it3} to orange stained glass pane
+			set {_i} to {CIN-Data::%{_cin}%-%loop-value-1%::%loop-value-2+{_page}-1%}
+			if loop-value-1 is 2 or 3:
+				if {CIN-Data::%{_cin}%-1::%loop-value-2+{_page}-1%} is not set:
+					continue
+			if loop-value-1 is not 1:
+				if loop-value-2 > {_amount}:
+					continue
+			if {_i} is not set:
+				if loop-value-1 is 1:
+					set {_lore::*} to "" and "&eLeft-Click to add Cinematic!" and "&6Right-Click to add Teleport!"
+				else:
+					set {_lore::*} to "" and "&eClick here to add!"
+				set {_cont} to true
+			else:
+				if loop-value-1 is 1:
+					add 1 to {_amount}
+				if loop-value-1 is 2:
+					set {_it1} to light blue stained glass pane
+					set {_it2} to light blue stained glass pane
+					set {_it3} to blue stained glass pane with enchantment glint
+					set {_TRUE} to true
+					set {_lore::*} to "" and "&7Informations:" and " &7Time: &6%{CIN-Data::%{_cin}%-%loop-value-1%::%loop-value-2+{_page}-1%}% seconds" and "" and "&6Left click to delete!" and "&eRight click to teleport!"
+				else:
+					set {_it1} to magenta stained glass pane
+					set {_it2} to blue stained glass pane
+					set {_it3} to purple stained glass pane with enchantment glint
+					if {_i} is "Teleport":
+						set {_it1} to light gray stained glass pane
+						set {_it2} to cyan stained glass pane
+						set {_it3} to light gray stained glass pane with enchantment glint
+						set {_lore::*} to "" and "&7The camera will move" and "&7to the next location!" and "" and "&eLeft click to delete!"
+					else:
+						set {_lore::*} to "" and "&7Informations:" and " &7X: &6%x-coords of {_i}%" and " &7Y: &e%y-coords of {_i}%" and " &7Z: &a%z-coords of {_i}%" and "" and "&7Other:" and " &7Pitch: &6%pitch of {_i}%" and " &7Yaw: &e%correctYaw(yaw of {_i})%" and "" and "&6Left click to delete!" and "&eRight click to teleport!" and "&bShift+Right to replace location!"
+				set {_last} to loop-value-2+{_page}-1
+			set {_item} to {_it1} named {_name} with lore {_lore::*}
+			if mod({_page}, 2) is 0:
+				if mod(loop-value-2, 2) is 0:
+					set {_item} to {_it2} named {_name} with lore {_lore::*}
+			else:
+				if mod(loop-value-2, 2) is not 0:
+					set {_item} to {_it2} named {_name} with lore {_lore::*}
+			if loop-value-2 is 1:
+				if {_page} is 1:
+					set slot 46 of {_x} to air
+					set {_item} to {_it3} named {_name} with lore {_lore::*}
+			if loop-value-1 is 3:
+				if {CIN-Data::%{_cin}%-3::%loop-value-2+{_page}-1%} is set:
+					set {_l::*} to "" and "&7Titles:"
+					loop 6 times:
+						if {CIN-Effects::%{_cin}%::%loop-value-2+{_page}-1%::%loop-value-3%} is set:
+							set {_a::*} to formatted {CIN-Effects::%{_cin}%::%loop-value-2+{_page}-1%::%loop-value-3%} split at "\"
+							set {_toadd} to " &7- %{_a::1}%"
+							if {_a::2} is set:
+								set {_toadd} to "%{_toadd}% &7(and) %{_a::2}%"
+							add {_toadd} to {_l::*}
+					add "" to {_l::*}
+					add "&7Sounds:" to {_l::*}
+					loop 6 times:
+						if {CIN-EffectsSound::%{_cin}%::%loop-value-2+{_page}-1%::%loop-value-3%} is set:
+							set {_a::*} to formatted {CIN-EffectsSound::%{_cin}%::%loop-value-2+{_page}-1%::%loop-value-3%} split at "\"
+							set {_toadd} to " &7- &6%{_a::1}%"
+							if {_a::2} is set:
+								set {_toadd} to "%{_toadd}% &7(Pitch) &e%{_a::2}%"
+							if {_a::3} is set:
+								set {_toadd} to "%{_toadd}% &7(Volume) &a%{_a::3}%"
+							add {_toadd} to {_l::*}
+					add "" to {_l::*}
+					add "&eClick here to edit!" to {_l::*}
+					set lore of {_item} to {_l::*}
+			if loop-value-1 is 2 or 3:
+				if {CIN-Data::%{_cin}%-1::%loop-value-2+{_page}-1%} is "Teleport":
+					set {_item} to red stained glass pane named "&cSlot Locked!" with lore "" and "&7You cannot set the Tieme or" and "&7Effect for teleportation!"
+			set slot {_slot} of {_x} to {_item}
+			if name of {_item} is "&cSlot Locked!":
+				set slot {_slot}-1 of {_x} to {_item}
+			if loop-value-1 is 1:
+				if {_cont} is true:
+					set {_stoploop} to true
+					continue
+	if slot 25 of {_x} is air:
+		set slot 52 of {_x} to air
+	open {_x} for {_player}
+
+on inventory click:
+	if name of current inventory of player contains "&8Cinematic&2 &8> ":
+		cancel event
+		if player don't have permission "*":
+			close player's inventory
+			stop
+		if clicked slot is 45:
+			set {_n::*} to uncolored name of current inventory of player split at "> "
+			centercamera(player)
+			editcin(player, {_n::2}, {CIN-EditorPage::%player%})
+		if clicked slot is 49:
+			set {_n::*} to uncolored name of current inventory of player split at "> "
+			close player's inventory
+			startCinematic(player, {_n::2}, false)
+		if clicked slot > 18:
+			if clicked slot < 27:
+				set {_n::*} to uncolored name of current inventory of player split at "> "
+				set {_a::*} to uncolored name of clicked slot split at " "
+				if {CIN-Data::%{_n::2}%-1::%{_a::2}%} is set:
+					if click type is right mouse button with shift:
+						set {CIN-Data::%{_n::2}%-1::%{_a::2}%} to location at player
+						send "&aPosition &6&l%{_a::2}% &areplaced!"
+					else if click type is right mouse button:
+						teleport player to location at {CIN-Data::%{_n::2}%-1::%{_a::2}%}
+					else:
+						if {CIN-Data::%{_n::2}%-1::%{_a::2} parsed as number+1%} is set:
+							send "&cRemove earlier Positions first!"
+						else:
+							remove {_a::2} from {CIN-Data::%{_n::2}%-1::Times::*}
+							delete {CIN-Data::%{_n::2}%-1::%{_a::2}%}
+							delete {CIN-Data::%{_n::2}%-2::%{_a::2}%}
+							delete {CIN-Data::%{_n::2}%-3::%{_a::2}%}
+					editcin(player, {_n::2}, {CIN-EditorPage::%player%})
+				else:
+					if click type is left mouse button:
+						add {_a::2} to {CIN-Data::%{_n::2}%-1::Times::*}
+						set {CIN-Data::%{_n::2}%-1::%{_a::2}%} to location at player
+					if click type is right mouse button:
+						add {_a::2} to {CIN-Data::%{_n::2}%-1::Times::*}
+						set {CIN-Data::%{_n::2}%-1::%{_a::2}%} to "Teleport"
+					editcin(player, {_n::2}, {CIN-EditorPage::%player%})
+		if clicked slot > 27:
+			if clicked slot < 36:
+				set {_n::*} to uncolored name of current inventory of player split at "> "
+				set {_a::*} to uncolored name of clicked slot split at " "
+				if click type is right mouse button:
+					if {CIN-Data::%{_n::2}%-2::%{_a::2}%} > 1:
+						remove 1 from {CIN-Data::%{_n::2}%-2::%{_a::2}%}
+					else:
+						delete {CIN-Data::%{_n::2}%-2::%{_a::2}%}
+					editcin(player, {_n::2}, {CIN-EditorPage::%player%})
+				else:
+					add 1 to {CIN-Data::%{_n::2}%-2::%{_a::2}%}
+					editcin(player, {_n::2}, {CIN-EditorPage::%player%})
+		if clicked slot > 36:
+			if clicked slot < 45:
+				set {_n::*} to uncolored name of current inventory of player split at "> "
+				set {_a::*} to uncolored name of clicked slot split at " "
+				if {_a::2} is set:
+					if clicked slot is not red stained glass pane:
+						addeffect(player, {_n::2}, {_a::2} parsed as number)
+		if clicked slot is 52:
+			if clicked slot is arrow:
+				set {_n::*} to uncolored name of current inventory of player split at "> "
+				editcin(player, {_n::2}, {CIN-EditorPage::%player%}+1)
+		if clicked slot is 46:
+			if clicked slot is arrow:
+				set {_n::*} to uncolored name of current inventory of player split at "> "
+				editcin(player, {_n::2}, {CIN-EditorPage::%player%}-1)
+	if name of current inventory of player contains "&8Cinematic&1":
+		cancel event
+		if player don't have permission "*":
+			close player's inventory
+			stop
+		if clicked slot > 8:
+			if clicked slot < 36:
+				set {_n::*} to name of clicked slot split at "&eCinematic "
+				if {_n::2} is set:
+					editcin(player, uncolored {_n::2}, 1)
+		if clicked slot is 39:
+			if clicked slot is arrow with enchantment glint named "&aPrevious Page":
+				set {_n::*} to uncolored name of current inventory of player split at "("
+				set {_page::*} to {_n::1} split at "/"
+				cinematic(player, "%({_page::1} parsed as number)-1%")
+		if clicked slot is 41:
+			if clicked slot is arrow with enchantment glint named "&aPrevious Page":
+				set {_n::*} to uncolored name of current inventory of player split at "("
+				set {_page::*} to {_n::1} split at "/"
+				cinematic(player, "%({_page::1} parsed as number)+1%")
+function correctYaw(yaw: number) :: number:
+	if {_yaw} > 180:
+		return {_yaw}-360
+	else:
+		return {_yaw}
+function Hermite(y0: number, y1: number, y2: number, y3: number, mu: number, tension: number = 0, bias: number = 0) :: number:
+	set {_m0} to ({_y1} - {_y0}) * (1 + {_bias}) * (1 - {_tension}) / 2
+	add ({_y2} - {_y1}) * (1 - {_bias}) * (1 - {_tension}) / 2 to {_m0}
+	set {_m1} to ({_y2} - {_y1}) * (1 + {_bias}) * (1 - {_tension}) / 2
+	add ({_y3} - {_y2}) * (1 - {_bias}) * (1 - {_tension}) / 2 to {_m1}
+	set {_a0} to 2 * {_mu}^3 - 3 * {_mu}^2 + 1
+	set {_a1} to {_mu}^3 - 2 * {_mu}^2 + {_mu}
+	set {_a2} to {_mu}^3 - 1 * {_mu}^2
+	set {_a3} to -2 * {_mu}^3 + 3 * {_mu}^2
+	return {_a0} * {_y1} + {_a1} * {_m0} + {_a2} * {_m1} + {_a3} * {_y2}
+
+function CatmullRom(y0: number, y1: number, y2: number, y3: number, mu: number) :: number:
+	set {_a0} to -0.5*{_y0} + 1.5*{_y1} - 1.5*{_y2} + 0.5*{_y3}
+	set {_a1} to {_y0} - 2.5*{_y1} + 2*{_y2} - 0.5*{_y3}
+	set {_a2} to -0.5*{_y0} + 0.5*{_y2}
+	set {_a3} to {_y1}
+	return {_a0} * {_mu} * {_mu}^2 + {_a1} * {_mu}^2 + {_a2} * {_mu} + {_a3}
+
+function centercamera(player: player):
+	set {_loc} to location at {_player}
+	if {_player}'s pitch < -45:
+		set {_pset} to true
+		set pitch of {_loc} to -90
+	if {_player}'s pitch > 45:
+		set {_pset} to true
+		set pitch of {_loc} to 90
+	if {_pset} is not set:
+		set pitch of {_loc} to 0
+	if {_player}'s facing is west:
+		set yaw of {_loc} to 90
+	if {_player}'s facing is north:
+		set yaw of {_loc} to 180
+	if {_player}'s facing is east:
+		set yaw of {_loc} to -90
+	if {_player}'s facing is south:
+		set yaw of {_loc} to 0
+	teleport {_player} to {_loc}
+	send "&aCentered!" to {_player}
+
+function bossparticle():
+	wait 1.3 second
+	loop 20 times:
+		make 100 of flame at {Dungeon-Spawn::8} with offset vector(1, 1, 1) with extra 1
+		wait 1 tick
+
+function startCinematic(player: player, cin: text, particle: boolean):
+	if {_cin} is "Welcome":
+		set {_bar} to {Config::Cinematic::SkipTimes}
+		replace all "{TIMES}" with "3" in {_bar}
+		send action bar {_bar} to {_player}
+	set {SkipStage::%{_player}%} to 6
+	set {_prevloc} to location at {_player}
+	delete {CIN-Data::%{_cin}%-1::<none>}
+	set {_pointsx::*} to {CIN-Data::%{_cin}%-1::*}
+	set {_split} to 1
+	set {_alx} to 0
+	loop {_pointsx::*}:
+		add 1 to {_alx}
+		if loop-value is "Teleport":
+			add 1 to {_split}
+		else:
+			set {_time::%{_alx}%} to {CIN-Data::%{_cin}%-2::%{_alx}%}
+			add loop-value to {_points::%{_split}%::*}
+	if {_cin} is "Dungeon":
+		bossparticle()
+	set {_previous gamemode} to gamemode of {_player}
+	set {_previous location} to location of {_player}
+	set {_lvax} to 0
+	set {_alx} to 0
+	loop {_split} times:
+		if {SkipStage::%{_player}%} is not set:
+			stop loop
+		if loop-value is not 1:
+			add 2 to {_cinnum}
+		add 1 to {_lvax}
+		set {_start} to {_points::%loop-value-1%::1} ~ (vector between {_points::%loop-value-1%::2} and {_points::%loop-value-1%::1})
+		set {_end} to (last element of {_points::%loop-value-1%::*}) ~ (vector between (2nd last element of {_points::%loop-value-1%::*}) and last element of {_points::%loop-value-1%::*})
+		if {_lvax} is set:
+			kill {_stand}
+			delete spectator target of {_player}
+			if {_particle} is false:
+				spawn block display at {_points::%loop-value-1%::1}:
+					set {_stand} to entity
+					set display teleport duration of entity to 15
+				set name of last spawned armor stand to "Cinematic-%{_player}%"
+			teleport {_player} to {_stand}
+			wait 5 tick
+			if {_particle} is false:
+				set {_player}'s gamemode to spectator
+				set {_player}'s spectator target to {_stand}
+		
+		# SPECIAL EFFECTS (Gens)
+		if {_cin} is "Welcome":
+			if {_lvax} is 1: # Gens title & Disable hologram
+				gensTitle({_player}, {_stand})
+				specialAnim({_player}, false)
+			if {_lvax} is 7: # Enable island hologram
+				specialAnim({_player}, true)
+
+		add 1 to {_WelcomeCin}
+		loop (size of {_points::%loop-value-1%::*} - 1) times:
+			add 1 to {_cinnum}
+			if {_particle} is false:
+				if {CIN-Data::%{_cin}%-3::%loop-value-2%} is set:
+					loop 6 times:
+						if {_cin} is "Welcome":
+							set {_a::*} to {Config::Cinematic::Welcome::%{_WelcomeCin}%::%loop-value-3%::*}
+							if {_a::1} is set:
+								set {_fadeout} to {_a::5} parsed as timespan ? 1 second
+								set {_dur} to {_a::3} parsed as timespan ? 1 second
+								set {_fadein} to {_a::4} parsed as timespan ? 0.5 second
+								set {_fadeout} to {_a::5} parsed as timespan ? 0.5 second
+								set {_delay} to {_a::6} parsed as timespan ? 0 seconds
+								set {_title} to {_a::1} ? ""
+								set {_subtitle} to {_a::2} ? ""
+								replace all "%%player%%" with "%{_player}%" in {_title} and {_subtitle}
+								cintitle({_player}, {_title}, {_subtitle}, {_dur}, {_fadein}, {_fadeout}, {_delay}, {_cin}, {_lvax})
+							
+						else:
+							set {_a::*} to {CIN-Effects::%{_cin}%::%{_cinnum}%::%loop-value-3%} split at "\"
+							if {_a::1} is set:
+								set {_fadeout} to {_a::5} parsed as timespan ? 1 second
+								set {_dur} to {_a::3} parsed as timespan ? 1 second
+								set {_fadein} to {_a::4} parsed as timespan ? 0.5 second
+								set {_fadeout} to {_a::5} parsed as timespan ? 0.5 second
+								set {_delay} to {_a::6} parsed as timespan ? 0 seconds
+								set {_title} to {_a::1} ? ""
+								set {_subtitle} to {_a::2} ? ""
+								replace all "%%player%%" with "%{_player}%" in {_title} and {_subtitle}
+								cintitle({_player}, {_title}, {_subtitle}, {_dur}, {_fadein}, {_fadeout}, {_delay}, {_cin}, {_lvax})
+					loop 6 times:
+						set {_a::*} to {CIN-EffectsSound::%{_cin}%::%{_cinnum}%::%loop-value-3%} split at "\"
+						if {_a::1} is set:
+							set {_sound} to {_a::1}
+							set {_pitch} to {_a::2} parsed as number ? 1
+							set {_volume} to {_a::3} parsed as number ? 1
+							set {_delay} to {_a::4} parsed as timespan ? 0 seconds
+							cinsound({_player}, {_sound}, {_volume}, {_pitch}, {_delay}, {_cin}, {_lvax})
+			set {_p0} to {_points::%loop-value-1%::%(loop-number-2) - 1%} if loop-number-2 > 1, else {_start} 
+			set {_p1} to {_points::%loop-value-1%::%(loop-number-2) + 0%}
+			set {_p2} to {_points::%loop-value-1%::%(loop-number-2) + 1%}
+			set {_p3} to {_points::%loop-value-1%::%(loop-number-2) + 2%} if loop-number-2 < (size of {_points::%loop-value-1%::*} - 1), else {_end}
+			set yaw of {_p0} to yaw of {_p0}
+			set yaw of {_p1} to nearestIdenticalYaw((yaw of {_p1}), yaw of {_p2})
+			set yaw of {_p2} to nearestIdenticalYaw((yaw of {_p2}), yaw of {_p1})
+			set yaw of {_p3} to yaw of {_p3}
+			set {_step} to 1 / ({_time::%{_cinnum}%}*20)
+			set {_mu} to 0
+			delete {_axa}
+			while {_mu} < 1:
+				if {SkipStage::%{_player}%} is not set:
+					stop loop
+				add {_step} to {_mu}
+				set {_point} to interpolate({_p0}, {_p1}, {_p2}, {_p3}, {_mu})
+				if {_particle} is true:
+					make 1 of end rod at {_point} with extra 0
+				else:
+					add 1 to {_axa}
+					teleport {_stand} to location 1.5 above {_point}
+					wait 1 tick
+	if {_particle} is false:
+		kill {_stand}
+		set gamemode of {_player} to {_previous gamemode}
+		teleport {_player} to {_prevloc}
+		if {Objective::%{_player}%} is not set:
+			set {Objective::%{_player}%} to "BuyTool"
+			play sound "entity.illusioner.cast_spell" with pitch 1.3 for {_player}
+		delete {SkipStage::%{_player}%}
+
+function specialAnim(player: player, toggle: boolean):
+	wait 0.5 second
+	set {_e} to {XqHolo::Entity} parsed as entity
+	toggleAnimation({XqHolo::Entity} parsed as entity, {_e}, {_toggle}, {_player}, true)
+
+on load:
+	loop all block displays:
+		if name of loop-block display contains "Cinematic-":
+			kill loop-block display
+
+on damage:
+	if damage cause is fall:
+		if {SkipStage::%victim%} is set:
+			cancel event
+
+on sneak toggle:
+	if player's gamemode is spectator:
+		cancel event
+		if {SkipStage::%player%} > 0:
+			if player is not sneaking:
+				remove 1 from {SkipStage::%player%}
+				play sound "block.note_block.hat" with pitch 1.3+(6-{SkipStage::%player%}/8) for player
+				if {SkipStage::%player%} is 5 or 6:
+					set {_info} to 3
+				if {SkipStage::%player%} is 3 or 4:
+					set {_info} to 2
+				if {SkipStage::%player%} is 1 or 2:
+					set {_info} to 1
+				if {SkipStage::%player%} < 1:
+					delete {SkipStage::%player%}
+					send {Config::Cinematic::Skipped}
+					send action bar {Config::Cinematic::Skipped} to player
+					send player title "&7" with subtitle "&7" for 1 second
+					if {Objective::%player%} is not set:
+						set {Objective::%player%} to "BuyTool"
+						play sound "entity.illusioner.cast_spell" with pitch 1.3 for player
+				else:
+					set {_bar} to {Config::Cinematic::SkipTimes}
+					replace all "{TIMES}" with "%{_info}%" in {_bar}
+					send action bar {_bar} to player
+
+function cintitle(player: player, title: text, subtitle: text, dur: timespan, fadein: timespan, fadeout: timespan, delay: timespan, cin: text, check: number):
+	wait {_delay}
+	if {SkipStage::%{_player}%} is not set:
+		stop
+	if "%{_title}%" is "{ANIMATION}":
+		anim1({_player}, false, 3, "000000")
+		wait 1.2 second
+		anim1({_player}, true, 3, "000000")
+	else:
+		wait 2 tick
+		send {_player} title "%{_title}%" with subtitle "%{_subtitle}%" for {_dur} with {_fadein} fade in and {_fadeout} fade out
+function cinsound(player: player, sound: text, pitch: number, volume: number, delay: timespan, cin: text, check: number):
+	wait {_delay}
+	if {SkipStage::%{_player}%} is not set:
+		stop
+	wait 2 tick
+	play sound {_sound} with volume {_volume} and pitch {_pitch} for {_player}
+
+function interpolate(p0: location, p1: location, p2: location, p3: location, mu: number) :: location:
+	set {_x0} to x-pos of {_p0}
+	set {_y0} to y-pos of {_p0}
+	set {_z0} to z-pos of {_p0}
+	set {_yaw0} to yaw of {_p0}
+	set {_pitch0} to pitch of {_p0}
+	set {_x1} to x-pos of {_p1}
+	set {_y1} to y-pos of {_p1}
+	set {_z1} to z-pos of {_p1}
+	set {_yaw1} to yaw of {_p1}
+	set {_pitch1} to pitch of {_p1}
+	set {_x2} to x-pos of {_p2}
+	set {_y2} to y-pos of {_p2}
+	set {_z2} to z-pos of {_p2}
+	set {_yaw2} to yaw of {_p2}
+	set {_pitch2} to pitch of {_p2}
+	set {_x3} to x-pos of {_p3}
+	set {_y3} to y-pos of {_p3}
+	set {_z3} to z-pos of {_p3}
+	set {_yaw3} to yaw of {_p3}
+	set {_pitch3} to pitch of {_p3}
+	set {_rx} to CatmullRom({_x0}, {_x1}, {_x2}, {_x3}, {_mu})
+	set {_ry} to CatmullRom({_y0}, {_y1}, {_y2}, {_y3}, {_mu})
+	set {_rz} to CatmullRom({_z0}, {_z1}, {_z2}, {_z3}, {_mu})
+	set {_ryaw} to CatmullRom({_yaw0}, {_yaw1}, {_yaw2}, {_yaw3}, {_mu})
+	set {_rpitch} to CatmullRom({_pitch0}, {_pitch1}, {_pitch2}, {_pitch3}, {_mu})
+	set {_loc} to location at {_rx}, {_ry}, {_rz} in (world of {_p0})
+	set yaw of {_loc} to {_ryaw}
+	set pitch of {_loc} to {_rpitch}
+	return {_loc}
+
+function nearestIdenticalYaw(current: number, target: number) :: number:
+	if abs({_target} - {_current}) > 180:
+		set {_direction} to {_target} - {_current}
+		set {_norm} to {_direction} / abs({_direction})
+		return {_current} + {_norm} * 360
+	return {_current}
+
+function a2(b: number) :: text:
+	set {_b} to "%{_b}%"
+	if length of {_b} > 3:
+		return "%a(first length of {_b} - 3 characters of {_b})%,%last 3 characters of {_b}%"
+	return {_b}
+function animation(player: player):
+	anim1({_player}, false, 3, "000000")
+	wait 0.5 second
+	anim1({_player}, true, 3, "000000")
+
+function anim1(player: player, reversed: boolean, speed: number, color: text):
+	if {Bedrock::%{_player}%} is "Bedrock":
+		stop
+	if "%{_player}%" starts with {Config::Global::BedrockSupport}:
+		send {_player} title " " with subtitle {Config::Update35::Teleporting} for 0.5 second with 0.2 seconds fade in and 0.2 seconds fade out
+		stop
+	set {_symbols::*} to "七" and "七" and "七" and "七" and "七" and "七" and "七" and "七" and "七"
+	set {_rows} to 50
+	loop {_rows} times:
+		if {_reversed} is true:
+			set {_i} to {_rows}-loop-value
+		else:
+			set {_i} to loop-value
+		set {_left_part} to ""
+		loop {_i} times:
+			set {_j} to loop-value-2
+			set {_current_value} to min({_j}, size of {_symbols::*})
+			set {_current_char} to {_symbols::%{_current_value}%}
+			set {_left_part} to "%{_left_part}%%{_current_char}%"
+		if length of {_left_part} > 1:
+			set {_s} to length of {_left_part}
+			set {_a} to first {_s}-1 characters of {_left_part}
+			set {_left_part_without_last} to {_a}
+		set {_s} to length of {_left_part}
+		set {_b} to first {_s}-1 characters of {_left_part}
+		set {_right_part} to reversed({_b}) ? ""
+		add 1 to {_wait}
+		if {_wait} >= {_speed}:
+			delete {_wait}
+			wait 1 tick
+		send {_player} title "<##%{_color}%>%{_left_part}%%{_right_part}%" with subtitle "" for 1 second with 0 seconds fade in and 0 seconds fade out
+
+function reversed(t: text) :: text:
+    return join (characters at (integers between (length of {_t}) and 1) of {_t}) with ""
+
+function a(b: text) :: text:
+	if length of {_b} > 3:
+		return "%a(first length of {_b} - 3 characters of {_b})%,%last 3 characters of {_b}%"
+	return {_b}
+		
+
+function smoothScale(entity: entity, rev: boolean):
+	set {_Bounce-In::*} to 0, 0.1, 0.25, 0.45, 0.7, 0.9, 1.02, 1.08, 1.1, 1.09, 1.07, 1.05, 1.03, 1.01 and 1
+	if {_rev} is true:
+		set {_Bounce-In::*} to reversed {_Bounce-In::*}
+	loop {_Bounce-In::*}:
+		set interpolation start of {_entity} to 0
+		set interpolation duration of {_entity} to 1 tick
+		set {_scale} to 2*loop-value
+		set display scale of {_entity} to vector({_scale},{_scale},{_scale})
+		wait 1 tick
+
+function gensTitle(player: player, arm: entity):
+	wait 3 second
+	set {_loc} to location at {_arm}
+	set {_data::*} to 7042, 7040, 7049, 7054
+	loop 4 times:
+		spawn item display at {_loc}:
+			set {_entity} to entity
+			set interpolation start of entity to 0
+			set interpolation duration of entity to 1 tick
+			set display scale of entity to vector(0, 0, 0)
+			set display teleport duration of entity to 2
+			make entity disappear from all players
+			make entity appear to {_player}
+			add {_entity} to {_list::*}
+		set {_i} to a potion of luck
+		dye {_i} rgb(255, 255, 255)
+		set display item of {_entity} to {_i} with custom model data {_data::%loop-counter%}
+	rideDelay({_arm}, {_list::*})
+	wait 2 tick
+	loop {_list::*}:
+		if {_player}'s gamemode is not spectator:
+			stop loop
+		smoothScale(loop-value, false)
+		wait 2 tick
+	loop 20 times:
+		if {_player}'s gamemode is not spectator:
+			loop {_list::*}:
+				kill loop-value-2
+			stop
+		wait 3 tick
+	loop {_list::*}:
+		if {_player}'s gamemode is not spectator:
+			stop loop
+		smoothScale(loop-value, true)
+		wait 2 tick
+	wait 1.5 second
+	loop {_list::*}:
+		kill loop-value
+
+function rideDelay(entity: entity, entities: objects):
+	set {_entities::*} to reversed {_entities::*}
+	set {_vec} to -1.5
+	loop 8 times:
+		set {_vec%loop-value%} to vector(-0.5, 0, {_vec})
+		add 1.05 to {_vec}
+	loop 70 times:
+		set {_loc} to location at {_entity}
+		set yaw of {_loc} to -90
+		set pitch of {_loc} to 0
+		loop 8 times:
+			teleport {_entities::%loop-counter-2%} to {_loc} ~ {_vec%loop-value-2%}
+		wait 2 tick

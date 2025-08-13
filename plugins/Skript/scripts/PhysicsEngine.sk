@@ -1,0 +1,173 @@
+import:
+	com.jme3.bullet.PhysicsTickListener
+	com.jme3.bullet.PhysicsSpace
+	com.jme3.bullet.objects.PhysicsRigidBody
+	com.jme3.bullet.objects.PhysicsBody
+	com.jme3.system.NativeLibraryLoader
+	com.jme3.bullet.collision.shapes.BoxCollisionShape
+	com.jme3.bullet.collision.shapes.PlaneCollisionShape
+	com.jme3.math.Plane
+	com.jme3.math.Quaternion
+	com.jme3.math.Vector3f
+	java.io.File
+
+on load:
+	NativeLibraryLoader.loadLibbulletjme(true, new File("plugins/skript-reflect"), "Release", "Sp")
+
+function physics_update(spaceID: string, timestep: number, steps: integer):
+	set {_space} to physics_getSpace({_spaceID})
+	{_space}.update({_timestep}, {_steps})
+	onPhysicsTick({_spaceID}, {_timestep})
+
+function physics_registerSpace(spaceID: string):
+	set {_space} to new PhysicsSpace(PhysicsSpace.BroadphaseType.DBVT)
+	set {physics::spaces::%{_spaceID}%} to {_space}
+
+function physics_unregisterSpace(spaceID: string):
+	set {_space} to physics_getSpace({_spaceID})
+	loop {physics::bodies::%{_spaceID}%::*}:
+		kill (physics_getCustomData(loop-value) parsed as entity)
+	{_space}.destroy()
+	delete {physics::spaces::%{_spaceID}%}
+	delete {physics::bodies::%{_spaceID}%::*}
+
+function physics_getAllSpaces() :: strings:
+	return (indexes of {physics::spaces::*})
+
+function physics_getSpace(spaceID: string) :: javaobject:
+	return {physics::spaces::%{_spaceID}%}
+
+function physics_addCollisionBody(spaceID: string, collisionBody: javaobject):
+	set {_space} to physics_getSpace({_spaceID})
+	{_space}.addCollisionObject({_collisionBody})
+
+function physics_getBoxShape(halfExtent: number) :: javaobject:
+	return new BoxCollisionShape({_halfExtent})
+
+
+function physics_Quaternion(quaternion: object = {_null}) :: object:
+	if {_quaternion} is instance of Quaternion:
+		return quaternionToSkript({_quaternion})
+	if {_quaternion} is a quaternion:
+		return quaternionToJava({_quaternion})
+	return new Quaternion()
+
+local function quaternionToJava(quaternion: quaternion) :: javaobject:
+	return new Quaternion({_quaternion}'s quat-x, {_quaternion}'s quat-y, {_quaternion}'s quat-z, {_quaternion}'s quat-w)
+
+local function quaternionToSkript(quaternion: javaobject) :: quaternion:
+	return quaternion({_quaternion}.x, {_quaternion}.y, {_quaternion}.z, {_quaternion}.w)
+
+function physics_Vector3f(vector: object = {_null}) :: object:
+	if {_vector} is instance of Vector3f:
+		return vectorToSkript({_vector})
+	if {_vector} is a vector:
+		return vectorToJava({_vector})
+	return new Vector3f()
+
+local function vectorToJava(vector: vector) :: javaobject:
+	return new Vector3f({_vector}'s x, {_vector}'s y, {_vector}'s z)
+
+local function vectorToSkript(vector: javaobject) :: vector:
+	return vector({_vector}.x, {_vector}.y, {_vector}.z)
+
+every 1 tick:
+	loop physics_getAllSpaces():
+		physics_update(loop-value, 0.05, 5)
+
+function onPhysicsTick(spaceID: string, timestep: number):
+	set {_interpolate::*} to (0, round({_timestep} * 20))
+	loop {physics::bodies::%{_spaceID}%::*}:
+		set {_display} to (physics_getCustomData(loop-value) parsed as entity)
+		set {_loc} to (location of physics_getLocation(loop-value) in {_display}'s world)
+		display_teleport({_display}, {_loc}, {_interpolate::*})
+		set {_rotation} to physics_getRotation(loop-value)
+		display_leftRotate({_display}, {_rotation}, {_interpolate::*})
+
+local function interpolate(display: entity, interpolate: numbers):
+	set ({_display}'s display interpolation delay) to {_interpolate::1}
+	set ({_display}'s display interpolation duration) to {_interpolate::2}
+	set ({_display}'s display teleport duration) to {_interpolate::2}
+
+
+function physics_spawnDisplay(item: item, spaceID: string, loc: location, halfExtent: number = 0.5) :: javaobject:
+	spawn item display at {_loc}:
+		set {_display} to entity
+		set {_display}'s display item to {_item}
+		set {_a} to 1
+		set display scale of entity to vector({_a}, {_a}, {_a})
+		set interpolation duration of {_display} to 6 ticks
+		set interpolation start of {_display} to 0
+	set {_collisionBody} to physics_createRigidBody({_spaceID}, (vector of {_loc}), physics_getBoxShape({_halfExtent}), 1, ({_display}'s uuid))
+	add {_collisionBody} to {physics::bodies::%{_spaceID}%::*}
+	interpolateX({_display}, {_collisionBody})
+	{_collisionBody}.setGravity(physics_Vector3f(vector(0, -9.81, 0)))
+	return {_collisionBody}
+
+function interpolateX(display: entity, data: object):
+	set {_collisionBody} to {_data}
+	set {_sec} to random number between 3.0 and 6.0
+	loop {_sec}*10 times:
+		wait 0.1 second
+	loop 30 times:
+		set {_x} to 1-(loop-value/30)
+		set display scale of {_display} to vector({_x},{_x},{_x})
+		set {_shape} to physics_getBoxShape({_x}*0.5)
+		{_collisionBody}.setCollisionShape({_shape})
+		wait 1 tick
+	set display scale of {_display} to vector(0,0,0)
+	kill {_display}
+
+function physics_applyImpulse(collisionBody: javaobject, impulse: vector, offset: vector = vector(0, 0, 0)):
+	set {_impulse} to physics_Vector3f({_impulse})
+	set {_offset} to physics_Vector3f({_offset})
+	{_collisionBody}.applyImpulse({_impulse}, {_offset})
+
+function physics_setLocation(collisionBody: javaobject, vector: vector):
+	{_collisionBody}.setPhysicsLocation(physics_Vector3f({_vector}))
+
+function physics_getLocation(collisionBody: javaobject) :: vector:
+	set {_vector} to physics_Vector3f()
+	{_collisionBody}.getPhysicsLocation({_vector})
+	return physics_Vector3f({_vector})
+
+function physics_getRotation(collisionBody: javaobject) :: quaternion:
+	set {_quaternion} to physics_Quaternion()
+	{_collisionBody}.getPhysicsRotation({_quaternion})
+	return physics_Quaternion({_quaternion})
+
+function physics_createRigidBody(spaceID: string, vector: vector, shape: javaobject, mass: number, object: object = {_null}) :: javaobject:
+	set {_space} to physics_getSpace({_spaceID})
+	set {_collisionBody} to new PhysicsRigidBody({_shape}, {_mass})
+	physics_setLocation({_collisionBody}, {_vector})
+	physics_addCollisionBody({_spaceID}, {_collisionBody})
+	if {_object} is set:
+		physics_setCustomData({_collisionBody}, {_object})
+	return {_collisionBody}
+
+function physics_createStaticBody(spaceID: string, loc: location, shape: javaobject) :: javaobject:
+	set {_mass} to PhysicsBody.massForStatic
+	set {_collisionBody} to physics_createRigidBody({_spaceID}, (vector of {_loc}), {_shape}, {_mass})
+	return {_collisionBody}
+
+function physics_setCustomData(collisionBody: javaobject, object: object):
+	{_collisionBody}.setUserObject({_object})
+
+function physics_getCustomData(collisionBody: javaobject) :: object:
+	return {_collisionBody}.getUserObject()
+
+function display_teleport(display: entity, loc: location, interpolate: numbers = (0, 0)):
+	interpolate({_display}, {_interpolate::*})
+	teleport {_display} to {_loc}
+
+function display_scale(display: entity, vector: vector, interpolate: numbers = (0, 0)):
+	interpolate({_display}, {_interpolate::*})
+	set ({_display}'s display scale) to {_vector}
+
+function display_rightRotate(display: entity, quaternion: quaternion, interpolate: numbers = (0, 0)):
+	interpolate({_display}, {_interpolate::*})
+	set ({_display}'s display right rotation) to {_quaternion}
+
+function display_leftRotate(display: entity, quaternion: quaternion, interpolate: numbers = (0, 0)):
+	interpolate({_display}, {_interpolate::*})
+	set ({_display}'s display left rotation) to {_quaternion}

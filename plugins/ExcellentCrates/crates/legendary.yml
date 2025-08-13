@@ -1,0 +1,693 @@
+Name: Legendary Crate
+Description: []
+ItemProvider:
+  Type: VANILLA
+  Tag:
+    Value: '{components:{"minecraft:custom_name":{bold:0b,extra:["Legendary Crate"],italic:0b,obfuscated:0b,strikethrough:0b,text:"",underlined:0b},"minecraft:profile":{id:[I;-850160402,1534147744,-2009838519,1945945916],name:"1ff041976a09dd05",properties:[{name:"textures",value:"eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMWZmMDQxOTc2YTA5ZGQwNTNlM2QxZDRlNjExYWFjMDk1OTRkNzRmYzcxYTBlYzRkYTAxMTA0MTZkMzE3ZGJhOCJ9fX0="}]},"minecraft:tooltip_display":{hidden_components:["minecraft:mooshroom/variant","minecraft:custom_data","minecraft:writable_book_content","minecraft:provides_trim_material","minecraft:weapon","minecraft:container","minecraft:bucket_entity_data","minecraft:tropical_fish/pattern","minecraft:use_cooldown","minecraft:villager/variant","minecraft:damage_resistant","minecraft:lock","minecraft:cat/variant","minecraft:frog/variant","minecraft:block_state","minecraft:pot_decorations","minecraft:llama/variant","minecraft:glider","minecraft:rarity","minecraft:block_entity_data","minecraft:cat/collar","minecraft:suspicious_stew_effects","minecraft:unbreakable","minecraft:parrot/variant","minecraft:axolotl/variant","minecraft:cow/variant","minecraft:damage","minecraft:entity_data","minecraft:use_remainder","minecraft:potion_contents","minecraft:intangible_projectile","minecraft:repair_cost","minecraft:painting/variant","minecraft:consumable","minecraft:enchantable","minecraft:creative_slot_lock","minecraft:break_sound","minecraft:lodestone_tracker","minecraft:wolf/sound_variant","minecraft:tropical_fish/base_color","minecraft:tropical_fish/pattern_color","minecraft:salmon/size","minecraft:tool","minecraft:bundle_contents","minecraft:wolf/variant","minecraft:container_loot","minecraft:can_place_on","minecraft:firework_explosion","minecraft:map_id","minecraft:bees","minecraft:fox/variant","minecraft:base_color","minecraft:blocks_attacks","minecraft:debug_stick_state","minecraft:stored_enchantments","minecraft:enchantment_glint_override","minecraft:death_protection","minecraft:trim","minecraft:food","minecraft:profile","minecraft:equippable","minecraft:sheep/color","minecraft:rabbit/variant","minecraft:potion_duration_scale","minecraft:provides_banner_patterns","minecraft:map_post_processing","minecraft:note_block_sound","minecraft:written_book_content","minecraft:attribute_modifiers","minecraft:horse/variant","minecraft:repairable","minecraft:charged_projectiles","minecraft:enchantments","minecraft:instrument","minecraft:ominous_bottle_amplifier","minecraft:banner_patterns","minecraft:can_break","minecraft:map_color","minecraft:jukebox_playable","minecraft:fireworks","minecraft:chicken/variant","minecraft:dyed_color","minecraft:max_stack_size","minecraft:shulker/color","minecraft:map_decorations","minecraft:recipes","minecraft:wolf/collar","minecraft:pig/variant","minecraft:max_damage"]}},count:1,id:"minecraft:player_head"}'
+    DataVersion: 4325
+ItemStackable: false
+Permission_Required: false
+Preview:
+  Enabled: true
+  Id: legendary
+Animation:
+  Enabled: true
+  Id: spinningwheel
+Opening:
+  Cooldown: 0
+Key:
+  Required: true
+  Ids:
+  - legendary
+Block:
+  Positions:
+  - -28,100,20,world
+  Pushback:
+    Enabled: true
+  Hologram:
+    Enabled: true
+    Template: default
+    Y_Offset: 0.0
+  Effect:
+    Model: none
+    Particle:
+      Name: CLOUD
+Milestones:
+  Repeatable: false
+_dataver: 600
+Rewards:
+  List:
+    netherite_sword:
+      Type: ITEM
+      PreviewData:
+        Type: VANILLA
+        Tag:
+          Value: '{components:{"minecraft:custom_name":{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"Netherite Sword",underlined:0b}],text:""},"minecraft:enchantments":{"minecraft:fire_aspect":1,"minecraft:looting":2,"minecraft:sharpness":4,"minecraft:unbreaking":3}},count:1,id:"minecraft:netherite_sword"}'
+          DataVersion: 4325
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: true
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:enchantments":{"minecraft:fire_aspect":1,"minecraft:looting":2,"minecraft:sharpness":4,"minecraft:unbreaking":3}},count:1,id:"minecraft:netherite_sword"}'
+            DataVersion: 4325
+    netherite_pickaxe:
+      Type: ITEM
+      PreviewData:
+        Type: VANILLA
+        Tag:
+          Value: '{components:{"minecraft:custom_name":{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"Netherite Pickaxe",underlined:0b}],text:""},"minecraft:enchantments":{"minecraft:efficiency":4,"minecraft:fortune":2,"minecraft:unbreaking":3}},count:1,id:"minecraft:netherite_pickaxe"}'
+          DataVersion: 4325
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: true
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:enchantments":{"minecraft:efficiency":4,"minecraft:fortune":2,"minecraft:unbreaking":3}},count:1,id:"minecraft:netherite_pickaxe"}'
+            DataVersion: 4325
+    netherite_axe:
+      Type: ITEM
+      PreviewData:
+        Type: VANILLA
+        Tag:
+          Value: '{components:{"minecraft:custom_name":{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"Netherite Axe",underlined:0b}],text:""},"minecraft:enchantments":{"minecraft:efficiency":4,"minecraft:unbreaking":3}},count:1,id:"minecraft:netherite_axe"}'
+          DataVersion: 4325
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: true
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:enchantments":{"minecraft:efficiency":4,"minecraft:unbreaking":3}},count:1,id:"minecraft:netherite_axe"}'
+            DataVersion: 4325
+    netherite_shovel:
+      Type: ITEM
+      PreviewData:
+        Type: VANILLA
+        Tag:
+          Value: '{components:{"minecraft:custom_name":{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"Netherite Shovel",underlined:0b}],text:""},"minecraft:enchantments":{"minecraft:efficiency":4,"minecraft:unbreaking":3}},count:1,id:"minecraft:netherite_shovel"}'
+          DataVersion: 4325
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: true
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:enchantments":{"minecraft:efficiency":4,"minecraft:unbreaking":3}},count:1,id:"minecraft:netherite_shovel"}'
+            DataVersion: 4325
+    netherite_helmet:
+      Type: ITEM
+      PreviewData:
+        Type: VANILLA
+        Tag:
+          Value: '{components:{"minecraft:custom_name":{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"Netherite Helmet",underlined:0b}],text:""},"minecraft:enchantments":{"minecraft:protection":3,"minecraft:unbreaking":3}},count:1,id:"minecraft:netherite_helmet"}'
+          DataVersion: 4325
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: true
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:enchantments":{"minecraft:protection":3,"minecraft:unbreaking":3}},count:1,id:"minecraft:netherite_helmet"}'
+            DataVersion: 4325
+    netherite_chestplate:
+      Type: ITEM
+      PreviewData:
+        Type: VANILLA
+        Tag:
+          Value: '{components:{"minecraft:custom_name":{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"Netherite Chestplate",underlined:0b}],text:""},"minecraft:enchantments":{"minecraft:protection":3,"minecraft:unbreaking":3}},count:1,id:"minecraft:netherite_chestplate"}'
+          DataVersion: 4325
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: true
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:enchantments":{"minecraft:protection":3,"minecraft:unbreaking":3}},count:1,id:"minecraft:netherite_chestplate"}'
+            DataVersion: 4325
+    netherite_leggings:
+      Type: ITEM
+      PreviewData:
+        Type: VANILLA
+        Tag:
+          Value: '{components:{"minecraft:custom_name":{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"Netherite Leggings",underlined:0b}],text:""},"minecraft:enchantments":{"minecraft:protection":3,"minecraft:unbreaking":3}},count:1,id:"minecraft:netherite_leggings"}'
+          DataVersion: 4325
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: true
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:enchantments":{"minecraft:protection":3,"minecraft:unbreaking":3}},count:1,id:"minecraft:netherite_leggings"}'
+            DataVersion: 4325
+    netherite_boots:
+      Type: ITEM
+      PreviewData:
+        Type: VANILLA
+        Tag:
+          Value: '{components:{"minecraft:custom_name":{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"Netherite Boots",underlined:0b}],text:""},"minecraft:enchantments":{"minecraft:protection":3,"minecraft:unbreaking":3}},count:1,id:"minecraft:netherite_boots"}'
+          DataVersion: 4325
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: true
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:enchantments":{"minecraft:protection":3,"minecraft:unbreaking":3}},count:1,id:"minecraft:netherite_boots"}'
+            DataVersion: 4325
+    crossbow:
+      Type: ITEM
+      PreviewData:
+        Type: VANILLA
+        Tag:
+          Value: '{components:{"minecraft:custom_name":{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"Crossbow",underlined:0b}],text:""},"minecraft:enchantments":{"minecraft:multishot":1,"minecraft:piercing":4,"minecraft:quick_charge":3,"minecraft:unbreaking":3}},count:1,id:"minecraft:crossbow"}'
+          DataVersion: 4325
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: true
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:enchantments":{"minecraft:multishot":1,"minecraft:piercing":4,"minecraft:quick_charge":3,"minecraft:unbreaking":3}},count:1,id:"minecraft:crossbow"}'
+            DataVersion: 4325
+    bow:
+      Type: ITEM
+      PreviewData:
+        Type: VANILLA
+        Tag:
+          Value: '{components:{"minecraft:custom_name":{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"Bow",underlined:0b}],text:""},"minecraft:enchantments":{"minecraft:infinity":1,"minecraft:power":5,"minecraft:unbreaking":3}},count:1,id:"minecraft:bow"}'
+          DataVersion: 4325
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: true
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:enchantments":{"minecraft:infinity":1,"minecraft:power":5,"minecraft:unbreaking":3}},count:1,id:"minecraft:bow"}'
+            DataVersion: 4325
+    trident:
+      Type: ITEM
+      PreviewData:
+        Type: VANILLA
+        Tag:
+          Value: '{components:{"minecraft:custom_name":{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"Trident",underlined:0b}],text:""}},count:1,id:"minecraft:trident"}'
+          DataVersion: 4325
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: true
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{count:1,id:"minecraft:trident"}'
+            DataVersion: 4325
+    enchanted_book:
+      Type: ITEM
+      PreviewData:
+        Type: VANILLA
+        Tag:
+          Value: '{components:{"minecraft:custom_name":{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"Enchanted Book ",underlined:0b},{color:"gray",italic:0b,text:"(Mending)"}],text:""},"minecraft:stored_enchantments":{"minecraft:mending":1}},count:1,id:"minecraft:enchanted_book"}'
+          DataVersion: 4325
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: true
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:stored_enchantments":{"minecraft:mending":1}},count:1,id:"minecraft:enchanted_book"}'
+            DataVersion: 4325
+    enchanted_golden_apple:
+      Type: ITEM
+      PreviewData:
+        Type: VANILLA
+        Tag:
+          Value: '{components:{"minecraft:custom_name":{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"Enchanted Golden Apple ",underlined:0b},{color:"gray",italic:0b,text:"(x3)"}],text:""}},count:3,id:"minecraft:enchanted_golden_apple"}'
+          DataVersion: 4325
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: true
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{count:3,id:"minecraft:enchanted_golden_apple"}'
+            DataVersion: 4325
+    totem_of_undying:
+      Type: ITEM
+      PreviewData:
+        Type: VANILLA
+        Tag:
+          Value: '{components:{"minecraft:custom_name":{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"Totem of Undying ",underlined:0b},{color:"gray",italic:0b,text:"(x1)"}],text:""}},count:1,id:"minecraft:totem_of_undying"}'
+          DataVersion: 4325
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: true
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{count:1,id:"minecraft:totem_of_undying"}'
+            DataVersion: 4325
+    diamond_block:
+      Type: ITEM
+      PreviewData:
+        Type: VANILLA
+        Tag:
+          Value: '{components:{"minecraft:custom_name":{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"Diamond Block ",underlined:0b},{color:"gray",italic:0b,text:"(x64)"}],text:""}},count:64,id:"minecraft:diamond_block"}'
+          DataVersion: 4325
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: true
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{count:64,id:"minecraft:diamond_block"}'
+            DataVersion: 4325
+    emerald_block:
+      Type: ITEM
+      PreviewData:
+        Type: VANILLA
+        Tag:
+          Value: '{components:{"minecraft:custom_name":{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"Emerald Block ",underlined:0b},{color:"gray",italic:0b,text:"(x64)"}],text:""}},count:64,id:"minecraft:emerald_block"}'
+          DataVersion: 4325
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: true
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{count:64,id:"minecraft:emerald_block"}'
+            DataVersion: 4325
+    gold_block:
+      Type: ITEM
+      PreviewData:
+        Type: VANILLA
+        Tag:
+          Value: '{components:{"minecraft:custom_name":{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"Gold Block ",underlined:0b},{color:"gray",italic:0b,text:"(x64)"}],text:""}},count:64,id:"minecraft:gold_block"}'
+          DataVersion: 4325
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: true
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{count:64,id:"minecraft:gold_block"}'
+            DataVersion: 4325
+    iron_block:
+      Type: ITEM
+      PreviewData:
+        Type: VANILLA
+        Tag:
+          Value: '{components:{"minecraft:custom_name":{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"Iron Block ",underlined:0b},{color:"gray",italic:0b,text:"(x64)"}],text:""}},count:64,id:"minecraft:iron_block"}'
+          DataVersion: 4325
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: true
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{count:64,id:"minecraft:iron_block"}'
+            DataVersion: 4325
+    white_shulker_box:
+      Type: ITEM
+      PreviewData:
+        Type: VANILLA
+        Tag:
+          Value: '{components:{"minecraft:custom_name":{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"Shulker Box ",underlined:0b},{color:"gray",italic:0b,text:"(x1)"}],text:""}},count:1,id:"minecraft:white_shulker_box"}'
+          DataVersion: 4325
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: true
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{count:1,id:"minecraft:white_shulker_box"}'
+            DataVersion: 4325
+    sellchest_10x10:
+      Type: ITEM
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: false
+      PreviewData:
+        Tag:
+          Value: '{}'
+          DataVersion: 4189
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:custom_data":{SellChest:1b},"minecraft:custom_name":{extra:[{bold:1b,color:"#F9A600",italic:0b,obfuscated:0b,strikethrough:0b,text:"S",underlined:0b},{bold:1b,color:"#F8A802",italic:0b,obfuscated:0b,strikethrough:0b,text:"E",underlined:0b},{bold:1b,color:"#F8B00A",italic:0b,obfuscated:0b,strikethrough:0b,text:"L",underlined:0b},{bold:1b,color:"#F8BC17",italic:0b,obfuscated:0b,strikethrough:0b,text:"L",underlined:0b},{bold:1b,color:"#F8CB25",italic:0b,obfuscated:0b,strikethrough:0b,text:"C",underlined:0b},{bold:1b,color:"#F8D933",italic:0b,obfuscated:0b,strikethrough:0b,text:"H",underlined:0b},{bold:1b,color:"#F8E540",italic:0b,obfuscated:0b,strikethrough:0b,text:"E",underlined:0b},{bold:1b,color:"#F8ED48",italic:0b,obfuscated:0b,strikethrough:0b,text:"S",underlined:0b},{bold:1b,color:"#F8F04B",italic:0b,obfuscated:0b,strikethrough:0b,text:"T
+              ",underlined:0b},{bold:0b,color:"dark_gray",italic:0b,obfuscated:0b,strikethrough:0b,text:"[",underlined:0b},{color:"aqua",italic:0b,text:"10x10"},{color:"dark_gray",italic:0b,text:"]"}],text:""},"minecraft:lore":[{extra:[" ",{bold:0b,color:"yellow",italic:0b,obfuscated:0b,strikethrough:0b,text:"Best item on this server!",underlined:0b}],text:""},{extra:[" ",{bold:0b,color:"gray",italic:0b,obfuscated:0b,strikethrough:0b,text:"Place this ",underlined:0b},{color:"gold",italic:0b,text:"SellChest"},{color:"gray",italic:0b,text:"
+              on the ground"}],text:""},{extra:[" ",{bold:0b,color:"gray",italic:0b,obfuscated:0b,strikethrough:0b,text:"to start selling items",underlined:0b}],text:""},"",{extra:[" ",{bold:0b,color:"yellow",italic:0b,obfuscated:0b,strikethrough:0b,text:"Items are sold in a 10x10 area",underlined:1b}],text:""},"",{extra:[" ",{bold:0b,color:"gray",italic:0b,obfuscated:0b,strikethrough:0b,text:"All ",underlined:0b},{color:"gold",italic:0b,text:"Items"},{color:"gray",italic:0b,text:" in the area will be"}],text:""},{extra:["
+              ",{bold:0b,color:"gray",italic:0b,obfuscated:0b,strikethrough:0b,text:"sold and their ",underlined:0b},{color:"yellow",italic:0b,text:"Value"},{color:"gray",italic:0b,text:" will be"}],text:""},{extra:[" ",{bold:0b,color:"gray",italic:0b,obfuscated:0b,strikethrough:0b,text:"sent straight to you!",underlined:0b}],text:""},"",{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"",underlined:0b}],text:""}]},count:1,id:"minecraft:chest"}'
+            DataVersion: 4325
+    s_50_uses:
+      Type: ITEM
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: false
+      PreviewData:
+        Tag:
+          Value: '{}'
+          DataVersion: 4189
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:custom_data":{Multiplier:2.0f,Uses:50},"minecraft:custom_name":{extra:[{bold:0b,color:"#24FC2A",italic:0b,obfuscated:0b,strikethrough:0b,text:"sᴇʟʟᴡᴀɴᴅ ",underlined:0b},{bold:0b,color:"dark_gray",italic:0b,obfuscated:0b,strikethrough:0b,text:"[",underlined:0b},{color:"aqua",italic:0b,text:"50 Uses"},{color:"dark_gray",italic:0b,text:"]"}],text:""},"minecraft:enchantment_glint_override":1b,"minecraft:lore":[{extra:[{bold:0b,color:"gray",italic:0b,obfuscated:0b,strikethrough:0b,text:"This
+              item will help you sell",underlined:0b}],text:""},{extra:[{bold:0b,color:"gray",italic:0b,obfuscated:0b,strikethrough:0b,text:"items in your chests faster!",underlined:0b}],text:""},"",{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"ɪɴғᴏʀᴍᴀᴛɪᴏɴs:",underlined:0b}],text:""},{extra:[" ",{bold:0b,color:"#FCF932",italic:0b,obfuscated:0b,strikethrough:0b,text:"★ ",underlined:0b},{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"ʀᴇᴀᴍɪɴɢ ᴜsᴇs: ",underlined:0b},{bold:0b,color:"#FCF932",italic:0b,obfuscated:0b,strikethrough:0b,text:"50",underlined:0b}],text:""},{extra:["
+              ",{bold:0b,color:"#EFC422",italic:0b,obfuscated:0b,strikethrough:0b,text:"☀ ",underlined:0b},{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"ᴍᴜʟᴛɪᴘʟɪᴇʀ: ",underlined:0b},{bold:0b,color:"#EFC422",italic:0b,obfuscated:0b,strikethrough:0b,text:"x2",underlined:0b}],text:""},"",{extra:[{bold:0b,color:"green",italic:0b,obfuscated:0b,strikethrough:0b,text:"Right click to sell!",underlined:0b}],text:""},"",{extra:[{bold:0b,color:"white",italic:0b,obfuscated:0b,strikethrough:0b,text:"",underlined:0b}],text:""}]},count:1,id:"minecraft:stick"}'
+            DataVersion: 4325

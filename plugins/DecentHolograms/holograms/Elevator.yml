@@ -1,0 +1,22 @@
+location: world:-59,500:100,000:10,500
+enabled: true
+display-range: 48
+update-range: 48
+update-interval: 20
+facing: 0.0
+down-origin: false
+pages:
+- lines:
+  - content: <#f6ff40>&lᴇʟᴇᴠᴀᴅᴏʀ</#bec710>
+    height: 0.3
+  - content: ''
+    height: 0.3
+  - content: '&fᴄʀɪᴇ ᴜᴍ ᴇʟᴇᴠᴀᴅᴏʀ ᴜsᴀɴᴅᴏ'
+    height: 0.3
+  - content: '&fᴀᴘᴇɴᴀs 2 ʙʟᴏᴄᴏs ᴅᴇ ᴇsᴍᴇʀᴀʟᴅᴀ!'
+    height: 0.3
+  - content: ''
+    height: 0.3
+  - content: '&a[ᴇsᴘᴀçᴏ & sʜɪғᴛ]'
+    height: 0.3
+  actions: {}

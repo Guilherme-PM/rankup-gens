@@ -1,0 +1,396 @@
+Settings: #SYMBOLS: 
+  Prefix: '&6&lAUCTIONS | ' #Prefix of when you get Crazy Auctions Messages.
+  GUIName: '&f七七七七七七七七㈇&8' #Name of the Main GUI.
+  Players-Current-Items: '&f七七七七七七七七㈉&1&8' #The Name of the Player Current Items GUI.
+  Cancelled/Expired-Items: '&f七七七七七七七七㈉&2&8' #Name of the Cancelled/Expired GUI.
+  Buying-Item: '&f七七七七七七七七ㇾ&0' #Name of the Buying GUI.
+  Bidding-On-Item: '&f七七七七七七七七&3&8' #Name of the Bidding GUI.
+  Categories: '&f七七七七七七七七㈈&8' #Name of the Category GUI.
+  Sell-Time: 2d #The time that each item will sell for.
+  Bid-Time: 12h #Time for each item that is biddable.
+  Full-Expire-Time: 10d #The full time the item is in the crazy auctions.
+  Bid-Winner-Time: 20d #The time the winner of a bid has to claim their prize.
+  Minimum-Sell-Price: 10 #Minimum amount you can sell an item for.
+  Max-Beginning-Sell-Price: 1000000000000000 #Max amount you can sell an item for.
+  Minimum-Bid-Price: 100 #Minimum starting bid.
+  Max-Beginning-Bid-Price: 1000000000000000 #Maximum starting bid.
+  Allow-Damaged-Items: false #Allow items that have been damaged.
+  Category-Page-Opens-First: false #If set to true the categories' page will open when they do /CA.
+  Feature-Toggle: #Toggle if a feature is on or off.
+    Selling: true #Able to use the selling part of the auction house.
+    Bidding: true #Able to use the bidding part of the auction house.
+  Patches:
+    Macro-Dupe: true #Turn to false if you have an issue, but it should patch the bug.
+  Sounds:
+    Toggle: true #Disable the clicking sound.
+    Sound: 'BLOCK_NOTE_BLOCK_HAT' #Make sure if you use 1.8 or lower you use the 1.8 sound and 1.9 and up use 1.9 sounds. The default sound is 1.8.
+    #Sounds are found here: https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Sound.html
+  GUISettings: #Settings for things in the gui.
+    SellingItemLore: #The lore on items that are being sold.
+      - ''
+      - '#30ff30ᴄ#34ff34ʟ#38ff37ɪ#3cff3bᴄ#40fe3eᴋ #44fe42ʜ#48fe46ᴇ#4cfe49ʀ#50fe4dᴇ #54fe51ᴛ#58fd54ᴏ #5cfd58ᴘ#60fd5bᴜ#64fd5fʀ#68fd63ᴄ#6cfd66ʜ#70fc6aᴀ#74fc6ds#78fc71ᴇ' # ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴘᴜʀᴄʜᴀsᴇ
+      - ''
+      - '&e&l$ &fᴘʀɪᴄᴇ &e%price%&l$'
+      - '&6✎ &fsᴇʟʟᴇʀ &6%seller%'
+      - ''
+      - '&3⌛ &fᴇxᴘɪʀᴇ &3%time%'
+      - ''
+      - '#a8abb1ᴘ#a9acb2ᴜ#aaaeb4ʀ#acafb5ᴄ#adb0b6ʜ#aeb1b7ᴀ#afb3b9s#b0b4baᴇ #b2b5bbᴛ#b3b6bcʜ#b4b8beᴇ #b5b9bfɪ#b7bac0ᴛ#b8bbc1ᴇ#b9bdc3ᴍ #babec4ɴ#bbbfc5ᴏ#bdc0c6ᴡ #bec2c8ᴡ#bfc3c9ɪ#c0c4caᴛ#c1c5cbʜ#c3c7cdᴏ#c4c8ceᴜ#c5c9cfᴛ' # ᴘᴜʀᴄʜᴀsᴇ ᴛʜᴇ ɪᴛᴇᴍ ɴᴏᴡ ᴡɪᴛʜᴏᴜᴛ
+      - '#a8abb1ᴡ#a9acb2ᴀ#abaeb4ɪ#acafb5ᴛ#aeb1b7ɪ#afb2b8ɴ#b0b4baɢ #b2b5bbғ#b3b7bdᴏ#b5b8beʀ #b6bac0ᴛ#b8bbc1ʜ#b9bcc2ᴇ #babec4ᴀ#bcbfc5ᴜ#bdc1c7ᴄ#bfc2c8ᴛ#c0c4caɪ#c1c5cbᴏ#c3c7cdɴ #c4c8ceᴇ#c6cad0ɴ#c7cbd1ᴅ' # ᴡᴀɪᴛɪɴɢ ғᴏʀ ᴛʜᴇ ᴀᴜᴄᴛɪᴏɴ ᴇɴᴅ
+    CurrentLore: #Lore on items that are in your current items GUI.
+      - ''
+      - '#2ffc2fᴄ#34fc33ʟ#38fc37ɪ#3dfb3bᴄ#41fb3fᴋ #46fb43ʜ#4afb47ᴇ#4ffb4bʀ#53fb50ᴇ #58fa54ᴛ#5cfa58ᴏ #61fa5cᴄ#65fa60ᴀ#6afa64ɴ#6ef968ᴄ#73f96cᴇ#77f970ʟ' # ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴄᴀɴᴄᴇʟ
+      - ''
+      - '&e&l$ &fᴘʀɪᴄᴇ &e%price%&l$'
+      - '&6⌛ &fᴇxᴘɪʀᴇ &6%time%'
+      - ''
+      - '#a8abb1ʏ#a9acb2ᴏ#abaeb4ᴜ #acafb5ᴡ#aeb1b7ɪ#afb2b8ʟ#b0b4baʟ #b2b5bbʙ#b3b6bcᴇ #b4b8beᴀ#b6b9bfʙ#b7bbc1ʟ#b9bcc2ᴇ #babec4ᴛ#bbbfc5ᴏ #bdc0c6ᴄ#bec2c8ᴏ#bfc3c9ʟ#c1c5cbʟ#c2c6ccᴇ#c4c8ceᴄ#c5c9cfᴛ' # ʏᴏᴜ ᴡɪʟʟ ʙᴇ ᴀʙʟᴇ ᴛᴏ ᴄᴏʟʟᴇᴄᴛ
+      - '#a8abb1ɪ#aaadb3ᴛ#acafb5ᴇ#aeb1b7ᴍ#b0b4bas #b2b6bcᴛ#b4b8beʜ#b7bac0ᴀ#b9bcc2ᴛ #bbbec4ᴇ#bdc0c6x#bfc3c9ᴘ#c1c5cbɪ#c3c7cdʀ#c5c9cfᴇ' # ɪᴛᴇᴍs ᴛʜᴀᴛ ᴇxᴘɪʀᴇ
+    Cancelled/ExpiredLore: #Lore on items that are in your canceled/expired GUI.
+      - ''
+      - '&aᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ʀᴇᴛᴜʀɴ ᴛᴏ ʏᴏᴜ'
+      - ''
+      - '&6⌛ &fғᴜʟʟ ᴇxᴘɪʀᴇ &6%time%'
+      - ''
+      - '#a8abb1ᴀ#aaadb3ғ#abaeb4ᴛ#adb0b6ᴇ#aeb1b7ʀ #b0b3b9ᴄ#b1b4baʟ#b3b6bcɪ#b4b8beᴄ#b6b9bfᴋ#b7bbc1ɪ#b9bcc2ɴ#babec4ɢ #bcc0c6ʏ#bdc1c7ᴏ#bfc3c9ᴜ #c0c4caᴡ#c2c6ccɪ#c3c7cdʟ#c5c9cfʟ' # ᴀғᴛᴇʀ ᴄʟɪᴄᴋɪɴɢ ʏᴏᴜ ᴡɪʟʟ
+      - '#a8abb1ʀ#aaadb3ᴇ#abaeb4ᴄ#adb0b6ᴇ#aeb2b8ɪ#b0b3b9ᴠ#b2b5bbᴇ #b3b7bdʏ#b5b8beᴏ#b7bac0ᴜ#b8bcc2ʀ #babdc3ɪ#bbbfc5ᴛ#bdc1c7ᴇ#bfc2c8ᴍ #c0c4caʙ#c2c6ccᴀ#c3c7cdᴄ#c5c9cfᴋ' # ʀᴇᴄᴇɪᴠᴇ ʏᴏᴜʀ ɪᴛᴇᴍ ʙᴀᴄᴋ
+    Bidding: #Lore on Bidding Items.
+      - ''
+      - '#2ffc2fᴄ#35fc34ʟ#3afc39ɪ#40fb3eᴄ#45fb43ᴋ #4bfb48ʜ#50fb4dᴇ#56fa52ʀ#5bfa57ᴇ #61fa5cᴛ#66fa61ᴏ #6cf966ʙ#71f96bɪ#77f970ᴅ' # ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ʙɪᴅ
+      - ''
+      - '&6✎ &fsᴇʟʟᴇʀ: &6%seller%'
+      - '&e&l$ &fᴄᴜʀʀᴇɴᴛ ʙɪᴅ &e%topbid%&l$'
+      - '&e🗡 &fᴛᴏᴘ ʙɪᴅᴅᴇʀr &e%topbidder%'
+      - ''
+      - '&3⌛ &fᴛɪᴍᴇ ʟᴇғᴛ &3%time%'
+      - ''
+      - '#a8abb1ʙ#a9acb2ɪ#abaeb4ᴅ #acafb5ᴏ#aeb1b7ɴ #afb2b8ᴛ#b0b4baʜ#b2b5bbᴇ #b3b6bcɪ#b4b8beᴛ#b6b9bfᴇ#b7bbc1ᴍ #b9bcc2ᴀ#babec4ɴ#bbbfc5ᴅ #bdc0c6ʀ#bec2c8ᴇ#bfc3c9ᴄ#c1c5cbᴇ#c2c6ccɪ#c4c8ceᴠ#c5c9cfᴇ' # ʙɪᴅ ᴏɴ ᴛʜᴇ ɪᴛᴇᴍ ᴀɴᴅ ʀᴇᴄᴇɪᴠᴇ
+      - '#a8abb1ɪ#aaadb3ᴛ #acafb5ᴀ#adb1b7ᴛ #afb3b9ᴛ#b1b4baʜ#b3b6bcᴇ #b5b8beᴀ#b7bac0ᴜ#b8bcc2ᴄ#babec4ᴛ#bcc0c6ɪ#bec2c8ᴏ#c0c3c9ɴ #c1c5cbᴇ#c3c7cdɴ#c5c9cfᴅ' # ɪᴛ ᴀᴛ ᴛʜᴇ ᴀᴜᴄᴛɪᴏɴ ᴇɴᴅ
+    Category-Settings:
+      Armor:
+        Item: 'GOLDEN_CHESTPLATE'
+        Toggle: true
+        Slot: 11
+        Name: '&6&lᴀʀᴍᴏʀ &b(🛡)'
+        Lore:
+          - ''
+          - '#2ffc2fʏ#32fc32ᴏ#36fc35ᴜ #39fc38ᴡ#3dfb3bɪ#40fb3eʟ#44fb42ʟ #47fb45ғ#4afb48ɪ#4efb4bɴ#51fb4eᴅ #55fa51ɪ#58fa54ᴛ#5cfa57ᴇ#5ffa5aᴍ#62fa5ds #66fa61s#69fa64ᴜ#6df967ᴄ#70f96aʜ #74f96dᴀ#77f970s' # ʏᴏᴜ ᴡɪʟʟ ғɪɴᴅ ɪᴛᴇᴍs sᴜᴄʜ ᴀs
+          - ' &3- Helmet'
+          - ' &3- Chestplate'
+          - ' &3- Boots'
+          - ''
+          - '&8ᴛʜɪs ᴄᴀᴛᴇɢᴏʀʏ ᴄᴏɴᴛᴀɪɴs ᴀʟʟ ᴀʀᴍᴏʀ'
+          - '&8ᴛʜᴀᴛ ᴀʀᴇ ᴄᴜʀʀᴇɴᴛʟʏ ʙᴇɪɴɢ sᴏʟᴅ'
+      Weapons:
+        Item: 'GOLDEN_SWORD'
+        Toggle: true
+        Slot: 12
+        Name: '&6&lᴡᴇᴀᴘᴏɴs &b(🗡)'
+        Lore:
+          - ''
+          - '#2ffc2fʏ#32fc32ᴏ#36fc35ᴜ #39fc38ᴡ#3dfb3bɪ#40fb3eʟ#44fb42ʟ #47fb45ғ#4afb48ɪ#4efb4bɴ#51fb4eᴅ #55fa51ɪ#58fa54ᴛ#5cfa57ᴇ#5ffa5aᴍ#62fa5ds #66fa61s#69fa64ᴜ#6df967ᴄ#70f96aʜ #74f96dᴀ#77f970s' # ʏᴏᴜ ᴡɪʟʟ ғɪɴᴅ ɪᴛᴇᴍs sᴜᴄʜ ᴀs
+          - ' &3- Sword'
+          - ' &3- Trident'
+          - ' &3- Bow'
+          - ''
+          - '&8ᴛʜɪs ᴄᴀᴛᴇɢᴏʀʏ ᴄᴏɴᴛᴀɪɴs ᴀʟʟ ᴡᴇᴀᴘᴏɴs'
+          - '&8ᴛʜᴀᴛ ᴀʀᴇ ᴄᴜʀʀᴇɴᴛʟʏ ʙᴇɪɴɢ sᴏʟᴅ'
+      Tools:
+        Item: 'GOLDEN_PICKAXE'
+        Toggle: true
+        Slot: 13
+        Name: '&6&lᴛᴏᴏʟs &b(🪓)'
+        Lore:
+          - ''
+          - '#2ffc2fʏ#32fc32ᴏ#36fc35ᴜ #39fc38ᴡ#3dfb3bɪ#40fb3eʟ#44fb42ʟ #47fb45ғ#4afb48ɪ#4efb4bɴ#51fb4eᴅ #55fa51ɪ#58fa54ᴛ#5cfa57ᴇ#5ffa5aᴍ#62fa5ds #66fa61s#69fa64ᴜ#6df967ᴄ#70f96aʜ #74f96dᴀ#77f970s' # ʏᴏᴜ ᴡɪʟʟ ғɪɴᴅ ɪᴛᴇᴍs sᴜᴄʜ ᴀs
+          - ' &3- Pickaxe'
+          - ' &3- Shovel'
+          - ' &3- Axe'
+          - ''
+          - '&8ᴛʜɪs ᴄᴀᴛᴇɢᴏʀʏ ᴄᴏɴᴛᴀɪɴs ᴀʟʟ ᴛᴏᴏʟs'
+          - '&8ᴛʜᴀᴛ ᴀʀᴇ ᴄᴜʀʀᴇɴᴛʟʏ ʙᴇɪɴɢ sᴏʟᴅ'
+      Food:
+        Item: 'GOLDEN_APPLE'
+        Toggle: true
+        Slot: 14
+        Name: '&6&lғᴏᴏᴅ &b(🍖)'
+        Lore:
+          - ''
+          - '#2ffc2fʏ#32fc32ᴏ#36fc35ᴜ #39fc38ᴡ#3dfb3bɪ#40fb3eʟ#44fb42ʟ #47fb45ғ#4afb48ɪ#4efb4bɴ#51fb4eᴅ #55fa51ɪ#58fa54ᴛ#5cfa57ᴇ#5ffa5aᴍ#62fa5ds #66fa61s#69fa64ᴜ#6df967ᴄ#70f96aʜ #74f96dᴀ#77f970s' # ʏᴏᴜ ᴡɪʟʟ ғɪɴᴅ ɪᴛᴇᴍs sᴜᴄʜ ᴀs
+          - ' &3- Apple'
+          - ' &3- Potato'
+          - ' &3- Carrot'
+          - ''
+          - '&8ᴛʜɪs ᴄᴀᴛᴇɢᴏʀʏ ᴄᴏɴᴛᴀɪɴs ᴀʟʟ ғᴏᴏᴅ'
+          - '&8ᴛʜᴀᴛ ᴀʀᴇ ᴄᴜʀʀᴇɴᴛʟʏ ʙᴇɪɴɢ sᴏʟᴅ'
+      Potions:
+        Item: 'POTION'
+        Toggle: true
+        Slot: 15
+        Name: '&6&lᴘᴏᴛɪᴏɴs &b(🧪)'
+        Lore:
+          - ''
+          - '#2ffc2fʏ#32fc32ᴏ#36fc35ᴜ #39fc38ᴡ#3dfb3bɪ#40fb3eʟ#44fb42ʟ #47fb45ғ#4afb48ɪ#4efb4bɴ#51fb4eᴅ #55fa51ɪ#58fa54ᴛ#5cfa57ᴇ#5ffa5aᴍ#62fa5ds #66fa61s#69fa64ᴜ#6df967ᴄ#70f96aʜ #74f96dᴀ#77f970s' # ʏᴏᴜ ᴡɪʟʟ ғɪɴᴅ ɪᴛᴇᴍs sᴜᴄʜ ᴀs
+          - ' &3- Lingering Potion'
+          - ' &3- Splash Potion'
+          - ' &3- Potion'
+          - ''
+          - '&8ᴛʜɪs ᴄᴀᴛᴇɢᴏʀʏ ᴄᴏɴᴛᴀɪɴs ᴀʟʟ ᴘᴏᴛɪᴏɴs'
+          - '&8ᴛʜᴀᴛ ᴀʀᴇ ᴄᴜʀʀᴇɴᴛʟʏ ʙᴇɪɴɢ sᴏʟᴅ'
+      Blocks:
+        Item: 'GRASS_BLOCK'
+        Toggle: true
+        Slot: 16
+        Name: '&6&lʙʟᴏᴄᴋs &b(⛏)'
+        Lore:
+          - ''
+          - '#2ffc2fʏ#32fc32ᴏ#36fc35ᴜ #39fc38ᴡ#3dfb3bɪ#40fb3eʟ#44fb42ʟ #47fb45ғ#4afb48ɪ#4efb4bɴ#51fb4eᴅ #55fa51ɪ#58fa54ᴛ#5cfa57ᴇ#5ffa5aᴍ#62fa5ds #66fa61s#69fa64ᴜ#6df967ᴄ#70f96aʜ #74f96dᴀ#77f970s' # ʏᴏᴜ ᴡɪʟʟ ғɪɴᴅ ɪᴛᴇᴍs sᴜᴄʜ ᴀs
+          - ' &3- Grass Block'
+          - ' &3- Crafting Table'
+          - ' &3- Bookshelf'
+          - ''
+          - '&8ᴛʜɪs ᴄᴀᴛᴇɢᴏʀʏ ᴄᴏɴᴛᴀɪɴs ᴀʟʟ ʙʟᴏᴄᴋs'
+          - '&8ᴛʜᴀᴛ ᴀʀᴇ ᴄᴜʀʀᴇɴᴛʟʏ ʙᴇɪɴɢ sᴏʟᴅ'
+      Other:
+        Item: 'GOLD_NUGGET'
+        Toggle: true
+        Slot: 17
+        Name: '&6&lᴏᴛʜᴇʀs &b(🏹)'
+        Lore:
+          - ''
+          - '#2ffc2fʏ#32fc32ᴏ#36fc35ᴜ #39fc38ᴡ#3dfb3bɪ#40fb3eʟ#44fb42ʟ #47fb45ғ#4afb48ɪ#4efb4bɴ#51fb4eᴅ #55fa51ɪ#58fa54ᴛ#5cfa57ᴇ#5ffa5aᴍ#62fa5ds #66fa61s#69fa64ᴜ#6df967ᴄ#70f96aʜ #74f96dᴀ#77f970s' # ʏᴏᴜ ᴡɪʟʟ ғɪɴᴅ ɪᴛᴇᴍs sᴜᴄʜ ᴀs
+          - ' &3- Crossbow'
+          - ' &3- End Crystal'
+          - ' &3- Horse Armor'
+          - ''
+          - '&8ᴛʜɪs ᴄᴀᴛᴇɢᴏʀʏ ᴄᴏɴᴛᴀɪɴs ᴀʟʟ ᴛʜᴇ ᴏᴛʜᴇʀ'
+          - '&8ɪᴛᴇᴍs ᴛʜᴀᴛ ᴀʀᴇ ᴄᴜʀʀᴇɴᴛʟʏ ʙᴇɪɴɢ sᴏʟᴅ'
+      None:
+        Item: 'BARRIER'
+        Toggle: true
+        Slot: 23
+        Name: '&6&lɴᴏɴᴇ &b(⭐)'
+        Lore:
+          - ''
+          - '#2ffc2fʏ#32fc32ᴏ#36fc35ᴜ #39fc38ᴡ#3dfb3bɪ#40fb3eʟ#44fb42ʟ #47fb45ғ#4afb48ɪ#4efb4bɴ#51fb4eᴅ #55fa51ɪ#58fa54ᴛ#5cfa57ᴇ#5ffa5aᴍ#62fa5ds #66fa61s#69fa64ᴜ#6df967ᴄ#70f96aʜ #74f96dᴀ#77f970s' # ʏᴏᴜ ᴡɪʟʟ ғɪɴᴅ ɪᴛᴇᴍs sᴜᴄʜ ᴀs
+          - ' &3- Ender Chest'
+          - ' &3- Flowers'
+          - ' &3- Beacon'
+          - ''
+          - '&8ᴛʜɪs ᴄᴀᴛᴇɢᴏʀʏ ᴄᴏɴᴛᴀɪɴs ᴀʟʟ ɪᴛᴇᴍs'
+          - '&8ᴛʜᴀᴛ ᴀʀᴇ ᴄᴜʀʀᴇɴᴛʟʏ ʙᴇɪɴɢ sᴏʟᴅ'
+    OtherSettings: #Other Settings for the GUIs.
+      SellingItems: #The button for your current items.
+        Item: 'DIAMOND' #The item that this button is.
+        Toggle: true #If the item is in the gui or not.
+        Slot: 46 #The slot it is in. I recommend not changing these. If you do make sure they are still in the bottom row.
+        Name: '&6ɪᴛᴇᴍs ʏᴏᴜ ᴀʀᴇ sᴇʟʟɪɴɢ' #Name of the item.
+        Lore: #Lore of the item.
+          - ''
+          - '#2ffc2fᴄ#34fc33ʟ#38fc37ɪ#3dfb3bᴄ#41fb3fᴋ #46fb43ʜ#4afb47ᴇ#4ffb4bʀ#53fb50ᴇ #58fa54ᴛ#5cfa58ᴏ #61fa5cs#65fa60ᴇ#6afa64ʟ#6ef968ᴇ#73f96cᴄ#77f970ᴛ' # ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ sᴇʟᴇᴄᴛ
+          - ''
+          - '#a6a9afᴄ#a7aab0ʟ#a8abb1ɪ#a9acb2ᴄ#aaadb3ᴋ #abaeb4ʜ#acafb5ᴇ#adb1b7ʀ#aeb2b8ᴇ #afb3b9ᴛ#b0b4baᴏ #b1b5bbᴠ#b2b6bcɪ#b3b7bdᴇ#b5b8beᴡ #b6b9bfᴀ#b7bac0ʟ#b8bbc1ʟ #b9bcc2ᴛ#babdc3ʜ#bbbec4ᴇ #bcc0c6ɪ#bdc1c7ᴛ#bec2c8ᴇ#bfc3c9ᴍ#c0c4cas #c1c5cbʏ#c2c6ccᴏ#c3c7cdᴜ' # ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴠɪᴇᴡ ᴀʟʟ ᴛʜᴇ ɪᴛᴇᴍs ʏᴏᴜ
+          - '#a6a9afᴀ#a7aab0ʀ#a8abb1ᴇ #a9acb2ᴄ#aaadb3ᴜ#abaeb4ʀ#acafb5ʀ#adb0b6ᴇ#aeb1b7ɴ#afb2b8ᴛ#b0b3b9ʟ#b1b4baʏ #b2b5bbs#b3b6bcᴇ#b4b7bdʟ#b5b8beʟ#b5b9bfɪ#b6bac0ɴ#b7bbc1ɢ #b8bcc2ᴏ#b9bdc3ɴ #babec4ᴛ#bbbfc5ʜ#bcc0c6ᴇ #bdc1c7ᴀ#bec2c8ᴜ#bfc3c9ᴄ#c0c4caᴛ#c1c5cbɪ#c2c6ccᴏ#c3c7cdɴ' # ᴀʀᴇ ᴄᴜʀʀᴇɴᴛʟʏ sᴇʟʟɪɴɢ ᴏɴ ᴛʜᴇ ᴀᴜᴄᴛɪᴏɴ
+      Cancelled/ExpiredItems: #The button for Cancelled/Expired Items.
+        Item: 'POISONOUS_POTATO'
+        Toggle: true
+        Slot: 47
+        Name: '&6ᴄᴏʟʟᴇᴄᴛ ᴇxᴘɪʀᴇᴅ / ᴄᴀɴᴄᴇʟᴇᴅ ɪᴛᴇᴍs'
+        Lore:
+          - ''
+          - '#2ffc2fᴄ#34fc33ʟ#38fc37ɪ#3dfb3bᴄ#41fb3fᴋ #46fb43ʜ#4afb47ᴇ#4ffb4bʀ#53fb50ᴇ #58fa54ᴛ#5cfa58ᴏ #61fa5cs#65fa60ᴇ#6afa64ʟ#6ef968ᴇ#73f96cᴄ#77f970ᴛ' # ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ sᴇʟᴇᴄᴛ
+          - ''
+          - '#a6a9afᴄ#a7aab0ʟ#a8abb1ɪ#a9acb2ᴄ#aaadb3ᴋ #abaeb4ʜ#abafb5ᴇ#acb0b6ʀ#adb1b7ᴇ #aeb1b7ᴛ#afb2b8ᴏ #b0b3b9ᴠ#b1b4baɪ#b2b5bbᴇ#b3b6bcᴡ #b4b7bdᴀ#b5b8beɴ#b5b9bfᴅ #b6bac0ᴄ#b7bbc1ᴏ#b8bcc2ʟ#b9bdc3ʟ#babec4ᴇ#bbbfc5ᴄ#bcc0c6ᴛ #bdc0c6ᴀ#bec1c7ʟ#bec2c8ʟ #bfc3c9ᴏ#c0c4caғ #c1c5cbᴛ#c2c6ccʜ#c3c7cdᴇ' # ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴠɪᴇᴡ ᴀɴᴅ ᴄᴏʟʟᴇᴄᴛ ᴀʟʟ ᴏғ ᴛʜᴇ
+          - '#a6a9afɪ#a7aab0ᴛ#a8abb1ᴇ#a9acb2ᴍ#aaadb3s #abaeb4ʏ#acafb5ᴏ#adb0b6ᴜ #adb1b7ʜ#aeb2b8ᴀ#afb3b9ᴠ#b0b4baᴇ #b1b5bbᴄ#b2b6bcᴀ#b3b7bdɴ#b4b8beᴄ#b5b8beᴇ#b6b9bfʟ#b7bac0ᴇ#b8bbc1ᴅ #b9bcc2ᴏ#babdc3ʀ #bbbec4ʜ#bcbfc5ᴀ#bcc0c6s #bdc1c7ᴇ#bec2c8x#bfc3c9ᴘ#c0c4caɪ#c1c5cbʀ#c2c6ccᴇ#c3c7cdᴅ' # ɪᴛᴇᴍs ʏᴏᴜ ʜᴀᴠᴇ ᴄᴀɴᴄᴇʟᴇᴅ ᴏʀ ʜᴀs ᴇxᴘɪʀᴇᴅ
+      PreviousPage: #The button for Previous Page.
+        Item: 'ARROW'
+        Toggle: true
+        Slot: 49
+        Name: '&6ᴘʀᴇᴠɪᴏᴜs ᴘᴀɢᴇ'
+        Lore: { }
+      Refesh: #The button for Refresh Page.
+        Item: 'SUNFLOWER'
+        Toggle: true
+        Slot: 50
+        Name: '&6ʀᴇғʀᴇsʜ ᴘᴀɢᴇ'
+        Lore: { }
+      NextPage: #The button for Next Page.
+        Item: 'ARROW'
+        Toggle: true
+        Slot: 51
+        Name: '&6ɴᴇxᴛ ᴘᴀɢᴇ'
+        Lore: { }
+      Category1: #The button for Next Page.
+        Item: 'CHEST'
+        Toggle: true
+        Slot: 52
+        Name: '&6ᴄᴀᴛᴇɢᴏʀɪᴇs'
+        Lore:
+          - ''
+          - '#2ffc2fᴄ#34fc33ʟ#38fc37ɪ#3dfb3bᴄ#41fb3fᴋ #46fb43ʜ#4afb47ᴇ#4ffb4bʀ#53fb50ᴇ #58fa54ᴛ#5cfa58ᴏ #61fa5cᴄ#65fa60ʜ#6afa64ᴀ#6ef968ɴ#73f96cɢ#77f970ᴇ' # ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴄʜᴀɴɢᴇ
+          - ''
+          - '&eᴄᴜʀʀᴇɴᴛ ᴄᴀᴛᴇɢᴏʀʏ: &6%category%'
+          - ''
+          - '#a6a9afᴡ#a7aab0ᴀ#a8abb1ɴ#a9acb2ᴛ #a9adb3ᴛ#aaadb3ᴏ #abaeb4s#acafb5ᴇ#adb0b6ᴇ #aeb1b7ɪ#afb2b8ᴛ#afb3b9ᴇ#b0b4baᴍ#b1b4bas #b2b5bbɪ#b3b6bcɴ #b4b7bds#b5b8beᴘ#b5b9bfᴇ#b6bac0ᴄ#b7bbc1ɪ#b8bcc2ғ#b9bcc2ɪ#babdc3ᴄ #babec4ᴄ#bbbfc5ᴀ#bcc0c6ᴛ#bdc1c7ᴇ#bec2c8ɢ#bfc3c9ᴏ#c0c3c9ʀ#c0c4caɪ#c1c5cbᴇ#c2c6ccs#c3c7cd?' # ᴡᴀɴᴛ ᴛᴏ sᴇᴇ ɪᴛᴇᴍs ɪɴ sᴘᴇᴄɪғɪᴄ ᴄᴀᴛᴇɢᴏʀɪᴇs?
+          - '#a6a9afᴄ#a7aab0ʟ#a8abb1ɪ#a9acb2ᴄ#aaadb3ᴋ #aaaeb4ʜ#abaeb4ᴇ#acafb5ʀ#adb0b6ᴇ #aeb1b7ᴛ#afb2b8ᴏ #b0b3b9s#b1b4baᴇ#b1b5bbᴇ #b2b6bcᴀ#b3b7bdʟ#b4b8beʟ #b5b8beᴄ#b6b9bfᴀ#b7bac0ᴛ#b8bbc1ᴇ#b8bcc2ɢ#b9bdc3ᴏ#babec4ʀ#bbbfc5ɪ#bcc0c6ᴇ#bdc1c7s #bec2c8ᴏ#bfc2c8ғ #bfc3c9ɪ#c0c4caᴛ#c1c5cbᴇ#c2c6ccᴍ#c3c7cds' # ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ sᴇᴇ ᴀʟʟ ᴄᴀᴛᴇɢᴏʀɪᴇs ᴏғ ɪᴛᴇᴍs
+      Category2: #The button for Next Page.
+        Item: 'CHEST'
+        Toggle: true
+        Slot: 48
+        Name: '&6ᴄᴀᴛᴇɢᴏʀɪᴇs'
+        Lore:
+          - ''
+          - '#2ffc2fᴄ#34fc33ʟ#38fc37ɪ#3dfb3bᴄ#41fb3fᴋ #46fb43ʜ#4afb47ᴇ#4ffb4bʀ#53fb50ᴇ #58fa54ᴛ#5cfa58ᴏ #61fa5cᴄ#65fa60ʜ#6afa64ᴀ#6ef968ɴ#73f96cɢ#77f970ᴇ' # ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴄʜᴀɴɢᴇ
+          - ''
+          - '&eᴄᴜʀʀᴇɴᴛ ᴄᴀᴛᴇɢᴏʀʏ: &6%category%'
+          - ''
+          - '#a6a9afᴡ#a7aab0ᴀ#a8abb1ɴ#a9acb2ᴛ #a9adb3ᴛ#aaadb3ᴏ #abaeb4s#acafb5ᴇ#adb0b6ᴇ #aeb1b7ɪ#afb2b8ᴛ#afb3b9ᴇ#b0b4baᴍ#b1b4bas #b2b5bbɪ#b3b6bcɴ #b4b7bds#b5b8beᴘ#b5b9bfᴇ#b6bac0ᴄ#b7bbc1ɪ#b8bcc2ғ#b9bcc2ɪ#babdc3ᴄ #babec4ᴄ#bbbfc5ᴀ#bcc0c6ᴛ#bdc1c7ᴇ#bec2c8ɢ#bfc3c9ᴏ#c0c3c9ʀ#c0c4caɪ#c1c5cbᴇ#c2c6ccs#c3c7cd?' # ᴡᴀɴᴛ ᴛᴏ sᴇᴇ ɪᴛᴇᴍs ɪɴ sᴘᴇᴄɪғɪᴄ ᴄᴀᴛᴇɢᴏʀɪᴇs?
+          - '#a6a9afᴄ#a7aab0ʟ#a8abb1ɪ#a9acb2ᴄ#aaadb3ᴋ #aaaeb4ʜ#abaeb4ᴇ#acafb5ʀ#adb0b6ᴇ #aeb1b7ᴛ#afb2b8ᴏ #b0b3b9s#b1b4baᴇ#b1b5bbᴇ #b2b6bcᴀ#b3b7bdʟ#b4b8beʟ #b5b8beᴄ#b6b9bfᴀ#b7bac0ᴛ#b8bbc1ᴇ#b8bcc2ɢ#b9bdc3ᴏ#babec4ʀ#bbbfc5ɪ#bcc0c6ᴇ#bdc1c7s #bec2c8ᴏ#bfc2c8ғ #bfc3c9ɪ#c0c4caᴛ#c1c5cbᴇ#c2c6ccᴍ#c3c7cds' # ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ sᴇᴇ ᴀʟʟ ᴄᴀᴛᴇɢᴏʀɪᴇs ᴏғ ɪᴛᴇᴍs
+      Bidding/Selling: #Switch between Bidding and Selling.
+        Selling:
+          Item: 'SLIME_BALL'
+          Toggle: true
+          Slot: 53
+          Name: '&6sᴀʟᴇs ᴛʏᴘᴇ'
+          Lore:
+            - ''
+            - '#2ffc2fᴄ#34fc33ʟ#38fc37ɪ#3dfb3bᴄ#41fb3fᴋ #46fb43ʜ#4afb47ᴇ#4ffb4bʀ#53fb50ᴇ #58fa54ᴛ#5cfa58ᴏ #61fa5cᴄ#65fa60ʜ#6afa64ᴀ#6ef968ɴ#73f96cɢ#77f970ᴇ' # ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴄʜᴀɴɢᴇ
+            - ' &7- #ffb000&lᴀ#f4bd03&lᴜ#e8ca07&lᴄ#ddd80a&lᴛ#d2e50d&lɪ#c6f211&lᴏ#bbff14&lɴ'
+            - ' &7- &3ʙɪᴅ'
+            - ''
+            - '#a6a9afᴄ#a7aab0ᴜ#a9acb2ʀ#aaadb3ʀ#abaeb4ᴇ#adb0b6ɴ#aeb1b7ᴛ#afb3b9ʟ#b1b4baʏ #b2b5bbʟ#b3b7bdᴏ#b5b8beᴏ#b6b9bfᴋ#b7bbc1ɪ#b8bcc2ɴ#babdc3ɢ #bbbfc5ᴀ#bcc0c6ᴛ #bec2c8ɪ#bfc3c9ᴛ#c0c4caᴇ#c2c6ccᴍ#c3c7cds' # ᴄᴜʀʀᴇɴᴛʟʏ ʟᴏᴏᴋɪɴɢ ᴀᴛ ɪᴛᴇᴍs
+            - '#a6a9afᴛ#a7abb1ʜ#a9acb2ᴀ#aaaeb4ᴛ #acafb5ʏ#adb1b7ᴏ#afb2b8ᴜ #b0b4baᴄ#b2b5bbᴀ#b3b7bdɴ #b5b8beʙ#b6bac0ᴜ#b7bbc1ʏ #b9bdc3ᴀ#babec4ᴛ #bcc0c6ᴀ #bdc1c7ᴘ#bfc3c9ʀ#c0c4caɪ#c2c6ccᴄ#c3c7cdᴇ' # ᴛʜᴀᴛ ʏᴏᴜ ᴄᴀɴ ʙᴜʏ ᴀᴛ ᴀ ᴘʀɪᴄᴇ
+        Bidding:
+          Item: 'MAGMA_CREAM'
+          Toggle: true
+          Slot: 53
+          Name: '&6sᴀʟᴇs ᴛʏᴘᴇ '
+          Lore:
+            - ''
+            - '#2ffc2fᴄ#34fc33ʟ#38fc37ɪ#3dfb3bᴄ#41fb3fᴋ #46fb43ʜ#4afb47ᴇ#4ffb4bʀ#53fb50ᴇ #58fa54ᴛ#5cfa58ᴏ #61fa5cᴄ#65fa60ʜ#6afa64ᴀ#6ef968ɴ#73f96cɢ#77f970ᴇ' # ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴄʜᴀɴɢᴇ
+            - ' &7- &3ᴀᴜᴄᴛɪᴏɴ'
+            - ' &7- #ffb000&lʙ#ddd80a&lɪ#bbff14&lᴅ'
+            - ''
+            - '#a6a9afᴄ#a7aab0ᴜ#a9acb2ʀ#aaadb3ʀ#abaeb4ᴇ#adb0b6ɴ#aeb1b7ᴛ#afb3b9ʟ#b1b4baʏ #b2b5bbʟ#b3b7bdᴏ#b5b8beᴏ#b6b9bfᴋ#b7bbc1ɪ#b8bcc2ɴ#babdc3ɢ #bbbfc5ᴀ#bcc0c6ᴛ #bec2c8ɪ#bfc3c9ᴛ#c0c4caᴇ#c2c6ccᴍ#c3c7cds' # ᴄᴜʀʀᴇɴᴛʟʏ ʟᴏᴏᴋɪɴɢ ᴀᴛ ɪᴛᴇᴍs
+            - '#a6a9afᴛ#a8abb1ʜ#aaadb3ᴀ#acafb5ᴛ #aeb2b8ʏ#b0b4baᴏ#b2b6bcᴜ #b5b8beᴄ#b7bac0ᴀ#b9bcc2ɴ #bbbec4ʙ#bdc1c7ɪ#bfc3c9ᴅ #c1c5cbᴏ#c3c7cdɴ' # ᴛʜᴀᴛ ʏᴏᴜ ᴄᴀɴ ʙɪᴅ ᴏɴ
+      WhatIsThis: #The info on all the Books buttons.
+        SellingShop: #The Book in the main shop.
+          Item: 'BOOK'
+          Toggle: true
+          Slot: 54
+          Name: '#f9a600ᴡ#f9a802ʜ#f9aa04ᴀ#f9ac05ᴛ #f9ae07ɪ#f9b009s #f9b20bᴛ#f9b40dʜ#f9b50eɪ#f9b710s #f9b912ᴘ#f9bb14ᴀ#f9bd15ɢ#f9bf17ᴇ#f9c119?' # ᴡʜᴀᴛ ɪs ᴛʜɪs ᴘᴀɢᴇ?
+          Lore:
+            - '#a6a9afᴛ#a7aab0ʜ#a8abb1ɪ#a9acb2s #aaadb3ɪ#abafb5s #acb0b6ᴛ#aeb1b7ʜ#afb2b8ᴇ #b0b3b9ᴀ#b1b4baᴜ#b2b5bbᴄ#b3b6bcᴛ#b4b7bdɪ#b5b9bfᴏ#b6bac0ɴ#b7bbc1s#b8bcc2, #b9bdc3ʜ#babec4ᴇ#bbbfc5ʀ#bdc0c6ᴇ #bec1c7ʏ#bfc3c9ᴏ#c0c4caᴜ #c1c5cbᴄ#c2c6ccᴀ#c3c7cdɴ' # ᴛʜɪs ɪs ᴛʜᴇ ᴀᴜᴄᴛɪᴏɴs, ʜᴇʀᴇ ʏᴏᴜ ᴄᴀɴ
+            - '#a6a9afᴘ#a7aab0ᴜ#a8abb1ᴛ #a9acb2ɪ#aaaeb4ᴛ#acafb5ᴇ#adb0b6ᴍ#aeb1b7s #afb2b8ғ#b0b3b9ᴏ#b1b5bbʀ #b2b6bcs#b3b7bdᴀ#b5b8beʟ#b6b9bfᴇ#b7bac0, #b8bbc1ᴀ#b9bdc3ɴ#babec4ᴅ #bbbfc5ʙ#bcc0c6ᴜ#bdc1c7ʏ #bfc2c8ɪ#c0c4caᴛ#c1c5cbᴇ#c2c6ccᴍ#c3c7cds' # ᴘᴜᴛ ɪᴛᴇᴍs ғᴏʀ sᴀʟᴇ, ᴀɴᴅ ʙᴜʏ ɪᴛᴇᴍs
+            - '#a6a9afᴛ#a7aab0ʜ#a9acb2ᴀ#aaadb3ᴛ #abaeb4ᴏ#acb0b6ᴛ#aeb1b7ʜ#afb2b8ᴇ#b0b3b9ʀ#b1b5bbs #b3b6bcʜ#b4b7bdᴀ#b5b9bfᴠ#b6bac0ᴇ #b8bbc1ᴘ#b9bdc3ᴜ#babec4ᴛ #bbbfc5ғ#bdc0c6ᴏ#bec2c8ʀ #bfc3c9s#c0c4caᴀ#c2c6ccʟ#c3c7cdᴇ' # ᴛʜᴀᴛ ᴏᴛʜᴇʀs ʜᴀᴠᴇ ᴘᴜᴛ ғᴏʀ sᴀʟᴇ
+            - ''
+            - '&8ᴛʜᴇ ᴀᴜᴄᴛɪᴏɴ ɪs ᴀʟsᴏ ᴀ ɢʀᴇᴀᴛ ᴘʟᴀᴄᴇ ᴛᴏ ᴍᴀᴋᴇ'
+            - '&8ᴍᴏɴᴇʏ ʙʏ sᴇʟʟɪɴɢ ɪᴛᴇᴍs ᴛʜᴀᴛ ᴏᴛʜᴇʀs'
+        BiddingShop: #The Book in the main shop.
+          Item: 'BOOK'
+          Toggle: true
+          Slot: 54
+          Name: '#f9a600ᴡ#f9a802ʜ#f9aa04ᴀ#f9ac05ᴛ #f9ae07ɪ#f9b009s #f9b20bᴛ#f9b40dʜ#f9b50eɪ#f9b710s #f9b912ᴘ#f9bb14ᴀ#f9bd15ɢ#f9bf17ᴇ#f9c119?' # ᴡʜᴀᴛ ɪs ᴛʜɪs ᴘᴀɢᴇ?
+          Lore:
+            - '#a6a9afᴛ#a7aab0ʜ#a8abb1ɪ#a9acb2s #aaadb3ɪ#abafb5s #acb0b6ᴛ#aeb1b7ʜ#afb2b8ᴇ #b0b3b9ᴀ#b1b4baᴜ#b2b5bbᴄ#b3b6bcᴛ#b4b7bdɪ#b5b9bfᴏ#b6bac0ɴ#b7bbc1s#b8bcc2, #b9bdc3ʜ#babec4ᴇ#bbbfc5ʀ#bdc0c6ᴇ #bec1c7ʏ#bfc3c9ᴏ#c0c4caᴜ #c1c5cbᴄ#c2c6ccᴀ#c3c7cdɴ' # ᴛʜɪs ɪs ᴛʜᴇ ᴀᴜᴄᴛɪᴏɴs, ʜᴇʀᴇ ʏᴏᴜ ᴄᴀɴ
+            - '#a6a9afᴘ#a7aab0ᴜ#a8abb1ᴛ #a9acb2ɪ#aaaeb4ᴛ#acafb5ᴇ#adb0b6ᴍ#aeb1b7s #afb2b8ғ#b0b3b9ᴏ#b1b5bbʀ #b2b6bcs#b3b7bdᴀ#b5b8beʟ#b6b9bfᴇ#b7bac0, #b8bbc1ᴀ#b9bdc3ɴ#babec4ᴅ #bbbfc5ʙ#bcc0c6ᴜ#bdc1c7ʏ #bfc2c8ɪ#c0c4caᴛ#c1c5cbᴇ#c2c6ccᴍ#c3c7cds' # ᴘᴜᴛ ɪᴛᴇᴍs ғᴏʀ sᴀʟᴇ, ᴀɴᴅ ʙᴜʏ ɪᴛᴇᴍs
+            - '#a6a9afᴛ#a7aab0ʜ#a9acb2ᴀ#aaadb3ᴛ #abaeb4ᴏ#acb0b6ᴛ#aeb1b7ʜ#afb2b8ᴇ#b0b3b9ʀ#b1b5bbs #b3b6bcʜ#b4b7bdᴀ#b5b9bfᴠ#b6bac0ᴇ #b8bbc1ᴘ#b9bdc3ᴜ#babec4ᴛ #bbbfc5ғ#bdc0c6ᴏ#bec2c8ʀ #bfc3c9s#c0c4caᴀ#c2c6ccʟ#c3c7cdᴇ' # ᴛʜᴀᴛ ᴏᴛʜᴇʀs ʜᴀᴠᴇ ᴘᴜᴛ ғᴏʀ sᴀʟᴇ
+            - ''
+            - '&8ᴛʜᴇ ᴀᴜᴄᴛɪᴏɴ ɪs ᴀʟsᴏ ᴀ ɢʀᴇᴀᴛ ᴘʟᴀᴄᴇ ᴛᴏ ᴍᴀᴋᴇ'
+            - '&8ᴍᴏɴᴇʏ ʙʏ sᴇʟʟɪɴɢ ɪᴛᴇᴍs ᴛʜᴀᴛ ᴏᴛʜᴇʀs'
+        CurrentItems: #The Book in the Current items GUI.
+          Item: 'BOOK'
+          Toggle: true
+          Slot: 50
+          Name: '#f9a600ᴡ#f9a802ʜ#f9aa04ᴀ#f9ac05ᴛ #f9ae07ɪ#f9b009s #f9b20bᴛ#f9b40dʜ#f9b50eɪ#f9b710s #f9b912ᴘ#f9bb14ᴀ#f9bd15ɢ#f9bf17ᴇ#f9c119?' # ᴡʜᴀᴛ ɪs ᴛʜɪs ᴘᴀɢᴇ?
+          Lore:
+            - '#a6a9afᴛ#a7aab0ʜ#a8abb1ᴇ#a9acb2s#aaadb3ᴇ #abaeb4ᴀ#abafb5ʀ#acb0b6ᴇ #adb1b7ʏ#aeb1b7ᴏ#afb2b8ᴜ#b0b3b9ʀ #b1b4baᴄ#b2b5bbᴜ#b3b6bcʀ#b4b7bdʀ#b5b8beᴇ#b5b9bfɴ#b6bac0ᴛ #b7bbc1ʟ#b8bcc2ɪ#b9bdc3s#babec4ᴛ#bbbfc5ɪ#bcc0c6ɴ#bdc0c6ɢ#bec1c7s#bec2c8, #bfc3c9ᴀ#c0c4caʟ#c1c5cbʟ #c2c6ccᴏ#c3c7cdғ' # ᴛʜᴇsᴇ ᴀʀᴇ ʏᴏᴜʀ ᴄᴜʀʀᴇɴᴛ ʟɪsᴛɪɴɢs, ᴀʟʟ ᴏғ
+            - '#a6a9afᴛ#a7aab0ʜ#a8abb1ᴇ #a9acb2ɪ#aaadb3ᴛ#abaeb4ᴇ#acafb5ᴍ#adb0b6s #aeb1b7ʏ#afb2b8ᴏ#b0b3b9ᴜ #b1b4baᴄ#b2b5bbᴜ#b3b6bcʀ#b4b7bdʀ#b5b9bfᴇ#b6bac0ɴ#b7bbc1ᴛ#b8bcc2ʟ#b9bdc3ʏ #babec4ʜ#bbbfc5ᴀ#bcc0c6ᴠ#bdc1c7ᴇ #bec2c8ʟ#bfc3c9ɪ#c0c4cas#c1c5cbᴛ#c2c6ccᴇ#c3c7cdᴅ' # ᴛʜᴇ ɪᴛᴇᴍs ʏᴏᴜ ᴄᴜʀʀᴇɴᴛʟʏ ʜᴀᴠᴇ ʟɪsᴛᴇᴅ
+            - '#a6a9afᴏ#a7aab0ɴ #a8abb1ᴀ#a9adb3ᴜ#abaeb4ᴄ#acafb5ᴛ#adb0b6ɪ#aeb1b7ᴏ#afb3b9ɴ#b0b4bas #b2b5bbᴀ#b3b6bcʀ#b4b7bdᴇ #b5b9bfᴅ#b6bac0ɪ#b7bbc1s#b9bcc2ᴘ#babdc3ʟ#bbbfc5ᴀ#bcc0c6ʏ#bdc1c7ᴇ#bec2c8ᴅ #c0c3c9ʜ#c1c5cbᴇ#c2c6ccʀ#c3c7cdᴇ' #ᴏɴ ᴀᴜᴄᴛɪᴏɴs ᴀʀᴇ ᴅɪsᴘʟᴀʏᴇᴅ ʜᴇʀᴇ
+            - ''
+            - '&8you can cancel and view your listings'
+            - '&8xᴘɪʀᴇ ᴛɪᴍᴇ ʜᴇʀᴇ.'
+        Cancelled/ExpiredItems: #The Book in the Canceled/Expired Items GUI.
+          Item: 'BOOK'
+          Toggle: true
+          Slot: 50
+          Name: '#f9a600ᴡ#f9a802ʜ#f9aa04ᴀ#f9ac05ᴛ #f9ae07ɪ#f9b009s #f9b20bᴛ#f9b40dʜ#f9b50eɪ#f9b710s #f9b912ᴘ#f9bb14ᴀ#f9bd15ɢ#f9bf17ᴇ#f9c119?' # ᴡʜᴀᴛ ɪs ᴛʜɪs ᴘᴀɢᴇ?
+          Lore:
+            - '#a6a9afᴛ#a7aab0ʜ#a8abb1ɪ#a9acb2s #a9adb3ᴘ#aaadb3ᴀ#abaeb4ɢ#acafb5ᴇ #adb0b6ʜ#aeb1b7ᴏ#afb2b8ᴜ#afb3b9s#b0b4baᴇ#b1b4bas #b2b5bbᴀ#b3b6bcʟ#b4b7bdʟ #b5b8beᴏ#b5b9bfғ #b6bac0ʏ#b7bbc1ᴏ#b8bcc2ᴜ#b9bcc2ʀ #babdc3ᴄ#babec4ᴀ#bbbfc5ɴ#bcc0c6ᴄ#bdc1c7ᴇ#bec2c8ʟ#bfc3c9ʟ#c0c3c9ᴇ#c0c4caᴅ #c1c5cbᴀ#c2c6ccɴ#c3c7cdᴅ' # ᴛʜɪs ᴘᴀɢᴇ ʜᴏᴜsᴇs ᴀʟʟ ᴏғ ʏᴏᴜʀ ᴄᴀɴᴄᴇʟʟᴇᴅ ᴀɴᴅ
+            - '#a6a9afᴇ#a7aab0x#a8abb1ᴘ#a8acb2ɪ#a9acb2ʀ#aaadb3ᴇ#abaeb4ᴅ #acafb5ɪ#acb0b6ᴛ#adb1b7ᴇ#aeb1b7ᴍ#afb2b8s#b0b3b9, #b0b4baᴡ#b1b5bbʜ#b2b6bcᴇ#b3b6bcɴ #b4b7bdᴀ #b5b8beʟ#b5b9bfɪ#b6bac0s#b7bbc1ᴛ#b8bbc1ɪ#b9bcc2ɴ#b9bdc3ɢ#babec4s #bbbfc5ɪ#bcc0c6s #bdc0c6ᴄ#bdc1c7ᴀ#bec2c8ɴ#bfc3c9ᴄ#c0c4caᴇ#c1c5cbʟ#c1c5cbʟ#c2c6ccᴇ#c3c7cdᴅ' # ᴇxᴘɪʀᴇᴅ ɪᴛᴇᴍs, ᴡʜᴇɴ ᴀ ʟɪsᴛɪɴɢs ɪs ᴄᴀɴᴄᴇʟʟᴇᴅ
+            - '#a6a9afᴏ#a7aab0ʀ #a8abb1ᴇ#a9acb2x#aaadb3ᴘ#aaaeb4ɪ#abaeb4ʀ#acafb5ᴇ#adb0b6s #aeb1b7ʏ#afb2b8ᴏ#b0b3b9ᴜ #b1b4baᴡ#b1b5bbɪ#b2b6bcʟ#b3b7bdʟ #b4b8beʙ#b5b8beᴇ #b6b9bfᴀ#b7bac0ʙ#b8bbc1ʟ#b8bcc2ᴇ #b9bdc3ᴛ#babec4ᴏ #bbbfc5ʀ#bcc0c6ᴇ#bdc1c7ᴛ#bec2c8ᴜ#bfc2c8ʀ#bfc3c9ɴ #c0c4caᴛ#c1c5cbʜ#c2c6ccᴀ#c3c7cdᴛ' # ᴏʀ ᴇxᴘɪʀᴇs ʏᴏᴜ ᴡɪʟʟ ʙᴇ ᴀʙʟᴇ ᴛᴏ ʀᴇᴛᴜʀɴ ᴛʜᴀᴛ
+            - '#a6a9afɪ#a7aab0ᴛ#a8acb2ᴇ#aaadb3ᴍ #abaeb4ʙ#acafb5ᴀ#adb1b7ᴄ#aeb2b8ᴋ #b0b3b9ᴛ#b1b4baᴏ #b2b6bcʏ#b3b7bdᴏ#b5b8beᴜ #b6b9bfғ#b7bbc1ʀ#b8bcc2ᴏ#b9bdc3ᴍ #bbbec4ᴛ#bcc0c6ʜ#bdc1c7ɪ#bec2c8s #bfc3c9ᴍ#c1c5cbᴇ#c2c6ccɴ#c3c7cdᴜ' # ɪᴛᴇᴍ ʙᴀᴄᴋ ᴛᴏ ʏᴏᴜ ғʀᴏᴍ ᴛʜɪs ᴍᴇɴᴜ
+            - ''
+            - '&8ᴊᴜsᴛ ᴄʟɪᴄᴋ ᴏɴ ᴛʜᴇ ɪᴛᴇᴍ ᴀɴᴅ ɪғ ʏᴏᴜ ʜᴀᴠᴇ ᴇɴᴏᴜɢʜ'
+            - '&8ɪɴᴠᴇɴᴛᴏʀʏ sᴘᴀᴄᴇ ʏᴏᴜ ᴡɪʟʟ ʀᴇᴄᴇɪᴠᴇ ᴛʜᴀᴛ ɪᴛᴇᴍ.'
+        Viewing: #The Book in the Viewing Items GUI.
+          Item: 'BOOK'
+          Toggle: true
+          Slot: 50
+          Name: '#f9a600ᴡ#f9a802ʜ#f9aa04ᴀ#f9ac05ᴛ #f9ae07ɪ#f9b009s #f9b20bᴛ#f9b40dʜ#f9b50eɪ#f9b710s #f9b912ᴘ#f9bb14ᴀ#f9bd15ɢ#f9bf17ᴇ#f9c119?' # ᴡʜᴀᴛ ɪs ᴛʜɪs ᴘᴀɢᴇ?
+          Lore:
+            - '#a6a9afᴛ#a7aab0ʜ#a8abb1ɪ#a9acb2s #aaadb3ᴘ#abafb5ᴀ#acb0b6ɢ#aeb1b7ᴇ #afb2b8s#b0b3b9ʜ#b1b4baᴏ#b2b5bbᴡ#b3b6bcs #b4b7bdᴀ#b5b9bfʟ#b6bac0ʟ #b7bbc1ᴛ#b8bcc2ʜ#b9bdc3ᴇ #babec4ɪ#bbbfc5ᴛ#bdc0c6ᴇ#bec1c7ᴍ#bfc3c9s #c0c4caᴛ#c1c5cbʜ#c2c6ccᴀ#c3c7cdᴛ' # ᴛʜɪs ᴘᴀɢᴇ sʜᴏᴡs ᴀʟʟ ᴛʜᴇ ɪᴛᴇᴍs ᴛʜᴀᴛ
+            - '#a6a9afᴀ #a7aab0ᴘ#a8abb1ʟ#a9acb2ᴀ#aaadb3ʏ#abaeb4ᴇ#acafb5ʀ #adb0b6ʜ#aeb1b7ᴀ#afb2b8s #b0b3b9ᴄ#b1b4baᴜ#b2b5bbʀ#b3b6bcʀ#b4b7bdᴇ#b5b8beɴ#b5b9bfᴛ#b6bac0ʟ#b7bbc1ʏ #b8bcc2ᴏ#b9bdc3ɴ #babec4ᴛ#bbbfc5ʜ#bcc0c6ᴇ #bdc1c7ʙ#bec2c8ɪ#bfc3c9ᴅ#c0c4caᴅ#c1c5cbɪ#c2c6ccɴ#c3c7cdɢ' # ᴀ ᴘʟᴀʏᴇʀ ʜᴀs ᴄᴜʀʀᴇɴᴛʟʏ ᴏɴ ᴛʜᴇ ʙɪᴅᴅɪɴɢ
+            - '#a6a9afᴀ#a7aab0ɴ#a8abb1ᴅ #a9acb2s#aaadb3ᴇ#abaeb4ʟ#abafb5ʟ#acb0b6ɪ#adb1b7ɴ#aeb1b7ɢ #afb2b8ᴍ#b0b3b9ᴀ#b1b4baʀ#b2b5bbᴋ#b3b6bcᴇ#b4b7bdᴛ#b5b8be. #b5b9bfʏ#b6bac0ᴏ#b7bbc1ᴜ #b8bcc2ᴄ#b9bdc3ᴀ#babec4ɴ #bbbfc5ǫ#bcc0c6ᴜ#bdc0c6ɪ#bec1c7ᴄ#bec2c8ᴋ#bfc3c9ʟ#c0c4caʏ #c1c5cbs#c2c6ccᴇ#c3c7cdᴇ' # ᴀɴᴅ sᴇʟʟɪɴɢ ᴍᴀʀᴋᴇᴛ. ʏᴏᴜ ᴄᴀɴ ǫᴜɪᴄᴋʟʏ sᴇᴇ
+            - '#a6a9afᴡ#a7aab0ʜ#a8abb1ᴀ#a9acb2ᴛ #aaadb3ᴀ #abafb5s#acb0b6ᴘ#aeb1b7ᴇ#afb2b8ᴄ#b0b3b9ɪ#b1b4baғ#b2b5bbɪ#b3b6bcᴄ #b4b7bdᴘ#b5b9bfʟ#b6bac0ᴀ#b7bbc1ʏ#b8bcc2ᴇ#b9bdc3ʀ #babec4ɪ#bbbfc5s #bdc0c6s#bec1c7ᴇ#bfc3c9ʟ#c0c4caʟ#c1c5cbɪ#c2c6ccɴ#c3c7cdɢ' # ᴡʜᴀᴛ ᴀ sᴘᴇᴄɪғɪᴄ ᴘʟᴀʏᴇʀ ɪs sᴇʟʟɪɴɢ
+        Categories: #The Book in the Viewing Items GUI.
+          Item: 'BOOK'
+          Toggle: true
+          Slot: 50
+          Name: '#f9a600ᴡ#f9a802ʜ#f9aa04ᴀ#f9ac05ᴛ #f9ae07ɪ#f9b009s #f9b20bᴛ#f9b40dʜ#f9b50eɪ#f9b710s #f9b912ᴘ#f9bb14ᴀ#f9bd15ɢ#f9bf17ᴇ#f9c119?' # ᴡʜᴀᴛ ɪs ᴛʜɪs ᴘᴀɢᴇ?
+          Lore:
+            - '#a6a9afᴛ#a7aab0ʜ#a8abb1ɪ#a9acb2s #aaadb3ᴘ#abaeb4ᴀ#acafb5ɢ#adb1b7ᴇ #aeb2b8s#afb3b9ʜ#b0b4baᴏ#b1b5bbᴡ#b2b6bcs #b3b7bdᴀ#b5b8beʟ#b6b9bfʟ #b7bac0ᴛ#b8bbc1ʜ#b9bcc2ᴇ #babdc3ᴄ#bbbec4ᴀ#bcc0c6ᴛ#bdc1c7ᴇ#bec2c8ɢ#bfc3c9ᴏ#c0c4caʀ#c1c5cbɪ#c2c6ccᴇ#c3c7cds' # ᴛʜɪs ᴘᴀɢᴇ sʜᴏᴡs ᴀʟʟ ᴛʜᴇ ᴄᴀᴛᴇɢᴏʀɪᴇs
+            - '#a6a9afᴛ#a7aab0ʜ#a8abb1ᴀ#a9acb2ᴛ #aaadb3ʏ#abaeb4ᴏ#abafb5ᴜ #acb0b6ᴄ#adb1b7ᴀ#aeb1b7ɴ #afb2b8ᴄ#b0b3b9ʜ#b1b4baᴏ#b2b5bbᴏ#b3b6bcs#b4b7bdᴇ #b5b8beғ#b5b9bfʀ#b6bac0ᴏ#b7bbc1ᴍ#b8bcc2. #b9bdc3ᴡ#babec4ʜ#bbbfc5ᴇ#bcc0c6ɴ #bdc0c6ʏ#bec1c7ᴏ#bec2c8ᴜ #bfc3c9ᴄ#c0c4caʟ#c1c5cbɪ#c2c6ccᴄ#c3c7cdᴋ' # ᴛʜᴀᴛ ʏᴏᴜ ᴄᴀɴ ᴄʜᴏᴏsᴇ ғʀᴏᴍ. ᴡʜᴇɴ ʏᴏᴜ ᴄʟɪᴄᴋ
+            - '#a6a9afᴀ #a7aab0ᴄ#a8abb1ᴀ#a9acb2ᴛ#aaadb3ᴇ#abaeb4ɢ#abafb5ᴏ#acb0b6ʀ#adb1b7ʏ #aeb1b7ɪ#afb2b8ᴛ #b0b3b9ᴡ#b1b4baɪ#b2b5bbʟ#b3b6bcʟ #b4b7bdᴏ#b5b8beᴘ#b5b9bfᴇ#b6bac0ɴ #b7bbc1ᴛ#b8bcc2ʜ#b9bdc3ᴇ #babec4ɢ#bbbfc5ᴜ#bcc0c6ɪ #bdc0c6ᴡ#bec1c7ɪ#bec2c8ᴛ#bfc3c9ʜ #c0c4caᴏ#c1c5cbɴ#c2c6ccʟ#c3c7cdʏ' # ᴀ ᴄᴀᴛᴇɢᴏʀʏ ɪᴛ ᴡɪʟʟ ᴏᴘᴇɴ ᴛʜᴇ ɢᴜɪ ᴡɪᴛʜ ᴏɴʟʏ
+            - '#a6a9afɪ#a7aab0ᴛ#a8abb1ᴇ#a9acb2ᴍ#aaadb3s #abaeb4ᴛ#acafb5ʜ#adb1b7ᴀ#aeb2b8ᴛ #afb3b9ʙ#b0b4baᴇ#b1b5bbʟ#b2b6bcᴏ#b3b7bdɴ#b5b8beɢ #b6b9bfᴛ#b7bac0ᴏ #b8bbc1ᴛ#b9bcc2ʜ#babdc3ᴀ#bbbec4ᴛ #bcc0c6ᴄ#bdc1c7ᴀ#bec2c8ᴛ#bfc3c9ᴇ#c0c4caɢ#c1c5cbᴏ#c2c6ccʀ#c3c7cdʏ' # ɪᴛᴇᴍs ᴛʜᴀᴛ ʙᴇʟᴏɴɢ ᴛᴏ ᴛʜᴀᴛ ᴄᴀᴛᴇɢᴏʀʏ
+      Back: #The Back Buttons.
+        Item: 'ARROW'
+        Slot: 46
+        Name: '&cʙᴀᴄᴋ'
+      Return: #The Return Buttons.
+        Item: 'FLOWER_POT'
+        Slot: 50
+        Name: '&6ʀᴇᴛᴜʀɴ ᴀʟʟ'
+        Lore:
+          - ''
+          - '#2ffc2fᴄ#33fc32ʟ#37fc36ɪ#3afc39ᴄ#3efb3dᴋ #42fb40ʜ#46fb44ᴇ#4afb47ʀ#4dfb4aᴇ #51fb4eᴛ#55fa51ᴏ #59fa55ʀ#5cfa58ᴇ#60fa5bᴛ#64fa5fᴜ#68fa62ʀ#6cf966ɴ #6ff969ᴀ#73f96dʟ#77f970ʟ' # ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ʀᴇᴛᴜʀɴ ᴀʟʟ
+          - ''
+          - '#a6a9afᴄ#a7aab0ʟ#a8abb1ɪ#a9acb2ᴄ#aaadb3ᴋ #abaeb4ʜ#acafb5ᴇ#adb1b7ʀ#aeb2b8ᴇ #afb3b9ᴛ#b0b4baᴏ #b1b5bbʀ#b2b6bcᴇ#b3b7bdᴛ#b5b8beᴜ#b6b9bfʀ#b7bac0ɴ #b8bbc1ᴀ#b9bcc2ʟ#babdc3ʟ #bbbec4ᴄ#bcc0c6ᴀ#bdc1c7ɴ#bec2c8ᴄ#bfc3c9ᴇ#c0c4caʟ#c1c5cbʟ#c2c6ccᴇ#c3c7cdᴅ' # ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ʀᴇᴛᴜʀɴ ᴀʟʟ ᴄᴀɴᴄᴇʟʟᴇᴅ
+          - '#a6a9afᴀ#a7aab0ɴ#a8abb1ᴅ #a9acb2ᴇ#aaadb3x#abaeb4ᴘ#acafb5ɪ#adb0b6ʀ#aeb1b7ᴇ#afb2b8ᴅ #b0b3b9ɪ#b1b4baᴛ#b2b5bbᴇ#b3b6bcᴍ#b4b7bds #b5b9bfᴛ#b6bac0ᴏ #b7bbc1ʏ#b8bcc2ᴏ#b9bdc3ᴜ#babec4ʀ #bbbfc5ɪ#bcc0c6ɴ#bdc1c7ᴠ#bec2c8ᴇ#bfc3c9ɴ#c0c4caᴛ#c1c5cbᴏ#c2c6ccʀ#c3c7cdʏ' # ᴀɴᴅ ᴇxᴘɪʀᴇᴅ ɪᴛᴇᴍs ᴛᴏ ʏᴏᴜʀ ɪɴᴠᴇɴᴛᴏʀʏ
+      Confirm: #The Confirm Buttons.
+        Item: 'LIME_STAINED_GLASS_PANE'
+        Name: '&aᴄᴏɴғɪʀᴍ'
+      Cancel: #The Cancel Buttons.
+        Item: 'RED_STAINED_GLASS_PANE'
+        Name: '&cᴄᴀɴᴄᴇʟ'
+      Your-Item: #The item that shows when you try to buy/bid on your item.
+        Item: 'BARRIER'
+        Name: '&cʏᴏᴜ ᴄᴀɴᴛ ᴘᴜʀᴄʜᴀsᴇ ʏᴏᴜʀ ᴏᴡɴ ɪᴛᴇᴍ'
+      Cant-Afford: #The item that shows when you can't afford this item.
+        Item: 'BARRIER'
+        Name: '&cʏᴏᴜ ᴄᴀɴᴛ ᴀғғᴏʀᴅ ᴛʜɪs ɪᴛᴇᴍ'
+      Top-Bidder: #The item for when a player is already the top bidder.
+        Item: 'BARRIER'
+        Name: '&cʏᴏᴜ ᴀʀᴇ ᴀʟʀᴇᴀᴅʏ ᴛʜᴇ ᴛᴏᴘ ʙɪᴅᴅᴇʀ'
+      Bidding: #The item in the middle when bidding on an item.
+        Item: 'BLACK_STAINED_GLASS_PANE'
+        Name: '&7Bidding'
+        Lore:
+          - ''
+          - ''
+          - '&7⬅️ &aᴀᴅᴅ &cʀᴇᴍᴏᴠᴇ &7➡️'
+          - ''
+          - '&e&l$ &fʏᴏᴜʀ ᴄᴜʀʀᴇɴᴛ ʙɪᴅ: &e%Bid%'
+          - '&e🗡 &fᴄᴜʀʀᴇɴᴛ ᴛᴏᴘ ʙɪᴅ: &e%topbid%'
+      Bid: #The button for when you want to confirm your bid.
+        Item: 'LIGHT_BLUE_STAINED_GLASS_PANE'
+        Name: '&bʙɪᴅ ɴᴏᴡ'
+        Lore:
+          - ''
+          - '#2ffc2fᴄ#35fc34ʟ#3afc39ɪ#40fb3eᴄ#45fb43ᴋ #4bfb48ʜ#50fb4dᴇ#56fa52ʀ#5bfa57ᴇ #61fa5cᴛ#66fa61ᴏ #6cf966ʙ#71f96bɪ#77f970ᴅ' # ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ʙɪᴅ
+          - ''
+          - '#a6a9afʙ#a8abb1ɪ#aaaeb4ᴅ #adb0b6ɴ#afb2b8ᴏ#b1b5bbᴡ #b3b7bdᴀ#b6b9bfɴ#b8bbc1ᴅ #babec4ᴛ#bcc0c6ʀ#bfc2c8ʏ #c1c5cbᴛ#c3c7cdᴏ' # ʙɪᴅ ɴᴏᴡ ᴀɴᴅ ᴛʀʏ ᴛᴏ
+          - '#a6a9afᴡ#a8abb1ɪ#aaaeb4ɴ #adb0b6ᴛ#afb2b8ʜ#b1b5bbɪ#b3b7bds #b6b9bfᴀ#b8bbc1ᴜ#babec4ᴄ#bcc0c6ᴛ#bfc2c8ɪ#c1c5cbᴏ#c3c7cdɴ' # ᴡɪɴ ᴛʜɪs ᴀᴜᴄᴛɪᴏɴ
+  BlackList:
+    - 'BEDROCK'
+    - 'END_PORTAL_FRAME'

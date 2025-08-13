@@ -1,0 +1,36 @@
+location: world:-13,002:105,000:22,999
+enabled: true
+display-range: 48
+update-range: 48
+update-interval: 20
+facing: 0.0
+down-origin: false
+pages:
+- lines:
+  - content: <#6375ff>&lᴛᴏᴘ 10 ᴛᴏᴋᴇɴs
+    height: 0.3
+  - content: <#8593ff>1. &f%ajlb_lb_gens_tokens_1_alltime_name% <#8593ff>(%ajlb_lb_gens_tokens_1_alltime_value%)
+    height: 0.3
+  - content: <#8593ff>2. &f%ajlb_lb_gens_tokens_2_alltime_name% <#8593ff>(%ajlb_lb_gens_tokens_2_alltime_value%)
+    height: 0.3
+  - content: <#8593ff>3. &f%ajlb_lb_gens_tokens_3_alltime_name% <#8593ff>(%ajlb_lb_gens_tokens_3_alltime_value%)
+    height: 0.3
+  - content: <#8593ff>4. &f%ajlb_lb_gens_tokens_4_alltime_name% <#8593ff>(%ajlb_lb_gens_tokens_4_alltime_value%)
+    height: 0.3
+  - content: <#8593ff>5. &f%ajlb_lb_gens_tokens_5_alltime_name% <#8593ff>(%ajlb_lb_gens_tokens_5_alltime_value%)
+    height: 0.3
+  - content: <#8593ff>6. &f%ajlb_lb_gens_tokens_6_alltime_name% <#8593ff>(%ajlb_lb_gens_tokens_6_alltime_value%)
+    height: 0.3
+  - content: <#8593ff>7. &f%ajlb_lb_gens_tokens_7_alltime_name% <#8593ff>(%ajlb_lb_gens_tokens_7_alltime_value%)
+    height: 0.3
+  - content: <#8593ff>8. &f%ajlb_lb_gens_tokens_8_alltime_name% <#8593ff>(%ajlb_lb_gens_tokens_8_alltime_value%)
+    height: 0.3
+  - content: <#8593ff>9. &f%ajlb_lb_gens_tokens_9_alltime_name% <#8593ff>(%ajlb_lb_gens_tokens_9_alltime_value%)
+    height: 0.3
+  - content: <#8593ff>10. &f%ajlb_lb_gens_tokens_10_alltime_name% <#8593ff>(%ajlb_lb_gens_tokens_10_alltime_value%)
+    height: 0.3
+  - content: ''
+    height: 0.3
+  - content: <#8593ff>#1. &f%ajlb_lb_gens_tokens_1_alltime_name%
+    height: 0.3
+  actions: {}

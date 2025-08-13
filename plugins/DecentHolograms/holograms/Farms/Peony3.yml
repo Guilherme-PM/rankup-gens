@@ -1,0 +1,28 @@
+location: world:-43,500:100,000:138,500
+enabled: true
+display-range: 48
+update-range: 48
+update-interval: 20
+facing: 0.0
+down-origin: false
+pages:
+- lines:
+  - content: '#ICON:Peony'
+    height: 0.6
+  - content: '&6Peony Farm &e500★'
+    height: 0.3
+  - content: ''
+    height: 0.3
+  - content: '&fᴀᴠᴀɪʟᴀʙʟᴇ ғʀᴏᴍ &e&l500 &fʟᴇᴠᴇʟ'
+    height: 0.3
+  - content: '&fɪᴛᴇᴍ ᴠᴀʟᴜᴇ: &a&l250 ᴍᴏɴᴇʏ'
+    height: 0.3
+  - content: ''
+    height: 0.3
+  - content: '%gens_farmevent%'
+    height: 0.3
+  - content: ''
+    height: 0.3
+  - content: '&a[ʙᴜʏ ʜᴏᴇ ᴜsɪɴɢ /ᴛᴏᴏʟs]'
+    height: 0.3
+  actions: {}

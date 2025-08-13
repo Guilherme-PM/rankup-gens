@@ -1,0 +1,22 @@
+location: world:-30,500:104,000:33,500
+enabled: true
+display-range: 48
+update-range: 48
+update-interval: 20
+facing: 0.0
+down-origin: false
+pages:
+- lines:
+  - content: <#ffcd61>&lᴘᴇᴛs</#e3a214>
+    height: 0.3
+  - content: ''
+    height: 0.3
+  - content: '&fᴀᴜᴍᴇɴᴛᴇ sᴇᴜs sᴛᴀᴛᴜs ᴄᴏᴍ'
+    height: 0.3
+  - content: '&fᴄᴏᴍ ᴀ ᴀᴊᴜᴅᴀ ᴅᴏs ᴘᴇᴛs!'
+    height: 0.3
+  - content: ''
+    height: 0.3
+  - content: '&a[ᴄʟɪǫᴜᴇ ᴘᴀʀᴀ ᴀʙʀɪʀ]'
+    height: 0.3
+  actions: {}

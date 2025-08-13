@@ -1,0 +1,43 @@
+cooldown: 86400
+one_time: false
+auto_armor: false
+permission_required: true
+display:
+  default:
+    id: IRON_SWORD
+    name: '&6&lkeys &aKit'
+    amount: 1
+    lore:
+    - '&7This is a description of the kit.'
+    - '&7You can add multiples &alines&7.'
+  no_permission:
+    id: BARRIER
+    name: '&6&lkeys &aKit'
+    amount: 1
+    lore:
+    - '&cYou don''t have permissions to claim'
+    - '&cthis kit.'
+  cooldown:
+    id: STONE_SWORD
+    name: '&c&l%kit_name% &cKit'
+    amount: 1
+    lore:
+    - '&cYou need to wait &7%time%'
+    - '&cto claim this kit again.'
+    item_flags:
+    - HIDE_ATTRIBUTES
+save_original_items: false
+actions:
+  claim:
+    '1':
+      action: 'console_command: crates key give %player% normal 3'
+      execute_before_items: false
+      count_as_item: false
+    '2':
+      action: 'console_command: crates key give %player% magical 2'
+      execute_before_items: false
+      count_as_item: false
+    '3':
+      action: 'console_command: crates key give %player% legendary 1'
+      execute_before_items: false
+      count_as_item: false

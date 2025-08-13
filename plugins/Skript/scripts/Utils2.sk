@@ -1,0 +1,924 @@
+# This script was written by Xqedii and sharing is not allowed!
+# You can change and edit everything in this file if you want
+
+# Utils2
+
+command /home [<text>]:
+	aliases: homes
+	trigger:
+		if arg-1 is not set:
+			homeGUI(player)
+		else:
+			if {Homes::%player%::%arg-1%::Loc} is set:
+				homeTeleport(player, {Homes::%player%::%arg-1%})
+			else:
+				send {Config::Utils2::UnknownHome}
+
+function homeTeleport(player: player, home: text):
+	animation({_player})
+	wait 0.5 second
+	set {_mess} to {Config::Utils2::HomeTeleport}
+	replace all "{HOME}" with "%{_home}%" in {_mess}
+	send {_mess} to {_player}
+	teleport {_player} to {Homes::%{_player}%::%{_home}%::Loc}
+	wait 1 tick
+	play sound "entity.player.levelup" with pitch 2 for {_player}
+
+function homeGUI(player: player):
+	set {_x} to chest inventory with 3 rows named {Config::GUIS::Homes::%{Bedrock::%{_player}%}%}
+	if size of {Homes::%{_player}%::*} is 0:
+		set slot 13 of {_x} to {Config::GUIS::Homes::NoHome}
+	else:
+		loop {Homes::%{_player}%::*}:
+			set {_world} to "Spawn"
+			if world of {Homes::%{_player}%::%loop-counter%::Loc} is {Config::Global::IslandWorld}:
+				set {_world} to "Island"
+			set {_item} to {Config::GUIS::Homes::Home}
+			replace all "{NAME}" with "%loop-value%" in {_item}'s name
+			replace all "{NAME}" with "%loop-value%" in {_item}'s lore
+			replace all "{OWNER}" with "%{_player}%" in {_item}'s lore
+			replace all "{WORLD}" with "%{_world}%" in {_item}'s lore
+			set slot 10+loop-counter of {_x} to {_item}
+	open {_x} for {_player}
+
+function delHome(player: player, home: text):
+	delete {Homes::%{_player}%::%{_home}%}
+	delete {Homes::%{_player}%::%{_home}%::Loc}
+	set {_mess} to {Config::Utils2::HomeDeleted}
+	replace all "{HOME}" with {_home} in {_mess}
+	send {_mess} to {_player}
+
+command /delhome [<text>]:
+	aliases: deletehome
+	trigger:
+		if arg-1 is not set:
+			send {Config::Utils2::HomeName}
+			stop
+		if {Homes::%player%::%arg-1%} is set:
+			delHome(player, {Homes::%player%::%arg-1%})
+		else:
+			send {Config::Utils2::UnknownHome}
+
+command /sethome [<text>]:
+	aliases: createhome
+	trigger:
+		if arg-1 is not set:
+			send {Config::Utils2::HomeName}
+			stop
+		if size of {Homes::%player%::*} >= 5:
+			send {Config::Utils2::HomeLimit}
+			stop
+		else:
+			if length of arg-1 is bigger than 20:
+				send {Config::Utils2::NameTooLong}
+				stop
+			if {Homes::%player%::%arg-1%} is set:
+				send {Config::Utils2::HouseAlreadyExist}
+				stop
+			else:
+				if block under player is not air:
+					if player is in world "world":
+						if x-coordinates of player >= 1000:
+							send {Config::Utils2::CantSetHome}
+							stop
+						if x-coordinates of player <= -1500:
+							send {Config::Utils2::CantSetHome}
+							stop
+					play sound "entity.player.levelup" with pitch 2 for player
+					set {_mess} to {Config::Utils2::HomeCreated}
+					replace all "{HOME}" with arg-1 in {_mess}
+					send {_mess}
+					set {_x} to location at player
+					set {Homes::%player%::%arg-1%} to arg-1
+					set {Homes::%player%::%arg-1%::Loc} to {_x}
+				else:
+					send {Config::Utils2::UnsafePlace}
+
+function nick(player: player):
+	set {_x} to chest inventory with 5 rows named {Config::GUIS::Colors::%{Bedrock::%{_player}%}%}
+	set {_p} to "%{_player}%"
+	set {_item} to {Config::GUIS::Colors::GoldMessage}
+	replace all "{EXAMPLE}" with formatted gradient({Config::GUIS::Colors::ExampleMess}, ("fc5f1c", "f7f019")) in {_item}'s lore
+	set slot 11 of {_x} to {_item}
+	set {_item} to {Config::GUIS::Colors::GoldNick}
+	replace all "{EXAMPLE}" with formatted gradient({_p}, ("fc5f1c", "f7f019")) in {_item}'s lore
+	set slot 12 of {_x} to {_item}
+	set {_item} to {Config::GUIS::Colors::BoldNick}
+	replace all "{EXAMPLE}" with "%{_p}%" in {_item}'s lore
+	set slot 13 of {_x} to {_item}
+	set {_item} to {Config::GUIS::Colors::DiamondNick}
+	replace all "{EXAMPLE}" with formatted gradient({_p}, ("3249fa", "7cd4f7")) in {_item}'s lore
+	set slot 14 of {_x} to {_item}
+	set {_item} to {Config::GUIS::Colors::DiamondMessage}
+	replace all "{EXAMPLE}" with formatted gradient({Config::GUIS::Colors::ExampleMess}, ("3249fa", "7cd4f7")) in {_item}'s lore
+	set slot 15 of {_x} to {_item}
+	set {_colors1::*} to "ff4f4f" and "ff8d30" and "ff9b05" and "ffd13b" and "16c91f" and "3bff5f" and "ede20c" and "fff64d" and "ff5efa" and "ff96fc" and "1196f5" and "59baff" and "06baba" and "1ee3e3"
+	set {_slot} to 18
+	set {_a} to -1
+	set {_b} to 0
+	loop 7 times:
+		add 2 to {_a}
+		add 2 to {_b}
+		add 1 to {_slot}
+		set {_item} to {Config::GUIS::Colors::NickColors}
+		replace all "{EXAMPLE}" with formatted gradient({_p}, ({_colors1::%{_a}%}, {_colors1::%{_b}%})) in {_item}'s lore
+		set slot {_slot} of {_x} to {_item}
+	set {_slot} to 27
+	set {_a} to -1
+	set {_b} to 0
+	loop 7 times:
+		add 2 to {_a}
+		add 2 to {_b}
+		add 1 to {_slot}
+		set {_item} to {Config::GUIS::Colors::MessageColors}
+		replace all "{EXAMPLE}" with formatted gradient({Config::GUIS::Colors::ExampleMess}, ({_colors1::%{_a}%}, {_colors1::%{_b}%})) in {_item}'s lore
+		set slot {_slot} of {_x} to {_item}
+	set slot 39 and 40 and 41 of {_x} to {Config::GUIS::Colors::Reset}
+	open {_x} for {_player}
+
+command /kit:
+	trigger:
+		kits(player)
+command /kits:
+	trigger:
+		kits(player)
+
+function kits(player: player):
+	set {_x} to chest inventory with 3 rows named {Config::GUIS::Kits::%{Bedrock::%{_player}%}%}
+	set {_Info0} to {Config::GUIS::Kits::InfoClaim}
+	if {_player} has permission "playerkits.kit.gold":
+		set {_Info1} to {Config::GUIS::Kits::InfoClaim}
+	else:
+		set {_Info1} to {Config::GUIS::Kits::InfoGold}
+	if {_player} has permission "playerkits.kit.diamond":
+		set {_Info2} to {Config::GUIS::Kits::InfoClaim}
+	else:
+		set {_Info2} to {Config::GUIS::Kits::InfoDiamond}
+	if {_player} has permission "playerkits.kit.emerald":
+		set {_Info3} to {Config::GUIS::Kits::InfoClaim}
+	else:
+		set {_Info3} to {Config::GUIS::Kits::InfoEmerald}
+	if {_player} has permission "playerkits.kit.netherite":
+		set {_Info4} to {Config::GUIS::Kits::InfoClaim}
+	else:
+		set {_Info4} to {Config::GUIS::Kits::InfoNetherite}
+	if {_player} has permission "playerkits.kit.keys":
+		set {_Info5} to {Config::GUIS::Kits::InfoClaim}
+	else:
+		set {_Info5} to {Config::GUIS::Kits::InfoDiamond}
+	set {_kits::*} to "Keys" and "Default" and "Gold" and "Diamond" and "Emerald" and "Netherite" and "Food"
+	set {_info::*} to 5 and 0 and 1 and 2 and 3 and 4 and 0
+	set {_slots::*} to 4 and 11 and 12 and 13 and 14 and 15 and 22
+	loop {_kits::*}:
+		set {_item} to {Config::GUIS::Kits::Item::%loop-value%}
+		replace all "{TIME}" with formatted placeholder "playerkits_cooldown_%loop-value%" from {_player} in {_item}'s lore
+		replace all "{INFO}" with {_Info%{_info::%loop-counter%}%} in {_item}'s lore
+		set slot {_slots::%loop-counter%} of {_x} to {_item}
+	open {_x} for {_player}
+
+function panel(player: player):
+	set {_x} to chest inventory with 5 rows named {Config::Update35::IsPanel::%{Bedrock::%{_player}%}%}
+	set {_slots::*} to 1, 2, 3, 10, 11, 12, 19, 20, 21
+	set slot 37, 38, 39 of {_x} to {Config::Update35::IsPanel::Teleport}
+	loop {_slots::*}:
+		set slot loop-value of {_x} to {Config::Update35::IsPanel::Slot%loop-counter%}
+	open {_x} for {_player}
+
+on explode:
+	if event-entity is a creeper:
+		cancel event
+on jump:
+	if block under player is emerald block:
+		loop blocks 20 above player:
+			if loop-block is emerald block:
+				if block 1 above loop-block is air:
+					if block 2 above loop-block is air:
+						send player title "&7" with subtitle "&a↑ Up ↑" for 1 seconds
+						play sound "ui.toast.out" with volume 2 and pitch 1 for player
+						set {_loc} to location at location 0.5 above loop-block
+						set pitch of {_loc} to pitch of player
+						set yaw of {_loc} to yaw of player
+						effect4({_loc}, "9eff36", 0.4, 2, true)
+						wait 3 tick
+						teleport player to {_loc}
+on sneak toggle:
+	if block under player is emerald block:
+		if player is sneaking:
+			loop blocks 20 under player:
+				if loop-block is emerald block:
+					if block 1 above loop-block is air:
+						if block 2 above loop-block is air:
+							if loop-block is not block under player:
+								send player title "&7" with subtitle "&c↓ Down ↓" for 1 seconds
+								play sound "ui.toast.in" with volume 2 and pitch 1 for player
+								set {_loc} to location at location 0.5 above loop-block
+								set pitch of {_loc} to pitch of player
+								set yaw of {_loc} to yaw of player
+								effect4({_loc}, "9eff36", 0.4, 2, true)
+								wait 3 tick
+								teleport player to {_loc}
+
+command /cosmetics:
+	aliases: hats, particle, particles, suit, suits, gadget, gadgets, banners, banner, cloak, cloaks
+	trigger:
+		execute player command "gmenu main"
+
+on damage:
+	if victim is a player:
+		if damage cause is void:
+			cancel event
+			teleport victim to {spawn}
+
+on first join:
+	teleport player to {spawn}
+	set player's balance to {Config::Gens::Tutorial::StartBalance}
+
+command /bal [<player>]:
+	trigger:
+		set {_tooltip} to {Config::Utils2::BalTooltip}
+		if arg-1 is set:
+			set {_mess} to {Config::Utils2::Balance}
+			replace all "{PLAYER}" with "%arg-1%" in {_mess}
+			replace all "{MONEY}" with placeholder "vault_eco_balance_formatted" from arg-1 in {_mess}
+			replace all "{MONEY}" with a(placeholder "vault_eco_balance_fixed" from arg-1) in {_tooltip}
+		else:
+			set {_mess} to {Config::Utils2::YourBalance}
+			replace all "{PLAYER}" with "%player%" in {_mess}
+			replace all "{MONEY}" with placeholder "vault_eco_balance_formatted" from player in {_mess}
+			replace all "{MONEY}" with a(placeholder "vault_eco_balance_fixed" from player) in {_tooltip}
+		send ""
+		send formatted "<tooltip:%{_tooltip}%>%{_mess}%<reset>"
+		send ""
+
+command /helpop [<text>]:
+	cooldown: 1 minute
+	cooldown message: %{Config::Utils2::HelpOpWait}%
+	trigger:
+		if arg-1 is not set:
+			send {Config::Utils2::HelpNoMess}
+			cancel cooldown
+			stop
+		if length of arg-1 < 15:
+			send {Config::Utils2::SmallMess}
+			cancel cooldown
+			stop
+		set {_rank} to placeholder "luckperms_prefix" from player
+		send "&2&lHelpOP &7(%{_rank}% %player%&7)" to player
+		send " &e%arg-1%" to player
+		send " &bNo answer? Write it on: &nDiscord" to player
+		helpopsfx(player)
+		loop all players:
+			if loop-player has permission "helpop.receive":
+				send "&2&lHelpOP &7(%{_rank}% %player%&7)" to loop-player
+				send " &e%arg-1%" to loop-player
+				send " &bIf you are able to answer, please do it :)" to loop-player
+				helpopsfx(loop-player)
+
+function helpopsfx(player: player):
+	play sound "block.note_block.pling" with pitch 0.5 for {_player}
+	wait 0.1 second
+	play sound "block.note_block.pling" with pitch 0.6 for {_player}
+	wait 0.1 second
+	play sound "block.note_block.pling" with pitch 0.8 for {_player}
+	wait 0.1 second
+	play sound "block.note_block.pling" with pitch 1.2 for {_player}
+
+command /tpa [<player>]:
+	aliases: teleport
+	trigger:
+		if arg-1 is "%player%":
+			send {Config::Utils2::TpaSelf}
+			play sound "entity.endermen.teleport" with pitch 0.5 for player
+			stop
+		if arg-1 is not set:
+			send {Config::Global::EnterPlayer}
+			play sound "entity.endermen.teleport" with pitch 0.5 for player
+		else:
+			if arg-1 is online:
+				if {TPA::sent::to::%player%} is set:
+					send {Config::Utils2::TpaAlready}
+					play sound "entity.endermen.teleport" with pitch 0.5 for player
+				else:
+					set {TPA::sent::to::%player%} to arg-1
+					set {TPA::received::from::%arg-1%} to player
+					set {TPA-RequestTime::%player%} to now
+					
+					play sound "entity.experience_orb.pickup" with pitch 1.3 for player
+					play sound "entity.experience_orb.pickup" with pitch 1.3 for arg-1
+					set {_mess} to {Config::Utils2::TpaSent}
+					replace all "{PLAYER}" with "%arg-1%" in {_mess}
+					send {_mess} to player
+					set {_mess} to {Config::Utils2::TpaReceived}
+					replace all "{PLAYER}" with "%player%" in {_mess}
+					send {_mess} to arg-1
+					
+					wait 30 seconds
+					if {TPA::sent::to::%player%} is arg-1:
+						delete {TPA::sent::to::%player%}
+						delete {TPA::received::from::%arg-1%}
+						delete {TPA-RequestTime::%player%}
+
+						play sound "entity.endermen.teleport" with pitch 0.5 for player
+						set {_mess} to {Config::Utils2::TpaExpired1}
+						replace all "{PLAYER}" with "%arg-1%" in {_mess}
+						send {_mess} to player
+						
+						if arg-1 is online:
+							play sound "entity.endermen.teleport" with pitch 0.5 for arg-1
+							set {_mess} to {Config::Utils2::TpaExpired2}
+							replace all "{PLAYER}" with "%player%" in {_mess}
+							send {_mess} to arg-1
+			else:
+				send {Config::Global::PlayerOffline}
+				play sound "entity.endermen.teleport" with pitch 0.5 for player
+
+command /tpaccept [<player>]:
+	trigger:
+		if arg-1 is "%player%":
+			send {Config::Utils2::TpaSelf}
+			play sound "entity.endermen.teleport" with pitch 0.5 for player
+			stop
+		if arg-1 is not set:
+			send {Config::Global::EnterPlayer}
+			play sound "entity.endermen.teleport" with pitch 0.5 for player
+		else:
+			if arg-1 is online:
+				if {TPA::received::from::%player%} is arg-1:
+					delete {TPA::received::from::%player%}
+					delete {TPA::sent::to::%arg-1%}
+					delete {TPA-RequestTime::%arg-1%}
+
+					play sound "entity.experience_orb.pickup" with pitch 1.7 for player
+					play sound "entity.experience_orb.pickup" with pitch 1.7 for arg-1
+					set {_mess} to {Config::Utils2::TpaAccept1}
+					replace all "{PLAYER}" with "%arg-1%" in {_mess}
+					send {_mess} to player
+					set {_mess} to {Config::Utils2::TpaAccept2}
+					replace all "{PLAYER}" with "%player%" in {_mess}
+					send {_mess} to arg-1
+					
+					tpaccept(arg-1, location of player, "%player%")
+				else:
+					send {Config::Utils2::NoRequest} # np. "&cNie masz prośby od tego gracza."
+					play sound "entity.endermen.teleport" with pitch 0.5 for player
+			else:
+				send {Config::Global::PlayerOffline}
+				play sound "entity.endermen.teleport" with pitch 0.5 for player
+
+function tpaccept(player: player, to: location, nick: text):
+	set {_loc} to location at block 1 under {_player}
+	wait 0.5 second
+	play sound "entity.player.levelup" with pitch 2 for {_player}
+	send {_player} title "" with subtitle "&aSuccess!" for 1 second
+	set {_mess} to {Config::Utils2::Teleported}
+	replace all "{PLAYER}" with "%{_nick}%" in {_mess}
+	send {_mess} to {_player}
+	teleport {_player} to location at {_to}
+
+command /gamma:
+	permission: gamma
+	trigger:
+		if {Gamma::%player%} is false:
+			set {Gamma::%player%} to true
+			send {Config::Global::ToggleOn}
+			apply night vision 1 without any particles to player for 9999 days
+			play sound "entity.experience_orb.pickup" with pitch 1.7
+		else:
+			set {Gamma::%player%} to false
+			send {Config::Global::ToggleOff}
+			remove night vision from player
+			play sound "entity.experience_orb.pickup" with pitch 1.3
+
+on command:
+	if command is "minecraft:help" or "minecraft:tell" or "minecraft:me" or "?" or "bukkit:?" or "pl" or "plugins" or "plugin" or "bukkit:help" or "icanhasbukkit" or "bukkit:version" or "bukkit:ver" or "version" or "ver" or "about" or "bukkit:about" or "bukkit:pl" or "bukkit:plugins":
+		if player has permission "*":
+			stop
+		else:
+			cancel event
+			send {Config::Utils1::CommandDisabled}
+on command:
+	if command contains "calc" or "calculate" or "solve" or "eval" or "evaluate":
+		cancel event
+		send {Config::Utils2::CommandDisabled}
+
+on spawn of armor stand:
+	if "%Spawn Reason%" is "default":
+		add nbt compound from "{NoBasePlate:1b,NoGravity:1b,ShowArms:1b}" to nbt compound of event-entity
+
+command /nick:
+	aliases: color, colors
+	trigger:
+		nick(player)
+
+on inventory click:
+	if name of current inventory of player is {Config::Update35::IsPanel::Default} or {Config::Update35::IsPanel::Bedrock}:
+		cancel event
+		if clicked slot is 37 or 38 or 39:
+			set {_x} to placeholder "bskyblock_island_owner" from player
+			close player's inventory
+			if {_x} is set:
+				animation(player)
+				wait 0.5 second
+				execute player command "bskyblock:island go"
+			else:
+				execute player command "bskyblock:island create"
+		if clicked slot is 1:
+			islandupgrades(player)
+		if clicked slot is 2:
+			execute player command "is border"
+		if clicked slot is 3:
+			activeGens(player, 1)
+		if clicked slot is 10:
+			farms(player, "Farm")
+		if clicked slot is 11:
+			cave(player)
+		if clicked slot is 12:
+			potions(player)
+		if clicked slot is 19:
+			rebirth(player)
+		if clicked slot is 20:
+			toolSkins(player, "Sword")
+		if clicked slot is 21:
+			upgrademenu(player)
+		stop
+	if name of current inventory of player is {Config::GUIS::Colors::Default} or {Config::GUIS::Colors::Bedrock}:
+		cancel event
+		if clicked slot is 40:
+			close player's inventory
+			send {Config::Utils::ColorReset}
+			delete {Chat-Color::%player%::*}
+			delete {Chat-Message::%player%::*}
+			delete {Chat-Bold::%player%}
+			stop
+		set {_colors1::*} to "ff4f4f" and "ff8d30" and "ff9b05" and "ffd13b" and "16c91f" and "3bff5f" and "ede20c" and "fff64d" and "ff5efa" and "ff96fc" and "1196f5" and "59baff" and "06baba" and "1ee3e3"
+		set {_a} to -1
+		set {_b} to 0
+		loop 7 times:
+			add 2 to {_a}
+			add 2 to {_b}
+			if clicked slot is 18+loop-value:
+				close player's inventory
+				if {Tokens::%player%} >= 50:
+					remove 50 from {Tokens::%player%}
+					delete {Chat-Color::%player%::*}
+					add {_colors1::%{_a}%} to {Chat-Color::%player%::*}
+					add {_colors1::%{_b}%} to {Chat-Color::%player%::*}
+					set {_mess} to {Config::Utils::ColorPurchased}
+					replace all "{COLOR}" with formatted gradient("Nickname", ({_colors1::%{_a}%}, {_colors1::%{_b}%})) in {_mess}
+					send {_mess}
+					play sound "entity.player.levelup" with pitch 2 for player
+					stop
+				else:
+					send {Config::Global::NotEnoughShards}
+					play sound "entity.illusioner.mirror_move" with pitch 2 for player
+					stop
+		set {_a} to -1
+		set {_b} to 0
+		loop 7 times:
+			add 2 to {_a}
+			add 2 to {_b}
+			if clicked slot is 27+loop-value:
+				close player's inventory
+				if {Tokens::%player%} >= 50:
+					remove 50 from {Tokens::%player%}
+					delete {Chat-Message::%player%::*}
+					add {_colors1::%{_a}%} to {Chat-Message::%player%::*}
+					add {_colors1::%{_b}%} to {Chat-Message::%player%::*}
+					set {_mess} to {Config::Utils::ColorPurchased}
+					replace all "{COLOR}" with formatted gradient("Message", ({_colors1::%{_a}%}, {_colors1::%{_b}%})) in {_mess}
+					send {_mess}
+					play sound "entity.player.levelup" with pitch 2 for player
+					stop
+				else:
+					send {Config::Global::NotEnoughShards}
+					play sound "entity.illusioner.mirror_move" with pitch 2 for player
+					stop
+		if clicked slot is 11:
+			close player's inventory
+			if player has permission "genblock.goldcolor":
+				delete {Chat-Message::%player%::*}
+				add "fc5f1c" to {Chat-Message::%player%::*}
+				add "f7f019" to {Chat-Message::%player%::*}
+				set {_mess} to {Config::Utils::ColorPurchased}
+				replace all "{COLOR}" with formatted gradient("Message", ("fc5f1c", "f7f019")) in {_mess}
+				send {_mess}
+				play sound "entity.player.levelup" with pitch 2 for player
+			else:
+				send {Config::Utils2::RankColorGold}
+				play sound "entity.illusioner.mirror_move" with pitch 2 for player
+				stop
+		if clicked slot is 12:
+			close player's inventory
+			if player has permission "genblock.goldcolor":
+				delete {Chat-Color::%player%::*}
+				add "fc5f1c" to {Chat-Color::%player%::*}
+				add "f7f019" to {Chat-Color::%player%::*}
+				set {_mess} to {Config::Utils::ColorPurchased}
+				replace all "{COLOR}" with formatted gradient("Nickname", ("fc5f1c", "f7f019")) in {_mess}
+				send {_mess}
+				play sound "entity.player.levelup" with pitch 2 for player
+			else:
+				send {Config::Utils2::RankColorGold}
+				play sound "entity.illusioner.mirror_move" with pitch 2 for player
+				stop
+		if clicked slot is 13:
+			if clicked slot is 13:
+				close player's inventory
+				if {Tokens::%player%} >= 100:
+					remove 100 from {Tokens::%player%}
+					set {Chat-Bold::%player%} to true
+					set {_mess} to {Config::Utils::ColorPurchased}
+					replace all "{COLOR}" with "&f&lBold" in {_mess}
+					send {_mess}
+					play sound "entity.player.levelup" with pitch 2 for player
+					stop
+				else:
+					send {Config::Global::NotEnoughShards}
+					play sound "entity.illusioner.mirror_move" with pitch 2 for player
+					stop
+		if clicked slot is 14:
+			close player's inventory
+			if player has permission "genblock.diamondcolor":
+				delete {Chat-Color::%player%::*}
+				add "3249fa" to {Chat-Color::%player%::*}
+				add "7cd4f7" to {Chat-Color::%player%::*}
+				set {_mess} to {Config::Utils::ColorPurchased}
+				replace all "{COLOR}" with formatted gradient("Nickname", ("3249fa", "7cd4f7")) in {_mess}
+				send {_mess}
+				play sound "entity.player.levelup" with pitch 2 for player
+			else:
+				send {Config::Utils2::RankColorDiamond}
+				play sound "entity.illusioner.mirror_move" with pitch 2 for player
+				stop
+		if clicked slot is 15:
+			close player's inventory
+			if player has permission "genblock.diamondcolor":
+				delete {Chat-Message::%player%::*}
+				add "3249fa" to {Chat-Message::%player%::*}
+				add "7cd4f7" to {Chat-Message::%player%::*}
+				set {_mess} to {Config::Utils::ColorPurchased}
+				replace all "{COLOR}" with formatted gradient("Message", ("3249fa", "7cd4f7")) in {_mess}
+				send {_mess}
+				play sound "entity.player.levelup" with pitch 2 for player
+			else:
+				send {Config::Utils2::RankColorDiamond}
+				play sound "entity.illusioner.mirror_move" with pitch 2 for player
+				stop
+		stop
+	if name of current inventory of player is {Config::GUIS::Homes::Default} or {Config::GUIS::Homes::Bedrock}:
+		cancel event
+		loop {Homes::%player%::*}:
+			if clicked slot is 10+loop-counter:
+				set {_name} to loop-value
+				close player's inventory
+				if "%click type%" contains "LEFT":
+					homeTeleport(player, {Homes::%player%::%loop-value%})
+				if "%click type%" contains "RIGHT":
+					delHome(player, {Homes::%player%::%loop-value%})
+					homeGUI(player)
+		stop
+	if name of current inventory of player is {Config::GUIS::Kits::Default} or {Config::GUIS::Kits::Bedrock}:
+		cancel event
+		set {_kits::*} to "Keys" and "Default" and "Gold" and "Diamond" and "Emerald" and "Netherite" and "Food"
+		set {_slots::*} to 4 and 11 and 12 and 13 and 14 and 15 and 22
+		loop {_slots::*}:
+			if clicked slot is loop-value:
+				execute player command "playerkits2:kit claim %{_kits::%loop-counter%}%"
+
+on command:
+	if full command is "is" or "island":
+		cancel event
+		panel(player)
+
+command /panel:
+	aliases: islandpanel, ispanel
+	trigger:
+		panel(player)
+
+on command:
+	if command is "sit" or "lay" or "bellyflop" or "gbellyflop" or "gsit" or "glay" or "crawl" or "gcrawl" or "gspin" or "spin":
+		if player has permission "genblock.sit":
+			stop
+		else:
+			cancel event
+			send {Config::Utils2::RankCommandGold}
+			stop
+	if command contains "gsit:" or "glay:":
+		if player has permission "genblock.sit":
+			stop
+		else:
+			cancel event
+			send {Config::Utils2::RankCommandGold}
+
+
+on break:
+	if name of player's tool is name of {Config::Update35::MagicHoe}:
+		cancel event
+		if player is not in world {Config::Global::IslandWorld}:
+			stop
+		if event-block is wheat[age=7] or beetroots[age=3] or carrots[age=7]:
+			set {_loc} to location at event-block
+			if {CustomItems1::UC::%player%} is not set:
+				set {CustomItems1::UC::%player%} to now
+			else:
+				if difference between {CustomItems1::UC::%player%} and now < 5 seconds:
+					set {_a} to 6 seconds - difference between {CustomItems1::UC::%player%} and now
+					set {_a} to seconds of {_a}
+					set {_mess} to {Config::Update35::WaitBeforeNext}
+					replace all "{SEC}" with "%floor({_a})%" in {_mess}
+					send {_mess} to player
+					play sound "entity.illusioner.mirror_move" with pitch 2 for player
+					stop
+			set {CustomItems1::UC::%player%} to now
+			set {_eb} to type of event-block
+			if event-block is wheat[age=7]:
+				set {_rep} to wheat[age=0]
+			if event-block is beetroots[age=3]:
+				set {_rep} to beetroots[age=0]
+			if event-block is carrots[age=7]:
+				set {_rep} to carrots[age=0]
+			set {_a::*} to drops of event-block
+			clear drops
+			set {_vec1} to vector(1, 0, 1)
+			set {_vec2} to vector(-1, 0, -1)
+			play sound "entity.experience_orb.pickup" with pitch 2 for player
+			loop all blocks within {_loc} ~{_vec1} and {_loc} ~ {_vec2}:
+				if block at loop-block is {_eb}:
+					set block at loop-block to {_rep}
+					play sound "item.crop.break" with volume 1 and pitch 1 at loop-block
+					drop {_a::*} at loop-block
+		else:
+			send {Config::Update35::FullCrops}
+			play sound "entity.illusioner.mirror_move" with pitch 2 for player
+
+on right click:
+	if name of player's tool is name of {Config::Update35::MagicBoneMeal}:
+		cancel event
+		if player is not in world {Config::Global::IslandWorld}:
+			stop
+		set {_loc} to location at clicked block
+		if clicked block is wheat or beetroots or carrots:
+			set {_continue} to true
+		if clicked block is wheat[age=7] or beetroots[age=3] or carrots[age=7]:
+			set {_continue} to false
+		if {_continue} is true:
+			if {CustomItems2::UC::%player%} is not set:
+				set {CustomItems2::UC::%player%} to now
+			else:
+				if difference between {CustomItems2::UC::%player%} and now < 5 seconds:
+					set {_a} to 6 seconds - difference between {CustomItems2::UC::%player%} and now
+					set {_a} to seconds of {_a}
+					set {_mess} to {Config::Update35::WaitBeforeNext}
+					replace all "{SEC}" with "%floor({_a})%" in {_mess}
+					send {_mess} to player
+					play sound "entity.illusioner.mirror_move" with pitch 2 for player
+					stop
+			if clicked block is wheat:
+				set {_rep} to wheat[age=7]
+				set {_check} to wheat
+			if clicked block is beetroots:
+				set {_rep} to beetroots[age=3]
+				set {_check} to beetroots
+			if clicked block is carrots:
+				set {_rep} to carrots[age=7]
+				set {_check} to carrots
+			set {CustomItems2::UC::%player%} to now
+			play sound "entity.experience_orb.pickup" with pitch 2 for player
+			set {_eb} to type of event-block
+			set {_vec1} to vector(1, 0, 1)
+			set {_vec2} to vector(-1, 0, -1)
+			loop all blocks within {_loc} ~ {_vec1} and {_loc} ~ {_vec2}:
+				if loop-block is {_check}:
+					set loop-value to {_rep}
+					play sound "item.bone_meal.use" with pitch 1 at loop-block
+		else:
+			send {Config::Update35::UnripeCrops} to player
+			play sound "entity.illusioner.mirror_move" with pitch 2 for player
+
+
+command /coinflip [<text>] [<text>]:
+	trigger:
+		if arg-1 is not set:
+			coinflipGUI(player, 1)
+		else:
+			if arg-1 parsed as number is set:
+				createCoinFlip(player, arg-1)
+			else if arg-1 is "remove":
+				coinflipRemove(player, false)
+			else if arg-1 is "open" or "gui":
+				coinflipGUI(player, 1)
+			else if arg-1 is "create":
+				createCoinFlip(player, arg-2)
+			else:
+				send {Config::Update35::CoinflipNumber}
+				play sound "entity.illusioner.mirror_move" with pitch 2 for player
+
+function createCoinFlip(player: player, value: text):
+	set {_value} to floor({_value} parsed as number)
+	if {_value} is not set:
+		send {Config::Update35::CoinflipNumber} to {_player}
+		play sound "entity.illusioner.mirror_move" with pitch 2 for {_player}
+		stop
+	if {_value} < 1000:
+		send {Config::Update35::CoinflipMinimum} to {_player}
+		play sound "entity.illusioner.mirror_move" with pitch 2 for {_player}
+	else if {_value} > 2000000000:
+		send {Config::Update35::CoinflipMax} to {_player}
+		play sound "entity.illusioner.mirror_move" with pitch 2 for {_player}
+	else:
+		if {_player}'s balance is less than {_value}:
+			send {Config::Global::NotEnough} to {_player}
+			play sound "entity.illusioner.mirror_move" with pitch 2 for {_player}
+			stop
+		if {CoinFlip::%{_player}%::*} is set:
+			send {Config::Update35::CoinflipAlready} to {_player}
+			play sound "entity.illusioner.mirror_move" with pitch 2 for {_player}
+			stop
+		send {Config::Update35::CoinflipCreated} to {_player}
+		play sound "entity.player.levelup" with pitch 2 for {_player}
+		coinflipAdd({_player}, {_value})
+
+on tab complete of "/coinflip":
+	set tab completions for position 1 to "open", "remove", "create"
+	set tab completions for position 2 to "1000", "2500", "5000"
+
+on command:
+	if {CoinFlipStatus::%player%} is set:
+		cancel event
+		send {Config::Update35::CantType}
+		play sound "entity.illusioner.mirror_move" with pitch 2 for player
+
+on join:
+	coinflipRemove(player, false, false)
+	delete {CoinFlipStatus::%player%}
+
+on quit:
+	coinflipRemove(player, false, false)
+	delete {CoinFlipStatus::%player%}
+
+function coinflipGUI(player: player, page: number):
+	set {_x} to chest inventory with 4 rows named {Config::Update35::Coinflip::%{Bedrock::%{_player}%}%}
+	set {_slots::*} to 1, 2, 3, 4, 5, 6, 7, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25
+	if {_page} > 1:
+		set {_item} to {Config::Update35::Coinflip::PrevPage}
+		set int tag "Page" of custom nbt of {_item} to {_page}-1
+		set slot 28 of {_x} to {_item}
+	set {_max} to ((size of {CoinFlip::*})/21)-0.01
+	if {_page} < {_max}:
+		set {_item} to {Config::Update35::Coinflip::NextPage}
+		set int tag "Page" of custom nbt of {_item} to {_page}+1
+		set slot 34 of {_x} to {_item}
+	set slot 30, 31, 32 of {_x} to {Config::Update35::Coinflip::Create}
+	loop {_slots::*}:
+		set {_lx} to loop-counter+(({_page}-1)*21)
+		set {_p} to {CoinFlip::%{_lx}%}
+		set {_a::*} to {CoinFlip::%{_p}%::*}
+		set {_name} to {Config::Update35::Coinflip::Game}
+		replace all "{PLAYER}" with "%{_a::1}%" in {_name}
+		set {_lore::*} to {Config::Update35::Coinflip::GameLore::*}
+		replace all "{PLAYER}" with "%{_p}%" in {_lore::*}
+		replace all "{VALUE}" with "%{_a::2}%" in {_lore::*}
+		set {_head} to {_a::1}'s head named {_name} with lore {_lore::*}
+		set string tag "Player" of custom nbt of {_head} to "%{_a::1}%"
+		set int tag "Value" of custom nbt of {_head} to {_a::2}
+		set slot loop-value of {_x} to {_head}
+	open {_x} for {_player}
+
+on inventory click:
+	if name of current inventory of player is {Config::Update35::Coinflip::Default} or {Config::Update35::Coinflip::Bedrock}:
+		cancel event
+		if clicked slot is 30 or 31 or 32:
+			close player's inventory
+			play sound "entity.experience_orb.pickup" with pitch 2 for player
+			send ""
+			send {Config::Update35::CoinFlipInfo::1}
+			send ""
+			send {Config::Update35::CoinFlipInfo::2}
+			send {Config::Update35::CoinFlipInfo::3}
+			send ""
+			stop
+		if clicked inventory is player's inventory:
+			stop
+		if int tag "Page" of custom nbt of clicked slot is set:
+			coinflipGUI(player, int tag "Page" of custom nbt of clicked slot)
+		set {_owner} to string tag "Player" of custom nbt of clicked slot
+		if {_owner} is not set:
+			stop
+		set {_value} to int tag "Value" of custom nbt of clicked slot
+		if {CoinFlip::%{_owner}%::2} is not {_value}:
+			set {_stop} to true
+		if {CoinFlip::%{_owner}%::*} is not set:
+			set {_stop} to true
+		if {_stop} is true:
+			send {Config::Update35::CoinFlipExpired}
+			play sound "entity.illusioner.mirror_move" with pitch 2 for player
+			close player's inventory
+			stop
+		if {_owner} is "%player%":
+			send {Config::Update35::CoinFlipYourself}
+			play sound "entity.illusioner.mirror_move" with pitch 2 for player
+			stop
+		if {_owner} is set:
+			if {_value} is set:
+				if player's balance is less than {_value}:
+					send {Config::Global::NotEnough}
+					play sound "entity.illusioner.mirror_move" with pitch 2 for player
+				else:
+					coinflipStart(player, {_owner}, {_value})
+
+function coinflipStart(player: player, player2: text, value: number):
+	coinflipRemove({_player2} parsed as offline player, true)
+	set {_player2} to {_player2} parsed as offline player
+	set {_players::*} to {_player} and {_player2}
+	loop {_players::*}:
+		set {CoinFlipStatus::%loop-value%} to true
+	set {_mess} to {Config::Update35::CoinFlipStarted}
+	replace all "{PLAYER}" with "%{_player2}%" in {_mess}
+	send {_mess} to {_player}
+	set {_mess} to {Config::Update35::CoinFlipStarted}
+	replace all "{PLAYER}" with "%{_player}%" in {_mess}
+	send {_mess} to {_player2}
+	remove {_value} from {_player}'s balance
+	set {_x} to chest inventory with 3 rows named {Config::Update35::CoinflipGame::%{Bedrock::%{_player}%}%}
+	loop 8 times:
+		set {_check} to checkCoinFlip({_player}, {_player2})
+		if loop-counter <= 1:
+			set {_check} to 2
+		if {_check} < 1:
+			stop loop
+		else:
+			if mod(loop-value, 2) is 0:
+				set slot 13 of {_x} to {Config::Update35::CoinflipGame::Slot1}
+				play sound "block.note_block.bit" with pitch 2 for {_players::*}
+			else:
+				set slot 13 of {_x} to {Config::Update35::CoinflipGame::Slot2}
+				play sound "block.note_block.bit" with pitch 1.5 for {_players::*}
+			if loop-value is 1:
+				loop {_players::*}:
+					open {_x} for {_players::*}
+			wait 0.5 second
+	set {_a} to random integer between 1 and 2
+	set {_winner} to {_players::%{_a}%}
+	loop {_players::*}:
+		delete {CoinFlipStatus::%loop-value%}
+	remove {_winner} from {_players::*}
+	send {Config::Update35::CoinFlipWin::1} to {_winner}
+	send {_winner} title "" with subtitle {Config::Update35::CoinFlipWin::2} for 2 seconds
+	send {_players::*} title "" with subtitle {Config::Update35::CoinFlipLose::2} for 2 seconds
+	send {Config::Update35::CoinFlipLose::1} to {_players::*}
+	play sound "entity.player.levelup" with pitch 2 for {_winner}
+	play sound "entity.item.break" with pitch 1 for {_players::*}
+	add {_value}*2 to {_winner}'s balance
+	close {_player}'s inventory
+	close {_player2}'s inventory
+
+function checkCoinFlip(player: player, player2: player) :: number:
+	if name of {_player}'s inventory is {Config::Update35::CoinflipGame::Default} or {Config::Update35::CoinflipGame::Bedrock}:
+		add 1 to {_x}
+	if name of {_player2}'s inventory is {Config::Update35::CoinflipGame::Default} or {Config::Update35::CoinflipGame::Bedrock}:
+		add 1 to {_x}
+	return {_x} ? 0
+ 
+on inventory click:
+	if name of current inventory of player is {Config::Update35::CoinflipGame::Default} or {Config::Update35::CoinflipGame::Bedrock}:
+		cancel event
+
+function coinflipRemove(player: player, started: boolean, reply: boolean = true):
+	if {CoinFlip::%{_player}%::*} is set:
+		if {_started} is false:
+			add {CoinFlip::%{_player}%::2} to {_player}'s balance
+			if {_reply} is true:
+				send {Config::Update35::CoinFlipDeleted} to {_player}
+				play sound "entity.experience_orb.pickup" with pitch 2 for {_player}
+		delete {CoinFlip::%{_player}%::*}
+		remove {_player} from {CoinFlip::*}
+	else:
+		if {_reply} is true:
+			send {Config::Update35::CoinFlipNotCreated} to {_player}
+			play sound "entity.illusioner.mirror_move" with pitch 2 for {_player}
+
+function coinflipAdd(player: player, amount: number):
+	set {CoinFlip::%{_player}%::*} to {_player} and {_amount}
+	add {_player} to {CoinFlip::*}
+	remove {_amount} from {_player}'s balance
+	coinflipGUI({_player}, 1)
+
+on right click:
+	wait 1 tick
+	set {_intTag} to int tag "ExtraGens" of custom nbt of player's tool
+	if {_intTag} > 0:
+		if {ExtraGensUsed::%player%}+{_intTag} > {Config::Gens::ExtraGenSlot::Limit}:
+			send {Config::Utils2::ExtraSlotMax} to player
+			play sound "entity.illusioner.mirror_move" with pitch 2 for player
+		else:
+			remove 1 of player's tool from player
+			add {_intTag} to {GensMAX::%player%}
+			add {_intTag} to {ExtraGensUsed::%player%}
+			set {_mess} to {Config::Utils2::SlotsIncreased}
+			replace all "{AMOUNT}" with "%{GensMAX::%player%}%" in {_mess}
+			send {_mess} to player
+			play sound "entity.player.levelup" with pitch 0.5 for player
+			set {_title} to {Config::Utils2::SlotsTitle::2}
+			replace all "{AMOUNT}" with "%{GensMAX::%player%}%" in {_title}
+			send player title {Config::Utils2::SlotsTitle::1} with subtitle {_title}
+			launch trailing flickering ball large coloured orange fading to yellow at player's location with duration 0

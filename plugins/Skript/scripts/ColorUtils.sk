@@ -1,0 +1,80 @@
+#    _____      _              _    _ _   _ _
+#   / ____|    | |            | |  | | | (_) |
+#  | |     ___ | | ___  _ __  | |  | | |_ _| |___ TM    | A colorful script brought to you by Sourbun et Mr. Darth :D
+#  | |    / _ \| |/ _ \| '__| | |  | | __| | / __|      | Version 2.3
+#  | |___| (_) | | (_) | |    | |__| | |_| | \__ \
+#   \_____\___/|_|\___/|_|     \____/ \__|_|_|___/
+
+# A small set of functions designed to bring a new look to your server, giving it color :)
+# Nota Bene: These functions are pretty fast, yet using them a lot of times in a short period of time will probably cause quite some lag.
+
+# Update 2.3: Decreased Parsing time and increased performance
+
+# RGBToHex(number: numbers)
+# @description Function converts RGB Value to the HEX representation
+# @param number: list of numbers between 0 and 255
+# @return the hexadecimal representation of the numbers
+function RGBToHex(number: numbers) :: string:
+    loop {_number::*}:
+        set {_r} to join {_r}, (character at (mod((floor(min(max(loop-value, 0), 255) / 16)), 16) + 1) in "0123456789ABCDEF") and (character at ((mod(min(max(loop-value, 0), 255), 16)) + 1) in "0123456789ABCDEF")
+    return colored "<##%{_r}%>"
+
+#HexToRGB(hex: string)
+# @description Function to convert a hex value to the 3 Color values
+# @param: 6 letter hex string
+# @return 3 numbers
+function HexToRGB(hex: string) :: numbers:
+    replace all "##" with "" in {_hex}
+    set {_s::*} to split "0123456789abcdefklmnor" at ""
+    loop 3 times:
+        set {_n} to subtext of {_hex} from characters (loop-value -1)*2+1 to loop-value*2 in lower case
+        add (index of first element out of (split {_n} at "") in "0123456789abcdefklmnor" -1)* 16 to {_rgb::%loop-value-1%}
+        add index of 2nd element out of (split {_n} at "") in "0123456789abcdefklmnor"-1  to {_rgb::%loop-value-1%}
+    return {_rgb::*}
+
+# rainbow(input: string, wrap: boolean = false, wrapAmount: number = 10, lightness: number = 0)
+# @description Function that 'rainbowifies' a given string (id est colors the string in a rainbow pattern - ROYGBIV)
+# @param input the string to be rainbowified
+# @param wrapAmount if this value is positive, the rainbow pattern will start repeating approximately every wrapAmount characters
+# @param lightness a number from 0 to 1 representing how light the color should be; a value of 0.5 means no change, value 0 is black and value 1 is white
+# @return the rainbowified string
+function rainbow(input: string, wrapAmount: number = -1, lightness: number = 0.56) :: string:
+    set {_delta} to 360 / ({_wrapAmount} if {_wrapAmount} > 0, else length of {_input})
+    set {_lightnessModifier} to (({_lightness}*2)-1) * 255
+    set {_angle} to 90
+    loop length of {_input} times:
+        set {_character} to character at loop-value in {_input}
+        if {_character} or (character at (loop-value - 1) in {_input}) is "§":
+            if "abcdefklmnor0123456789" contains {_character}:
+                set {_format} to (join {_format} and "&%{_character}%") if {_character} is not "r", else ("")
+            continue      
+        loop 3 times:
+            set {_n::%loop-value-2%} to (0.5 * (sin(({_angle} + (loop-number-2*120-120))) + 1)) * 255 + {_lightnessModifier}
+        set {_output} to join {_output}, RGBToHex({_n::*}), {_format} and {_character}
+        remove {_delta} from {_angle}
+    return colored {_output}
+
+# gradient(input: string, startColor: numbers, endColor: numbers)
+# @description Function that applies a gradient pattern over a given string
+# @param input the string to be colored
+# @param color list of Hex colors
+# @return the colored string in a gradient pattern
+function gradient(input: string, color: strings) :: string:
+    loop {_color::*}:
+        set {_rgb::%loop-index%::*} to HexToRGB(loop-value)
+    set {_n} to size of {_color::*} -1
+    set {_delta} to 180 / (length of uncolored {_input}/{_n} - 1)
+    loop {_n} times:
+        loop ceil(length of uncolored {_input}/{_n}) times:
+            set {_y} to ((loop-value-1) -1)*(ceil((length of uncolored {_input})/{_n})) + (loop-value-2)
+            while character at {_y}+{_x} in {_input} is "§":
+                if "abcdefklmnor0123456789" contains character at {_y}+{_x}+1 in {_input}:
+                    set {_format} to (join {_format} and "&%character at {_y}+{_x}+1 in {_input}%") if character at {_y}+{_x}+1 in {_input} is not "r", else ("")
+                    add 2 to {_x}
+            set {_character} to character at {_y} in uncolored {_input}
+            set {_startColorProportion} to (0.5 * (sin(({_delta}*((loop-value-2)-1))+90) + 1))
+            set {_endColorProportion} to (0.5 * (sin(({_delta}*((loop-value-2)-1))+270) + 1))
+            loop 3 times:
+                set {_n::%loop-value-3%} to ({_rgb::%loop-value-1%::%loop-value-3%} * {_startColorProportion}) + ({_rgb::%((loop-value-1) + 1)%::%loop-value-3%} * {_endColorProportion})
+            set {_output} to join {_output}, RGBToHex({_n::*}), {_format} and {_character}
+    return colored {_output}

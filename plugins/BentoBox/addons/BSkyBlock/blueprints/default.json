@@ -1,0 +1,16 @@
+{
+  "uniqueId": "default",
+  "icon": "GRASS_BLOCK",
+  "displayName": "&eThe Original SkyBlock",
+  "description": [
+    "§7Default Island"
+  ],
+  "requirePermission": false,
+  "blueprints": {
+    "NORMAL": "gens",
+    "NETHER": "gens",
+    "THE_END": "gens"
+  },
+  "slot": 0,
+  "times": 0
+}

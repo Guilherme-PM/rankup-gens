@@ -1,0 +1,530 @@
+# This script was written by Xqedii and sharing is not allowed!
+# You can change and edit everything in this file if you want
+
+# Structure
+
+function buildisland(player: player):
+	set {_x} to chest inventory with 6 rows named {Config::GUIS::IslandConfirm::%{Bedrock::%{_player}%}%}
+	set {_item} to {Config::GUIS::IslandConfirm::Confirm}
+	replace all "{NPC}" with "%{Config::Structure::NpcName}%" in {_item}'s lore
+	set slot 47 and 48 and 49 and 50 and 51 of {_x} to {_item}
+	open {_x} for {_player}
+
+options:
+	collisions: true
+	buildtime: 2 # times faster
+	XOffset: -16
+	YOffset: 15
+	ZOffset: 14
+	
+	NPCOffsetX: -7 
+	NPCOffsetY: 22
+	NPCOffsetZ: 6 
+
+function onislandcreate(player: player):
+	execute console command "bsbadmin range set %{_player}% 30"
+	wait 1 second
+	set {_owner} to placeholder "bskyblock_island_owner" from {_player}
+	if {_owner} is not "%{_player}%":
+		stop
+	set {_pos} to centerBlock({_player})
+	add {@NPCOffsetX} to x-coordinates of {_pos}
+	add {@NPCOffsetY} to y-coordinates of {_pos}
+	add {@NPCOffsetZ} to z-coordinates of {_pos}
+	if {JerryID::%{_player}%} is set:
+		remove citizen {JerryID::%{_player}%}
+	make 20 of cloud at {_pos} with extra 0.2
+	if {Config::Structure::NpcType} is "Player":
+		create a citizen named "%{_player}% %{Config::Structure::NpcName}%" at {_pos} as a player
+	else:
+		create a citizen named "%{_player}% %{Config::Structure::NpcName}%" at {_pos} as a villager
+	set {JerryID::%{_player}%} to last created citizen id
+	set {_gradient} to formatted gradient("&l%{Config::Structure::NpcName}%", ("f9a600", "f8f04b"))
+	execute console command "npc sel %{JerryID::%{_player}%}%"
+	execute console command "npc hologram add %{Config::Structure::NpcTitle}%"
+	execute console command "npc hologram add %{_gradient}%"
+	execute console command "npc hologram lineheight 0.27"
+	execute console command "npc name"
+	if {Config::Structure::NpcType} is "Player":
+		execute console command "npc skin %{Config::Structure::NpcSkin}%"
+	execute console command "npc look"
+	execute console command "npc sound -n"
+	execute console command "npc cmd add -r -p genisland"
+	execute console command "npc cmd add -l -p genisland"
+	add 2.2 to y-loc of {_pos}
+	set {JerryAsk::%{_player}%} to "Not created"
+	wait 0.5 second
+	execute console command "npc gravity"
+
+command /detectislandcreate [<player>]:
+	permission: *
+	permission message: &cUnknown command!
+	cooldown: 1 seconds
+	trigger:
+		if executor is console:
+			onislandcreate(arg-1)
+		else:
+			send "&cCommand only executable by console!"
+
+command /genisland:
+	trigger:
+		set {_owner} to placeholder "bskyblock_island_owner" from player
+		if {_owner} is not "%player%":
+			set {_mess} to {Config::Structure::LeaderRequired}
+			replace all "{NPCNAME}" with {Config::Structure::NpcName} in {_mess}
+			send {_mess}
+			play sound "entity.villager.no" with pitch 1.15 for player
+			stop
+		if {JerryAsk::%player%} is "Not created":
+			set {JerryAsk::%player%} to now
+			loop {Config::Structure::NpcTalk::*}:
+				set {_mess} to loop-value
+				replace all "{NPCNAME}" with {Config::Structure::NpcName} in {_mess}
+				replace all "{PLAYER}" with "%player%" in {_mess}
+				send {_mess}
+				play sound "entity.villager.yes" with pitch 1.15 for player
+				wait 1.5 second
+			buildisland(player)
+			play sound "entity.experience_orb.pickup" with pitch 2 for player
+		else:
+			if {JerryAsk::%player%} is true:
+				set {_mess} to {Config::Structure::DontDisturb}
+				replace all "{NPCNAME}" with {Config::Structure::NpcName} in {_mess}
+				send {_mess}
+				play sound "entity.villager.trade" with pitch 1.15 for player
+			else:
+				if difference between now and {JerryAsk::%player%} > 10 seconds:
+					buildisland(player)
+
+function jerryrespond(player: player):
+	loop {Config::Structure::BuildFinish::*}:
+		set {_mess} to loop-value
+		replace all "{NPCNAME}" with {Config::Structure::NpcName} in {_mess}
+		replace all "{PLAYER}" with "%{_player}%" in {_mess}
+		send {_mess} to {_player}
+		play sound "entity.villager.yes" with pitch 1.15 for {_player}
+		wait 1.5 second
+	set {_pos} to centerBlock({_player})
+	add {@NPCOffsetX} to x-coordinates of {_pos}
+	add {@NPCOffsetY} to y-coordinates of {_pos}
+	add {@NPCOffsetZ} to z-coordinates of {_pos}
+	make 20 of cloud at {_pos} with extra 0.2
+	remove citizen {JerryID::%{_player}%}
+	delete {JerryID::%{_player}%}
+	delete {Jerry::%{_player}%}
+	delete {JerryAsk::%{_player}%}
+
+on inventory click:
+	if name of current inventory of player is {Config::GUIS::IslandConfirm::Default} or {Config::GUIS::IslandConfirm::Bedrock}:
+		cancel event
+		if clicked slot is 47 or 48 or 49 or 50 or 51:
+			close player's inventory
+			play sound "entity.player.levelup" with pitch 2 for player
+			set {JerryAsk::%player%} to true
+			buildgenisland(player, "GenIsland2")
+
+function centerBlock(player: player) :: location:
+	set {_Cord-X} to "%placeholder "bskyblock_island_center_x" from {_player}%.5" parsed as number
+	set {_Cord-Y} to "%placeholder "bskyblock_island_center_y" from {_player}%.5" parsed as number
+	set {_Cord-Z} to "%placeholder "bskyblock_island_center_z" from {_player}%.5" parsed as number
+	set {_pos} to location ({_Cord-X}, {_Cord-Y}, {_Cord-Z}) in world "%{Config::Global::IslandWorld}%"
+	loop all blocks in radius 2 around {_pos}:
+		if loop-block is bedrock:
+			set {_pos} to location at loop-block
+			stop loop
+	return {_pos}
+
+function buildgenisland(player: player, type: text):
+	set {_pos} to centerBlock({_player})
+	add {@XOffset} to x-coordinates of {_pos}
+	add {@YOffset} to y-coordinates of {_pos}
+	add {@ZOffset} to z-coordinates of {_pos}
+	set {_loc1} to location at (-79, 84, -78) in world "world"
+	set {_center} to location at (-88, 62, -69) in world "world"
+	set {_loc2} to location at (-98, 58, -62) in world "world"
+	loop all blocks within {_loc1} and {_loc2}:
+		if loop-block is not air:
+			set {_firstLoc} to location at {_pos}
+			set {_cordX} to x-coordinates of loop-block
+			set {_cordY} to y-coordinates of loop-block
+			set {_cordZ} to z-coordinates of loop-block
+			add {_cordX} - x-coordinates of {_center} to x-coordinates of {_firstLoc}
+			add {_cordY} - y-coordinates of {_center}+1 to y-coordinates of {_firstLoc}
+			add {_cordZ} - z-coordinates of {_center} to z-coordinates of {_firstLoc}
+			add 1 to {_x}
+			set {_Blocks::%{_x}%} to loop-block
+			set {_BlocksLoc::%{_x}%} to {_firstLoc}
+	set {_pitch} to 1.5/size of {_Blocks::*}
+	loop {_Blocks::*}:
+		if loop-value is cobweb:
+			add {_BlocksLoc::%loop-counter%} to {_fireworks::*}
+			continue
+		if loop-value is hay block:
+			add {_BlocksLoc::%loop-counter%} to {_generator::*}
+			continue
+		inputblock({_BlocksLoc::%loop-counter%}, loop-value, {_pitch}, loop-counter, {_player})
+		
+		if loop-counter is size of {_Blocks::*}:
+			stop loop
+		add 1 to {_bt}
+		if {_bt} >= 3:
+			set {_bt} to 0
+			wait 1 tick
+	wait 3 second
+	play sound "entity.player.levelup" with pitch 2 for {_player}
+	loop {_fireworks::*}:
+		if mod(loop-counter, 2) is 0:
+			launch trailing flickering ball large coloured lime and orange fading to red at loop-value with duration 1
+		else:
+			launch trailing flickering ball large coloured light blue and blue fading to magenta at loop-value with duration 1
+	loop {_generator::*}:
+		if size of {New-Generator::%{_player}%::*} < {GensMAX::%{_player}%}:
+			set {_loc} to block at loop-value
+			effect4({_loc}, "ffe436", 1.3, 2, true)
+			set {_locX} to {_loc}
+			set block at {_locX} to air
+			spawn item display at {_locX}:
+				set {_entity} to entity
+				set display item of entity to hay block
+				set display teleport duration of entity to 10
+				set interpolation start of entity to 0
+				set interpolation duration of entity to 10 ticks
+				set display scale of entity to vector(0,0,0)
+			wait 4 tick
+			set display scale of {_entity} to vector(1,1,1)
+			add 160 to yaw of {_locX}
+			teleport {_entity} to {_locX}
+			wait 0.5 second
+			wait 1 tick
+			set block at {_locX} to hay block[axis=y]
+			wait 1 tick
+			kill {_entity}
+			make 50 of reverse portal at loop-value with offset vector(0, 0, 0) with extra 2
+			set {_block} to block at loop-value
+			set {GeneratorType::%location at {_block}%} to 1
+			set {GeneratorCreator::%location at {_block}%} to {_player}
+			add location at {_block} to {New-Generator::%{_player}%::*}
+			add location at {_block} to {GlobalActiveGens::*}
+			
+	jerryrespond({_player})
+
+function fallingblock(loc: location, block: block):
+	set {_old} to {_loc}
+	remove 0.5 from x-coordinates of {_loc}
+	remove 0.5 from z-coordinates of {_loc}
+	if {_block} is dirt:
+		set {_block} to grass block
+	spawn ("falling %type of {_block}%" parsed as entitytype) at location 3 above {_loc}
+	set {_x} to last spawned falling block
+	wait 12 tick
+	kill {_x}
+	set block at {_loc} to {_block}
+
+function inputblock(location: location, block: block, pitch: number, loopC: number, player: player):
+	set {_location} to block at {_location}
+	set {_block} to block at {_block}
+	set {_x} to 18
+	set {_loc} to location at {_location}
+	set {_end} to location 1.5 under {_location}
+	set {_loc2} to {_loc}
+	add random integer between -25 and 25 to x-coordinates of {_loc2}
+	add random integer between -25 and 25 to y-coordinates of {_loc2}
+	add random integer between -25 and 25 to z-coordinates of {_loc2}
+	set {_start} to {_loc2}
+	add 90 to yaw of {_loc}
+	spawn item display at {_loc2}:
+		set {_entity} to entity
+		set display item of entity to {_block}
+		set display teleport duration of entity to 50
+		set interpolation start of entity to 0
+		set interpolation duration of entity to 50 ticks
+		set display scale of entity to vector(0,0,0)
+		set display left rotation of {_entity} to quaternion(0, random number between 0.1 and 1.0, random number between 0.1 and 1.0, 0)
+	wait 2 tick
+	set display scale of {_entity} to vector(0.7,0.7,0.7)
+	set display left rotation of {_entity} to quaternion(0, 1, 0, 0)
+	teleport {_entity} to location at {_loc}
+	wait 2.6 seconds
+	kill {_entity}
+	play sound "block.wood.break" with volume 0.5 and pitch 0.5+({_pitch}*{_loopC}) for {_player}
+	set block at {_location} to {_block}
+
+function isResetAnim(player: player, create: boolean = false):
+	if "%{_player}%" starts with {Config::Global::BedrockSupport}:
+		set {_noAnim} to true
+	if {Bedrock::%{_player}%} is "Bedrock":
+		set {_noAnim} to true
+	if {_noAnim} is true:
+		wait 7 seconds
+		execute {_player} command "is go"
+		wait 0.3 second
+		onislandcreate({_player})
+		stop
+	set {HideTAB::%{_player}%} to true
+	set {_loc} to {IslandAnim::Loc}
+	genIsland({_player})
+	spectatorTarg({_player})
+	wait 1 tick
+	set {_loc} to location 7 in front of {_loc}
+	add 0.23 to y-coords of {_loc}
+	set yaw of {_loc} to 0
+	# Background, Clouds, Island, Stone, Lava, Water, Grass, Logs, Fence, Beehive, Bees, Skeletons, Pig, Fishes, Lilypad, Character
+	set {_chars::*} to "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""
+	set {_types::*} to "1", "3", "2", "4", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "5", "5"
+	add 0.03 to z-coords of {_loc}
+	loop {_chars::*}:
+		add 0.07 to {_pitch}
+		add 0.003 to z-coords of {_loc}
+		add spawnDisplay({_player}, {_loc}, {_types::%loop-counter%}, loop-value, loop-counter) to {_total::*}
+		if loop-counter is 1:
+			wait 1 second
+		if loop-counter is 2:
+			loop 3 times:
+				play sound "ui.toast.in" with pitch 1 for {_player}
+			wait 0.4 second
+		else:
+			if loop-counter > 2:
+				play sound "entity.chicken.egg" with pitch 0.7+{_pitch} for {_player}
+				play sound "block.note_block.iron_xylophone" with volume 0.1 and pitch 0.7+{_pitch} for {_player}
+		if loop-counter is 3:
+			wait 0.1 second
+		if loop-counter > 7:
+			if loop-counter > 12:
+				wait 1 tick
+			else:
+				wait 2 tick
+		else:
+			wait 3 tick
+	play sound "entity.player.levelup" with pitch 2 for {_player}
+	wait 2 second
+	if {_create} is true:
+		execute {_player} command "is go"
+		wait 0.3 second
+		set {_player}'s gamemode to survival
+	wait 3 seconds
+	if {_player} is in world "world":
+		set {_player}'s gamemode to survival
+		teleport {_player} to {spawn}
+	kill {_total::*}
+	delete {HideTAB::%{_player}%}
+
+on damage:
+	if victim is in region "spawn":
+		cancel event
+
+on join:
+	delete {HideTAB::%player%}
+
+function spectatorTarg(player: player):
+	set {_loc} to {IslandAnim::Loc}
+	remove 0.37 from x-coords of {_loc}
+	spawn block display at {_loc}:
+		set {_stand} to entity
+	teleport {_player} to {_loc}
+	set {_player}'s gamemode to spectator
+	delete spectator target of {_player}
+	wait 10 ticks
+	set spectator target of {_player} to {_stand}
+
+function genIsland(player: player):
+	set {_player}'s action bar to TextBackground({Config::Update35::IslandGeneration})
+	wait 1.3 second
+	set {_counter} to 0
+	while {_counter} is less than 100:
+		if {_counter} <= 15:
+			add 3 to {_counter}
+			wait 3 tick
+		else if {_counter} <= 42:
+			add 4 to {_counter}
+			wait 1 tick
+		else if {_counter} <= 57:
+			add 4 to {_counter}
+			wait 1 tick
+		else:
+			add 4 to {_counter}
+			wait 1 tick
+		if {_counter} >= 100:
+			set {_counter} to 100
+		set {_text} to {Config::Update35::IslandProgress}
+		replace all "{PERCENT}" with "%{_counter}%" in {_text}
+		set {_player}'s action bar to TextBackground("%{_text}%@@")
+	set {_text} to {Config::Update35::IslandDone2}
+	send {Config::Update35::IslandDone} to {_player}
+	set {_player}'s action bar to TextBackground("%{_text}%@")
+	wait 1 second
+
+on load:
+	loop all text displays:
+		if name of loop-text display is "Animation":
+			kill loop-text display
+
+function spawnDisplay(player: player, loc: location, effect: text, unicode: text, lc: number) :: objects:
+	if {_lc} is 1:
+		remove 0.5 from z-coords of {_loc}
+		remove 1.5 from y-coords of {_loc}
+	if {_lc} is 5:
+		remove 0.02 from z-coords of {_loc}
+	if {_effect} is "4":
+		remove 0.02 from z-coords of {_loc}
+		remove 4.65 from y-coords of {_loc}
+	if {_lc} is 6:
+		add 0.03 to z-coords of {_loc}
+	if {_effect} is "5":
+		add 0.01 to z-coords of {_loc}
+	if {_effect} is "3":
+		remove 0.05 from z-coords of {_loc}
+		remove 40 from x-coords of {_loc}
+		set {_loc} to location 12 under {_loc}
+		set {_uni::*} to "", "", ""
+		loop {_uni::*}:
+			add 19 to x-coords of {_loc}
+			remove 0.08 from z-coords of {_loc}
+			spawn text display at {_loc}:
+				set {_entity} to the display
+				set name of entity to "Animation"
+				set display scale of entity to vector(3,3,3)
+				set display text background color of entity to bukkitColor(0,0,0,0)
+				set teleport duration of entity to 1 ticks
+				set display brightness of entity to displayBrightness(15,15)
+				make entity disappear from all players
+				make entity appear to {_player}
+			set display text of {_entity} to "&f%loop-value%"
+			upMove({_entity})
+			add {_entity} to {_list::*}
+		return {_list::*}
+	else:
+		set {_lp} to 1
+		if {_lc} is 1:
+			set {_lp} to 2
+		loop {_lp} times:
+			if loop-counter is 2:
+				add 10 to z-coords of {_loc}
+				add 180 to yaw of {_loc}
+			spawn text display at {_loc}:
+				set {_entity} to the display
+				set name of entity to "Animation"
+				if {_effect} is "1":
+					set display scale of entity to vector(16,8,16)
+				else:
+					set display scale of entity to vector(3,3,3)
+				set display text of entity to "&f%{_unicode}%"
+				set display text background color of entity to bukkitColor(0,0,0,0)
+				set teleport duration of entity to 1 ticks
+				set display brightness of entity to displayBrightness(15,15)
+				make entity disappear from all players
+				make entity appear to {_player}
+			if {_lc} is not 1:
+				if {_lc} is 3:
+					easeMove({_entity}, "Down", 1)
+				else:
+					easeMove({_entity}, "Up", 1)
+			if {_lc} is 1:
+				if loop-value is 1:
+					set display text opacity of {_entity} to 0
+					bgOpacity({_entity})
+			add {_entity} to {_list::*}
+		return {_list::*}
+
+function bgOpacity(entity: entity):
+	loop 20 times:
+		set {_op} to floor({_op}+(255/20))
+		set display text opacity of {_entity} to {_op}
+		wait 1 tick
+
+function easeMove(entity: entity, dir: text, offset: number):
+	set {_loc} to location at {_entity}
+	set {_Bounce-In::*} to 0, 0.1, 0.25, 0.45, 0.7, 0.9, 1.02, 1.08, 1.1, 1.09, 1.07, 1.05, 1.03, 1.01 and 1
+	if {_dir} is "Up":
+		add {_offset} to y-coords of {_loc}
+	else:
+		remove {_offset} from y-coords of {_loc}
+	set {_base} to y-coords of {_loc}
+	loop {_Bounce-In::*}:
+		set {_rem} to {_offset}*loop-value
+		if {_dir} is "Up":
+			set y-coords of {_loc} to {_base}-{_rem}
+		else:
+			set y-coords of {_loc} to {_base}+{_rem}
+		teleport {_entity} to {_loc}
+		wait 1 tick
+
+function upMove(entity: entity):
+	set {_loc} to location 2.75 above {_entity}
+	set {_Ease-InOut::*} to reversed 0.1, 0.22, 0.36, 0.52, 0.68, 0.82, 0.92, 0.98, 1
+	loop {_Ease-InOut::*}:
+		add loop-value to y-coords of {_loc}
+		teleport {_entity} to {_loc}
+		wait 1 tick
+
+
+on join:
+	delete {IsReset::%player%}
+
+on command:
+	if full command is "is reset" or "island reset" or "skyblock reset" or "bskyblock:island reset" or "bskyblock:is reset" or "bskyblock:island reset":
+		if {ResetDelay::%player%} is set:
+			if difference between now and {ResetDelay::%player%} < 120 seconds:
+				cancel event
+				set {_a} to 120 seconds
+				remove difference between now and {ResetDelay::%player%} from {_a}
+				set {_mess} to {Config::Update35::ResetWait}
+				replace all "{SECONDS}" with "%seconds of {_a}%" in {_mess}
+				send {_mess}
+				stop
+		set {_gen} to placeholder "bskyblock_island_owner" from player
+		if {_gen} is not set:
+			stop
+		if {_gen} is not "%player%":
+			stop
+		add 1 to {IsReset::%player%}
+		if {IsReset::%player%} is 2:
+			cancel event
+			isReset(player)
+			stop
+		if {IsReset::%player%} is 4:
+			isResetAnim(player)
+			close player's inventory
+			delete {IsReset::%player%}
+			stop
+		wait 9.5 seconds
+		if {IsReset::%player%} is 1:
+			delete {IsReset::%player%}
+on command:
+	if full command is "is create" or "island create" or "skyblock create" or "bskyblock:island create" or "bskyblock:is create" or "bskyblock:island create":
+		if {ResetDelay::%player%} is set:
+			if difference between now and {ResetDelay::%player%} < 240 seconds:
+				set {_a} to 240 seconds
+				remove difference between now and {ResetDelay::%player%} from {_a}
+				set {_mess} to {Config::Update35::ResetWait}
+				replace all "{SECONDS}" with "%seconds of {_a}%" in {_mess}
+				send {_mess}
+				cancel event
+				stop
+		set {_detect} to placeholder "bskyblock_has_island" from player
+		if {_detect} is "false":
+			isResetAnim(player, true)
+			set {ResetDelay::%player%} to now
+
+function isReset(player: player):
+	set {_check} to {IsReset::%{_player}%}
+	set {_x} to chest inventory with 6 rows named {Config::Update35::IsReset::%{Bedrock::%{_player}%}%}
+	set {_item} to {Config::Update35::IsReset::Button}
+	set slot 47 and 48 and 49 and 50 and 51 of {_x} to {_item}
+	open {_x} for {_player}
+	wait 9.5 seconds
+	if {IsReset::%{_player}%} is {_check}:
+		if name of current inventory of {_player} is {Config::Update35::IsReset::Default} or {Config::Update35::IsReset::Bedrock}:
+			delete {IsReset::%{_player}%}
+			close {_player}'s inventory
+
+on inventory close:
+	if name of current inventory of player is {Config::Update35::IsReset::Default} or {Config::Update35::IsReset::Bedrock}:
+		delete {IsReset::%player%}
+
+on inventory click:
+	if name of current inventory of player is {Config::Update35::IsReset::Default} or {Config::Update35::IsReset::Bedrock}:
+		cancel event
+		if clicked slot is 47 or 48 or 49 or 50 or 51:
+			add 1 to {IsReset::%player%}
+			execute player command "is reset"
+			set {ResetDelay::%player%} to now

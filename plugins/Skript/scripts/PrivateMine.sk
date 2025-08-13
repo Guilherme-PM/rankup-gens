@@ -1,0 +1,268 @@
+# This script was written by Xqedii and sharing is not allowed!
+# You can change and edit everything in this file if you want
+
+# PrivateMine
+
+options:
+	MaxCaves: 50
+	Cords-X: 1000
+	Cords-Y: 93
+	Cords-Z: 0
+
+	X-Offset: -12
+	Y-Offset: 7
+	Z-Offset: -7
+	DistanceBetween: 80
+
+function cave(player: player):
+	set {_x} to chest inventory with 5 rows named {Config::GUIS::Cave::%{Bedrock::%{_player}%}%}
+	set slot 0 and 1 and 2 and 3 and 9 and 10 and 11 and 12 and 18 and 19 and 20 and 21 and 27 and 28 and 29 and 30 and 36 and 37 and 38 and 39 of {_x} to {Config::GUIS::Cave::Public}
+	set slot 5 and 6 and 7 and 8 and 14 and 15 and 16 and 17 and 23 and 24 and 25 and 26 and 32 and 33 and 34 and 35 and 41 and 42 and 43 and 44 of {_x} to {Config::GUIS::Cave::Private}
+	open {_x} for {_player}
+function unlockcave(player: player):
+	set {_x} to chest inventory with 6 rows named {Config::GUIS::UnlockCave::%{Bedrock::%{_player}%}%}
+	set slot 47 and 48 and 49 and 50 and 51 of {_x} to {Config::GUIS::UnlockCave::Cost}
+	open {_x} for {_player}
+
+command /clearUpgraded:
+	permission: *
+	trigger:
+		send "&aClearing..."
+		loop {UpgradedBlock::*}:
+			add 1 to {_ax}
+			set {_loc} to loop-value
+			delete {UpgradedBlock::%location at {_loc}%}
+			kill {UpgrEntity::%location at {_loc}%} parsed as entity
+			add 1 to {_wait}
+			if {_wait} >= 20:
+				delete {_wait}
+				wait 1 tick
+		clear {UpgradedBlock::*}
+		send "&aCleared &6&l%{_ax} ? 0% &aupgraded blocks!"
+
+on load:
+	clear {PlayerMine::*}
+	loop all item displays in world "world":
+		if x-coordinates of loop-item display >= 500:
+			kill loop-item display
+	loop {UpgradedBlock::*}:
+		if x-coordinates of loop-value >= {@Cords-X}:
+			set {_loc} to loop-value
+			delete {UpgradedBlock::%location at {_loc}%}
+			kill {UpgrEntity::%location at {_loc}%} parsed as entity
+		add 1 to {_wait}
+		if {_wait} >= 20:
+			delete {_wait}
+			wait 1 tick
+	loop all players in world "world":
+		if x-coordinates of loop-player >= 500:
+			teleport loop-player to {spawn}
+			send "" to loop-player
+			send {Config::PVMine::MineRestart} to loop-player
+			send "" to loop-player
+			send loop-player title {Config::PVMine::MineRestart::Title::1} with subtitle {Config::PVMine::MineRestart::Title::2} for 3 seconds
+			play sound "block.anvil.place" with pitch 0.5 for loop-player
+	loop {@MaxCaves} times:
+		if {Cave::%loop-value%} is not "Not used":
+			set {Cave::%loop-value%} to "Not used"
+
+function Caveunlock2(player: player):
+	if {_player} is in world "world":
+		if x-coordinates of {_player} >= 500:
+			set {_start} to true
+	if {_start} is not set:
+		send "&cAn error occurred!" to {_player}
+		stop
+	if {PlayerMine::%{_player}%} is set:
+		set {_loc} to location({@Cords-X}+({PlayerMine::%{_player}%}*{@DistanceBetween})-9, {@Cords-Y}-1, {@Cords-Z}-42)
+		add {@X-Offset} to x-coords of {_loc}
+		add {@Y-Offset} to y-coords of {_loc}
+		add {@Z-Offset} to z-coords of {_loc}
+		set x-coords of {_loc} to floor(x-coords of {_loc})+0.5
+		set z-coords of {_loc} to floor(z-coords of {_loc})+0.5
+		set {_b} to 0
+		play sound "entity.creeper.primed" with pitch 1 at {_loc}
+		set {_spaceID} to "Cave-%{_player}%"
+		delete {Space::%{_spaceID}%::*}
+		physics_unregisterSpace({_spaceID})
+		physics_registerSpace({_spaceID})
+		set {_loc1} to location({@Cords-X}+({PlayerMine::%{_player}%}*{@DistanceBetween})-27, {@Cords-Y}+3, {@Cords-Z}-49)
+		set {_loc2} to location({@Cords-X}+({PlayerMine::%{_player}%}*{@DistanceBetween})-16, {@Cords-Y}+13, {@Cords-Z}-49)
+		set {_loc3} to location({@Cords-X}+({PlayerMine::%{_player}%}*{@DistanceBetween})-21, {@Cords-Y}+8, {@Cords-Z}-55)
+		set {_loc4} to location({@Cords-X}+({PlayerMine::%{_player}%}*{@DistanceBetween})-19.5, {@Cords-Y}+2, {@Cords-Z}-44)
+		addblocksinradius({_loc4}, {_spaceID})
+		wait 0.5 second
+		set {_pitch} to 0.5
+		loop 80 times:
+			add 0.01 to {_pitch}
+			play sound "block.stone.break" with pitch {_pitch} at {_loc}
+			make 1 of sonic boom at {_loc} with offset vector(1, 1.5, 0) with extra 1
+			make 1 of sweep attack at {_loc} with offset vector(1, 1.5, 0) with extra 1
+			wait 1 tick
+		paste schematic "plugins/FastAsyncWorldEdit/schematics/PM-2.schem" at location({@Cords-X}+({PlayerMine::%{_player}%}*{@DistanceBetween}), {@Cords-Y}, {@Cords-Z}) including air
+		launch trailing flickering ball large coloured lime and yellow fading to green at location 2 under {_loc}'s location with duration 0
+		make 5 of explosion at {_loc} with offset vector(1, 1.5, 0) with extra 1
+		make 5 of flash at {_loc} with offset vector(1, 1.5, 0) with extra 1
+		make 100 of firework at {_loc} with offset vector(1, 1.5, 0) with extra 0.3
+		play sound "entity.generic.explode" with pitch 0.5 at {_loc}
+		play sound "entity.generic.explode" with pitch 1 at {_loc}
+		play sound "entity.generic.explode" with pitch 1.5 at {_loc}
+		play sound "entity.lightning_bolt.thunder" with pitch 2 at {_loc}
+		play sound "entity.player.levelup" with pitch 0.5 at {_loc}
+		play sound "ui.toast.challenge_complete" with pitch 0.9 at {_loc}
+		send {_player} title {Config::PVMine::NextArea::1} with subtitle {Config::PVMine::NextArea::2} for 3 seconds
+		wait 1 tick
+		loop all blocks within {_loc1} and {_loc2}:
+			chance of 50%:
+				if loop-value is air:
+					chance of 20%:
+						make 1 of explosion at location 4 in front of loop-value
+					set {_block} to stone or andesite or stone or andesite or chiseled stone bricks
+					set {_collisionBody} to physics_spawnDisplay({_block}, {_spaceID}, location at loop-value, 0.5)
+					set {_forwardDirection} to vector between {_loc3} and loop-value
+					physics_applyImpulse({_collisionBody}, {_forwardDirection} * 1)
+		wait 8 seconds
+		physics_unregisterSpace({_spaceID})
+		stop
+	send "&cAn error occurred!" to {_player}
+
+function addblocksinradius(loc: location, spaceID: string):
+	loop all blocks in radius 13 around {_loc}:
+		if block at {_loc} is air or torch or brown carpet:
+			set {_blockLoc} to location of loop-block
+			set {_blockType} to type of loop-block
+			if y-coordinates of loop-block >= 95:
+				if y-coordinates of loop-block <= 109:
+					physics_createStaticBody({_spaceID}, {_blockLoc}, physics_getBoxShape(0.5))
+
+on death:
+	set death message to ""
+
+on respawn:
+	teleport player to {spawn}
+	wait 1 tick
+	teleport player to {spawn}
+import:
+    com.sk89q.worldedit.bukkit.BukkitWorld
+    com.sk89q.worldedit.extent.clipboard.Clipboard
+    com.sk89q.worldedit.extent.clipboard.io.ClipboardFormats
+    com.sk89q.worldedit.math.BlockVector3
+    com.sk89q.worldedit.regions.CuboidRegion
+    java.io.File
+    java.nio.file.Files
+    java.nio.file.Paths
+
+effect paste schematic %string% at %location% [(1¦(with|including) air)]:
+    trigger:
+        set {_file} to new File(expression-1)
+        set {_location} to BlockVector3.at(expression-2.getBlockX(), expression-2.getBlockY(), expression-2.getBlockZ())
+        set {_world} to new BukkitWorld(expression-2.getWorld())
+        set {_includeAir} to true if parse mark = 1, else false
+        ClipboardFormats.findByFile({_file}).load({_file}).paste({_world}, {_location}, false, {_includeAir}, false, null)
+
+on inventory click:
+	if name of current inventory of player is {Config::GUIS::UnlockCave::Default} or {Config::GUIS::UnlockCave::Bedrock}:
+		cancel event
+		if clicked slot is 47 or 48 or 49 or 50 or 51:
+			if player's balance is bigger or equal to 1000000:
+				set {Cave-Unlocked::%player%} to 0
+				remove 1000000 from player's balance
+				send {Config::Global::Success}
+				close player's inventory
+				play sound "entity.player.levelup" with pitch 0.5 for player
+				execute player command "privatecave"
+			else:
+				send {Config::Global::NotEnough}
+				play sound "entity.illusioner.mirror_move" with pitch 2 for player
+
+on inventory click:
+	if name of current inventory of player is {Config::GUIS::Cave::Default} or {Config::GUIS::Cave::Bedrock}:
+		cancel event
+		if clicked slot is 0 or 1 or 2 or 3 or 9 or 10 or 11 or 12 or 18 or 19 or 20 or 21 or 27 or 28 or 29 or 30 or 36 or 37 or 38 or 39:
+			close player's inventory
+			execute player command "warp mine"
+		if clicked slot is 5 or 6 or 7 or 8 or 14 or 15 or 16 or 17 or 23 or 24 or 25 or 26 or 32 or 33 or 34 or 35 or 41 or 42 or 43 or 44:
+			close player's inventory
+			execute player command "privatecave"
+
+command /cave: #TODO: Remover depois
+	trigger:
+		cave(player)
+
+command /mina:
+	trigger:
+		cave(player)
+
+on right click on chiseled stone bricks:
+	if player is in world "world":
+		if x-coordinates of player > 500:
+			caveupgrades(player)
+
+command /privatecave:
+	aliases: pvmine, mymine, mycave, pvcave, privatemine
+	trigger:
+		if {Cave-Unlocked::%player%} is not set:
+			unlockcave(player)
+			stop
+		if {PlayerMine::%player%} is set:
+			set {_loc} to location({@Cords-X}+({PlayerMine::%player%}*{@DistanceBetween}), {@Cords-Y}, {@Cords-Z})
+			add {@X-Offset} to x-coords of {_loc}
+			add {@Y-Offset} to y-coords of {_loc}
+			add {@Z-Offset} to z-coords of {_loc}
+			set x-coords of {_loc} to floor(x-coords of {_loc})+0.5
+			set z-coords of {_loc} to floor(z-coords of {_loc})+0.5
+			set pitch of {_loc} to 0
+			set yaw of {_loc} to 180
+			animation(player)
+			wait 0.5 second
+			send {Config::PVMine::Teleport}
+			teleport player to {_loc}
+			play sound "entity.player.levelup" with pitch 2 for player
+			stop
+		send {Config::PVMine::FindingLoc}
+		loop {Cave::*}:
+			add 1 to {_lx}
+			if loop-value is "Not used":
+				set {Cave::%{_lx}%} to player
+				set {PlayerMine::%player%} to {_lx}
+				set {_mess} to {Config::PVMine::LocFound}
+				replace all "{CAVEID}" with "Cave#%{_lx}%" in {_mess}
+				send {_mess}
+				send {Config::PVMine::Generating}
+				set {_loc} to location({@Cords-X}+({_lx}*{@DistanceBetween}), {@Cords-Y}, {@Cords-Z})
+				paste schematic "plugins/FastAsyncWorldEdit/schematics/PM-1.schem" at {_loc}
+				if {CaveUpgrade-Area::%player%} is true:
+					wait 1 second
+					paste schematic "plugins/FastAsyncWorldEdit/schematics/PM-2.schem" at {_loc} with air
+				add {@X-Offset} to x-coords of {_loc}
+				add {@Y-Offset} to y-coords of {_loc}
+				add {@Z-Offset} to z-coords of {_loc}
+				set x-coords of {_loc} to floor(x-coords of {_loc})+0.5
+				set z-coords of {_loc} to floor(z-coords of {_loc})+0.5
+				set pitch of {_loc} to 0
+				set yaw of {_loc} to 180
+				send {Config::PVMine::Finish}
+				animation(player)
+				wait 0.5 second
+				send {Config::PVMine::Teleport}
+				teleport player to {_loc}
+				play sound "entity.player.levelup" with pitch 2 for player
+				clearUpgraded({@Cords-X}+({_lx}*{@DistanceBetween}))
+				stop
+		send {Config::PVMine::NoCavesAvaiable}
+
+function clearUpgraded(x: number):
+	loop {UpgradedBlock::*}:
+		set {_loc} to loop-value
+		if x-coords of {_loc} >= {_x}:
+			if x-coords of {_loc} < {_x}+{@DistanceBetween}:
+				delete {UpgradedBlock::%location at {_loc}%}
+				kill {UpgrEntity::%location at {_loc}%} parsed as entity
+				add 1 to {_wait}
+				if {_wait} >= 20:
+					delete {_wait}
+					wait 1 tick
+	loop all item displays in world "world":
+		if x-coords of loop-item display >= {_x}:
+			if x-coords of loop-item display < {_x}+{@DistanceBetween}:
+				kill loop-item display

@@ -1,0 +1,52 @@
+cooldown: 21600
+one_time: false
+auto_armor: false
+permission_required: true
+display:
+  default:
+    id: IRON_SWORD
+    name: '&6&lDefault &aKit'
+    amount: 1
+    lore:
+    - '&7This is a description of the kit.'
+    - '&7You can add multiples &alines&7.'
+  no_permission:
+    id: BARRIER
+    name: '&6&lDefault &aKit'
+    amount: 1
+    lore:
+    - '&cYou don''t have permissions to claim'
+    - '&cthis kit.'
+  cooldown:
+    id: STONE_SWORD
+    name: '&c&l%kit_name% &cKit'
+    amount: 1
+    lore:
+    - '&cYou need to wait &7%time%'
+    - '&cto claim this kit again.'
+    item_flags:
+    - HIDE_ATTRIBUTES
+items:
+  '1':
+    id: STONE_SWORD
+    amount: 1
+  '2':
+    id: IRON_PICKAXE
+    amount: 1
+    enchants:
+    - DIG_SPEED;1
+  '3':
+    id: STONE_AXE
+    amount: 1
+  '4':
+    id: STONE_SHOVEL
+    amount: 1
+  '5':
+    id: COOKED_CHICKEN
+    amount: 3
+  '6':
+    id: OAK_LOG
+    amount: 6
+  '7':
+    id: TORCH
+    amount: 3

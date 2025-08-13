@@ -1,0 +1,51 @@
+cooldown: 21600
+one_time: false
+auto_armor: false
+permission_required: true
+items:
+  '1':
+    id: BREAD
+    amount: 6
+  '2':
+    id: COOKED_CHICKEN
+    amount: 3
+  '3':
+    id: MELON_SLICE
+    amount: 8
+  '4':
+    id: COOKIE
+    amount: 3
+  '5':
+    id: POTION
+    amount: 1
+    potion_data:
+      extended: false
+      upgraded: false
+      type: REGEN
+  '6':
+    id: HONEY_BOTTLE
+    amount: 1
+display:
+  default:
+    id: IRON_SWORD
+    name: '&6&lFood &aKit'
+    amount: 1
+    lore:
+    - '&7This is a description of the kit.'
+    - '&7You can add multiples &alines&7.'
+  no_permission:
+    id: BARRIER
+    name: '&6&lFood &aKit'
+    amount: 1
+    lore:
+    - '&cYou don''t have permissions to claim'
+    - '&cthis kit.'
+  cooldown:
+    id: STONE_SWORD
+    name: '&c&l%kit_name% &cKit'
+    amount: 1
+    lore:
+    - '&cYou need to wait &7%time%'
+    - '&cto claim this kit again.'
+    item_flags:
+    - HIDE_ATTRIBUTES

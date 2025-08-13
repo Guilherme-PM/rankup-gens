@@ -1,0 +1,16 @@
+location: world:-36,500:101,375:19,500
+enabled: true
+display-range: 48
+update-range: 48
+update-interval: 20
+facing: 0.0
+down-origin: false
+pages:
+- lines:
+  - content: <#bc60fc>&lɢᴇɴᴇʀᴀᴛᴏʀs ᴄʀᴀᴛᴇ
+    height: 0.5
+  - content: '&aClick here to open!'
+    height: 0.3
+  - content: '&7ʙᴜʏ sᴏᴍᴇ ᴋᴇʏs /ᴋᴇʏs'
+    height: 0.3
+  actions: {}

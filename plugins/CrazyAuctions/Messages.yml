@@ -1,0 +1,137 @@
+Messages:
+  Players-Only: '&cOnly players can use this command.'
+  Reload:
+    - '&7'
+    - '&7 &b🎣 &6&lʀᴇʟᴏᴀᴅ'
+    - '&7 Plugin has been reloaded! &bCrazyAuctions v1.3.2&7'
+  Need-More-Money:
+    - '&7'
+    - '&7 &b&l$ &c&lɴᴏᴛ ᴇɴᴏᴜɢʜ ᴍᴏɴᴇʏ'
+    - '&7 &7You are in need of &c%money_needed%&7!&7'
+  Inventory-Full:
+    - '&7'
+    - '&7 &b🛡 &c&lғᴜʟʟ ɪɴᴠᴇɴᴛᴏʀʏ'
+    - '&7 &7Please open up some space to buy that.&7'
+  No-Permission: '&cYou do not have permission to use that command!'
+  Not-Online:
+    - '&7'
+    - '&7 &b⚗ &c&lᴘʟᴀʏᴇʀ'
+    - '&7 &7That player is not online.&7'
+  Doesnt-Have-Item-In-Hand:
+    - '&7'
+    - '&7 &b🗡 &c&lɪᴛᴇᴍ'
+    - '&7 &7You must have an item in your hand.&7'
+  Not-A-Number:
+    - '&7'
+    - '&7 &b&l$ &c&lᴘʀɪᴄᴇ'
+    - '&7 &b%arg% &7is not a number.&7'
+  Got-Item-Back:
+    - '&7'
+    - '&7 &b🗡 &6&lɪᴛᴇᴍs'
+    - '&7 &7Your item has been returned.&7'
+  Cancelled-Item:
+    - '&7'
+    - '&7 &b🗡 &6&lɪᴛᴇᴍs'
+    - '&7 &7You have canceled an item on the auction list.'
+    - '&7 &7Return your items with &b/ah expired&7'
+  Item-Has-Expired:
+    - '&7'
+    - '&7 &b⌛ &a&lɪᴛᴇᴍ'
+    - '&7 &7An item you have in the Auctions has expired.&7'
+  Admin-Force-Cancelled:
+    - '&7'
+    - '&7 &b⭐ &a&lsᴀʟᴇ'
+    - '&7 &7You have force canceled a sale.&7'
+  Admin-Force-Cancelled-To-Player:
+    - '&7'
+    - '&7 &b❌ &c&lsᴀʟᴇ'
+    - '&7 &7One of your items was force canceled by an Admin.&7'
+  Item-Doesnt-Exist:
+    - '&7'
+    - '&7 &b❌ &c&lᴇʀʀᴏʀ'
+    - '&7 &7That item isn''t in the auctions any more.&7'
+  Max-Items:
+    - '&7'
+    - '&7 &b⚗ &c&lʟɪᴍɪᴛ'
+    - '&7 &7You can''t list any more items to the Auctions.&7'
+  Item-BlackListed:
+    - '&7'
+    - '&7 &b🗡 &c&lɪᴛᴇᴍ'
+    - '&7 &7That item is not allowed to be sold here.&7'
+  Item-Damaged:
+    - '&7'
+    - '&7 &b🏹 &c&lᴅᴀᴍᴀɢᴇᴅ ɪᴛᴇᴍ'
+    - '&7 &7That item is damaged and is not allowed to be sold here.&7'
+  Sold-Msg:
+    - '&7'
+    - '&7 &b✔ &a&lsᴜᴄᴄᴇss'
+    - '&7 &7You have successfully purchased item!&7'
+  Bid-More-Money:
+    - '&7'
+    - '&7 &b&l$ &c&lᴘʀɪᴄᴇ'
+    - '&7 &7Your bid is too low, please bid more.&7'
+  Not-A-Currency: # Remove Tokens if you do not have TokenManager.
+    - '&7'
+    - '&7 &b&l$ &c&lᴘʀɪᴄᴇ'
+    - '&7 &7That is not a currency. Please use Money or Tokens.&7'
+  Sell-Price-To-Low:
+    - '&7'
+    - '&7 &b&l$ &c&lᴘʀɪᴄᴇ'
+    - '&7 &7Your sell price is too low the minimum is &b10&l$&7'
+  Sell-Price-To-High:
+    - '&7'
+    - '&7 &b&l$ &c&lᴘʀɪᴄᴇ'
+    - '&7 &7Your sell price is too high the maximum is &b1000000&l$&7'
+  Bid-Price-To-Low:
+    - '&7'
+    - '&7 &b&l$ &c&lᴘʀɪᴄᴇ'
+    - '&7 &7Your starting bid price is too low the minimum is &b100&l$&7'
+  Bid-Price-To-High:
+    - '&7'
+    - '&7 &b&l$ &c&lᴘʀɪᴄᴇ'
+    - '&7 &7Your starting bid price is too high the maximum is &b1000000&l$&7'
+  Bought-Item:
+    - '&7'
+    - '&7 &b✔ &a&lsᴜᴄᴄᴇss!'
+    - '&7 &7You have just bought an item for &b%price%&l$&7'
+  Win-Bidding:
+    - '&7'
+    - '&7 &b✔ &a&lsᴜᴄᴄᴇss'
+    - '&7 &7You have just won a bid for &b%price%&l$&7.'
+    - '&7 &7Do &b/ah collect&7 to collect your winnings.&7'
+  Player-Bought-Item:
+    - '&7'
+    - '&7 &b⭐ &a&lɪᴛᴇᴍ sᴏʟᴅ'
+    - '&7 &b%player% &7has bought your item for &b%price%&l$&7'
+  Someone-Won-Players-Bid:
+    - '&7'
+    - '&7 &b⭐ &a&lɪᴛᴇᴍ sᴏʟᴅ'
+    - '&7 &b%player% &7has won your item with a bid of &b%price%&l$&7'
+  Added-Item-To-Auction:
+    - '&7'
+    - '&7 &b🗡 &a&lɪᴛᴇᴍ'
+    - '&7 &7You have just added an item to the auctions for &b%price%&l$&7'
+  Bid-Msg:
+    - '&7'
+    - '&7 &b✔ &a&lsᴜᴄᴄᴇss'
+    - '&7 &7You have just bid &b%Bid%&l$ &7on that item.&7'
+  Selling-Disabled:
+    - '&7'
+    - '&7 &b❌ &c&lᴇʀʀᴏʀ'
+    - '&7 &7The selling option is &bᴅɪsᴀʙʟᴇᴅ'
+  Bidding-Disabled:
+    - '&7'
+    - '&7 &b❌ &c&lᴇʀʀᴏʀ'
+    - '&7 &7The bidding option is &bᴅɪsᴀʙʟᴇᴅ'
+  CrazyAuctions-Help: '&cUnknown command! /ah help'
+  CrazyAuctions-View: '&cUnknown command! /ah view [player]'
+  CrazyAuctions-Sell-Bid: '&c/ah [Sell/Bid] [Price] [Items amount]'
+  Book-Not-Allowed: '&cThat book is not able to be sold in this auction house!'
+  Help-Menu:
+    - '&7'
+    - '&6/ah &3- &7Opens the auction.'
+    - '&6/ah &eView [Player] &3- &7eSee what a player is selling.'
+    - '&6/ah &eSell/Bid [Price] [Items amount] &3- &7List the item you selling.'
+    - '&6/ah &eExpired/Collect &3- &7View and manage your items.'
+    - '&6/ah &eListed &3- &7View and manage the items you are selling.'
+    - '&6/ah &eHelp &3- &7View this help menu.&7'

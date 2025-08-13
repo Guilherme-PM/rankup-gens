@@ -1,0 +1,332 @@
+# This script was written by Xqedii and sharing is not allowed!
+# You can change and edit everything in this file if you want
+
+# Refinery
+
+function refineryFormatter(item: item, gui: boolean) :: item:
+	set {_doubledrop} to {Config::Refinery::Cross}
+	set {_speed} to {Config::Refinery::Cross}
+	if boolean tag "Refinery-DoubleDrop" of custom nbt of {_item} is true:
+		set {_doubledrop} to {Config::Refinery::Checkmark}
+	if boolean tag "Refinery-Speed" of custom nbt of {_item} is true:
+		set {_speed} to {Config::Refinery::Checkmark}
+	set {_end} to {Config::Refinery::ItemPlace}
+	if {_gui} is true:
+		set {_end} to {Config::Refinery::ItemActive}
+	set {_lore::*} to {Config::Refinery::ItemLore::*}
+	replace all "{DOUBLEDROP}" with "%{_doubledrop}%" in {_lore::*}
+	replace all "{SPEED}" with "%{_speed}%" in {_lore::*}
+	replace all "{BOTTOM}" with "%{_end}%" in {_lore::*}
+	set lore of {_item} to {_lore::*}
+	return {_item}
+
+on load:
+	set {Refinery-World} to "bskyblock_world"
+	set {Refinery1-Cost} to 50000
+	set {Refinery2-Cost} to 500000
+	set {Refinery3-Cost} to 2500000
+	set {Refinery4-Cost} to 5000000
+	set {Refinery5-Cost} to 10000000
+	set {refinery1-item} to blast furnace with enchantment glint named formatted gradient({Config::Refinery::OakRefinery}, ("87c6ff", "87c6ff"))
+	set {refinery2-item} to blast furnace with enchantment glint named formatted gradient({Config::Refinery::BirchRefinery}, ("87c6ff", "87c6ff"))
+	set {refinery3-item} to blast furnace with enchantment glint named formatted gradient({Config::Refinery::SpruceRefinery}, ("87c6ff", "87c6ff"))
+	set {refinery4-item} to blast furnace with enchantment glint named formatted gradient({Config::Refinery::DarkOakRefinery}, ("87c6ff", "87c6ff"))
+	set {refinery5-item} to blast furnace with enchantment glint named formatted gradient({Config::Refinery::JungleRefinery}, ("87c6ff", "87c6ff"))
+	loop 5 times:
+		set boolean tag "Refinery-DoubleDrop" of custom nbt of {refinery%loop-value%-item} to false
+		set boolean tag "Refinery-Speed" of custom nbt of {refinery%loop-value%-item} to false
+		set {refinery%loop-value%-item} to refineryFormatter({refinery%loop-value%-item}, false)
+
+	set {Refinery1-upgrade1-cost} to 20000
+	set {Refinery2-upgrade1-cost} to 1000000
+	set {Refinery3-upgrade1-cost} to 5000000
+	set {refinery4-upgrade1-cost} to 10000000
+	set {refinery5-upgrade1-cost} to 40000000
+
+	set {Refinery1-upgrade2-cost} to 10000
+	set {Refinery2-upgrade2-cost} to 500000
+	set {Refinery3-upgrade2-cost} to 2500000
+	set {refinery4-upgrade2-cost} to 5000000
+	set {refinery5-upgrade2-cost} to 20000000
+
+	set {Refinery1-input} to {GenData::oak}
+	set {Refinery2-input} to {GenData::birch}
+	set {Refinery3-input} to {GenData::spruce}
+	set {refinery4-input} to {GenData::darkoak}
+	set {refinery5-input} to {GenData::jungle}
+
+	set {Refinery1-drop} to {GenData::oak-UPGRADED}
+	set {Refinery2-drop} to {GenData::birch-UPGRADED}
+	set {Refinery3-drop} to {GenData::spruce-UPGRADED}
+	set {refinery4-drop} to {GenData::darkoak-UPGRADED}
+	set {refinery5-drop} to {GenData::jungle-UPGRADED}
+	set {RefTimeAccumulator} to 0
+	set {RefProcessIndex} to 1
+	clear {ActiveRefineries::*}
+	loop all players:
+		loop {Refinery::%loop-player%::*}:
+			add location at loop-value-2 to {ActiveRefineries::*}
+
+
+function refinery(player: player):
+	set {_x} to chest inventory with 3 rows named {Config::GUIS::Refinery::%{Bedrock::%{_player}%}%}
+	set {_item} to {Config::GUIS::Refinery::Oak}
+	set {_slots::*} to 11, 12, 13, 14, 15
+	set {_items::*} to "Oak", "Birch", "Spruce", "DarkOak", "Jungle"
+	loop {_slots::*}:
+		set {_item} to {Config::GUIS::Refinery::%{_items::%loop-counter%}%}
+		set {_cost} to "%{Refinery%loop-counter%-Cost}%"
+		replace all "{COST}" with formatnumber({_cost}) in {_item}'s lore
+		set int tag "Data" of custom nbt of {_item} to loop-counter
+		set slot loop-value of {_x} to {_item}
+	open {_x} for {_player}
+
+function Refinerygui(player: player, loc: location):
+	set {_TIER} to {Refinery::TIER::%{_loc}%}
+	if {Refinery::T%{_TIER}%::%{_loc}%} is {_player}:
+		set {_access} to true
+	if placeholder "bskyblock_on_island" from {_player} is "true":
+		set {_access} to true
+	if {_access} is true:
+		set {_temp} to {_loc}
+		set yaw of {_temp} to 0
+		set pitch of {_temp} to 0
+		set {Refinery-Upgr::%{_player}%} to {_temp}
+		set {_x} to chest inventory with 5 rows named {Config::GUIS::RefineryMenu::%{Bedrock::%{_player}%}%}
+		set {_item} to {refinery%{_TIER}%-item}
+		set boolean tag "Refinery-DoubleDrop" of custom nbt of {_item} to true
+		set boolean tag "Refinery-Speed" of custom nbt of {_item} to true
+		set {_item} to refineryFormatter({_item}, true)
+
+		set slot 4 of {_x} to {_item}
+		set {_multipliter} to 10
+		if {Refinery::UPGRADE2::%{_loc}%} is true:
+			set {_multipliter} to 5
+			set {_info::*} to {Config::GUIS::RefineryMenu::Upgrade1Max::*}
+		else:
+			set {_tempcost} to "%{Refinery%{_TIER}%-upgrade2-cost}%"
+			set {_cost} to "$%formatnumber({_tempcost})%"
+			set {_info::*} to {Config::GUIS::RefineryMenu::Upgrade1::*}
+			replace all "{COST}" with formatnumber({_tempcost}) in {_info::*}
+		set {_item} to {Config::GUIS::RefineryMenu::Speed}
+		set {_lore::*} to lore of {_item}
+		replace all "{BOTTOM}" with "" in {_lore::*}
+		set {_lore::*} to {_lore::*} and {_info::*}
+		set lore of {_item} to {_lore::*}
+		set slot 19 and 20 of {_x} to {_item}
+		if {Refinery::UPGRADE1::%{_loc}%} is true:
+			set {_info::*} to {Config::GUIS::RefineryMenu::Upgrade2Max::*}
+		else:
+			set {_cost} to "$%formatnumber({_tempcost})%"
+			set {_info::*} to {Config::GUIS::RefineryMenu::Upgrade2::*}
+			replace all "{COST}" with formatnumber({_tempcost}) in {_info::*}
+		set {_item} to {Config::GUIS::RefineryMenu::DoubleDrop}
+		set {_lore::*} to lore of {_item}
+		replace all "{BOTTOM}" with "" in {_lore::*}
+		set {_lore::*} to {_lore::*} and {_info::*}
+		set lore of {_item} to {_lore::*}
+		set slot 24 and 25 of {_x} to {_item}
+		set {_fuel} to "%{Refinery::T%{_TIER}%::%{_loc}%::ITEMS}%"
+		set {_ETA} to "%{Refinery::T%{_TIER}%::%{_loc}%::ITEMS}*{_multipliter}%"
+		set {_item} to {Config::GUIS::RefineryMenu::Refuel}
+		replace all "{BLOCKS}" with "%{_fuel}%" in {_item}'s lore
+		replace all "{ETA}" with "%{_ETA}%s" in {_item}'s lore
+		set slot 39 and 40 and 41 of {_x} to {_item}
+		open {_x} for {_player}
+	else:
+		set {_mess} to {Config::Refinery::NotYour}
+		replace all "{PLAYER}" with "%{Refinery::T%{_TIER}%::%{_loc}%}%" in {_mess}
+		send {_mess} to {_player}
+		play sound "entity.illusioner.mirror_move" with pitch 2 for {_player}
+
+
+command /refinaria:
+	aliases: refinery, buyrefinery
+	trigger:
+		refinery(player)
+
+on join:
+	loop {Refinery::%player%::*}:
+		add location at loop-value to {ActiveRefineries::*}
+on quit:
+	loop {Refinery::%player%::*}:
+		remove location at loop-value from {ActiveRefineries::*}
+
+on place of blast furnace:
+	loop 5 times:
+		if name of player's tool is name of {refinery%loop-value%-item}:
+			set {_TIER} to loop-value
+	if {_TIER} is set:
+		set {_lore::*} to lore of player's tool
+		particle("portal", event-block)
+		set {_a} to location at event-block
+		set pitch of {_a} to 0
+		set yaw of {_a} to 0
+		add {_a} to {Refinery::%player%::*}
+		set {Refinery::T%{_TIER}%::%location at event-block%} to player
+		set {Refinery::TIER::%location at event-block%} to {_TIER}
+
+		if boolean tag "Refinery-DoubleDrop" of custom nbt of player's tool is true:
+			set {Refinery::UPGRADE1::%location at event-block%} to true
+		if boolean tag "Refinery-Speed" of custom nbt of player's tool is true:
+			set {Refinery::UPGRADE2::%location at event-block%} to true
+
+		set {Refinery::T%{_TIER}%::%location at event-block%::ITEMS} to 0
+		send player title {Config::Refinery::Placed::1} with subtitle {Config::Refinery::Placed::2} for 2 seconds
+		play sound "entity.experience_orb.pickup" with pitch 2 for player
+
+on right click on blast furnace:
+	if {Refinery::TIER::%location at event-block%} is set:
+		cancel event
+		Refinerygui(player, location at event-block)
+
+on inventory close:
+	delete {Refinery-Upgr::%player%}
+
+every 1 second:
+	loop {ActiveRefineries::*}:
+		set {_loc} to loop-value
+		set {_tier} to {Refinery::TIER::%{_loc}%}
+		if {_tier} is not set:
+			remove {_loc} from {ActiveRefineries::*}
+			continue
+
+		set {_interval} to 10 seconds
+		if {Refinery::UPGRADE2::%{_loc}%} is true:
+			set {_interval} to 5 seconds
+		if {refinery.lastProcess::%{_loc}%} is not set:
+			refinerydrop({_loc}, {_tier})
+		if difference between now and {refinery.lastProcess::%{_loc}%} >= {_interval}:
+			refinerydrop({_loc}, {_tier})
+
+function refinerydrop(loc: location, tier: number):
+	if {_loc} is not in world {Refinery-World}:
+		stop
+	if {Refinery::T%{_tier}%::%{_loc}%::ITEMS} > 0:
+		set {refinery.lastProcess::%{_loc}%} to now
+
+		remove 1 from {Refinery::T%{_tier}%::%{_loc}%::ITEMS}
+
+		if {Refinery::UPGRADE1::%{_loc}%} is true:
+			drop 2 of {Refinery%{_tier}%-drop} at location 1 above {_loc} without velocity
+		else:
+			drop 1 of {Refinery%{_tier}%-drop} at location 1 above {_loc} without velocity
+
+		if {Refinery::T%{_tier}%::%{_loc}%::ITEMS} <= 0:
+			remove {_loc} from {ActiveRefineries::*}
+			delete {refinery.lastProcess::%{_loc}%}
+
+
+on inventory click:
+	if name of current inventory of player is {Config::GUIS::RefineryMenu::Default} or {Config::GUIS::RefineryMenu::Bedrock}:
+		cancel event
+		set {_TIER} to {Refinery::TIER::%{Refinery-Upgr::%player%}%}
+		if {_TIER} is not set:
+			close player's inventory
+		set {_slot} to 25
+		if clicked slot is 19 or 20:
+			set {_upgrade} to 2
+		if clicked slot is 24 or 25:
+			set {_upgrade} to 1
+		if clicked slot is 19 or 20 or 24 or 25:
+			if {Refinery-Upgr::%player%} is set:
+				if {Refinery::UPGRADE%{_upgrade}%::%{Refinery-Upgr::%player%}%} is not true:
+					if player's balance is bigger or equal to {Refinery%{_TIER}%-upgrade%{_upgrade}%-cost}:
+						if block at {Refinery-Upgr::%player%} is air:
+							stop
+						remove {Refinery%{_TIER}%-upgrade%{_upgrade}%-cost} from player's balance
+						send {Config::Refinery::Upgrade}
+						set {Refinery::UPGRADE%{_upgrade}%::%{Refinery-Upgr::%player%}%} to true
+						play sound "entity.player.levelup" with pitch 2 for player
+						particle("enchant", {Refinery-Upgr::%player%})
+						close player's inventory
+					else:
+						send {Config::Global::NotEnough}
+						play sound "entity.illusioner.mirror_move" with pitch 2 for player
+						close player's inventory
+		if clicked slot is 39 or 40 or 41:
+			loop all items in player's inventory:
+				if name of loop-item is name of {Refinery%{_TIER}%-input}:
+					add item amount of loop-value to {_fuel}
+			if {_fuel} > 0:
+				loop all items in player's inventory:
+					if name of loop-item is name of {Refinery%{_TIER}%-input}:
+						remove loop-value from player
+				send {Config::Refinery::Refuel}
+				add {Refinery-Upgr::%player%} to {ActiveRefineries::*}
+				play sound "entity.player.levelup" with pitch 2 for player
+				add {_fuel} to {Refinery::T%{_TIER}%::%{Refinery-Upgr::%player%}%::ITEMS}
+				close player's inventory
+			else:
+				send {Config::Refinery::WrongWood}
+				play sound "entity.illusioner.mirror_move" with pitch 2 for player
+	if name of current inventory of player is {Config::GUIS::Refinery::Default} or {Config::GUIS::Refinery::Bedrock}:
+		cancel event
+		set {_data} to int tag "Data" of custom nbt of clicked slot
+		if {_data} is set:
+			if player's balance is bigger or equal to {Refinery%{_data}%-Cost}:
+				remove {Refinery%{_data}%-Cost} from player's balance
+				give {refinery%{_data}%-item} to player
+				send {Config::Global::Success}
+				play sound "entity.player.levelup" with pitch 2 for player
+			else:
+				send {Config::Global::NotEnough}
+				play sound "entity.illusioner.mirror_move" with pitch 2 for player
+
+on break of blast furnace:
+	if {Refinery::TIER::%location at event-block%} is set:
+		cancel event
+on left click on blast furnace:
+	if {Refinery::TIER::%location at event-block%} is set:
+		set {_TIER} to {Refinery::TIER::%location at event-block%}
+		if {Refinery::T%{_TIER}%::%location at event-block%} is player:
+			set {_access} to true
+		if placeholder "bskyblock_on_island" from player is "true":
+			set {_access} to true
+		if {_access} is true:
+			set event-block to air
+			set {_a} to location at event-block
+			set pitch of {_a} to 0
+			set yaw of {_a} to 0
+			remove all {_a} from {Refinery::%player%::*}
+			remove all {_a} from {ActiveRefineries::*}
+			delete {Refinery::T%{_TIER}%::%location at event-block%}
+			drop {Refinery::T%{_TIER}%::%location at event-block%::ITEMS} of {Refinery%{_TIER}%-input} at event-block without velocity
+			delete {Refinery::T%{_TIER}%::%location at event-block%::ITEMS}
+			particle("cloud", event-block)
+			play sound "entity.experience_orb.pickup" with pitch 1.5 for player
+			set {_item} to {refinery%{_TIER}%-item}
+			set {_lore::*} to lore of {refinery%{_TIER}%-item}
+			if {Refinery::UPGRADE1::%location at event-block%} is true:
+				set boolean tag "Refinery-DoubleDrop" of custom nbt of {_item} to true
+			if {Refinery::UPGRADE2::%location at event-block%} is true:
+				set boolean tag "Refinery-Speed" of custom nbt of {_item} to true
+			set {_item} to refineryFormatter({_item}, false)
+			delete {Refinery::UPGRADE1::%location at event-block%}
+			delete {Refinery::UPGRADE2::%location at event-block%}
+			delete {Refinery::TIER::%location at event-block%}
+			give {_item} to player
+		else:
+			cancel event
+			set {_mess} to {Config::Refinery::NotYour}
+			replace all "{PLAYER}" with "%{Refinery::T%{_TIER}%::%location at event-block%}%" in {_mess}
+			send {_mess} to player
+			play sound "entity.illusioner.mirror_move" with pitch 2 for player
+
+function particle(type: text, loc: location):
+	if {_type} is "cloud":
+		make 5 of cloud at {_loc} with extra 0.1
+	if {_type} is "portal":
+		make 75 of reverse portal at {_loc} with extra 2
+	if {_type} is "enchant":
+		make 75 of sculk_charge_pop at {_loc} with extra 0.4
+		make 75 of witch at {_loc} with extra 0.4
+
+function texttotime(time: text) :: string:
+    set {_sekundy} to "%{_time}%"
+    set {_format} to "%{_sekundy}% seconds" parsed as timespan
+    set {_time} to "%{_format}%"
+    set {_timespan::*} to {_time} parsed as "%number% %string%[s][ and %number% %string%[s]]"
+    set {_first} to "%round({_timespan::1})%%first character of {_timespan::2}%"
+    set {_second} to "%round({_timespan::3})%%first character of {_timespan::4}%"
+    return ("%{_first}% %{_second}%" if {_timespan::3} is set, else "%{_first}%")

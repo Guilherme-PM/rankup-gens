@@ -1,0 +1,2049 @@
+# This script was written by Xqedii and sharing is not allowed!
+# You can change and edit everything in this file if you want
+
+# Generators
+
+on load:
+	clear {Costs::*}
+	clear {Generatory::*}
+	clear {GeneratoryItems::*}
+	clear {GensBuyData::*}
+	clear {FishList::*}
+	set {GenData::sawmill-region} to "Sawmill"
+	set {GenData::farm-region} to "Farming"
+	set {GenData::cave-region} to "Cave"
+
+	#              ID              Item            Name                 Value   Male(1) Female(2)  From
+	registerItem("wheat",          wheat,          "&eTrigo",           10,      1,                "Farm")
+	registerItem("potato",         potato,         "&eBatata",          25,      1,                "Farm")
+	registerItem("carrot",         carrot,         "&eCenoura",         50,      1,                "Farm")
+	registerItem("beetroot",       beetroot,       "&eBeterraba",       80,      1,                "Farm")
+	registerItem("lilac",          lilac,          "&eLilás",           125,     1,                "Farm")
+	registerItem("rose",           rose bush,      "&eRosa",            175,     1,                "Farm")
+	registerItem("peony",          peony,          "&ePeônia",          250,     1,                "Farm")
+	registerItem("tube coral",     tube coral,     "&eCoral Tubo",      350,     1,                "Farm")
+	registerItem("brain coral",    brain coral,    "&eCoral Cérebro",   400,     1,                "Farm")
+	registerItem("bubble coral",   bubble coral,   "&eCoral Bolha",     450,     1,                "Farm")
+	registerItem("fire coral",     fire coral,     "&eCoral de Fogo",   500,     1,                "Farm")
+	registerItem("horn coral",     horn coral,     "&eCoral Chifre",    550,     1,                "Farm")
+	registerItem("crimson roots",  crimson roots,  "&eRaízes Carmesim", 600,     1,                "Farm")
+
+	registerItem("cobble",         cobblestone,    "&ePedregulho",      100,      1,               "Cave")
+	registerItem("iron",           iron ingot,     "&eFerro",           300,      1,               "Cave")
+	registerItem("gold",           gold ingot,     "&eOuro",            25000,    1,               "Cave")
+	registerItem("diamond",        diamond,        "&eDiamante",        32000,    1,               "Cave")
+	registerItem("emerald",        emerald,        "&eEsmeralda",       44000,    1,               "Cave")
+	registerItem("amethyst",       amethyst shard, "&eAmetista",        64000,    1,               "Cave")
+	registerItem("honeycomb",      honeycomb,      "&eFavo de Mel",       84000,    1,             "Cave")
+	registerItem("fireshard",      red dye,        "&eFragmento de Fogo", 90000,    1,             "Cave")
+	registerItem("larimar",        yellow dye,     "&eLarimar",           96000,    1,             "Cave")
+	registerItem("mithril",        light blue dye, "&eMithril",           110000,   1,             "Cave")
+	registerItem("chromit",        purple dye,     "<##FF00FF>Cromita",   126000,   1,             "Cave")
+
+	registerItem("oak",            oak log,        "&eMadeira de Carvalho",       225,      1,     "Sawmill")
+	registerItem("birch",          birch log,      "&eMadeira de Bétula",         750,      1,     "Sawmill")
+	registerItem("spruce",         spruce log,     "&eMadeira de Abeto",          1000,     1,     "Sawmill")
+	registerItem("darkoak",        dark oak log,   "&eMadeira de Carvalho Negro", 1500,     1,     "Sawmill")
+	registerItem("jungle",         jungle log,     "&eMadeira da Selva",          2500,     1,     "Sawmill")
+
+	#              ID              Item            Name                 Value   Male(1) Female(2)  From     Chances (100 in total)
+	registerItem("rawcod",         cod,            "&eBacalhau Cru",     300,    1,                "Pond",  40)
+	registerItem("cookedcod",      cooked cod,     "&eBacalhau Cozido",  600,    1,                "Pond",  30)
+	registerItem("rawsalmon",      salmon,         "&eSalmão Cru",       900,    1,                "Pond",  15)
+	registerItem("cookedsalmon",   cooked salmon,  "&eSalmão Cozido",    1200,   1,                "Pond",  8)
+	registerItem("tropicalfish",   tropical fish,  "&ePeixe Tropical",   3000,   1,                "Pond",  5)
+	registerItem("pufferfish",     pufferfish,     "&eBaiacu",           10000,  1,                "Pond",  2)
+
+	#           Item                   Name                                       Colors                 Cost/ID           Drop Item            Drop Name                Drop Value
+	registerGen(hay block,             gradient("Gerador de Trigo",               ("ad9a1e", "ffdd08")), 50, 1,            wheat,               "&eTrigo",               10)
+	registerGen(oak log,               gradient("Gerador de Madeira",             ("c7974e", "f8c479")), 100, 2,           oak log,             "&eMadeira",             20)
+	registerGen(cobblestone,           gradient("Gerador de Pedregulho",          ("b3b1b3", "dedede")), 200, 3,           cobblestone,         "&ePedregulho",          25)
+	registerGen(stone,                 gradient("Gerador de Pedra",               ("a6a6a6", "bdbdbd")), 350, 4,           stone,               "&ePedra",               50)
+	registerGen(coal ore,              gradient("Gerador de Carvão",              ("433e3e", "524d4d")), 600, 5,           coal,                "&eCarvão",              75)
+	registerGen(coal block,            gradient("Gerador de Bloco de Carvão",     ("2e2727", "443b3b")), 1500, 6,          coal block,          "&eBloco de Carvão",     100)
+	registerGen(iron ore,              gradient("Gerador de Ferro",               ("ebbb9c", "ffebc3")), 5000, 7,          iron ingot,          "&eFerro",               150)
+	registerGen(iron block,            gradient("Gerador de Bloco de Ferro",      ("eeeded", "ffffff")), 10000, 8,         iron block,          "&eBloco de Ferro",      200)
+	registerGen(gold ore,              gradient("Gerador de Ouro",                ("ffd105", "ffff5c")), 20000, 9,         gold ingot,          "&eOuro",                300)
+	registerGen(gold block,            gradient("Gerador de Bloco de Ouro",       ("ffc738", "ffff29")), 35000, 10,        gold block,          "&eBloco de Ouro",       400)
+	registerGen(redstone ore,          gradient("Gerador de Redstone",            ("c70000", "ff0000")), 60000, 11,        redstone,            "&eRedstone",            500)
+	registerGen(redstone block,        gradient("Gerador de Bloco de Redstone",   ("db1400", "ff1f00")), 120000, 12,       redstone block,      "&eBloco de Redstone",   600)
+	registerGen(lapis ore,             gradient("Gerador de Lápis",               ("5290ff", "87c6ff")), 250000, 13,       lapis lazuli,        "&eLápis",               700)
+	registerGen(lapis block,           gradient("Gerador de Bloco de Lápis",      ("3358cd", "4e6ed6")), 500000, 14,       lapis block,         "&eBloco de Lápis",      1000)
+	registerGen(diamond ore,           gradient("Gerador de Diamante",            ("bae8ee", "9cffff")), 1000000, 15,      diamond,             "&eDiamante",            1250)
+	registerGen(diamond block,         gradient("Gerador de Bloco de Diamante",   ("48ffff", "d3ffff")), 2500000, 16,      diamond block,       "&eBloco de Diamante",   1500)
+	registerGen(emerald ore,           gradient("Gerador de Esmeralda",           ("1aca2b", "12ff52")), 5000000, 17,      emerald,             "&eEsmeralda",           2000)
+	registerGen(emerald block,         gradient("Gerador de Bloco de Esmeralda",  ("17ea3c", "12ff52")), 10000000, 18,     emerald block,       "&eBloco de Esmeralda",  3000)
+	registerGen(netherrack,            gradient("Gerador de Netherrack",      ("822929", "943838")), 25000000, 19,     netherrack,              "&eNetherrack",      4000)
+	registerGen(soul sand,             gradient("Gerador de Areia da Alma",    ("896652", "9f7c66")), 50000000, 20,     soul sand,              "&eAreia da Alma",       5000)
+	registerGen(nether quartz ore,     gradient("Gerador de Quartzo",          ("f5dbbb", "ffffff")), 100000000, 21,    quartz,                 "&eQuartzo",          6000)
+	registerGen(nether gold ore,       gradient("Gerador de Ouro do Nether",   ("ff801b", "ffff5c")), 175000000, 22,    gold ingot,             "&eOuro do Nether",     8000)
+	registerGen(nether bricks,         gradient("Gerador de Tijolos do Nether", ("7f2535", "983042")), 300000000, 23,    nether brick,          "&eTijolo do Nether",    10000)
+	registerGen(nether wart block,     gradient("Gerador de Verruga do Nether", ("a10000", "c41414")), 500000000, 24,    nether wart,           "&eVerruga do Nether",     12000)
+	registerGen(end stone,             gradient("Gerador de Pedra do End",      ("ffffb7", "ffffdb")), 1000000000, 25,   end stone,             "&ePedra do End",       15000)
+	registerGen(purpur block,          gradient("Gerador de Purpur",           ("e7a1e7", "fbc6fb")), 2000000000, 26,   popped chorus fruit,    "&ePurpur",          17500)
+	registerGen(amethyst block,        gradient("Gerador de Ametista",         ("9162e3", "b18cf0")), 4000000000, 27,   amethyst shard,         "&eAmetista",        20000)
+	registerGen(honeycomb block,       gradient("Gerador de Favo de Mel",      ("d6bb0d", "f7db28")), 8000000000, 28,   honeycomb,              "&eFavo de Mel",       22500)
+	registerGen(obsidian,              gradient("Gerador de Obsidiana",        ("6328b0", "7536c9")), 14000000000, 29,  obsidian,               "&eObsidiana",        25000)
+	registerGen(crying obsidian,       gradient("Gerador de Obsidiana Lacrimejante", ("700fbd", "8108e1")), 22000000000, 30,  crying obsidian,  "&eObsidiana Lacrimejante", 27500)
+	registerGen(magma block,           gradient("Gerador de Magma",            ("e26310", "f4983e")), 32000000000, 31,  magma cream,            "&eMagma",             30000)
+	registerGen(basalt,                gradient("Gerador de Basalto",          ("5b5b5b", "878787")), 44000000000, 32,  basalt,                 "&eBasalto",           32500)
+	registerGen(calcite,               gradient("Gerador de Calcita",          ("d6d8d4", "fcfcfc")), 58000000000, 33,  calcite,                "&eCalcita",           35000)
+	registerGen(shroomlight,           gradient("Gerador de Luz de Cogumelo",  ("fcc47d", "faf1b2")), 74000000000, 34,  shroomlight,            "&eLuz de Cogumelo",   37500)
+	registerGen(prismarine,            gradient("Gerador de Prismarinho",      ("78b593", "5d9ca1")), 92000000000, 35,  prismarine,             "&ePrismarinho",       40000)
+	registerGen(dripstone block,       gradient("Gerador de Pedra Gotejante",  ("816253", "9e8b6f")), 112000000000, 36, dripstone block,        "&ePedra Gotejante",   42500)
+	registerGen(stripped bamboo block, gradient("Gerador de Bambu",            ("b9a649", "dfc866")), 134000000000, 37, bamboo,                 "&eBambu",             45000)
+	registerGen(red mushroom block,    gradient("Gerador de Cogumelo Vermelho", ("bc221f", "c92c28")), 158000000000, 38, red mushroom,          "&eCogumelo Vermelho", 47500)
+	registerGen(honey block,           gradient("Gerador de Bloco de Mel",     ("d18119", "faa639")), 184000000000, 39, honey block,            "&eBloco de Mel",      50000)
+	registerGen(ochre froglight,       gradient("Gerador de Luz de Sapo",      ("f4dc90", "f9f7cb")), 212000000000, 40, ochre froglight,        "&eLuz de Sapo",       52500)
+
+	registerCustom("crystalshard", amethyst shard with enchantment glint,       gradient("ғʀᴀɢᴍᴇɴᴛᴏ ᴅᴇ ᴄʀɪsᴛᴀʟ", ("b4a1fc", "b4a1fc")), ("" and " &fᴇsᴛᴇ ɪᴛᴇᴍ ᴅʀᴏᴘᴀ ᴅᴀs &6ғᴀᴢᴇɴᴅᴀs&f!" and " &fᴄʜᴀɴᴄᴇ ᴅᴇ ᴅʀᴏᴘ ᴅᴇ ғʀᴀɢᴍᴇɴᴛᴏ: &e&nᴍᴜɪᴛᴏ ʙᴀɪxᴀ" and "" and " &fᴄᴏᴍᴘʀᴇ ᴘᴏçõᴇs ᴄᴏᴍ ᴏs ғʀᴀɢᴍᴇɴᴛᴏs ɢᴀɴʜᴏs: &a&n/ᴘᴏᴛɪᴏɴs"))
+
+	# Tools upgrade Costs
+	set {Costs::*} to 500, 1000, 2500, 3000, 4000, 5000, 7500, 10000, 12500, 15000, 17500, 20000, 22500, 25000, 27500, 30000, 32500, 35000, 40000, 45000, 50000, 60000, 70000, 80000, 90000, 100000, 125000, 150000, 175000, 200000, 250000, 300000, 350000, 400000, 450000, 500000, 550000, 600000, 650000, 700000, 750000, 800000, 850000, 900000, 950000, 1000000, 1250000, 1500000, 2000000, 2500000, 5000000, 10000000, 20000000, 30000000, 40000000, 50000000, 75000000, 100000000, 250000000, 500000000, 750000000, 1000000000, 2000000000, 3000000000, 4000000000, 5000000000, 8000000000, 12000000000, 16000000000, 20000000000, 24000000000, 28000000000, 32000000000, 36000000000, 40000000000, 44000000000, 48000000000, 52000000000 and 56000000000
+
+	# [type]Items::* - Items ID from registerItem
+	# Key::* - Minecraft block name (use /blocktype) to check it
+
+	# Farm
+
+	set {Farmkey::*} to      "wheat", "potatoes", "carrots", "beetroots", "lilac", "rose bush", "peony", "tube coral", "brain coral", "bubble coral", "fire coral", "horn coral", "crimson roots"
+	set {FarmItems::*} to "wheat", "potato", "carrot", "beetroot", "lilac", "rose", "peony", "tube coral", "brain coral", "bubble coral", "fire coral", "horn coral", "crimson roots"
+	set {_Farm_FixBlocks::*} to wheat[age=7], potatoes[age=7], carrots[age=7], beetroots[age=3], lilac[half=lower], rose bush[half=lower], peony[half=lower], tube coral[waterlogged=false], brain coral[waterlogged=false], bubble coral[waterlogged=false], fire coral[waterlogged=false], horn coral[waterlogged=false], crimson roots
+	set {_level::*} to 0, 40, 90, 150, 250, 350, 500, 800, 1000, 1300, 1600, 1900, 2200
+	loop {Farmkey::*}:
+		set {FarmFixBlock::%loop-value%} to {_Farm_FixBlocks::%loop-counter%}
+		set {BlockData::%loop-value%::*} to {FarmItems::%loop-counter%}, {_level::%loop-counter%}, loop-counter
+
+	# Cave
+
+	set {Cavekey::*} to "cobblestone", "iron ore", "gold ore", "diamond ore", "emerald ore", "amethyst block", "honeycomb block", "red glazed terracotta", "lime glazed terracotta", "light blue glazed terracotta", "purple glazed terracotta"
+	set {CaveItems::*} to "cobble", "iron", "gold", "diamond", "emerald", "amethyst", "honeycomb", "fireshard", "larimar", "mithril", "chromit"
+	set {_Cave_FixBlocks::*} to cobblestone, iron ore, gold ore, diamond ore, emerald ore, amethyst block, honeycomb block, red glazed terracotta, lime glazed terracotta, light blue glazed terracotta, purple glazed terracotta
+	set {_level::*} to 0, 5, 15, 40, 50, 70, 100, 150, 250, 450, 600
+	loop {Cavekey::*}:
+		set {CaveFixBlock::%loop-value%} to {_Cave_FixBlocks::%loop-counter%}
+		set {BlockData::%loop-value%::*} to {CaveItems::%loop-counter%}, {_level::%loop-counter%}, loop-counter
+
+	set {Sawmillkey::*} to "oak log", "birch log", "spruce log", "dark oak log", "jungle log"
+	set {SawmillItems::*} to "oak", "birch", "spruce", "darkoak", "jungle"
+	set {_Sawmill_FixBlocks::*} to oak log, birch log, spruce log, dark oak log, jungle log
+	set {_level::*} to 5, 25, 50, 75, 100
+	loop {Sawmillkey::*}:
+		set {SawmillFixBlock::%loop-value%} to {_Sawmill_FixBlocks::%loop-counter%}
+		set {BlockData::%loop-value%::*} to {SawmillItems::%loop-counter%}, {_level::%loop-counter%}, loop-counter
+
+	updateFarms()
+	set {GenTimeAccumulator} to 0
+	set {GenProcessIndex} to 1
+	delete {GlobalEvent}
+
+function registerCustom(ItemID: text, item: item, ItemName: text, lore: objects):
+	set {GenData::%{_itemID}%} to {_item} named {_ItemName} with lore {_lore::*}
+
+function registerGen(GenItem: item, GenName: text, GenCost: number, GenLevel: number, DropItem: item, DropName: text, DropValue: number):
+	set {_lev::*} to {Config::Tools::Gen::GeneratorLevel} split at "{LEVEL}"
+	set {_Finalitem} to {_GenItem} named {_GenName} with lore "%{_lev::1}%%{_GenLevel}%%{_lev::2}%" and "" and {Config::Tools::Gen::GenEvery} and genLoreInfo({_DropValue}) and "" and {Config::Gens::GenInfo-UpgradeInfo}
+	set int tag "GenLevel" of custom nbt of {_Finalitem} to {_GenLevel}
+	set {Generatory::%{_GenLevel}%} to {_Finalitem} with enchantment glint
+	set {GensBuyData::%{_GenLevel}%::*} to {_GenCost} and {_DropValue}
+	set {_lev::*} to {Config::Tools::Gen::ItemLevel} split at "{LEVEL}"
+	set int tag "ItemValue" of custom nbt of {_DropItem} to {_DropValue}
+	set {GeneratoryItems::%{_GenLevel}%} to {_DropItem} named {_DropName} with lore "%{_lev::1}%%{_GenLevel}%%{_lev::2}%" and "" and {Config::Tools::Gen::SpawnEvery} and itemValue({_DropValue}) and "" and {Config::Gens::SellItemUsing} and {Config::Global::Rarity-Common::*}
+
+function registerItem(ItemID: text, ItemItem: item, ItemName: text, ItemValue: number, TextType: number, From: text, chance: number = 0):
+	set {GenData::%{_itemID}%} to {_itemItem} named {_ItemName} with lore {Config::Gens::ItemInfo-%{_From}%} and "" and itemValue({_ItemValue}) and {Config::Gens::SellItemUsing} and {Config::Global::Rarity-Common::*}
+	set int tag "ItemValue" of custom nbt of {GenData::%{_itemID}%} to {_itemValue}
+	set string tag "CaveItem" of custom nbt of {GenData::%{_itemID}%} to {_itemID}
+	set string tag "ItemFrom" of custom nbt of {GenData::%{_itemID}%} to {_From}
+	if {_from} is "Cave":
+		set {_upgrade::*} to "" and {Config::Gens::UsedToUpgrade}
+	set {GenData::%{_itemID}%-UPGRADED} to {_itemItem} with enchantment glint named "%{_ItemName}% %{Config::Gens::Event::UpgradedTitle1}%" with lore {Config::Gens::ItemInfo-%{_From}%} and "" and itemValue({_ItemValue}*64) and {Config::Gens::SellItemUsing} and {_upgrade::*} and {Config::Global::Rarity-Rare::*}
+	set int tag "ItemValue" of custom nbt of {GenData::%{_itemID}%-UPGRADED} to {_itemValue}*64
+	set string tag "ItemFrom" of custom nbt of {GenData::%{_itemID}%-UPGRADED} to {_From}
+	if {_chance} is not 0:
+		set {FishList::%{_chance}%} to {_itemID}
+
+command /machado:
+	aliases: Axe, buyaxe
+	trigger:
+		buytool(player, "Axe", 1)
+
+command /picareta:
+	aliases: buypickaxe, pickaxe
+	trigger:
+		buytool(player, "Pickaxe", 2)
+
+command /enxada:
+	aliases: Hoe, buyhole
+	trigger:
+		buytool(player, "Hoe", 3)
+
+command /vara:
+	aliases: varinha, fishingrod, buyfishingrod
+	trigger:
+		buytool(player, "FishingRod", 4)
+
+command /toolboost:
+	aliases: toolboosts
+	trigger:
+		if int tag "Tool-Level" of custom nbt of player's tool is set:
+			send {Config::Gens::Cave::ToolInfo1}
+		else:
+			send {Config::Gens::Cave::ToolInfo2}
+
+function buytool(player: player, tool: text, id: number):
+	set {_types::*} to "Axe", "Pickaxe", "Hoe", "FishingRod"
+	loop {_types::*}:
+		if {_id} is loop-counter:
+			set {_name} to {Config::GUIS::BuyTool::%loop-value%::%{Bedrock::%{_player}%}%}
+	set {_x} to chest inventory with 5 rows named {_name}
+	set {_item} to generateItem(1, {_tool}, 0)
+	if {Config::Update35::ToolStats} is true:
+		loop {_item}'s lore:
+			if loop-value contains "{USES}":
+				set {_line} to loop-counter
+				stop loop
+		set {_lore::*} to {_item}'s lore
+		delete {_lore::%{_line}%}
+		delete {_lore::%{_line}+1%}
+		set {_item}'s lore to {_lore::*}
+	set slot 13 of {_x} to {_item}
+	set slot 29 and 30 and 31 and 32 and 33 of {_x} to {Config::GUIS::BuyTool::Confirm}
+	open {_x} for {_player}
+
+command /ferramentas:
+	aliases: ferramenta, tool, tools, buytools, buytool
+	trigger:
+		set {_x} to chest inventory with 3 rows named {Config::GUIS::Tools::%{Bedrock::%player%}%}
+		set slot 10 of {_x} to {Config::GUIS::Tools::Axe}
+		set slot 12 of {_x} to {Config::GUIS::Tools::Pickaxe}
+		set slot 14 of {_x} to {Config::GUIS::Tools::Hoe}
+		set slot 16 of {_x} to {Config::GUIS::Tools::FishingRod}
+		open {_x} for player
+
+on block trample:
+	if type of event-block is farmland:
+		cancel event
+
+function itemupgrade(player: player):
+	set {_level} to int tag "Tool-Level" of custom nbt of {_player}'s tool
+	if {_level} is set:
+		set {_x} to chest inventory with 4 rows named {Config::GUIS::ItemUpgrade::%{Bedrock::%{_player}%}%}
+		set slot 11 of {_x} to {Config::GUIS::ItemUpgrade::ToolBoosts}
+		set {_item} to {Config::GUIS::ItemUpgrade::Rebirth}
+		replace all "{REBIRTH}" with "%{Rebirth::%{_player}%} ? "0"%" in {_item}'s lore
+		set slot 15 of {_x} to {_item}
+		set {_data::*} to reqitems({_level}-14)
+		set {_needi} to name of {_data::2}
+		if {_needi} is not set:
+			set {_ReqItems} to "None"
+		else:
+			set {_ReqItems} to "%name of {_data::2}% &r&b(x%{_data::1}%)"
+		if {_level} < 80:
+			set {_item} to {Config::GUIS::ItemUpgrade::UpgradeItem}
+			set {_l::*} to lore of {_item}
+			set {_money} to "%{Costs::%{_level}%}%"
+			replace all "{LEVEL}"    with "%{_level}%" in {_l::*}
+			replace all "{NEWLEVEL}" with "%{_level}+1%" in {_l::*}
+			replace all "{MONEY}"    with formatnumber({_money}) in {_l::*}
+			replace all "{ITEMS}"    with "%{_ReqItems}%" in {_l::*}
+			set lore of {_item} to {_l::*}
+			set slot 30 and 31 and 32 of {_x} to {_item}
+		else:
+			set slot 30 and 31 and 32 of {_x} to {Config::GUIS::ItemUpgrade::MaximumLevel}
+		set slot 13 of {_x} to {_player}'s tool
+		open {_x} for {_player}
+	else:
+		close {_player}'s inventory
+		send {Config::Gens::CantUpgrade} to {_player}
+		play sound "entity.illusioner.mirror_move" with pitch 2 for {_player}
+
+function reqitems(level: number) :: objects:
+	set {_items} to 2 ^ mod(({_level} - 1), 5)
+	if {_level} > 55:
+		set {_items} to 8+(({_level}-54)*8)
+
+	set {_itemIndex} to floor((({_level}-1) / 5)) + 1
+	if {_itemIndex} > size of {CaveItems::*}:
+		set {_itemIndex} to size of {CaveItems::*}
+	set {_needi} to {GenData::%{CaveItems::%{_itemIndex}%}%-UPGRADED}
+	set {_object::1} to {_items}
+	set {_object::2} to {_needi}
+	return {_object::*}
+
+function configvalue(number: number) :: text:
+	set {_a} to {Config::GUIS::BuyGen::Value}
+	set {_value} to "%{_number}%"
+	replace all "{VALUE}" with formatnumber({_value}) in {_a}
+	return {_a}
+
+command /maquinas:
+	aliases: maquina, buygen, gen, generator, generators, buygenerator, buygenerators
+	trigger:
+		buyGen(player, 1)
+
+function buyGen(player: player, page: number):
+	set {_x} to chest inventory with 4 rows named {Config::GUIS::BuyGen::%{Bedrock::%{_player}%}%}
+	set {_val::*} to {Config::GUIS::BuyGen::Cost} split at "{VAL}"
+	set {_val2::*} to {Config::GUIS::BuyGen::ItemLevel} split at "{LEVEL}"
+	add (integers between 1 and 7) to {_slots::*}
+	add (integers between 10 and 16) to {_slots::*}
+	add (integers between 19 and 25) to {_slots::*}
+	add (integers between 29 and 33) to {_slots::*}
+	if {_page} is 1:
+		set {_item} to gold nugget with custom model data 7018 named "&aPróxima Página"
+		set int tag "NextPage" of custom nbt of {_item} to {_page}
+		set slot 34 of {_x} to {_item}
+	if {_page} is 2:
+		set {_item} to gold nugget with custom model data 7017 named "&aPágina Anterior"
+		set int tag "PrevPage" of custom nbt of {_item} to {_page}
+		set slot 28 of {_x} to {_item}
+	set {_ID} to 0+(({_page}-1)*(size of {_slots::*}))
+	set {_a} to {_ID}
+	loop {_slots::*}:
+		add 1 to {_ID}
+		set {_cost} to "%{GensBuyData::%{_ID}%::1}%"
+		set {_item} to {Generatory::%{_ID}%} with lore "%{_val2::1}%%{_ID}%%{_val2::2}%" and "" and {Config::GUIS::BuyGen::Drop} and configvalue({GensBuyData::%{_ID}%::2}) and "" and "%{_val::1}%%formatnumber({_cost})%%{_val::2}%" and "" and {Config::GUIS::BuyGen::Info}
+		set int tag "GenLevel" of custom nbt of {_item} to {_ID}
+		set slot loop-value of {_x} to {_item}
+	if {Config::Dungeons::GensRequirements} is true:
+		set {_level} to {Level::%{_player}%}
+		loop {_slots::*}:
+			add 1 to {_a}
+			if {_level} >= ({_a}*2)-10:
+				continue
+			else:
+				set {_name} to uncolored name of slot loop-value of {_x}
+				if {_name} is not set:
+					stop loop
+				set {_item} to {Config::GUIS::BuyGen::NotUnlocked}
+				replace all "{GENERATOR}" with "%{_name}%" in {_item}'s name
+				replace all "{LEVEL}" with "%({_a}*2)-10%" in {_item}'s lore
+				set int tag "Locked" of custom nbt of {_item} to {_level}
+				set slot loop-value of {_x} to {_item}
+	open {_x} for {_player}
+
+function geninfo(player: player, block: location, broken: boolean):
+	set {UpgradeLoc::%{_player}%} to {_block}
+	set {_x} to chest inventory with 5 rows named {Config::GUIS::GenInfo::%{Bedrock::%{_player}%}%}
+	set {_level} to {GeneratorType::%{_block}%}
+	set slot 4 of {_x} to {Generatory::%{_level}%}
+	set {_upgrade} to {Config::GUIS::GenInfo::Upgrade}
+	if {Generatory::%{_level}+1%} is set:
+		set {_next} to {Config::GUIS::GenInfo::NextLevel}
+		replace all "{CURRENT}" with "%{_level}%" in {_next}
+		replace all "{NEW}" with "%{_level}+1%" in {_next}
+		set {_upgcost} to upgradegen({_player}, {_block}, true)
+		set {_cost} to {Config::GUIS::GenInfo::Cost}
+		replace all "{COST}" with formatnumber({_upgcost}) in {_cost}
+	else:
+		set {_max} to true
+	set {_checkval::*} to uncolored lore of {Generatory::%{_level}%}
+	if {_broken} is true:
+		set {_upgcost} to "%{GensBuyData::%{_level}%::1} / 25%"
+		set {_cost} to {Config::GUIS::GenInfo::RepairCost}
+		replace all "{COST}" with formatnumber({_upgcost}) in {_cost}
+		set {_item} to {Config::GUIS::GenInfo::Repair}
+		replace all "{COST}" with {_cost} in {_item}'s lore
+		set slot 38 and 39 and 40 and 41 and 42 of {_x} to {_item}
+	else:
+		if {_max} is true:
+			set slot 38 and 39 and 40 and 41 and 42 of {_x} to {Config::GUIS::GenInfo::MaxLevel}
+		else:
+			set {_item} to {Config::GUIS::GenInfo::UpgradeGen}
+			replace all "{LEVEL}" with "%{_next}%" in {_item}'s lore
+			replace all "{COST}" with "%{_cost}%" in {_item}'s lore
+			replace all "{INFO}" with "%{_upgrade}%" in {_item}'s lore
+			set slot 38 and 39 and 40 and 41 and 42 of {_x} to {_item}
+	set slot 21, 22, 23 of {_x} to {Config::GUIS::GenInfo::Informations}
+	open {_x} for {_player}
+
+function itemValue(number: number) :: text:
+	set {_value} to {Config::Gens::ValueLore}
+	set {_number} to "%{_number}%"
+	replace all "{VALUE}" with formatnumber({_number}) in {_value}
+	return {_value}
+function genLoreInfo(number: number) :: text:
+	set {_value} to {Config::Gens::GenInfo-DropValue}
+	replace all "{VALUE}" with "%{_number}%" in {_value}
+	return {_value}
+
+every 30 minutes:
+    startevent("Random")
+
+function eventMessage(eventdata: text):
+	if {_eventdata} is "FarmBoost":
+		set {_dur} to "%floor({Config::Farms::Duration}/60)% %{Config::Gens::EventName::MinutesPrefix}%"
+	else:
+		set {_dur} to "%floor({Config::Gens::Event::Duration}/60)% %{Config::Gens::EventName::MinutesPrefix}%"
+	set {_event} to {Config::Gens::EventName::%{_eventdata}%}
+	set {_title} to {Config::Gens::Event::Title}
+	replace all "{EVENT}" with {_event} in {_title}
+	set {_gradient} to formatted gradient({_title}, ("f9a600", "f8f04b"))
+	set {_header} to {Config::Gens::Event::Header}
+	replace all "{TITLE}" with {_gradient} in {_header}
+	set {_mess} to {Config::Gens::Event::DurTitle}
+	replace all "{EVENT}" with {_event} in {_mess}
+	replace all "{TIME}" with "%{_dur}%" in {_mess}
+
+	send "" to all players
+	send {_header} to all players
+	send "" to all players
+	send {_mess} to all players
+	send "" to all players
+	send {Config::Gens::Event::%{_eventdata}%::1} to all players
+	send {Config::Gens::Event::%{_eventdata}%::2} to all players
+	send "" to all players
+
+	set {_eventtitle} to {Config::Gens::EventName::EventTitle}
+	replace all "{EVENT}" with "%{_event}%" in {_eventtitle}
+	set {_playertitle} to {Config::Gens::Event::PlayerTitle}
+	replace all "{EVENT}" with {_event} in {_playertitle}
+	replace all "{TIME}" with "%{_dur}%" in {_playertitle}
+
+	loop all players:
+		send loop-player title "<##FFFFFD>" with subtitle "%{_playertitle}%" for 3 seconds
+		if {Config::BossbarStats::Enabled} is true:
+			if {_eventdata} is not "FarmBoost":
+				eventTitle(loop-player, {_eventtitle}, {Config::Gens::EventName::EventTitleLength})
+
+function startevent(forceevent: text = "Random"):
+	loop all players:
+		sfx(loop-player, "EventStart")
+	if {_forceevent} is "Random":
+		set {_eventdata} to "DoubleXP" or "DoubleDrop" or "GensTier" or "FarmingBoost"
+	else:
+		set {_eventdata} to {_forceevent}
+	set {_event} to {Config::Gens::EventName::%{_eventdata}%}
+	set {_currentevent} to {_event}
+	set {GlobalEvent} to {_event}
+	eventMessage({_eventdata})
+	set {EventTime} to {Config::Gens::Event::Duration}
+	loop {Config::Gens::Event::Duration} times:
+		set {_a} to {EventTime}
+		remove 1 from {EventTime}
+		wait 1 second
+		if {_a}-1 is not {EventTime}:
+			stop
+	if {GlobalEvent} is {_currentevent}:
+		loop all players:
+			sfx(loop-player, "EventEnd")
+		send "" to all players
+		set {_mess} to {Config::Gens::Event::End}
+		replace all "{EVENT}" with {Config::Gens::EventName::%{_eventdata}%} in {_mess}
+		send formatted {_mess} to all players
+		send "" to all players
+		loop all players:
+			bossbar(loop-player)
+		delete {GlobalEvent}
+		delete {EventTime}
+
+command /vender:
+	cooldown: 3 seconds
+	cooldown message: %{Config::Gens::SellDelay}%
+	trigger:
+		sell(player, true)
+
+command /vendertudo:
+	cooldown: 3 seconds
+	cooldown message: %{Config::Gens::SellDelay}%
+	trigger:
+		sell(player, true)
+
+command /sell:
+	cooldown: 3 seconds
+	cooldown message: %{Config::Gens::SellDelay}%
+	trigger:
+		sell(player, true)
+
+command /sellall:
+	cooldown: 3 seconds
+	cooldown message: %{Config::Gens::SellDelay}%
+	trigger:
+		sell(player, true)
+
+command /compactar:
+	aliases: compress, convert, change
+	cooldown: 3 seconds
+	cooldown message: %{Config::Gens::ChangeDelay}%
+	trigger:
+		compressitems(player, false)
+
+function sell(player: player, reply: boolean):
+	loop all items in {_player}'s inventory:
+		delete {_value}
+		set {_value} to int tag "ItemValue" of custom nbt of loop-value
+		if {_value} is set:
+			add {_value}*item amount of loop-value to {_total}
+			remove loop-value from {_player}'s inventory
+	# Potion boosts
+	loop 3 times:
+		set {_check} to difference between now and {ActivePot::%{_player}%::Start::ExtraSell-%loop-value%}
+		if {_check} < {ActivePot::%{_player}%::Type::ExtraSell-%loop-value%}:
+			set {_extrasell} to 1+((loop-value/20)*2)
+	if {_extrasell} is set:
+		set {_total} to ({_total}*{_extrasell})
+
+	if {_total} is set:
+		set {_total} to {_total}*(1+({Rebirth::%{_player}%}*0.05)) # Rebirth Multiplier
+		if {CurrentPet::Item::%{_player}%} is set:
+			set {_total} to {_total}*(float tag "Multi-Money" of custom nbt of {CurrentPet::Item::%{_player}%} ? 1)
+		add {_total} to {_player}'s balance
+		if {_player}'s balance is bigger or equal to 1000:
+			if {Objective::%{_player}%} is "EarnMoney":
+				set {Objective::%{_player}%} to "BuyPickaxe"
+				play sound "entity.illusioner.cast_spell" with pitch 1.3 for {_player}
+		if {_player}'s balance is bigger or equal to 5000:
+			if {Objective::%{_player}%} is "EarnMoney2":
+				set {Objective::%{_player}%} to "BuyGen"
+				play sound "entity.illusioner.cast_spell" with pitch 1.3 for {_player}
+
+
+	if {_reply} is true:
+		if {_total} > 0:
+			set {_replace} to "%floor({_total})%"
+			set {_mess} to {Config::Gens::Sold}
+			replace all "{VALUE}" with formatnumber({_replace}) in {_mess}
+			send {_mess} to {_player}
+			sfx({_player}, "Sell")
+		else:
+			send {Config::Gens::SellNothing} to {_player}
+			play sound "entity.illusioner.mirror_move" with pitch 2 for {_player}
+	else:
+		if {_total} > 0:
+			set {_mess} to {Config::Gens::SoldAuto}
+			replace all "{VALUE}" with formatnumber("%floor({_total})%") in {_mess}
+			send {_mess} to {_player}
+			sfx({_player}, "Sell")
+
+function compressitems(player: player, auto: boolean):
+	loop all items in {_player}'s inventory:
+		delete {_NBT}
+		set {_NBT} to string tag "CaveItem" of custom nbt of loop-value
+		if {_NBT} is set:
+			if {_player} has 64 of loop-value:
+				remove 64 of loop-value from {_player}
+				give {_player} 1 of {GenData::%{_NBT}%-UPGRADED}
+				set {_converted} to true
+				if {Objective::%{_player}%} is "Convert":
+					set {Objective::%{_player}%} to "Upgrade"
+					play sound "entity.illusioner.cast_spell" with pitch 1.3 for {_player}
+	if {_auto} is false:
+		if {_converted} is not set:
+			send {Config::Gens::ChangeNothing} to {_player}
+			play sound "entity.illusioner.mirror_move" with pitch 2 for {_player}
+	if {_converted} is set:
+		send {Config::Gens::ItemsChanged} to {_player}
+		play sound "entity.player.levelup" with pitch 2 for {_player}
+
+function toolreq(player: player, tool: text, command: text):
+	set {_mess} to {Config::Gens::ToolRequired}
+	replace all "{TOOL}" with {_tool} in {_mess}
+	replace all "{COMMAND}" with {_command} in {_mess}
+	send {_mess} to {_player}
+	play sound "entity.illusioner.mirror_move" with pitch 2 for {_player}
+
+on place: # (Cancel place in Cave)
+	if player is in world "world":
+		if x-coordinates of event-block >= 1000:
+			cancel event
+			send {Config::Gens::CantDoThis} to player
+on damage: # (Cancel damage in Cave)
+	if victim is in world "world":
+		if x-coordinates of victim >= 1000:
+			cancel event
+
+function requiredLevel(player: player, tool: text, level: number, info: text):
+	set {_mess} to {Config::Gens::%{_info}%}
+	replace all "{LEVEL}" with "%{_level}%" in {_mess}
+	replace all "{TOOL}" with {_tool} in {_mess}
+	send {_mess} to {_player}
+	send action bar {_mess} to {_player}
+
+on break:
+	if {BypassEdit::%player%} is true:
+		if event-block is in region "spawn":
+			if {Config::Update35::BypassEditInfo} is true:
+				send action bar "&aBlock bypass is enabled! Toggle it using &6/adminpanel bypassedit" to player
+			stop
+	set {_blocktype} to "%type of event-block%"
+	set {_item} to player's tool
+	set {_level} to int tag "Tool-Level" of custom nbt of {_item}
+	if {ToolData::%player%::1} is not {_level}:
+		set {ToolData::%player%::1} to int tag "Tool-Level" of custom nbt of {_item}
+		set {ToolData::%player%::2} to float tag "Tool-Multi" of custom nbt of {_item}
+		set {ToolData::%player%::3} to float tag "Tool-Double" of custom nbt of {_item}
+		set {ToolData::%player%::4} to float tag "Tool-Bonus" of custom nbt of {_item}
+		set {ToolData::%player%::5} to float tag "Tool-Shard" of custom nbt of {_item}
+		set {ToolData::%player%::6} to string tag "Tool-Owner" of custom nbt of {_item}
+	set {_owner} to {ToolData::%player%::6}
+	if {_level} is set:
+		if {_owner} is not set:
+			set {_owner} to "%player%"
+			set string tag "Tool-Owner" of custom nbt of player's tool to "%player%"
+	if {BypassOwner::%player%} is true:
+		set {_owner} to "%player%"
+	set {_ownermess} to {Config::Tools::OnlyOwnerMess}
+	replace all "{OWNER}" with "%{_owner}%" in {_ownermess}
+	if "%{_owner}%" is not "%player%":
+		if {Config::Tools::OnlyOwner} is true:
+			cancel event
+			send {_ownermess} to player
+			play sound "entity.illusioner.mirror_move" with pitch 2 for player
+			stop
+	if event-block is in region {GenData::farm-region}:
+		set {_farm} to true
+		set {_check::*} to "Hoe", "/buyhoe", "hoes"
+	if event-block is in region {GenData::sawmill-region}:
+		set {_sawmill} to true
+		set {_check::*} to "Axe", "/buyaxe", "axes"
+	if event-block is in region {GenData::cave-region}:
+		set {_cave} to true
+		set {_check::*} to "Pickaxe", "/buypickaxe", "pickaxes"
+	if x-coordinates of event-block >= 1000:
+		if player is in world "world":
+			set {_cave} to true
+			set {_check::*} to "Pickaxe", "/buypickaxe", "pickaxes"
+	if {_cave} or {_farm} or {_sawmill} is true:
+		cancel event
+		if {BlockData::%{_blocktype}%::*} is set:
+			set {_continue} to true
+		if {_continue} is not set:
+			if {Config::Update35::DisableBreakMessage} is false:
+				send {Config::Gens::CantDoThis} to player
+			else:
+				if player has permission "*":
+					if {BypassEdit::%player%} is not true:
+						if {Config::Update35::BypassEditInfo} is true:
+							send action bar "&aTo edit blocks enter the command <##00f718>&l/adminpanel bypassedit" to player
+			stop
+		if player's tool is not tagged as item tag {_check::3}:
+			cancel event
+			toolreq(player, {Config::Tools::%{_check::1}%}, {_check::2})
+			stop
+		if {_level} is not set:
+			cancel event
+			toolreq(player, {Config::Tools::%{_check::1}%}, {_check::2})
+			stop
+	if {_cave} is true:
+		if event-block is cobblestone:
+			if {Objective::%player%} is "ToolPickaxe":
+				set {Objective::%player%} to "64Cobblestone"
+				play sound "entity.illusioner.cast_spell" with pitch 1.3 for player
+			if {Objective::%player%} is "64Cobblestone":
+				add 1 to {CobblestoneObj::%player%}
+				if {CobblestoneObj::%player%} >= 64:
+					delete {CobblestoneObj::%player%}
+					set {Objective::%player%} to "Convert"
+					play sound "entity.illusioner.cast_spell" with pitch 1.3 for player
+		blockincave(event-block, location at event-block, player, {_level}, false)
+	if {_farm} is true:
+		if {Objective::%player%} is "ToolHoe":
+			set {Objective::%player%} to "EarnMoney"
+			play sound "entity.illusioner.cast_spell" with pitch 1.3 for player
+		set {_radius} to int tag "Tool-Radius" of custom nbt of player's tool
+		blockinfarm(event-block, location at event-block, player, {_level}, {_radius})
+	if {_sawmill} is true:
+		if {Objective::%player%} is "ToolAxe":
+			set {Objective::%player%} to "EarnMoney"
+			play sound "entity.illusioner.cast_spell" with pitch 1.3 for player
+		blockinsawmill(event-block, location at event-block, player, {_level}, false)
+
+command /blocktype:
+	permission: *
+	trigger:
+		if type of targeted block is set:
+			send "&a&lBlock name: &6%type of targeted block%"
+			play sound "entity.player.levelup" with pitch 2 for player
+		else:
+			send "&cUnknown block!"
+
+function blockincave(block: block, loc: location, player: player, level: number, boost: boolean):
+	set {_typeOf} to "%type of {_block}%"
+	set {_save} to type of {_block}
+	set {_data} to {BlockData::%{_typeOf}%::1}
+	set {_req} to {BlockData::%{_typeOf}%::2}
+	if {_data} is set:
+		set {_level} to {Level::%{_player}%}
+		if {Config::Update35::RanksInstantFarm} is true:
+			loop 5 times:
+				if {_player} has permission "InstantFarm.%loop-value%":
+					if {BlockData::%{_typeOf}%::3} <= loop-value:
+						set {_level} to 9999
+		if {_level} < {_req}:
+			if {_boost} is false:
+				requiredLevel({_player}, {Config::Tools::Pickaxe}, {_req}, "GensLevel")
+			stop
+		set block at {_loc} to blackstone
+		spawn 1 of xp at location at {_loc}
+
+		if {UpgradedBlock::%location at {_loc}%} is set:
+			delete {UpgradedBlock::%location at {_loc}%}
+			play sound "entity.illusioner.cast_spell" with pitch 1.5 for {_player}
+			kill {UpgrEntity::%{_loc}%} parsed as entity
+			delete {UpgrEntity::%{_loc}%}
+			set {_data} to "%{_data}%-UPGRADED"
+		if {_boost} is true:
+			addexp({_player}, {_data}, 1, "None", {_loc}, {_typeOf})
+		else:
+			addexp({_player}, {_data}, 1, "Cave", {_loc}, {_typeOf})
+		set {_respawnTime} to unix timestamp of now
+		add location at {_block} to {MineRespawnQueue::%{_respawnTime}%::*}
+		set {MineRespawnQueue::%{_respawnTime}%} to {_respawnTime}
+		set {_format} to cordFormat(location at {_block}, {_respawnTime})
+		set {MineBlockData::%{_format}%} to {_save}
+
+
+function blockinsawmill(block: block, loc: location, player: player, level: number, boost: boolean):
+	set {_typeOf} to "%type of {_block}%"
+	set {_save} to type of {_block}
+	set {_data} to {BlockData::%{_typeOf}%::1}
+	set {_req} to {BlockData::%{_typeOf}%::2}
+	if {_data} is set:
+		set {_level} to {Level::%{_player}%}
+		if {Config::Update35::RanksInstantFarm} is true:
+			loop 5 times:
+				if {_player} has permission "InstantFarm.%loop-value%":
+					if {BlockData::%{_typeOf}%::3} <= loop-value:
+						set {_level} to 9999
+		if {_level} < {_req}:
+			if {_boost} is false:
+				requiredLevel({_player}, {Config::Tools::Axe}, {_req}, "GensLevel")
+			stop
+		set block at {_loc} to air
+		if {_boost} is true:
+			addexp({_player}, {_data}, 1, "None", {_loc}, {_typeOf})
+		else:
+			addexp({_player}, {_data}, 1, "Sawmill", {_loc}, {_typeOf})
+		set {_respawnTime} to unix timestamp of now
+		add location at {_block} to {SawmillRespawnQueue::%{_respawnTime}%::*}
+		set {SawmillRespawnQueue::%{_respawnTime}%} to {_respawnTime}
+		set {_format} to cordFormat(location at {_block}, {_respawnTime})
+		set {SawmillBlockData::%{_format}%} to {_save}
+
+every 5 minutes:
+	clear {-Used::*}
+
+function blockinfarm(block: block, loc: location, player: player, level: number, radius: number = -1):
+	set {_typeOf} to "%type of {_block}%"
+	set {_save} to type of {_block}
+	set {_data} to {BlockData::%{_typeOf}%::1}
+	set {_req} to {BlockData::%{_typeOf}%::2}
+	if {_data} is set:
+		set {_respawnTime} to unix timestamp of now
+		set {_resCheck} to "%{_respawnTime}%"
+		if {-Used::%{_resCheck}%} is set:
+			stop
+		set {-Used::%{_resCheck}%} to true
+		set {_level} to {Level::%{_player}%}
+		if {Config::Update35::RanksInstantFarm} is true:
+			loop 5 times:
+				if {_player} has permission "InstantFarm.%loop-value%":
+					if {BlockData::%{_typeOf}%::3} <= loop-value:
+						set {_level} to 9999
+		if {_level} < {_req}:
+			requiredLevel({_player}, {Config::Tools::Axe}, {_req}, "GensLevel")
+			stop
+		set {_cords} to cordFormat({_loc}, {_respawnTime})
+		if {_radius} > 1:
+			set {_minus} to "-%{_radius}-2%" parsed as number
+			set {_vec1} to vector({_minus}, 0, {_minus})
+			set {_vec2} to vector({_radius}-2, 0, {_radius}-2)
+			loop all blocks within {_loc} ~ {_vec1} and {_loc} ~ {_vec2}:
+				if type of loop-block is {_save}:
+					set block at loop-block to air
+					add 1 to {_exp}
+					add location at loop-block to {_list::*}
+			add {_list::*} to {-FBRad::%{_respawnTime}%::%{_cords}%::*}
+		else:
+			set block at {_loc} to air
+		add location at {_block} to {FarmRespawnQueue::%{_respawnTime}%::*}
+		set {FarmBlockData::%{_cords}%} to {_save}
+		addexp({_player}, {_data}, 1+({_exp}), "Farm", {_loc}, {_typeOf})
+		set {FarmRespawnQueue::%{_respawnTime}%} to {_respawnTime}
+		set {_loc} to location at {_block}
+
+function cordFormat(loc: location, time: number) :: text:
+	set {_x} to floor(x-coords of {_loc})
+	set {_y} to floor(y-coords of {_loc})
+	set {_z} to floor(z-coords of {_loc})
+	return "%{_x}%, %{_y}%, %{_z}%, %{_time}%"
+
+every 2 second:
+	updateFarms()
+
+function updateFarms():
+	loop {FarmRespawnQueue::*}:
+		set {_respawnTs} to loop-value
+		if difference between {_respawnTs} and unix timestamp of now >= 1:
+			loop {FarmRespawnQueue::%{_respawnTs}%::*}:
+				set {_loc} to loop-value-2
+				set {_format} to cordFormat(location at {_loc}, {_respawnTs})
+				set {_type} to "%{FarmBlockData::%{_format}%}%"
+				if {-FBRad::%{_respawnTs}%::%{_format}%::*} is set:
+					loop {-FBRad::%{_respawnTs}%::%{_format}%::*}:
+						set block at loop-value-3 to {FarmFixBlock::%{_type}%}
+						if {FarmFixBlock::%{_type}%} is not set:
+							set block at loop-value-3 to diamond block
+					clear {-FBRad::%{_respawnTs}%::%{_format}%::*}
+				else:
+					set block at {_loc} to {FarmFixBlock::%{_type}%}
+				delete {FarmBlockData::%{_format}%}
+			clear {FarmRespawnQueue::%{_respawnTs}%::*}
+			delete {FarmRespawnQueue::%{_respawnTs}%}
+	loop {MineRespawnQueue::*}:
+		set {_respawnTs} to loop-value
+		if difference between {_respawnTs} and unix timestamp of now >= 10:
+			loop {MineRespawnQueue::%{_respawnTs}%::*}:
+				set {_loc} to loop-value-2
+				set {_format} to cordFormat(location at {_loc}, {_respawnTs})
+				if block at {_loc} is blackstone:
+					set block at {_loc} to {MineBlockData::%{_format}%}
+					chance of {Config::Gens::UpgradedBlocks::Chance}%:
+						effect5({_loc})
+						set {UpgradedBlock::%location at {_loc}%} to location at {_loc}
+					delete {MineBlockData::%{_format}%}
+			clear {MineRespawnQueue::%{_respawnTs}%::*}
+			delete {MineRespawnQueue::%{_respawnTs}%}
+	loop {SawmillRespawnQueue::*}:
+		set {_respawnTs} to loop-value
+		if difference between {_respawnTs} and unix timestamp of now >= 10:
+			loop {SawmillRespawnQueue::%{_respawnTs}%::*}:
+				set {_loc} to loop-value-2
+				set {_format} to cordFormat({_loc}, {_respawnTs})
+				set block at {_loc} to {SawmillBlockData::%{_format}%}
+				delete {SawmillBlockData::%{_format}%}
+			clear {SawmillRespawnQueue::%{_respawnTs}%::*}
+			delete {SawmillRespawnQueue::%{_respawnTs}%}
+
+function actionbar(player: player, add: number):
+	add {_add} to {Exp::%{_player}%}
+	set {_RebM} to 1+({Rebirth::%{_player}%}/2)
+	if {Exp::%{_player}%} >= round((({Level::%{_player}%}*750)*1.5)*{_RebM}):
+		set {Exp::%{_player}%} to 0
+		add 1 to {Level::%{_player}%}
+		levelup({_player})
+	set {_xp} to {Exp::%{_player}%}
+	set {_need} to round((({Level::%{_player}%}*750)*1.5)*{_RebM})
+	set {_percent} to ({_xp}/{_need})*100
+	if {_player}'s gamemode is spectator:
+		loop all armor stands:
+			if name of loop-armor stand contains "Cinematic-%{_player}%":
+				if {Cinematic-Skip::%{_player}%} is 1 or 2:
+					set {_info} to "3"
+				if {Cinematic-Skip::%{_player}%} is 3 or 4:
+					set {_info} to "2"
+				if {Cinematic-Skip::%{_player}%} is 5 or 6:
+					set {_info} to "1"
+				if {_info} is set:
+					set {_bar} to {Config::Cinematic::SkipTimes}
+					replace all "{TIMES}" with {_info} in {_bar}
+					send action bar {_bar} to {_player}
+				else:
+					send action bar {Config::Cinematic::SkipMessage} to {_player}
+				stop
+	else:
+		set {_actionbar} to {Config::Gens::ActionBar}
+		replace all "{HELPTEXT}" with "%{InfoText}%" in {_actionbar}
+		replace all "{LEVEL}" with "%{Level::%{_player}%}%" in {_actionbar}
+		replace all "{EXP}" with ecoFormat({Exp::%{_player}%}) in {_actionbar}
+		replace all "{REQUIRED}" with ecoFormat((({Level::%{_player}%}*750)*1.5)*{_RebM}) in {_actionbar}
+		replace all "{PERCENT}" with "%floor({_percent})%" in {_actionbar}
+		if difference between now and {ActionBarTime::%{_player}%} < 3 seconds:
+			send action bar "%{_actionbar}%%{ActionBarInfo::%{_player}%}%" to {_player}
+		else:
+			send action bar {_actionbar} to {_player}
+			delete {ActionBarTime::%{_player}%}
+			delete {ActionBarInfo::%{_player}%}
+
+function generateItem(level: number, type: text, extraradius: number) :: item:
+	if {_level} > 80:
+		return {_null}
+	set {_Types::Hoe::*}        to wooden hoe and stone hoe and iron hoe and golden hoe and diamond hoe and netherite hoe
+	set {_Types::Pickaxe::*}    to stone pickaxe and stone pickaxe and iron pickaxe and golden pickaxe and diamond pickaxe and netherite pickaxe
+	set {_Types::Axe::*}        to stone axe and stone axe and iron axe and golden axe and diamond axe and netherite axe
+	set {_Types::FishingRod::*} to fishing rod and fishing rod and fishing rod and fishing rod and fishing rod and fishing rod
+	set {_Types::Prefix::*}     to {Config::GUIS::Update31::Tools::Prefixes::*}
+	set {_Types::Names::1::*}   to {Config::GUIS::Update31::Tools::Male::*} # Male
+	set {_Types::Names::2::*}   to {Config::GUIS::Update31::Tools::Female::*} # Female
+	set {_Types::Lang::Hoe::*}     to 1 and {Config::GUIS::Update31::Tools::Farm}
+	set {_Types::Lang::Pickaxe::*} to 1 and {Config::GUIS::Update31::Tools::Cave}
+	set {_Types::Lang::Axe::*}     to 1 and {Config::GUIS::Update31::Tools::Sawmill}
+	set {_Types::Lang::FishingRod::*}     to 1 and {Config::GUIS::Update31::Tools::Pond}
+	set {_multiplier} to 1+(({_level})*0.2)
+	set {_doubledrop} to 1
+	set {_extrabonus} to 1
+	set {_token} to 0
+	if {_level} >= 15:
+		set {_enchant} to efficiency 1
+	if {_level} >= 30:
+		set {_enchant} to efficiency 2
+	if {_level} >= 45:
+		set {_enchant} to efficiency 3
+	if {_level} >= 60:
+		set {_enchant} to efficiency 4
+	if {_level} >= 75:
+		set {_enchant} to efficiency 5
+	loop floor({_level}/1.6) times:
+		add 0.1 to {_token}
+	set {_upgraded} to ""
+	set {_ItemType} to floor((({_level}-1)/10)+1)
+	if {_level} > 5:
+		if {_itemtype} is 1:
+			set {_ItemType} to 2
+	if {_ItemType} >= 6:
+		set {_ItemType} to 6
+	if {_level} > 25:
+		set {_upgraded} to "%{Config::Tools::UpgradedTitle%{_Types::Lang::%{_type}%::1}%}% "
+	if {_level} > 50:
+		set {_upgraded} to "%{Config::Tools::MythicTitle%{_Types::Lang::%{_type}%::1}%}% "
+	set {_checks::*} to "Hoe" and "Pickaxe" and "Axe" and "FishingRod"
+	loop {_checks::*}:
+		if {_type} is loop-value:
+			set {_name} to {_Types::Prefix::%loop-counter%}
+	set {_rarity} to {_Types::Names::%{_Types::Lang::%{_type}%::1}%::%{_ItemType}%}
+	if {_type} is "Pickaxe" or "Axe":
+		if {_rarity} is {_Types::Names::%{_Types::Lang::%{_type}%::1}%::1}:
+			set {_rarity} to {_Types::Names::%{_Types::Lang::%{_type}%::1}%::2}
+	if "%{_multiplier}%" contains ".":
+		set {_format} to {_multiplier}
+	else:
+		set {_format} to "%{_multiplier}%.0"
+	set {_infoX} to {Config::GUIS::Update31::Tools::XPMulti}
+	replace all "{AMOUNT}" with "%{_format}%" in {_infoX}
+	set {_stats::*} to {_infoX}
+	if {_level} > 5:
+		set {_infoX} to {Config::GUIS::Update31::Tools::DoubleDrop}
+		replace all "{AMOUNT}" with "%({_doubledrop}*{_level})-5%" in {_infoX}
+		add {_infoX} to {_stats::*}
+	if {_level} > 10:
+		set {_infoX} to {Config::GUIS::Update31::Tools::ExtraBonus}
+		replace all "{AMOUNT}" with "%(({_extrabonus}*{_level})/10)%" in {_infoX}
+		add {_infoX} to {_stats::*}
+	if {_level} > 15:
+		if {_type} is "FishingRod":
+			set {_infoX} to {Config::GUIS::Update31::Tools::FishingSpeed}
+			replace all "{AMOUNT}" with "%(({_doubledrop}*{_level})-5)/10%" in {_infoX}
+			add "" and {_infoX} to {_stats::*}
+		set {_infoX} to {Config::GUIS::Update31::Tools::ShardChance}
+		replace all "{AMOUNT}" with "%{_token}%" in {_infoX}
+		add "" and {_infoX} to {_stats::*}
+	if {_extraradius} > 1:
+		set {_infoX} to {Config::GUIS::Update31::Tools::Radius}
+		replace all "{RADIUS}" with "%{_extraradius}%" in {_infoX}
+		add "" and {_infoX} to {_stats::*}
+	if {Config::Update35::ToolStats} is true:
+		set {_uses::*} to {Config::Update35::ToolStatsLore} and ""
+	set {_item} to {_Types::%{_type}%::%{_ItemType}%} named "&e%{_upgraded}%&e%{_name}% %{_rarity}% &b(%{_level}%★)" with lore "" and {_stats::*} and "" and {_uses::*} and {Config::Update35::ToolUpgradeLore} and {_Types::Lang::%{_type}%::2}
+	set int tag "Tool-Level" of custom nbt of {_item} to {_level}
+	set float tag "Tool-Multi" of custom nbt of {_item} to {_multiplier}
+	if {_level} > 5:
+		set float tag "Tool-Double" of custom nbt of {_item} to ({_doubledrop}*{_level})-5
+	if {_level} > 10:
+		set float tag "Tool-Bonus" of custom nbt of {_item} to (({_extrabonus}*{_level})/10)
+	if {_level} > 15:
+		set float tag "Tool-Shard" of custom nbt of {_item} to {_token}
+		if {_type} is "FishingRod":
+			set float tag "Tool-FishingSpeed" of custom nbt of {_item} to (({_doubledrop}*{_level})-5)/10
+	if {_extraradius} > 1:
+		set int tag "Tool-Radius" of custom nbt of {_item} to {_extraradius}
+	enchant {_item} with {_enchant}
+	loop all attribute types:
+		add default loop-value modifier of {_item} to loop-value modifier of {_item}
+
+	add hide attributes to item flags of {_item}
+	return {_item} with item flags hide enchants
+
+on fishing state change:
+	if int tag "Tool-Level" of custom nbt of player's tool is set:
+		set {_check} to float tag "Tool-FishingSpeed" of custom nbt of player's tool
+		set {_time} to 15
+		if {_check} is set:
+			set {_time} to ({_time}/{_check})-1
+		set max wait time of fish hook to "%{_time}% seconds" parsed as timespan
+
+on fish catch:
+	if int tag "Tool-Level" of custom nbt of player's tool is set:
+		if {Config::Gens::FishingAntiAFK} is true:
+			cancel event
+			set max wait time of fish hook to 100 seconds
+			loop random integer between 3 and 7 times:
+				add "L" or "R" to {_list::*}
+			set {Caught::%player%::*} to {_list::*}
+			set {FishDelay::%player%} to now
+			delete {CaughtData::%player%::*}
+			set {CaughtTime::%player%} to now
+			fishingTitle(player, 1)
+			while {Caught::%player%::*} is set:
+				if difference between now and {CaughtTime::%player%} > 1.5 seconds:
+					fishing(player, false)
+					delete fishing hook
+				wait 1 tick
+			delete fishing hook
+		else:
+			set item of fish caught entity to air
+			addexp(player, randomFish(), 1, "Pond", location at player)
+
+function fishingTitle(player: player, check: number):
+	set {_subtitle} to {Config::GUIS::Update31::Fishing::Match}
+	set {_final} to ""
+	if {_check} is 1:
+		set {_x} to 0
+		loop {CaughtData::%{_player}%::*}:
+			set {_final} to "%{_final}%&a%loop-value% "
+			add 1 to {_x}
+		loop {Caught::%{_player}%::*}:
+			if loop-counter > {_x}:
+				set {_final} to "%{_final}%&7%loop-value% "
+		set {_time} to 3 second
+	else if {_check} is 2:
+		set {_x} to size of {Caught::%{_player}%::*}
+		loop {Caught::%{_player}%::*}:
+			set {_final} to "%{_final}%&c%loop-value% "
+			set {_time} to 1 second
+	else:
+		set {_x} to size of {Caught::%{_player}%::*}
+		loop {Caught::%{_player}%::*}:
+			set {_final} to "%{_final}%<##FCA805>%loop-value% "
+			set {_time} to 1 second
+		addexp({_player}, randomFish(), 1, "Pond", location at {_player})
+	if {_x} is 0:
+		send {_player} title {_final} with subtitle {_subtitle} for {_time} with 0.5 seconds fade in and 0 seconds fade out
+	else if {_x} is size of {Caught::%{_player}%::*}:
+		send {_player} title {_final} with subtitle {_subtitle} for {_time} with 0 seconds fade in and 0.5 seconds fade out
+	else:
+		send {_player} title {_final} with subtitle {_subtitle} for {_time} with 0 seconds fade in and 0 seconds fade out
+
+on left click:
+	if player's tool is fishing rod:
+		if {Caught::%player%::*} is set:
+			cancel event
+			if difference between now and {CaughtTime::%player%} >= 2 tick:
+				set {CaughtTime::%player%} to now
+				add "L" to {CaughtData::%player%::*}
+				loop size of {CaughtData::%player%::*} times:
+					if {Caught::%player%::%loop-counter%} is not {CaughtData::%player%::%loop-counter%}:
+						set {_stop} to true
+				if {_stop} is true:
+					fishing(player, false)
+				else:
+					fishing(player, true)
+
+on player's held item change:
+	if {FishDelay::%player%} is set:
+		fishing(player, false)
+
+function randomFish() :: text:
+	loop {FishList::*}:
+		add loop-value to {_data::*}
+		add loop-index parsed as number to {_chances::*}
+	loop {_chances::*}:
+		add loop-value to {_suma}
+		add {_suma} to {_check::*}
+	set {_rand} to random integer between 1 and 100
+
+	loop {_check::*}:
+		if {_rand} <= loop-value:
+			return {_data::%loop-counter%}
+
+
+function fishing(player: player, data: boolean):
+	if {_data} is false:
+		fishingTitle({_player}, 2)
+		delete {Caught::%{_player}%::*}
+		delete {CaughtData::%{_player}%::*}
+		delete {FishDelay::%{_player}%}
+	else:
+		if size of {CaughtData::%{_player}%::*} is size of {Caught::%{_player}%::*}:
+			fishingTitle({_player}, 3)
+			delete {Caught::%{_player}%::*}
+			delete {CaughtData::%{_player}%::*}
+			delete {FishDelay::%{_player}%}
+		else:
+			fishingTitle({_player}, 1)
+command /toolcreator [<text>] [<number>]:
+	permission: *
+	permission message: %{Config::Global::Permission}%
+	trigger:
+		set {_list::*} to "Brush"
+		if arg-1 is not set:
+			send "&cPlease select item Boost Type!"
+			send "&cAvailable types:"
+			loop {_list::*}:
+				send " &7- &a%loop-value%"
+		else:
+			if {_list::*} contains arg-1:
+				if arg-1 is "Brush":
+					set {_level} to int tag "Tool-Level" of custom nbt of player's tool
+					if {_level} is set:
+						if player's tool is tagged as item tag "hoes":
+							if arg-2 is not set:
+								send "&cUse Brush radius 1-10"
+								stop
+							if arg-2 < 1:
+								send "&cUse Brush radius 1-10"
+								stop
+							if arg-2 > 100:
+								send "&cUse Brush radius 1-10"
+								stop
+							set {_level} to int tag "Tool-Level" of custom nbt of player's tool
+							set {_item} to generateItem({_level}, "Hoe", arg-2)
+							if {Config::Update35::ToolStats} is true:
+								replace all "{USES}" with "0" in {_item}'s lore
+							set player's tool to {_item}
+							send "&aSuccess!"
+							play sound "entity.player.levelup" with pitch 2 for player
+						else:
+							send "&cYou can set Brush Radius only for Hoe!"
+					else:
+						send "&cThis is not Gens Tool!"
+			else:
+				send "&cIncorrect item Boost Type!"
+				send "&cAvailable types:"
+				loop {_list::*}:
+					send " &7- &a%loop-value%"
+
+
+on item damage:
+	if uncolored name of player's tool contains "★":
+		cancel event
+
+
+function levelup(player: player):
+	play sound "entity.player.levelup" with pitch 2 for {_player}
+	play sound "ui.toast.challenge_complete" with pitch 2 for {_player}
+	set {_nextlevel::*} to {Config::Gens::NextLevel::*}
+	replace all "{LEVEL}" with "%{Level::%{_player}%}%" in {_nextlevel::2}
+	send {_player} title {_nextlevel::1} with subtitle {_nextlevel::2} for 5 seconds
+	apply speed potion of tier 2 to {_player} for 10 second
+	if {Config::Update35::DisableAnimations} is false:
+		levelUpAnim({_player}, {Level::%{_player}%})
+
+function levelUpAnim(player: player, level: number):
+	set {_loc} to location 1 above {_player}
+	set {_loc2} to location 2.4 above {_player}
+	effect4Anim({_loc}, "00c8f9", "", 1, 0.3, true, 0, {_player}, 1)
+	effect4Anim({_loc2}, "ffffff", "       ", 5, 0.3, true, 0, {_player}, 2.4)
+	levelUpConfetti({_player})
+	set {_text::*} to {Config::Update35::LevelUpHolo} and "<##fcf932>&l%{_level}%"
+	LevelUpText({_player}, {_level}, {_text::*})
+
+function levelUpConfetti(player: player):
+	loop 80 times:
+		set {_loc} to location 3 above {_player}
+		add random number between 1.3 and -1.3 to x-coords of {_loc}
+		add random number between 0.3 and -0.3 to y-coords of {_loc}
+		add random number between 1.3 and -1.3 to z-coords of {_loc}
+		chance of 13%:
+			confetti({_loc}, true)
+		else:
+			confetti2({_loc}, true)
+		wait 1 ticks
+
+function LevelUpText(player: player, level: number, text: objects):
+	set {_loc} to location 2.5 above {_player}
+	spawn text display at {_loc}:
+		set {_entity} to the display
+		set billboard of the last spawned text display to center
+		set display scale of entity to vector(0,0,0)
+		set display text of entity to colored {_text::*}
+		set display text background color of entity to bukkitColor(0,0,0,0)
+		set interpolation start of entity to 0
+		set interpolation duration of entity to 1 tick
+		set display item of entity to {_type}
+		set teleport duration of entity to 3 ticks
+	abovePlayer({_player}, {_entity}, 0.3)
+	set {_Bounce-In::*} to 0, 0.1, 0.25, 0.45, 0.7, 0.9, 1.02, 1.08, 1.1, 1.09, 1.07, 1.05, 1.03, 1.01 and 1
+	loop {_Bounce-In::*}:
+		set {_size} to loop-value*1.2
+		set display scale of {_entity} to vector({_size}, {_size}, {_size})
+		set interpolation start of {_entity} to 0
+		wait 1 tick
+	wait 2 seconds
+	set {_Bounce-In::*} to 0, 0.1, 0.25, 0.45, 0.7, 0.9, 1.02, 1.08, 1.1, 1.09, 1.07, 1.05, 1.03, 1.01 and 1
+	loop {_Bounce-In::*}:
+		set {_size} to 1.2+loop-value
+		set display scale of {_entity} to vector({_size}, {_size}, {_size})
+		set interpolation start of {_entity} to 0
+		set {_op} to 255 - (loop-counter*(255/size of {_Bounce-In::*}+8))
+		if {_op} < 5:
+			set {_op} to 5
+		set display text opacity of {_entity} to {_op}
+		wait 1 tick
+	wait 0.5 second
+	kill {_entity}
+
+function abovePlayer(player: player, entity: entity, height: number):
+	set {_y} to 2.5
+	while {_entity} is alive:
+		if {_y} < 2.5+{_height}:
+			if {_height} >= 1:
+				add 0.02 to {_y}
+			else:
+				add 0.005 to {_y}
+		teleport {_entity} to location {_y} above {_player}
+		wait 1 tick
+
+function addexp(player: player, item: text, itemamount: number, boosts: text, loc: location, type: text = ""):
+	if {Config::Update35::DropKeysFromFarms} is true:
+		chance of {Config::Update35::DropKeysChance}%:
+			set {_key} to random element out of {Config::Update35::DropKeysList::*}
+			execute console command "crates key give %{_player}% %{_key}% 1"
+	set {_OrgAm} to {_itemamount}
+	set {_itemdata} to {_item}
+	set {_item} to {GenData::%{_itemdata}%}
+	set {_multi} to {ToolData::%{_player}%::2}
+	set {_double} to {ToolData::%{_player}%::3}
+	set {_bonus} to {ToolData::%{_player}%::4}
+	set {_token} to {ToolData::%{_player}%::5}
+	if {Config::Update35::ToolStats} is true:
+		set {_newItem} to {_player}'s tool
+		set {_current} to int tag "Uses" of custom nbt of {_newItem}
+		set int tag "Uses" of custom nbt of {_newItem} to {_current}+1
+		set {_newUses} to {Config::Update35::ToolStatsLore}
+		replace all "{USES}" with "%{_current}+1%" in {_newUses}
+		set {_lore::*} to {_newItem}'s lore
+		set {_check::*} to {Config::Update35::ToolStatsLore} split at "{USES}"
+		loop {_lore::*}:
+			if loop-value contains {_check::1}:
+				set {_line} to loop-counter
+				stop loop
+		set {_lore::%{_line}%} to {_newUses}
+		set {_newItem}'s lore to {_lore::*}
+		set {_player}'s tool to {_newItem}
+
+	set {_exp} to (3*{_multi})*{_itemamount}
+	chance of {_double}%:
+		set {_itemamount} to {_itemamount}*2
+	if {_boosts} is not "None":
+		chance of {_bonus}%:
+			set {_item} to {GenData::%{_itemdata}%-UPGRADED}
+	chance of {_token}*{_OrgAm}%:
+		set {_tokens} to 1
+		if {CurrentPet::Item::%{_player}%} is set:
+			set {_tokens} to floor({_tokens}*(float tag "Multi-Tokens" of custom nbt of {CurrentPet::Item::%{_player}%} ? 1))
+		add {_tokens} to {Tokens::%{_player}%}
+	chance of 0.1*{_OrgAm}%:
+		give {_player} {GenData::crystalshard}
+	if {FarmsEvent} > 0:
+		if string tag "ItemFrom" of custom nbt of {_item} is "Farm":
+			set {_itemamount} to {_itemamount}*2
+	if {GlobalEvent} is {Config::Gens::EventName::DoubleXP}:
+		set {_exp} to {_exp}*2
+	if {GlobalEvent} is {Config::Gens::EventName::FarmingBoost}:
+		set {_OrgAm} to {_OrgAm}*5
+	# Tool Boosts
+	if {_boosts} is not "None":
+
+		if {_boosts} is "Farm" or "Cave" or "Sawmill":
+			chance of ({BoostLevel::%{_player}%::Explosion}/15)*{Config::Update35::BoostChance}*{_OrgAm}%: # Explosion
+				effect5X({_loc}, 1+(0.15*{BoostLevel::%{_player}%::Explosion}), {_player}, {_type}, {_boosts})
+			chance of ({BoostLevel::%{_player}%::Speed}/30)*{Config::Update35::BoostChance}*{_OrgAm}%: # Speed
+				set {SpeedDelay::%{_player}%} to now
+				speedBoost({_player}, 0.2+((0.4/100)*{BoostLevel::%{_player}%::Speed}))
+			chance of ({BoostLevel::%{_player}%::Radius}/70)*{Config::Update35::BoostChance}%: # Radius
+				breakBlocks({_loc}, 2+((2/50)*{BoostLevel::%{_player}%::Radius}), {_player}, {_type}, {_boosts})
+				play sound "block.amethyst_block.place" with pitch 2 at {_loc}
+
+		if {_boosts} is "Farm":
+			chance of ({BoostLevel::%{_player}%::TNT}/70)*{Config::Update35::BoostChance}*{_OrgAm}%: # TNT
+				effect10({_loc}, {_player}, 2.5+(0.1*{BoostLevel::%{_player}%::TNT}), {_type})
+			chance of ({BoostLevel::%{_player}%::MagicCircle}/50)*{Config::Update35::BoostChance}*{_OrgAm}%: # Magic Circle
+				effect1({_loc}, 3+((3/10)*{BoostLevel::%{_player}%::MagicCircle}), 1, {_player}, {_type})
+			chance of ({BoostLevel::%{_player}%::Beams}/125)*{Config::Update35::BoostChance}*{_OrgAm}%: # Beams
+				effect2({_loc}, {_player}, {_type})
+			chance of ({BoostLevel::%{_player}%::Meteor}/600)*{Config::Update35::BoostChance}*{_OrgAm}%: # Meteor
+				effect3({_loc}, {_player}, {_type})
+			chance of ({BoostLevel::%{_player}%::UFO}/700)*{Config::Update35::BoostChance}*{_OrgAm}%: # UFO
+				effect9({_loc}, {_player}, {_type})
+			chance of ({BoostLevel::%{_player}%::Events}/500)*{Config::Update35::BoostChance}*{_OrgAm}%: # Events
+				effect7({_loc}, random integer between 1 and 2, 15+({BoostLevel::%{_player}%::Events}), 3+((4/15)*{BoostLevel::%{_player}%::Events}), {_type})
+			if {EventBlock::%location at {_loc}%} is "DoubleDrop":
+				set {_itemamount} to {_itemamount}*2
+			if {EventBlock::%location at {_loc}%} is "DoubleXP":
+				set {_exp} to {_exp}*2
+
+		if {BoostLevel::%{_player}%::ExtraExp} > 0: # Extra EXP
+			set {_exp} to {_exp}*(1+({BoostLevel::%{_player}%::ExtraExp}/100))
+		chance of ({BoostLevel::%{_player}%::Tokens}/50)*{Config::Update35::BoostChance}*{_OrgAm}%: # Tokens
+			set {_tokens} to 1
+			if {CurrentPet::Item::%{_player}%} is set:
+				set {_tokens} to floor({_tokens}*(float tag "Multi-Tokens" of custom nbt of {CurrentPet::Item::%{_player}%} ? 1))
+			add {_tokens} to {Tokens::%{_player}%}
+			play sound "block.end_portal_frame.fill" with pitch 2 for {_player}
+		chance of ({BoostLevel::%{_player}%::LuckyUpgrade}/100)*{Config::Update35::BoostChance}*{_OrgAm}%: # Lucky Upgrade
+			set {_item} to {GenData::%{_itemdata}%-UPGRADED}
+		chance of ({BoostLevel::%{_player}%::BlocksAura}/500)*{Config::Update35::BoostChance}*{_OrgAm}%: # Blocks Aura
+			Effect8X({_player}, {BoostLevel::%{_player}%::BlocksAura}, 200+({BoostLevel::%{_player}%::BlocksAura}*100), {BoostLevel::%{_player}%::BlocksAura})
+		if {BlocksAura::%{_player}%} is true:
+			set {_itemamount} to {_itemamount}*4
+
+	#Potion Boosts
+	if size of {ActivePotions::%{_player}%::*} > 0:
+		loop 3 times:
+			if {ActivePot::%{_player}%::%6999+loop-value%} is set: # Double XP
+				set {_boost} to 1+((loop-value/10)*2)
+			if {ActivePot::%{_player}%::%7008+loop-value%} is set:
+				set {_doubledrop} to loop-value*30
+		if {_boost} is set:
+			set {_exp} to {_exp}*{_boost}
+		chance of {_doubledrop}%:
+			set {_itemamount} to {_itemamount}*2
+
+	#Boosters
+	if difference between {ActiveBooster::%{_player}%::DropBooster::1} and now < {ActiveBooster::%{_player}%::DropBooster::2}:
+		set {_itemamount} to {_itemamount}*2
+	if difference between {ActiveBooster::%{_player}%::ExpBooster::1} and now < {ActiveBooster::%{_player}%::ExpBooster::2}:
+		set {_exp} to {_exp}*2
+
+	#Pet Boost
+	if {_boosts} is not "None":
+		if {CurrentPet::Item::%{_player}%} is set:
+			set {_exp} to {_exp}*(float tag "Multi-Exp" of custom nbt of {CurrentPet::Item::%{_player}%} ? 1)
+	if {_boosts} is "Cave":
+		if x-coords of {_player} >= 1000:
+			if {CaveUpgrade-Exp::%{_player}%} is true:
+				set {_exp} to {_exp}*2
+
+	#Give Item
+	if {_player} has enough space for {_itemamount} of {_item}:
+		set {_continue} to true
+	else:
+		send {_player} title "&c&lInventário Cheio!" with subtitle "&7Seu inventário está cheio!" for 2 second
+		send "&c&lInventário Cheio! &7Seu inventário está cheio!" to {_player}
+	give {_itemamount} of {_item} to {_player}
+	if {_exp} is 0:
+		stop
+	set {ActionBarTime::%{_player}%} to now
+	set {_info} to {Config::Gens::ExpReceived}
+	replace all "{ADD}" with ecoFormat({_exp}) in {_info}
+	set {ActionBarInfo::%{_player}%} to {_info}
+	actionbar({_player}, {_exp})
+
+on damage:
+	if damage cause is entity explosion:
+		cancel event
+
+on piston extend:
+	loop moved blocks:
+		if {GeneratorCreator::%location at loop-value%} is set:
+			cancel event
+
+on join:
+	if {GensMAX::%player%} is not set:
+		set {GensMAX::%player%} to {Config::Gens::Event::MaxGens}
+
+on place:
+	set {_a} to player's tool
+	set {_gen} to int tag "GenLevel" of custom nbt of {_a}
+	if {_gen} is set:
+		if size of {New-Generator::%player%::*} < {GensMAX::%player%}:
+			set {GeneratorType::%location at event-block%} to {_gen}
+			set {GeneratorCreator::%location at event-block%} to player
+			add location at event-block to {New-Generator::%player%::*}
+			set {_mess} to {Config::Gens::Generators}
+			replace all "{GENS}" with "%size of {New-Generator::%player%::*}%" in {_mess}
+			send {_mess} to player
+			add location at event-block to {GlobalActiveGens::*}
+			if boolean tag "BrokenGen" of custom nbt of {_a} is true:
+				set {GeneratorType::%location at event-block%::Broken} to true
+				play sound "entity.evoker_fangs.attack" with pitch 1.2 for player
+				make 50 crit at event-block
+				spawn text display at location 0.75 above event-block:
+					set {_entity} to entity
+					set display billboard of entity to center
+					set display text of entity to {Config::Gens::BrokenHologram::*}
+				set {BrokenGen::%location at event-block%} to uuid of {_entity}
+			else:
+				send player title {Config::Gens::Placed::1} with subtitle {Config::Gens::Placed::2} for 2 seconds
+				make 50 of reverse portal at event-block with extra 2
+				play sound "block.beehive.exit" with pitch 1.2 for player
+				if {Objective::%player%} is "PlaceGen":
+					set {Objective::%player%} to "UpgradeGen"
+					play sound "entity.illusioner.cast_spell" with pitch 1.3 for player
+		else:
+			cancel event
+			send {Config::Gens::GensLimit} to player
+			play sound "entity.illusioner.mirror_move" with pitch 2 for player
+
+on break:
+	if {GeneratorCreator::%location at event-block%} is set:
+		cancel event
+
+on left click:
+	if {GeneratorType::%location at event-block%} is set:
+		if {BypassOwner::%player%} is true:
+			set {_access} to true
+		if {GeneratorCreator::%location at event-block%} is player:
+			set {_access} to true
+		if placeholder "bskyblock_on_island" from player is "true":
+			set {_access} to true
+		if {_access} is true:
+			set {_type} to {GeneratorType::%location at event-block%}
+			set {_drop} to {Generatory::%{_type}%}
+			if player has enough space for {_drop}:
+				set event-block to air
+				remove location at event-block from {New-Generator::%{GeneratorCreator::%location at event-block%}%::*}
+				delete {GeneratorType::%location at event-block%}
+				delete {GeneratorCreator::%location at event-block%}
+				remove location at event-block from {GlobalActiveGens::*}
+				if size of {New-Generator::%player%::*} < 1:
+					send {Config::Gens::NoGenerators} to player
+				else:
+					set {_mess} to {Config::Gens::Generators}
+					replace all "{GENS}" with "%size of {New-Generator::%player%::*}%" in {_mess}
+					send {_mess} to player
+				if {GeneratorType::%location at event-block%::Broken} is true:
+					set {_entity} to {BrokenGen::%location at event-block%} parsed as entity
+					kill {_entity}
+					delete {GeneratorType::%location at event-block%::Broken}
+					set boolean tag "BrokenGen" of custom nbt of {_drop} to true
+				give {_drop} to player
+				make 5 of cloud at event-block with extra 0.1
+				play sound "block.beehive.exit" with pitch 0.8 for player
+			else:
+				send {Config::Gens::NoSpace} to player
+				play sound "entity.illusioner.mirror_move" with pitch 2 for player
+		else:
+			set {_mess} to {Config::Gens::NotYour}
+			replace all "{PLAYER}" with "%{GeneratorCreator::%location at event-block%}%" in {_mess}
+			send {_mess} to player
+			play sound "entity.illusioner.mirror_move" with pitch 2 for player
+
+function upgradegen(player: player, gen: location, price: boolean) :: text:
+	if {_price} is false:
+		delete {UpgradeLoc::%{_player}%}
+	set {_blok} to {_gen}
+	set {_level} to {GeneratorType::%{_blok}%}
+	if {_level} is not set:
+		stop
+	if {Generatory::%{_level}+1%} is set:
+		set {_cost} to {GensBuyData::%{_level}+1%::1}-{GensBuyData::%{_level}%::1}
+		set {_newblock} to {Generatory::%{_level}+1%}
+	if {_price} is true:
+		if {_cost} is not set:
+			return "None"
+		else:
+			return "%{_cost}%"
+	if {_cost} is not set:
+		send {Config::Gens::MaxLevel} to {_player}
+		play sound "entity.illusioner.mirror_move" with pitch 2 for {_player}
+		stop
+	if {Config::Dungeons::GensRequirements} is true:
+		if {_level} >= 5:
+			set {_plvl} to {Level::%{_player}%}
+			if {_plvl} < (({_level}-4)*2):
+				send {Config::Dungeons::GensReq} to {_player}
+				play sound "entity.illusioner.mirror_move" with pitch 2 for {_player}
+				stop
+	if {_player}'s balance is bigger or equal to {_cost}:
+		remove {_cost} from {_player}'s balance
+		set block at {_blok} to {_newblock}
+		set {GeneratorType::%{_gen}%} to {_level}+1
+		send {Config::Gens::Upgrade} to {_player}
+		make 30 of trial_spawner_detection at {_gen} with offset vector(0.7, 0.7, 0.7) with extra 0
+		make 1 of flash at {_gen}
+		play sound "entity.player.levelup" with pitch 2 for {_player}
+		play sound "entity.firework_rocket.twinkle" with pitch 1 for {_player}
+		if {Objective::%{_player}%} is "UpgradeGen":
+			add 1 to {UpgradeGenObj::%{_player}%}
+			if {UpgradeGenObj::%{_player}%} >= 16:
+				delete {UpgradeGenObj::%{_player}%}
+				set {Objective::%{_player}%} to "End"
+				play sound "entity.illusioner.cast_spell" with pitch 1.3 for {_player}
+	else:
+		send {Config::Global::NotEnough} to {_player}
+		play sound "entity.illusioner.mirror_move" with pitch 2 for {_player}
+
+on right click:
+	wait 1 tick
+	if {GeneratorCreator::%location at event-block%} is set:
+		if distance between event-block and player is smaller than 4:
+			if {GeneratorCreator::%location at event-block%} is player:
+				set {_access} to true
+			if placeholder "bskyblock_on_island" from player is "true":
+				set {_access} to true
+			if {_access} is true:
+				if player is sneaking:
+					upgradegen(player, location at event-block, false)
+				else:
+					if int tag "GenLevel" of custom nbt of player's tool is set:
+						stop
+					if {GeneratorType::%location at event-block%::Broken} is true:
+						geninfo(player, location at event-block, true)
+					else:
+						geninfo(player, location at event-block, false)
+					play sound "block.beehive.enter" with pitch 2 for player
+			else:
+				set {_mess} to {Config::Gens::NotYour}
+				replace all "{PLAYER}" with "%{GeneratorCreator::%location at event-block%}%" in {_mess}
+				send {_mess} to player
+				play sound "entity.illusioner.mirror_move" with pitch 2 for player
+
+on right click:
+	if player's tool is fishing rod:
+		if {Caught::%player%::*} is set:
+			cancel event
+			if difference between now and {CaughtTime::%player%} >= 2 tick:
+				set {CaughtTime::%player%} to now
+				add "R" to {CaughtData::%player%::*}
+				loop size of {CaughtData::%player%::*} times:
+					if {Caught::%player%::%loop-counter%} is not {CaughtData::%player%::%loop-counter%}:
+						set {_stop} to true
+				if {_stop} is true:
+					fishing(player, false)
+				else:
+					fishing(player, true)
+
+on right click:
+	wait 1 tick
+	if int tag "Tool-Level" of custom nbt of player's tool is set:
+		if player's tool is fishing rod:
+			if player is sneaking:
+				itemupgrade(player)
+		else:
+			itemupgrade(player)
+
+function formatnumber(b: text) :: text:
+	set {_original} to {_b}
+	set {_result} to ""
+	while length of {_b} > 3:
+		set {_result} to ",%last 3 characters of {_b}%%{_result}%"
+		set {_b} to first (length of {_b} - 3) characters of {_b}
+	return "%{_b}%%{_result}%"
+
+on load:
+	clear {GlobalActiveGens::*}
+	loop all players:
+		loop {New-Generator::%loop-player%::*}:
+			add loop-value-2 to {GlobalActiveGens::*}
+		wait 1 tick
+
+on join:
+    loop {New-Generator::%player%::*}:
+        add loop-value to {GlobalActiveGens::*}
+on quit:
+    loop {New-Generator::%player%::*}:
+        remove loop-value from {GlobalActiveGens::*}
+
+every 1 second:
+	set {_tier} to 0
+	if {GlobalEvent} is {Config::Gens::EventName::GensTier}:
+		set {_tier} to 1
+	set {_defDrop} to 1
+	if {GlobalEvent} is {Config::Gens::EventName::DoubleDrop}:
+		add 1 to {_defDrop}
+
+	if size of {GlobalActiveGens::*} is 0:
+		stop
+	set {_totalGens} to size of {GlobalActiveGens::*}
+	if {_totalGens} is 0:
+		set {GenTimeAccumulator} to 0
+		stop
+	set {_timePerGen} to 20 / {_totalGens}
+	add 1 to {GenTimeAccumulator}
+	while {GenTimeAccumulator} >= {_timePerGen}:
+		set {_dropCount} to {_defDrop}
+		subtract {_timePerGen} from {GenTimeAccumulator}
+		if {GenProcessIndex} > {_totalGens}:
+			set {GenProcessIndex} to 1
+		set {_genLoc} to {GlobalActiveGens::%{GenProcessIndex}%}
+		if {GeneratorCreator::%{_genLoc}%} is not set:
+			add 1 to {GenProcessIndex}
+			continue loop
+
+		set {_owner} to {GeneratorCreator::%{_genLoc}%}
+		if {Config::Gens::Event::OnIsland} is true:
+			if {_owner} is not in world {Config::Global::IslandWorld}:
+				add 1 to {GenProcessIndex}
+				continue loop
+		if chunk at {_genLoc} is not loaded:
+			add 1 to {GenProcessIndex}
+			if {UnloadedGen::%{_genLoc}%} < 500:
+				add 1 to {UnloadedGen::%{_genLoc}%}
+			continue loop
+		if block at {_genLoc} is not air:
+			if {GeneratorType::%{_genLoc}%::Broken} is not true:
+				set {_genTier} to {GeneratorType::%{_genLoc}%}
+				set {_item} to {GeneratoryItems::%{_genTier}+{_tier}%} ? {GeneratoryItems::%{_genTier}%}
+				chance of ({Upgrades::%{_owner}%::Speed}-1)*100%:
+					add 1 to {_dropCount}
+				loop 3 times:
+					set {_check} to difference between now and {ActivePot::%{_owner}%::Start::DoubleGensDrop-%loop-value-2%}
+					if {_check} < {ActivePot::%{_owner}%::Type::DoubleGensDrop-%loop-value-2%}:
+						set {_doublegensdrop} to loop-value-2*20
+				if difference between {ActiveBooster::%{_owner}%::GenBooster::1} and now < {ActiveBooster::%{_owner}%::GenBooster::2}:
+					add 1 to {_dropCount}
+				chance of {_doublegensdrop}%:
+					add 1 to {_dropCount}
+				if {Config::Update35::VirtualGensItems} is false:
+					add {UnloadedGen::%{_genLoc}%} to {_dropCount}
+					drop {_dropCount} of {_item} at block 1 above {_genLoc} without velocity
+					delete {UnloadedGen::%{_genLoc}%}
+				else:
+					if {_value::%{_genTier}%} is not set:
+						set {_item} to {GeneratoryItems::%{_genTier}%}
+						set {_value::%{_genTier}%} to int tag "ItemValue" of custom nbt of {_item}
+					add {_value::%{_genTier}%}*{_dropCount} to {_owner}'s balance
+				if {Config::Gens::Event::BreakDown} is true:
+					chance of {Config::Gens::Event::BreakDownChance}%:
+						set {GeneratorType::%{_genLoc}%::Broken} to true
+						play sound "entity.evoker_fangs.attack" with pitch 1.2 at {_genLoc}
+						make 50 crit at {_genLoc}
+						send {Config::Gens::Broken} to {_owner}
+						spawn text display at location 0.75 above {_genLoc}:
+							set {_entity} to entity
+							set display billboard of entity to center
+							set display text of entity to {Config::Gens::BrokenHologram::*}
+						set {BrokenGen::%{_genLoc}%} to uuid of {_entity}
+		else:
+			set {_val} to {GeneratorType::%{_genLoc}%}
+			remove {_genLoc} from {New-Generator::%{_owner}%::*}
+			delete {GeneratorType::%{_genLoc}%}
+			if {GeneratorType::%{_genLoc}%::Broken} is true:
+				set {_entity} to {BrokenGen::%{_genLoc}%} parsed as entity
+				kill {_entity}
+			delete {GeneratorType::%{_genLoc}%::Broken}
+			send {Config::Gens::UnknownBreak} to {_owner}
+			delete {GeneratorCreator::%{_genLoc}%}
+
+		add 1 to {GenProcessIndex}
+
+on place:
+	set {_a} to player's tool
+	if int tag "ItemValue" of custom nbt of {_a} is set:
+		cancel event
+		send {Config::Gens::CantPlace} to player
+		play sound "entity.illusioner.mirror_move" with pitch 2 for player
+
+on inventory click:
+	if name of current inventory of player is {Config::GUIS::Tools::Default} or {Config::GUIS::Tools::Bedrock}:
+		cancel event
+		if clicked slot is 10:
+			buytool(player, "Axe", 1)
+		if clicked slot is 12:
+			buytool(player, "Pickaxe", 2)
+		if clicked slot is 14:
+			buytool(player, "Hoe", 3)
+		if clicked slot is 16:
+			buytool(player, "FishingRod", 4)
+		stop
+	else if name of current inventory of player is {Config::GUIS::BuyGen::Default} or {Config::GUIS::BuyGen::Bedrock}:
+		cancel event
+		if clicked inventory is not player's inventory:
+			if int tag "NextPage" of custom nbt of clicked slot is set:
+				buyGen(player, int tag "NextPage" of custom nbt of clicked slot+1)
+				stop
+			if int tag "PrevPage" of custom nbt of clicked slot is set:
+				buyGen(player, int tag "PrevPage" of custom nbt of clicked slot-1)
+				stop
+			set {_locked} to int tag "Locked" of custom nbt of clicked slot
+			if {_locked} is set:
+				send {Config::Dungeons::GensReq}
+				play sound "entity.illusioner.mirror_move" with pitch 2 for player
+				close player's inventory
+				stop
+			set {_level} to int tag "GenLevel" of custom nbt of clicked slot
+			if {_level} is set:
+				set {_cost} to {GensBuyData::%{_level}%::1}
+				if player's balance is bigger or equal to {_cost}:
+					remove {_cost} from player's balance
+					give {Generatory::%{_level}%} to player
+					if {Objective::%player%} is "BuyGen":
+						set {Objective::%player%} to "PlaceGen"
+						play sound "entity.illusioner.cast_spell" with pitch 1.3 for player
+					send {Config::Global::Success}
+					play sound "entity.player.levelup" with pitch 2 for player
+				else:
+					close player's inventory
+					send {Config::Global::NotEnough}
+					play sound "entity.illusioner.mirror_move" with pitch 2 for player
+		stop
+	else if name of current inventory of player is {Config::GUIS::ToolBoost::Default} or {Config::GUIS::ToolBoost::Bedrock}:
+		cancel event
+		if clicked slot is 39 or 40 or 41:
+			itemupgrade(player)
+			stop
+		set {_costs::*} to 5000 and 20000 and 50000 and 100000 and 500000 and 1000000 and 2500000 and 30000000 and 500000000 and 10000000000 and 32000000000 and 64000000000 and 128000000000
+		set {_maxUpgr::*} to 100 and 100 and 10 and 100 and 25 and 10 and 25 and 100 and 50 and 50 and 25 and 15 and 5
+		set {_boosts::*} to "ExtraExp" and "Tokens" and "Explosion" and "Speed" and "TNT" and "MagicCircle" and "Beams" and "LuckyUpgrade" and "Radius" and "Meteor" and "UFO" and "Events" and "BlocksAura"
+		set {_slots::*} to 11, 12, 13, 14, 15, 20, 21, 22, 23, 24, 30, 31, 32
+		set {_req} to 0
+		loop {_boosts::*}:
+			if clicked slot is {_slots::%loop-counter%}:
+				if {BoostLevel::%player%::%{_boosts::%loop-counter%}%} < {_maxUpgr::%loop-counter%}:
+					if {Rebirth::%player%} ? 0 >= {_req}:
+						if player's balance is bigger or equal to {_costs::%loop-counter%}*({BoostLevel::%player%::%loop-value%}+1):
+							remove {_costs::%loop-counter%}*({BoostLevel::%player%::%loop-value%}+1) from player's balance
+							add 1 to {BoostLevel::%player%::%loop-value%}
+							set {_mess} to {Config::Gens::UpgradeBoost}
+							replace all "{TYPE}" with "%{_boosts::%loop-counter%}%" in {_mess}
+							replace all "{LEVEL}" with "%{BoostLevel::%player%::%{_boosts::%loop-counter%}%}%" in {_mess}
+							send {_mess}
+							upgrademenu(player)
+							stop
+						else:
+							send {Config::Global::NotEnough}
+							play sound "entity.illusioner.mirror_move" with pitch 2 for player
+							stop
+					else:
+						set {_mess} to {Config::Gens::RequiredRebirth}
+						replace all "{REQ}" with "%{_req}%" in {_mess}
+						send {_mess}
+						play sound "entity.illusioner.mirror_move" with pitch 2 for player
+						stop
+				else:
+					send {Config::Gens::MaxedBoost}
+					play sound "entity.illusioner.mirror_move" with pitch 2 for player
+					stop
+			if mod(loop-counter, 5) is 0:
+				add 1 to {_req}
+	else if name of current inventory of player is {Config::GUIS::ItemUpgrade::Default} or {Config::GUIS::ItemUpgrade::Bedrock}:
+		cancel event
+		if clicked inventory is not player's inventory:
+			if clicked slot is 11:
+				upgrademenu(player)
+				stop
+			if clicked slot is 15:
+				rebirth(player)
+			if clicked slot is 30 or 31 or 32:
+				set {_level} to int tag "Tool-Level" of custom nbt of slot 13 of current inventory of player
+				if {_level} >= 80:
+					stop
+				if {_level} is not set:
+					stop
+				set {_cost} to {Costs::%{_level}%}
+				set {_data::*} to reqitems({_level}-14)
+				set {_item} to {_data::2}
+				set {_reqitems} to {_data::1}
+				close player's inventory
+				if player's balance is bigger or equal to {_cost}:
+					set {_continue} to true
+				if {_continue} is not set:
+					play sound "entity.illusioner.mirror_move" with pitch 2 for player
+					send {Config::Global::NotEnough}
+					stop
+				if player's tool is tagged as item tag "hoes":
+					set {_itemtype} to "Hoe"
+				if player's tool is tagged as item tag "pickaxes":
+					set {_itemtype} to "Pickaxe"
+				if player's tool is tagged as item tag "axes":
+					set {_itemtype} to "Axe"
+				if player's tool is fishing rod:
+					set {_itemtype} to "FishingRod"
+				if {_item} is not set:
+					set {_success} to true
+				else:
+					if player has {_reqitems} of {_item}:
+						set {_success} to true
+				if {_required} >= {_reqitems}:
+					set {_success} to true
+				if {_success} is true:
+					if int tag "Tool-Level" of custom nbt of player's tool is {_level}:
+						set {_radius} to 0
+						if int tag "Tool-Radius" of custom nbt of player's tool is set:
+							set {_radius} to int tag "Tool-Radius" of custom nbt of player's tool
+						if {Config::Update35::ToolStats} is true:
+							set {_uses} to int tag "Uses" of custom nbt of player's tool
+							if {_uses} is not set:
+								set {_uses} to 0
+						send {Config::Global::Success}
+						play sound "entity.player.levelup" with pitch 0.5 for player
+						remove {_cost} from player's balance
+						remove {_reqitems} of {_item} from player's inventory
+						set {_newItem} to generateItem({_level}+1, {_itemtype}, {_radius})
+						if {Config::Update35::ToolStats} is true:
+							set int tag "Uses" of custom nbt of {_newItem} to {_uses}
+							replace all "{USES}" with "%{_uses}%" in {_newItem}'s lore
+						set player's tool to {_newItem}
+						if {Objective::%player%} is "Upgrade":
+							set {Objective::%player%} to "EarnMoney2"
+							play sound "entity.illusioner.cast_spell" with pitch 1.3 for player
+					else:
+						send "&4&l(!) &cAn error occurred while upgrading!"
+						play sound "entity.illusioner.mirror_move" with pitch 2 for player
+						stop
+				else:
+					play sound "entity.illusioner.mirror_move" with pitch 2 for player
+					send {Config::Gens::NotEnoughItems}
+					stop
+	else if name of current inventory of player is {Config::GUIS::GenInfo::Default} or {Config::GUIS::GenInfo::Bedrock}:
+		cancel event
+		if clicked slot is 38 or 39 or 40 or 41 or 42:
+			set {_loc} to {UpgradeLoc::%player%}
+			if {GeneratorType::%{_loc}%::Broken} is true:
+				set {_cost} to {GensBuyData::%{GeneratorType::%{_loc}%}%::1} / 25
+				if player's balance is bigger or equal to {_cost}:
+					set {_entity} to {BrokenGen::%{_loc}%} parsed as entity
+					kill {_entity}
+					remove {_cost} from player's balance
+					delete {GeneratorType::%{_loc}%::Broken}
+					send {Config::Gens::Repair}
+					make 30 of trial_spawner_detection at {_gen} with offset vector(0.7, 0.7, 0.7) with extra 0
+					play sound "block.anvil.use" with pitch 2 for player
+					close player's inventory
+				else:
+					send {Config::Global::NotEnough} to player
+					play sound "entity.illusioner.mirror_move" with pitch 2 for player
+				stop
+			else:
+				upgradegen(player, {_loc}, false)
+				geninfo(player, {_loc}, false)
+		if clicked slot is 21 or 22 or 23:
+			islandupgrades(player)
+	else:
+		set {_checks::*} to "Axe" and "Pickaxe" and "Hoe" and "FishingRod"
+		loop 4 times:
+			set {_guiCheck::*} to {Config::GUIS::BuyTool::%{_checks::%loop-counter%}%::Default} and {Config::GUIS::BuyTool::%loop-counter%::Bedrock}
+			if {_guiCheck::*} contains name of current inventory of player:
+				cancel event
+				if clicked inventory is not player's inventory:
+					if clicked slot is 29 or 30 or 31 or 32 or 33:
+						close player's inventory
+						if player's balance is bigger or equal to 250:
+							remove 250 from player's balance
+							play sound "entity.player.levelup" with pitch 2 for player
+							send {Config::Global::Success}
+							set {_item} to generateItem(1, {_checks::%loop-value%}, 0)
+							if {Config::Update35::ToolStats} is true:
+								replace all "{USES}" with "0" in {_item}'s lore
+							set string tag "Tool-Owner" of custom nbt of {_item} to "%player%"
+							give player {_item}
+							if {_checks::%loop-value%} is "Hoe" or "Axe":
+								if {Objective::%player%} is "BuyTool":
+									set {Objective::%player%} to "Tool%{_checks::%loop-value%}%"
+									play sound "entity.illusioner.cast_spell" with pitch 1.3 for player
+							else:
+								if {Objective::%player%} is "BuyTool":
+									set {Objective::%player%} to "ToolPickaxe"
+									play sound "entity.illusioner.cast_spell" with pitch 1.3 for player
+								if {Objective::%player%} is "BuyPickaxe":
+									set {Objective::%player%} to "64Cobblestone"
+									play sound "entity.illusioner.cast_spell" with pitch 1.3 for player
+						else:
+							play sound "entity.illusioner.mirror_move" with pitch 2 for player
+							send {Config::Global::NotEnough}
+				stop
+
+command /fixallgens:
+	aliases: repairallgens, repairgens, fixgens
+	cooldown: 10 seconds
+	cooldown message: &cPlease wait 10 seconds before next usage!
+	trigger:
+		loop {New-Generator::%player%::*}:
+			set {_loc} to loop-value
+			if {GeneratorType::%{_loc}%::Broken} is true:
+				add {_loc} to {_list::*}
+				add {GensBuyData::%{GeneratorType::%{_loc}%}%::1} / 25 to {_cost}
+		if size of {_list::*} is 0:
+			send {Config::Update35::NoBroken}
+			stop
+		else:
+			if player's balance is bigger or equal to {_cost}:
+				remove {_cost} from player's balance
+				set {_mess} to {Config::Update35::RepairedAll}
+				replace all "{AMOUNT}" with "%size of {_list::*}%" in {_mess}
+				send {_mess} to player
+				play sound "block.anvil.use" with pitch 2 for player
+				loop {_list::*}:
+					set {_loc} to loop-value
+					set {_entity} to {BrokenGen::%{_loc}%} parsed as entity
+					kill {_entity}
+					delete {GeneratorType::%{_loc}%::Broken}
+			else:
+				send {Config::Global::NotEnough} to {_player}
+				play sound "entity.illusioner.mirror_move" with pitch 2 for {_player}
+
+command /autosell:
+	cooldown: 5 seconds
+	cooldown message: %{Config::Gens::SellDelay}%
+	trigger:
+		set {_text::*} to {Config::Gens::Tutorial::AutoSell::*}
+		if {AutoSell::%player%} is true:
+			play sound "entity.arrow.hit_player" with pitch 1.5 for player
+			set {AutoSell::%player%} to false
+			replace all "{TYPE}" with {Config::Global::Disabled} in {_text::*}
+			send player title {_text::1} with subtitle {_text::2} for 1 seconds
+		else:
+			play sound "entity.arrow.hit_player" with pitch 2 for player
+			set {AutoSell::%player%} to true
+			replace all "{TYPE}" with {Config::Global::Enabled} in {_text::*}
+			send player title {_text::1} with subtitle {_text::2} for 1 seconds
+			sell(player, false)
+
+command /autocompress:
+	cooldown: 5 seconds
+	cooldown message: %{Config::Gens::ChangeDelay}%
+	trigger:
+		set {_text::*} to {Config::Gens::Tutorial::AutoCompress::*}
+		if {AutoCompress::%player%} is true:
+			play sound "entity.arrow.hit_player" with pitch 1.5 for player
+			set {AutoCompress::%player%} to false
+			replace all "{TYPE}" with {Config::Global::Disabled} in {_text::*}
+			send player title {_text::1} with subtitle {_text::2} for 1 seconds
+		else:
+			play sound "entity.arrow.hit_player" with pitch 2 for player
+			set {AutoCompress::%player%} to true
+			replace all "{TYPE}" with {Config::Global::Enabled} in {_text::*}
+			send player title {_text::1} with subtitle {_text::2} for 1 seconds
+			compressitems(player, true)
+
+every 10 seconds:
+	set {_curr::*} to {Config::Gens::HelpText::*}
+	remove {InfoText} from {_curr::*}
+	set {InfoText} to random element out of {_curr::*}
+	loop all players:
+		if {AutoSell::%loop-player%} is true:
+			sell(loop-player, false)
+		if {AutoCompress::%loop-player%} is true:
+			compressitems(loop-player, true)
+
+every 2 seconds:
+	loop all players:
+		actionbar(loop-player, 0)
+
+function ecoFormat(n: number) :: string:
+    set {_l::*} to split "k,M,B,T,Qn,Qi,Sx" at ","
+    set {_i} to min(floor(log({_n})/3), size of {_l::*})
+    return "%{_n}%" if {_i} <= 0
+    set {_i2} to 1000^{_i}
+    return "%{_n}/{_i2}%%{_l::%{_i}%}%"
+
+on food bar change:
+	if player is in world "world":
+		cancel event
+
+command /gens:
+	aliases: activegens
+	trigger:
+		activeGens(player, 1)
+
+function activeGens(player: player, page: number):
+	set {_x} to chest inventory with 4 rows named {Config::Update35::ActiveGens::%{Bedrock::%{_player}%}%}
+	set {_slots::*} to 1, 2, 3, 4, 5, 6, 7, 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25
+	set {_am} to size of {Generatory::*}
+	set {_max} to size of {New-Generator::%{_player}%::*} / size of {_slots::*}
+	if {_page} > ceil({_max}):
+		set {_page} to {_max}
+	if size of {New-Generator::%{_player}%::*} > 0:
+		loop {New-Generator::%{_player}%::*}:
+			set {_lvl} to {GeneratorType::%location at loop-value%}
+			add location at loop-value to {_Gens::%{_lvl}%::*}
+		loop {_am} times:
+			set {_rev} to ({_am}+1)-loop-value
+			add size of {_Gens::%{_rev}%::*} to {_total}
+			loop {_Gens::%{_rev}%::*}:
+				add 1 to {_slot}
+				if {_slot} > ({_page}-1)*size of {_slots::*}:
+					add 1 to {_slotX}
+					set {_Cordx} to x-coords of loop-value-2
+					set {_Cordy} to y-coords of loop-value-2
+					set {_Cordz} to z-coords of loop-value-2
+					if {_value::%{_rev}%} is not set:
+						set {_value::%{_rev}%} to int tag "ItemValue" of custom nbt of {GeneratoryItems::%{_rev}%}
+					if {_upgr::%{_rev}%} is not set:
+						set {_upgr::%{_rev}%} to {GensBuyData::%{_rev}+1%::1}-{GensBuyData::%{_rev}%::1}
+					if {_rev} is size of {Generatory::*}:
+						set {_lore::*} to {Config::Update35::ActiveGensGenMax::*}
+					else:
+						set {_lore::*} to {Config::Update35::ActiveGensGen::*}
+					replace all "{VALUE}" with formatNum({_value::%{_rev}%}) in {_lore::*}
+					replace all "{UPGRADE}" with formatNum({_upgr::%{_rev}%}) in {_lore::*}
+					replace all "{CORDS}" with "x: %floor({_Cordx})% y: %floor({_Cordy})% z: %floor({_Cordz})%" in {_lore::*}
+					set {_item} to {Generatory::%{_rev}%} with lore {_lore::*}
+					set string tag "Cords" of custom nbt of {_item} to "%{_Cordx}%|!|%{_Cordy}%|!|%{_Cordz}%|!|%world of loop-value-2%"
+					set int tag "Page" of custom nbt of {_item} to {_page}
+					if {_rev} is not size of {Generatory::*}:
+						set int tag "Cost" of custom nbt of {_item} to {_upgr::%{_rev}%}
+					set slot {_slots::%{_slotX}%} of {_x} to {_item}
+					if {_slotX} >= size of {_slots::*}:
+						set {_stop} to true
+						stop loop
+			if {_stop} is true:
+				stop loop
+		if {_page} > 1:
+			set {_item} to gold nugget with custom model data 7017 named "&aPrevious page"
+			set int tag "Page" of custom nbt of {_item} to {_page}
+			set slot 29 of {_x} to {_item}
+		if {_page} < {_max}:
+			set {_item} to gold nugget with custom model data 7018 named "&aNext page"
+			set int tag "Page" of custom nbt of {_item} to {_page}
+			set slot 33 of {_x} to {_item}
+	else:
+		set slot 13 of {_x} to barrier named "&cNo Generators" with lore "" and "&7You should place some :)"
+	open {_x} for {_player}
+
+on inventory click:
+	if name of current inventory of player is {Config::Update35::ActiveGens::Default} or {Config::Update35::ActiveGens::Bedrock}:
+		cancel event
+		if clicked slot is 29:
+			set {_page} to int tag "Page" of custom nbt of clicked slot
+			if {_page} is set:
+				activeGens(player, {_page}-1)
+		if clicked slot is 33:
+			set {_page} to int tag "Page" of custom nbt of clicked slot
+			if {_page} is set:
+				activeGens(player, {_page}+1)
+		set {_gen::*} to string tag "Cords" of custom nbt of clicked slot split at "|!|"
+		if {_gen::*} is set:
+			set {_page} to int tag "Page" of custom nbt of clicked slot
+			set {_x} to {_gen::1} parsed as number
+			set {_y} to {_gen::2} parsed as number
+			set {_z} to {_gen::3} parsed as number
+			set {_world} to {_gen::4}
+			set {_loc} to block at location at ({_x}, {_y}, {_z}) in world {_world}
+			set {_loc} to location at {_loc}
+			set {_type} to {GeneratorType::%location at {_loc}%}
+			if click type is left mouse button:
+				set {_drop} to {Generatory::%{_type}%}
+				if player has enough space for {_drop}:
+					set block at {_loc} to air
+					remove location at {_loc} from {New-Generator::%{GeneratorCreator::%{_loc}%}%::*}
+					delete {GeneratorType::%{_loc}%}
+					delete {GeneratorCreator::%{_loc}%}
+					remove location at {_loc} from {GlobalActiveGens::*}
+					if size of {New-Generator::%player%::*} < 1:
+						send {Config::Gens::NoGenerators} to player
+					else:
+						set {_mess} to {Config::Gens::Generators}
+						replace all "{GENS}" with "%size of {New-Generator::%player%::*}%" in {_mess}
+						send {_mess} to player
+					if {GeneratorType::%location at {_loc}%::Broken} is true:
+						set {_entity} to {BrokenGen::%location at {_loc}%} parsed as entity
+						kill {_entity}
+						delete {GeneratorType::%location at {_loc}%::Broken}
+						set boolean tag "BrokenGen" of custom nbt of {_drop} to true
+					give {_drop} to player
+					play sound "block.beehive.exit" with pitch 0.8 for player
+				else:
+					send {Config::Gens::NoSpace} to player
+					play sound "entity.illusioner.mirror_move" with pitch 2 for player
+			else:
+				set {_cost} to int tag "Cost" of custom nbt of clicked slot
+				if {_cost} is set:
+					if {Config::Dungeons::GensRequirements} is true:
+						if {_type} >= 5:
+							set {_plvl} to {Level::%player%}
+							if {_plvl} < (({_type}-4)*2):
+								send {Config::Dungeons::GensReq} to player
+								play sound "entity.illusioner.mirror_move" with pitch 2 for player
+								stop
+					if player's balance is bigger or equal to {_cost}:
+						remove {_cost} from player's balance
+						set block at {_loc} to {Generatory::%{_type}+1%}
+						set {GeneratorType::%location at {_loc}%} to {_type}+1
+						send {Config::Gens::Upgrade} to player
+						make 30 of trial_spawner_detection at {_loc} with offset vector(0.7, 0.7, 0.7) with extra 0
+						make 1 of flash at {_loc}
+						play sound "entity.player.levelup" with pitch 2 for player
+						play sound "entity.firework_rocket.twinkle" with pitch 1 for player
+						if {Objective::%player%} is "UpgradeGen":
+							add 1 to {UpgradeGenObj::%player%}
+							if {UpgradeGenObj::%player%} >= 16:
+								delete {UpgradeGenObj::%player%}
+								set {Objective::%player%} to "End"
+								play sound "entity.illusioner.cast_spell" with pitch 1.3 for player
+					else:
+						send {Config::Global::NotEnough} to player
+						play sound "entity.illusioner.mirror_move" with pitch 2 for player
+			activeGens(player, {_page})

@@ -1,0 +1,46 @@
+location: world:-10,009:106,000:20,997
+enabled: true
+display-range: 48
+update-range: 48
+update-interval: 20
+facing: 0.0
+down-origin: false
+pages:
+- lines:
+  - content: <#e6e325>&lᴛᴏᴘ 10 ɴíᴠᴇɪs
+    height: 0.3
+  - content: <#fcf932>1. &f%ajlb_lb_gens_level_1_alltime_name% <#fcf932>(%ajlb_lb_gens_level_1_alltime_value%
+      🔥)
+    height: 0.3
+  - content: <#fcf932>2. &f%ajlb_lb_gens_level_2_alltime_name% <#fcf932>(%ajlb_lb_gens_level_2_alltime_value%
+      🔥)
+    height: 0.3
+  - content: <#fcf932>3. &f%ajlb_lb_gens_level_3_alltime_name% <#fcf932>(%ajlb_lb_gens_level_3_alltime_value%
+      🔥)
+    height: 0.3
+  - content: <#fcf932>4. &f%ajlb_lb_gens_level_4_alltime_name% <#fcf932>(%ajlb_lb_gens_level_4_alltime_value%
+      🔥)
+    height: 0.3
+  - content: <#fcf932>5. &f%ajlb_lb_gens_level_5_alltime_name% <#fcf932>(%ajlb_lb_gens_level_5_alltime_value%
+      🔥)
+    height: 0.3
+  - content: <#fcf932>6. &f%ajlb_lb_gens_level_6_alltime_name% <#fcf932>(%ajlb_lb_gens_level_6_alltime_value%
+      🔥)
+    height: 0.3
+  - content: <#fcf932>7. &f%ajlb_lb_gens_level_7_alltime_name% <#fcf932>(%ajlb_lb_gens_level_7_alltime_value%
+      🔥)
+    height: 0.3
+  - content: <#fcf932>8. &f%ajlb_lb_gens_level_8_alltime_name% <#fcf932>(%ajlb_lb_gens_level_8_alltime_value%
+      🔥)
+    height: 0.3
+  - content: <#fcf932>9. &f%ajlb_lb_gens_level_9_alltime_name% <#fcf932>(%ajlb_lb_gens_level_9_alltime_value%
+      🔥)
+    height: 0.3
+  - content: <#fcf932>10. &f%ajlb_lb_gens_level_10_alltime_name% <#fcf932>(%ajlb_lb_gens_level_10_alltime_value%
+      🔥)
+    height: 0.3
+  - content: ''
+    height: 0.3
+  - content: <#fcf932>#1. &f%ajlb_lb_gens_level_1_alltime_name%
+    height: 0.3
+  actions: {}

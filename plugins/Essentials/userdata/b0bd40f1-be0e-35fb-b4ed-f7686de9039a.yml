@@ -1,0 +1,38 @@
+teleportenabled: true
+teleportauto: false
+godmode: false
+muted: false
+jailed: false
+ip-address: 127.0.0.1
+afk: false
+socialspy: false
+npc: false
+powertoolsenabled: true
+accepting-pay: true
+baltop-exempt: false
+timestamps:
+  lastteleport: 1754620393113
+  lastheal: 0
+  mute: 0
+  jail: 0
+  onlinejail: 0
+  logout: 1754879329422
+  login: 1754878159525
+money: '86644537130443.278972273816'
+last-account-name: Driveen
+logoutlocation:
+  world: ef655639-2841-48a8-9910-fc670929e3ee
+  world-name: world
+  x: -39.655919506070006
+  y: 97.0
+  z: -17.48572994200535
+  yaw: 79.02667236328125
+  pitch: 11.515466690063477
+lastlocation:
+  world: ef655639-2841-48a8-9910-fc670929e3ee
+  world-name: world
+  x: -0.5903601473404099
+  y: 100.0
+  z: 4.3228443852184375
+  yaw: -57.725494384765625
+  pitch: 24.768978118896484

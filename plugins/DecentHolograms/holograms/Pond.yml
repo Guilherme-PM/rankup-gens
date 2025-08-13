@@ -1,0 +1,24 @@
+location: world:-0,500:61,000:0,500
+enabled: true
+display-range: 48
+update-range: 48
+update-interval: 20
+facing: 0.0
+down-origin: false
+pages:
+- lines:
+  - content: '#ICON:PUFFERFISH'
+    height: 0.6
+  - content: '&6Lago &e1★'
+    height: 0.3
+  - content: ''
+    height: 0.3
+  - content: '&fᴅɪsᴘᴏɴíᴠᴇʟ ᴀ ᴘᴀʀᴛɪʀ ᴅᴏ ɴɪᴠᴇʟ &e&l1'
+    height: 0.3
+  - content: '&fᴜsᴇ ᴜᴍᴀ ᴠᴀʀᴀ ᴅᴇ ᴘᴇsᴄᴀ!'
+    height: 0.3
+  - content: ''
+    height: 0.3
+  - content: '&a[ᴄᴏᴍᴘʀᴇ sᴜᴀ ᴠᴀʀɪɴʜᴀ ɴᴏ /ᴠᴀʀᴀ]'
+    height: 0.3
+  actions: {}

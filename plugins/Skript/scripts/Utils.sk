@@ -1,0 +1,1275 @@
+# This script was written by Xqedii and sharing is not allowed!
+# You can change and edit everything in this file if you want
+
+# Utils
+
+on server list ping:
+	set motd to "%{Config::Global::Motd1}%%nl%%{Config::Global::Motd2}%"
+
+command /ranks:
+	aliases: rank, buyrank, gold, diamond, emerald, netherite, store
+	trigger:
+		set {_x} to chest inventory with 4 rows named {Config::GUIS::Ranks::%{Bedrock::%player%}%}
+		set slot 1 of {_x} to golden helmet
+		set slot 10 of {_x} to golden chestplate
+		set slot 19 of {_x} to golden leggings
+		set slot 28 of {_x} to golden boots
+
+		set slot 3 of {_x} to iron helmet
+		set slot 12 of {_x} to iron chestplate
+		set slot 21 of {_x} to iron leggings
+		set slot 30 of {_x} to iron boots
+
+		set slot 5 of {_x} to diamond helmet
+		set slot 14 of {_x} to diamond chestplate
+		set slot 23 of {_x} to diamond leggings
+		set slot 32 of {_x} to diamond boots
+
+		set slot 7 of {_x} to netherite helmet
+		set slot 16 of {_x} to netherite chestplate
+		set slot 25 of {_x} to netherite leggings
+		set slot 34 of {_x} to netherite boots
+		set {_slots1::*} to 1, 10, 19, 28
+		loop {_slots1::*}:
+			set name of slot loop-value of {_x} to {Config::GUIS::Ranks::GoldName}
+			set {_lore::*} to {Config::GUIS::Ranks::GoldInfo::*}
+			replace all "{PLAYER}" with "%player%" in {_lore::*}
+			set lore of slot loop-value of {_x} to {_lore::*}
+		set {_slots2::*} to 3, 12, 21, 30
+		loop {_slots2::*}:
+			set name of slot loop-value of {_x} to {Config::GUIS::Ranks::DiamondName}
+			set {_lore::*} to {Config::GUIS::Ranks::DiamondInfo::*}
+			replace all "{PLAYER}" with "%player%" in {_lore::*}
+			set lore of slot loop-value of {_x} to {_lore::*}
+		set {_slots3::*} to 5, 14, 23, 32
+		loop {_slots3::*}:
+			set name of slot loop-value of {_x} to {Config::GUIS::Ranks::EmeraldName}
+			set {_lore::*} to {Config::GUIS::Ranks::EmeraldInfo::*}
+			replace all "{PLAYER}" with "%player%" in {_lore::*}
+			set lore of slot loop-value of {_x} to {_lore::*}
+		set {_slots4::*} to 7, 16, 25, 34
+		loop {_slots4::*}:
+			set name of slot loop-value of {_x} to {Config::GUIS::Ranks::NetheriteName}
+			set {_lore::*} to {Config::GUIS::Ranks::NetheriteInfo::*}
+			replace all "{PLAYER}" with "%player%" in {_lore::*}
+			set lore of slot loop-value of {_x} to {_lore::*}
+		open {_x} for player
+
+function clantag(player: player):
+	set {_x} to chest inventory with 4 rows named {Config::GUIS::ClanTagColor::%{Bedrock::%{_player}%}%}
+	loop {Config::GUIS::ClanTagColor::Colors::*}:
+		set {_cost} to 100
+		if loop-counter is 8:
+			set {_cost} to 250
+		set {_desc::%loop-counter%::*} to {Config::GUIS::ClanTagColor::Desc::*}
+		replace all "{COLOR}" with "%loop-value%" in {_desc::%loop-counter%::*}
+		replace all "{COST}" with "%{_cost}%" in {_desc::%loop-counter%::*}
+	set {_slots::*} to 10, 11, 12, 13, 14, 15, 16, 22
+	set {_items::*} to red banner, orange banner, lime banner, yellow banner, magenta banner, blue banner, cyan banner, white banner
+	set {_colors::*} to "&c", "&6", "&a", "&e", "&d", "&9", "&3", "<##FF00FF>"
+	loop {_slots::*}:
+		set slot loop-value of {_x} to {_items::%loop-counter%} named "%{_colors::%loop-counter%}%%{Config::GUIS::ClanTagColor::Name}%" with lore {_desc::%loop-counter%::*}
+	open {_x} for {_player}
+
+command /icon:
+	aliases: prefix, icons, prefixes
+	trigger:
+		set {_x} to chest inventory with 6 rows named {Config::GUIS::Icons::%{Bedrock::%player%}%}
+		set {_slots::*} to 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25, 28, 29, 30, 31, 32, 33, 34
+		loop {_slots::*}:
+			set {_lore} to {Config::GUIS::Icons::Buy}
+			if {Config::GUI::Icons::List::%loop-counter%} is {Prefix::%player%::Icon}:
+				set {_lore} to {Config::GUIS::Icons::Selected}
+			set {_item} to {Config::GUIS::Icons::Prefix}
+			replace all "{ICON}" with "%{Config::GUI::Icons::List::%loop-counter%}%" in {_item}'s name
+			replace all "{ICON}" with "%{Config::GUI::Icons::List::%loop-counter%}%" in {_item}'s lore
+			replace all "{BOTTOM}" with "%{_lore}%" in {_item}'s lore
+			set slot loop-value of {_x} to {_item}
+		loop {Config::GUIS::Icons::Colors::*}:
+			set {_desc::%loop-counter%::*} to {Config::GUIS::Icons::Desc::*}
+			replace all "{COLOR}" with "%loop-value%" in {_desc::%loop-counter%::*}
+		set slot 4 of {_x} to air
+		set {_colors::*} to "&c", "&6", "&a", "&e", "&d", "&9", "&3", "<##FF00FF>"
+		set {_items::*} to red banner, orange banner, lime banner, yellow banner, magenta banner, blue banner, cyan banner, white banner
+		set {_slots::*} to 37, 38, 39, 40, 41, 42, 43
+		loop {_slots::*}:
+			set slot loop-value of {_x} to {_items::%loop-counter%} named "%{_colors::%loop-counter%}%%{Config::GUIS::Icons::Name}%" with lore {_desc::%loop-counter%::*}
+		set slot 48 and 49 and 50 of {_x} to {Config::GUIS::Icons::Reset}
+		open {_x} for player
+
+function upgrades(player: player):
+	set {_x} to chest inventory with 3 rows named {Config::GUIS::Upgrades::%{Bedrock::%{_player}%}%}
+	set slot 11 of {_x} to {Config::GUIS::Upgrades::Tools}
+	set slot 13 of {_x} to {Config::GUIS::Upgrades::Generators}
+	set slot 15 of {_x} to {Config::GUIS::Upgrades::PrivateCave}
+	open {_x} for {_player}
+
+function caveupgrades(player: player):
+	set {_x} to chest inventory with 3 rows named {Config::GUIS::CaveUpgrades::%{Bedrock::%{_player}%}%}
+	set {_cost::*} to {Config::GUIS::Update35::FastRegen}, {Config::GUIS::Update35::MoreExp}, {Config::GUIS::Update35::NewArea}
+	set {_checks::*} to "Regen" and "Exp" and "Area"
+	loop {_checks::*}:
+		set {_bottom%loop-counter%::*} to {Config::GUIS::CaveUpgrades::Upgrade::*}
+		set {_cx2} to "%{_cost::%loop-counter%}%"
+		replace all "{COST}" with formatnumber({_cx2}) in {_bottom%loop-counter%::*}
+		if {CaveUpgrade-%loop-value%::%{_player}%} is set:
+			set {_bottom%loop-counter%::*} to "&eᴜᴘɢʀᴀᴅᴇ ʟɪᴍɪᴛ ʀᴇᴀᴄʜᴇᴅ!"
+		set {_data%loop-counter%} to {Config::GUIS::CaveUpgrades::Upgrade%loop-counter%}
+		if {CaveUpgrade-%loop-value%::%{_player}%} is set:
+			set {_data%loop-counter%} to {Config::GUIS::CaveUpgrades::Upgrade%loop-counter%Max}
+
+	loop 3 times:
+		set {_item%loop-value%} to {Config::GUIS::CaveUpgrades::Upgrade%loop-value%Info}
+		set {_lore::*} to lore of {_item%loop-value%}
+		replace all "{STATUS}" with "%{_data%loop-value%}%" in {_lore::*}
+		replace all "{BOTTOM}" with "" in {_lore::*}
+		set {_lore::*} to {_lore::*} and  {_bottom%loop-value%::*}
+		set lore of {_item%loop-value%} to {_lore::*}
+	set slot 11 of {_x} to {_item1}
+	set slot 13 of {_x} to {_item2}
+	set slot 15 of {_x} to {_item3}
+	open {_x} for {_player}
+
+command /daily:
+	trigger:
+		daily(player)
+
+function daily(player: player):
+	set {_x} to chest inventory with 6 rows named {Config::Update35::Daily::%{Bedrock::%{_player}%}%}
+
+	if difference between now and {Daily::Cooldown::%{_player}%} > 2 days:
+		delete {Daily::Cooldown::%{_player}%}
+		delete {Daily::Number::%{_player}%}
+	if {Daily::Number::%{_player}%} is 29:
+		delete {Daily::Cooldown::%{_player}%}
+		delete {Daily::Number::%{_player}%}
+	set {_rewards::*} to {Config::Update35::Daily::KeysSequence::*}
+	set {_slots::*} to 10, 11, 12, 13, 14, 15, 16, 19, 20, 21, 22, 23, 24, 25, 28, 29, 30, 31, 32, 33, 34, 37, 38, 39, 40, 41, 42, 43
+	loop 28 times:
+		delete {_claim}
+		add 1 to {_lv}
+		if {_lv} > 7:
+			set {_lv} to 1
+		set {_rew::*} to {_rewards::%{_lv}%} split at ":"
+
+		set {_num} to {Daily::Number::%{_player}%} ? 1
+		set {_rewname} to {Config::Update35::Daily::RewardName}
+		set {_key} to {Config::Update35::Daily::KeyLore}
+		replace all "{KEYNAME}" with {Config::Update35::Daily::Key::%{_rew::2}%} in {_key}
+		set {_numX} to {_rew::1} parsed as number
+		replace all "{NUMBER}" with "%{_numX} * ({_multiplier}+1)%" in {_key}
+		replace all "{DAY}" with "%loop-value%" in {_rewname}
+		if mod(loop-value, 7) is 0:
+			add 1 to {_multiplier}
+		if loop-value is {_num}:
+			if difference between now and {Daily::Cooldown::%{_player}%} > 1 days:
+				set {_claim} to true
+			if {Daily::Cooldown::%{_player}%} is not set:
+				set {_claim} to true
+			if {_claim} is true:
+				set {_lore::*} to {Config::Update35::Daily::Desc::*}
+				replace all "{REWARDS}" with {_key} in {_lore::*}
+				replace all "{BOTTOM}" with {Config::Update35::Daily::Now} in {_lore::*}
+				set {_item} to chest minecart
+				set boolean tag "Claim" of custom nbt of {_item} to true
+			else:
+				set {_lore::*} to {Config::Update35::Daily::Desc::*}
+				replace all "{REWARDS}" with {_key} in {_lore::*}
+				replace all "{BOTTOM}" with {Config::Update35::Daily::Tomorrow} in {_lore::*}
+				set {_item} to chest minecart
+		else:
+			if loop-value > {_num}:
+				set {_lore::*} to {Config::Update35::Daily::Desc::*}
+				replace all "{REWARDS}" with {_key} in {_lore::*}
+				replace all "{BOTTOM}" with {Config::Update35::Daily::PreviousFirst} in {_lore::*}
+				set {_item} to minecart with tnt
+			else:
+				set {_lore::*} to {Config::Update35::Daily::Desc::*}
+				replace all "{REWARDS}" with {_key} in {_lore::*}
+				replace all "{BOTTOM}" with {Config::Update35::Daily::AlreadyClaimed} in {_lore::*}
+				set {_item} to minecart
+		set string tag "Key" of custom nbt of {_item} to {_rew::2}
+		set int tag "Amount" of custom nbt of {_item} to {_numX} * ({_multiplier}+1)
+		set int tag "Day" of custom nbt of {_item} to loop-value
+		set slot {_slots::%loop-counter%} of {_x} to {_item} named {_rewname} with lore {_lore::*}
+	open {_x} for {_player}
+
+
+on inventory click:
+	if name of current inventory of player is {Config::Update35::Daily::Default} or {Config::Update35::Daily::Bedrock}:
+		cancel event
+		if boolean tag "Claim" of custom nbt of clicked slot is true:
+			set {_key} to string tag "Key" of custom nbt of clicked slot
+			set {_amount} to int tag "Amount" of custom nbt of clicked slot
+			set {_day} to int tag "Day" of custom nbt of clicked slot
+			if difference between now and {Daily::Cooldown::%player%} > 1 days:
+				set {_claim} to true
+			if {Daily::Cooldown::%player%} is not set:
+				set {_claim} to true
+			if {_claim} is true:
+				set {Daily::Cooldown::%player%} to now
+				add 1 to {Daily::Number::%player%}
+				if {Daily::Number::%player%} is 1:
+					set {Daily::Number::%player%} to 2
+				set {_mess} to {Config::Utils::ClaimedReward}
+				replace all "{DAY}" with "%{_day}%" in {_mess}
+				send ""
+				send {_mess}
+				send ""
+				execute console command "crates key give %player% %{_key}% %{_amount}%"
+				close player's inventory
+				play sound "entity.player.levelup" with pitch 2 for player
+			else:
+				close player's inventory
+				send {Config::Utils::CannotClaimNow}
+				play sound "entity.illusioner.mirror_move" with pitch 2 for player
+
+on load:
+	set {IslandUCost::*} to 25000, 50000, 5000, 25000, 1000000000000
+	set {IslandUCashMulti::*} to 8, 5, 2, 3, 1
+
+	set {IslandUMulti::*} to 1, 0.05, 3, 1, 1
+	set {IslandUMultiX::*} to 1, 100, 15, 1, 1
+	set {IslandUMax::*} to {Config::Gens::Upgrade::MaxLimit}-9, 1, 5, 8, 1
+
+function islandupgrades(player: player):
+	set {_x} to chest inventory with 3 rows named {Config::GUIS::IsUpgrades::%{Bedrock::%{_player}%}%}
+	set {_owner} to placeholder "bskyblock_island_owner" from {_player}
+	if {_owner} is not set:
+		send {Config::Update35::NoIsland} to {_player}
+		stop
+	set {_checks::*} to "Gens" and "Speed" and "Size" and "Members" and "Flight"
+	set {_max::*} to {IslandUMax::*}
+	set {_slots::*} to 11, 12, 13, 14, 15
+	loop {_checks::*}:
+		set {_checking} to "%{_player}%"
+		if loop-counter > 2:
+			set {_checking} to {_owner}
+		set {_item} to {Config::GUIS::IsUpgrades::Upgrade%loop-counter%}
+		if {Upgrades::%{_checking}%::%loop-value%} >= {_max::%loop-counter%}:
+			set {_info} to {Config::GUIS::IsUpgrades::InfoFormatMax}
+			set boolean tag "Max" of custom nbt of {_item} to true
+		else:
+			set {_info} to {Config::GUIS::IsUpgrades::InfoFormat}
+			set string tag "Upgrade" of custom nbt of {_item} to loop-value
+		if loop-counter is 1:
+			replace all "{CURRENT}" with "%{GensMAX::%{_checking}%}%" in {_info}
+			replace all "{NEW}" with "%{GensMAX::%{_checking}%}+1%" in {_info}
+		if loop-counter is 2:
+			replace all "{CURRENT}" with "%({Upgrades::%{_checking}%::%loop-value%})*{IslandUMultiX::%loop-counter%}%%%" in {_info}
+			replace all "{NEW}" with "%({Upgrades::%{_checking}%::%loop-value%}+{IslandUMulti::%loop-counter%})*{IslandUMultiX::%loop-counter%}%%%" in {_info}
+		if loop-counter is 4:
+			replace all "{CURRENT}" with "%({Upgrades::%{_checking}%::%loop-value%}+1)*{IslandUMultiX::%loop-counter%}%" in {_info}
+			set {_new} to "%(({Upgrades::%{_checking}%::%loop-value%}+1)+{IslandUMulti::%loop-counter%})*{IslandUMultiX::%loop-counter%}%"
+			replace all "{NEW}" with {_new} in {_info}
+			set string tag "NewMembers" of custom nbt of {_item} to {_new}
+		if loop-counter is 3:
+			set {_curr} to 30+({Upgrades::%{_checking}%::%loop-value%}*{IslandUMultiX::%loop-counter%})
+			set {_new} to 30+(({Upgrades::%{_checking}%::%loop-value%}+1)*{IslandUMultiX::%loop-counter%})
+			if {_curr} > 100:
+				set {_curr} to 100
+			if {_new} > 100:
+				set {_new} to 100
+			replace all "{CURRENT}" with "%{_curr}%x%{_curr}%" in {_info}
+			replace all "{NEW}" with "%{_new}%x%{_new}%" in {_info}
+			set string tag "NewSize" of custom nbt of {_item} to "%{_new}%"
+		if loop-counter is 5:
+			if {Upgrades::%{_checking}%::Flight} > 0:
+				replace all "{CURRENT}" with {Config::GUIS::IsUpgrades::Unlocked} in {_item}'s lore
+			else:
+				replace all "{CURRENT}" with {Config::GUIS::IsUpgrades::NotUnlocked} in {_item}'s lore
+		else:
+			replace all "{CURRENT}" with "%{_info}%" in {_item}'s lore
+
+		if {Upgrades::%{_checking}%::%loop-value%} >= {_max::%loop-counter%}:
+			set {_bottom::*} to {Config::GUIS::IsUpgrades::Limit}
+		else:
+			set {_uMulti} to {Upgrades::%{_checking}%::%loop-value%}+1
+			if loop-counter is 2:
+				set {_uMulti} to ({Upgrades::%{_checking}%::%loop-value%}*50)+1
+			if loop-counter is 3:
+				set {_uMulti} to ({Upgrades::%{_checking}%::%loop-value%}*5)+1*(({Upgrades::%{_checking}%::%loop-value%}+1)/2)
+			set {_bottom::*} to {Config::GUIS::IsUpgrades::Purchase::*}
+			set {_cost} to {IslandUCost::%loop-counter%}*{_uMulti}*{IslandUCashMulti::%loop-counter%}
+			set int tag "Cost" of custom nbt of {_item} to {_cost}
+			set {_costDisplay} to formatnumber("%{_cost}%")
+			replace all "{COST}" with "%{_costDisplay}%$" in {_bottom::*}
+		replace all "{BOTTOM}" with "" in {_item}'s lore
+		set {_item}'s lore to {_item}'s lore and {_bottom::*}
+		set slot {_slots::%loop-counter%} of {_x} to {_item}
+	open {_x} for {_player}
+
+on inventory click:
+	if name of current inventory of player is {Config::GUIS::IsUpgrades::Default} or {Config::GUIS::IsUpgrades::Bedrock}:
+		cancel event
+		if boolean tag "Max" of custom nbt of clicked slot is true:
+			send {Config::Utils::UpgradeLimit}
+			play sound "entity.illusioner.mirror_move" with pitch 2 for player
+			stop
+		set {_cost} to int tag "Cost" of custom nbt of clicked slot
+		set {_upgr} to string tag "Upgrade" of custom nbt of clicked slot
+		set {_owner} to placeholder "bskyblock_island_owner" from player
+		if {_cost} is set:
+			if player's balance is bigger or equal to {_cost}:
+				remove {_cost} from player's balance
+				play sound "entity.player.levelup" with pitch 1.65
+				send {Config::Utils::UpgradePurchased}
+				if {_upgr} is "Gens":
+					add 1 to {Upgrades::%player%::Gens}
+					add 1 to {GensMAX::%player%}
+				if {_upgr} is "Speed":
+					add 0.05 to {Upgrades::%player%::Speed}
+				if {_upgr} is "Members":
+					set {_members} to string tag "NewMembers" of custom nbt of clicked slot
+					execute console command "lp user %{_owner}% permission set bskyblock.team.maxsize.%{_members}%"
+					add 1 to {Upgrades::%{_owner}%::%{_upgr}%}
+				if {_upgr} is "Size":
+					set {_newSize} to string tag "NewSize" of custom nbt of clicked slot
+					execute console command "lp user %{_owner}% permission set bskyblock.island.range.%{_newSize}%"
+					execute console command "bsbadmin range set %{_owner}% %{_newSize}%"
+					add 1 to {Upgrades::%{_owner}%::%{_upgr}%}
+				if {_upgr} is "Flight":
+					add 1 to {Upgrades::%{_owner}%::Flight}
+				islandupgrades(player)
+			else:
+				send {Config::Global::NotEnough}
+				play sound "entity.illusioner.mirror_move" with pitch 2 for player
+				stop
+
+		stop
+
+command /discord:
+	trigger:
+		send ""
+		send {Config::Gens::Discord::Discord}
+		send ""
+		send {Config::Gens::Discord::Info::1}
+		send {Config::Gens::Discord::Info::2}
+		send ""
+		send formatted {Config::Gens::Discord::Info::3}
+		send ""
+		send {Config::Gens::Discord::Info::4}
+		send ""
+		play sound "entity.experience_orb.pickup" with pitch 2 for player
+
+command /vote:
+	trigger:
+		send ""
+		send {Config::Gens::Vote::Vote}
+		send ""
+		send {Config::Gens::Vote::Info::1}
+		send {Config::Gens::Vote::Info::2}
+		send ""
+		send formatted {Config::Gens::Vote::Info::3}
+		send ""
+		send {Config::Gens::Vote::Info::4}
+		send ""
+		close player's inventory
+		play sound "entity.experience_orb.pickup" with pitch 2 for player
+
+options:
+	chatgame: 25 minutes # Start chatgame every 20 minutes
+
+on join:
+	set join message to ""
+	if {Config::Utils::WelcomeMess} is true:
+		if player has permission "WelcomeMess":
+			set {Top-Nick::%player%} to "%player%"
+			set {_bold} to ""
+			if {Chat-Bold::%player%} is true:
+				set {_bold} to "&l"
+			set {_nick} to player
+			if {Chat-Color::%player%::*} is set:
+				set {_nick} to formatted gradient("%{_bold}%%{_nick}%", ({Chat-Color::%player%::1}, {Chat-Color::%player%::2}))
+			if placeholder "luckperms_suffix" from player is not "Member":
+				set {_mess} to {Config::Utils::JoinMessage}
+				replace all "{RANK}" with placeholder "luckperms_prefix" from player in {_mess}
+				replace all "{NICK}" with "%{_nick}%" in {_mess}
+				send formatted {_mess} to all players
+
+on quit:
+	set quit message to ""
+on join:
+	if {Level::%player%} is not set:
+		set {Level::%player%} to 1
+
+placeholderapi placeholder with the prefix "gens":
+	if the identifier is "tab":
+		if {HideTAB::%player%} is set:
+			set the result to "true"
+		else:
+			if player is in world "world":
+				set the result to "false"
+			else:
+				set the result to "true"
+	if the identifier is "clanprefix":
+		if {clan::%player%} is set:
+			if {clan::%{clan::%player%}%::Color::*} is set:
+				if {clan::%{clan::%player%}%::Color::*} is "Rainbow":
+					set {_clan} to "[%{clan::%player%}%] "
+					set the result to rainbow({_clan})
+				else:
+					set the result to "%{clan::%{clan::%player%}%::Color::*}%[%{clan::%player%}%] "
+			else:
+				set the result to "&6[%{clan::%player%}%] "
+		else:
+			set the result to ""
+	if the identifier is "votes_cur":
+		set the result to "%{GlobalServerVotes} ? "0"%"
+	if the identifier is "votes_req":
+		set the result to "%{Config::Global::VoteParty}%"
+	if the identifier is "level":
+		set the result to "%{Level::%player%} ? "1"%"
+	if the identifier is "rebirth":
+		set the result to "%{Rebirth::%player%} ? "0"%"
+	if the identifier is "gens":
+		set {_genam} to size of {New-Generator::%player%::*}
+		set {_genmax} to {GensMAX::%player%}
+		if {_genam} is {_genmax}:
+			set the result to "<##fcd52a>%{_genam}%&b/<##fcd52a>%{_genmax}%"
+		else:
+			set the result to "<##1ef91e>%{_genam}%&b/<##1ef91e>%{_genmax}%"
+	if the identifier is "tokens":
+		set the result to "%{Tokens::%player%} ? 0%"
+	if the identifier is "playernick":
+		set {_bold} to ""
+		if {Chat-Bold::%player%} is true:
+			set {_bold} to "&l"
+		set {_nick} to player
+		if {Chat-Color::%player%::*} is set:
+			set {_nick} to formatted gradient("%{_bold}%%{_nick}%", ({Chat-Color::%player%::1}, {Chat-Color::%player%::2}))
+		set the result to "%{_bold}%%{_nick}%"
+	if the identifier is "prefix":
+		if {Prefix::%player%::Icon} is not set:
+			set the result to ""
+		else if {Prefix::%player%::Icon} is "":
+			set the result to ""
+		else:
+			set the result to " %{Prefix::%player%::Color}%%{Prefix::%player%::Icon}%"
+	if the identifier is "playtime":
+		set {_days} to placeholder "statistic_time_played:days" from player
+		set {_hours} to placeholder "statistic_time_played:hours" from player
+		set {_minutes} to placeholder "statistic_time_played:minutes" from player
+		set {_seconds} to placeholder "statistic_time_played:seconds" from player
+		set {_resoult} to "%{_seconds}%s"
+		if {_minutes} parsed as number > 0:
+			set {_resoult} to "%{_minutes}%m %{_seconds}%s"
+		if {_hours} parsed as number > 0:
+			set {_resoult} to "%{_hours}%h %{_minutes}%m"
+		if {_days} parsed as number > 0:
+			set {_resoult} to "%{_days}%d %{_hours}%h"
+		set the result to "%{_resoult}%"
+	if the identifier is "farmevent":
+		if {FarmsEvent} > 0:
+			set the result to {Config::Farms::EventPlaceholder2}
+		else:
+			set the result to {Config::Farms::EventPlaceholder}
+
+command /spawn:
+	trigger:
+		animation(player)
+		wait 0.5 second
+		teleport player to {spawn}
+		send {Config::Utils::SpawnTeleport}
+		play sound "entity.experience_orb.pickup" with pitch 2 for player
+
+command /setspawn:
+	permission: *
+	trigger:
+		send "&aSpawn has been set!"
+		set {spawn} to location at player
+		play sound "entity.experience_orb.pickup" with pitch 2 for player
+
+command /farm:
+	trigger:
+		farms(player, "Farm")
+
+command /campo:
+	trigger:
+		farms(player, "Farm")
+
+command /fazenda:
+	trigger:
+		farms(player, "Farm")
+
+command /sawmill: #TODO: Remover depois
+	trigger:
+		farms(player, "Sawmill")
+
+command /lenhador:
+	trigger:
+		farms(player, "Sawmill")
+
+command /pond: #TODO: Remover depois
+	trigger:
+		warptp(player, "Pond")
+
+command /pesca:
+	trigger:
+		warptp(player, "Pond")
+
+command /emoji:
+	aliases: emotes, emote
+	trigger:
+		send ""
+		send {Config::Utils::Emotes}
+		send ""
+		send " <##fcf932>:tableflip: &3→ &6(╯°□°)╯︵ ┻━┻"
+		send " <##fcf932>:shrug: &3→ &6¯\_( ͡❛ ͜ʖ ͡❛)_/¯"
+		send " <##fcf932>:lenny: &3→ &6( ͡❛ ͜ʖ ͡❛)"
+		send " <##fcf932>:yes: &3→ &6✔"
+		send " <##fcf932>:no: &3→ &6❌"
+		send " <##fcf932><3 &3→ &6❤"
+		send ""
+		close player's inventory
+		play sound "entity.experience_orb.pickup" with pitch 2 for player
+
+on chat:
+	if {clan::%player%} is set:
+		if {clan::%{clan::%player%}%::Color::*} is set:
+			if {clan::%{clan::%player%}%::Color::*} is "Rainbow":
+				set {_clan} to "[%{clan::%player%}%]"
+				set {_resclan} to rainbow({_clan})
+			else:
+				set {_resclan} to "%{clan::%{clan::%player%}%::Color::*}%[%{clan::%player%}%]"
+		else:
+			set {_resclan} to "&6[%{clan::%player%}%]"
+	else:
+		set {_resclan} to "None"
+	set {_suffix} to placeholder "luckperms_suffix" from player
+	set {_rank} to placeholder "luckperms_prefix" from player
+	set {_level} to {Level::%player%}
+	set {_money} to placeholder "vault_eco_balance_formatted" from player
+	set {_lvl} to {Level::%player%}
+	set {_prof} to formatted gradient("&l%player%'s profile", ("f9a600", "f8f04b"))
+	set {_bold} to ""
+	if {Chat-Bold::%player%} is true:
+		set {_bold} to "&l"
+	set {_mess} to message
+	if player has permission "genblock.emoji":
+		replace all ":lenny:" with "( ͡❛ ͜ʖ ͡❛)" in {_mess}
+		replace all ":shrug:" with "¯\_( ͡❛ ͜ʖ ͡❛)_/¯" in {_mess}
+		replace all ":tableflip:" with "(╯°□°)╯︵ ┻━┻" in {_mess}
+		replace all ":yes:" with "✔" in {_mess}
+		replace all ":no:" with "❌" in {_mess}
+		replace all "<3" with "❤" in {_mess}
+	if {Chat-Message::%player%::*} is set:
+		if length of {_mess} is 1:
+			set {_mess} to formatted "<##%{Chat-Message::%player%::1}%>%{_mess}%"
+		else:
+			set {_mess} to formatted gradient({_mess}, ({Chat-Message::%player%::1}, {Chat-Message::%player%::2}))
+	set {_nick} to player
+	set {_icon} to ""
+	if {Prefix::%player%::Icon} is set:
+		set {_icon} to "%{Prefix::%player%::Icon}% "
+	if {Chat-Color::%player%::*} is set:
+		set {_nick} to formatted gradient("%{_bold}%%{_nick}%", ({Chat-Color::%player%::1}, {Chat-Color::%player%::2}))
+	set {_chatformat} to {Config::Utils::ChatFormat}
+	replace all "{LEVEL}" with "%{_lvl} ? ""%" in {_chatformat}
+	replace all "{COLOR}" with "%{Prefix::%player%::Color} ? ""%" in {_chatformat}
+	replace all "{ICON}" with "%{_icon}%" in {_chatformat}
+	replace all "{RANK}" with "%{_rank} ? ""%" in {_chatformat}
+	replace all "{NICK}" with "%{_nick} ? ""%" in {_chatformat}
+	replace all "{MESSAGE}" with "%{_mess} ? ""%" in {_chatformat}
+	set chat format to formatted "%{_chatformat}%"
+
+command /clan [<text>] [<text>]:
+	trigger:
+		if arg-1 is not set:
+			send ""
+			loop {Config::Utils::ClanHelp::*}:
+				send loop-value
+			send ""
+			stop
+		if arg-1 is "info":
+			if arg-2 is not set:
+				if {clan::%player%} is not set:
+					send {Config::Utils::EnterClanTag}
+					stop
+				else:
+					claninfo(player, {clan::%player%})
+					stop
+			if {clan::*} contains arg-2:
+				claninfo(player, arg-2)
+			else:
+				send {Config::Utils::UnknownClan}
+			stop
+		if arg-1 is "create":
+			if {clan::%player%} is not set:
+				if arg-2 is not set:
+					send {Config::Utils::EnterClanTag}
+				else:
+					if length of arg-2 < 3:
+						send {Config::Utils::TAGTooShort}
+						stop
+					else if length of arg-2 > 4:
+						send {Config::Utils::TAGTooLong}
+						stop
+					if {clan::*} contains arg-2:
+						send {Config::Utils::TagExist}
+						stop
+					set {clan::%arg-2%::Leader} to player
+					set {clan::%arg-2%} to arg-2
+					set {clan::%player%} to arg-2
+					set {_mess} to {Config::Utils::ClanCreated}
+					replace all "{CLAN}" with arg-2 in {_mess}
+					send {_mess}
+					play sound "entity.player.levelup" with pitch 2 for player
+			else:
+				send {Config::Utils::AlreadyInClan}
+			stop
+		if arg-1 is "delete" or "disband":
+			if {clan::%player%} is set:
+				if {clan::%{clan::%player%}%::Leader} is player:
+					send {Config::Utils::ClanDeleted2} to player
+					loop {clan::%{clan::%player%}%::Dodani::*}:
+						set {_mess} to {Config::Utils::ClanDeleted}
+						replace all "{PLAYER}" with "%player%" in {_mess}
+						send "" to loop-value
+						send {_mess} to loop-value
+						send "" to loop-value
+						delete {clan::%loop-value%}
+					delete {clan::%{clan::%player%}%::Leader}
+					delete {clan::%{clan::%player%}%::Dodani::*}
+					delete {clan::%{clan::%player%}%::Color::*}
+					delete {clan::%{clan::%player%}%}
+					delete {clan::%player%}
+				else:
+					send {Config::Utils::NoLeader}
+			else:
+				send {Config::Utils::NoClan}
+			stop
+		if arg-1 is "color" or "colors":
+			if {clan::%player%} is set:
+				if {clan::%{clan::%player%}%::Leader} is player:
+					clantag(player)
+				else:
+					send {Config::Utils::NoLeader}
+			else:
+				send {Config::Utils::NoClan}
+			stop
+		if arg-1 is "invite" or "add":
+			if arg-2 is not set:
+				send {Config::Global::EnterPlayer}
+				stop
+			loop all players:
+				add loop-player to {_players::*}
+			if {_players::*} contains arg-2:
+				if {clan::%player%} is set:
+					if {clan::%{clan::%player%}%::Leader} is player:
+						if {clan::%arg-2%} is not set:
+							if {clanInvite::%arg-2%} is not {clan::%player%}:
+								play sound "block.note_block.pling" with pitch 1 for arg-2 parsed as offline player
+								set {_mess} to {Config::Utils::Invited}
+								replace all "{PLAYER}" with arg-2 in {_mess}
+								send {_mess}
+								set {clanInvite::%arg-2%} to {clan::%player%}
+								send "" to arg-2 parsed as offline player
+								set {_mess} to {Config::Utils::InviteReceived1}
+								replace all "{CLAN}" with {clan::%player%} in {_mess}
+								send {_mess} to arg-2 parsed as offline player
+								set {_mess} to {Config::Utils::InviteReceived2}
+								replace all "{TOOLTIP}" with "<command:/clan join %{clan::%player%}%><tooltip:%{Config::Utils::InviteTooltip}%>" in {_mess}
+								send formatted {_mess} to arg-2 parsed as offline player
+								send "" to arg-2 parsed as offline player
+							else:
+								send {Config::Utils::AlreadyInvited}
+						else:
+							send {Config::Utils::AlreadyInClan}
+					else:
+						send {Config::Utils::NoLeader}
+				else:
+					send {Config::Utils::NoClan}
+			else:
+				send {Config::Global::PlayerOffline}
+			stop
+		if arg-1 is "leave" or "quit":
+			if {clan::%player%} is set:
+				if {clan::%{clan::%player%}%::Leader} is player:
+					send {Config::Utils::LeaderCantLeave}
+				else:
+					remove player from {clan::%{clan::%player%}%::Dodani::*}
+					send "" to player
+					set {_mess} to {Config::Utils::LeftClan}
+					replace all {CLAN} with {clan::%player%} in {_mess}
+					send {_mess} to player
+					send "" to player
+					loop {clan::%{clan::%player%}%::Dodani::*}:
+						send "" to loop-value
+						set {_mess} to {Config::Utils::SomeoneLeft}
+						replace all "{PLAYER}" with arg-2 in {_mess}
+						send {_mess} to loop-value
+						send "" to loop-value
+					delete {clan::%player%}
+			else:
+				send {Config::Utils::NoClan}
+			stop
+		if arg-1 is "join":
+			if arg-2 is not set:
+				send {Config::Utils::EnterClanTag}
+				stop
+			if {clan::%player%} is not set:
+				if {clanInvite::%player%} is set:
+					if {clanInvite::%player%} is arg-2:
+						if {clan::*} contains {clanInvite::%player%}:
+							delete {clanInvite::%player%}
+							send ""
+							set {_mess} to {Config::Utils::JoinedClan}
+							replace all "{CLAN}" with arg-2 in {_mess}
+							send {_mess}
+							send ""
+							set {_mess} to {Config::Utils::SomeoneJoined}
+							replace all "{PLAYER}" with "%player%" in {_mess}
+							loop {clan::%arg-2%::Dodani::*}:
+								send "" to loop-value
+								send {_mess} to loop-value
+								send "" to loop-value
+							send "" to {clan::%arg-2%::Leader}
+							send {_mess} to {clan::%arg-2%::Leader}
+							send "" to {clan::%arg-2%::Leader}
+							set {clan::%player%} to arg-2
+							add player to {clan::%arg-2%::Dodani::*}
+						else:
+							send {Config::Utils::UnknownClan}
+					else:
+						send {Config::Utils::NoInvite}
+				else:
+					send {Config::Utils::NoInvite}
+			else:
+				send {Config::Utils::AlreadyInClan}
+			stop
+		if arg-1 is "kick":
+			if arg-2 is not set:
+				send {Config::Global::EnterPlayer}
+				stop
+			if {clan::%player%} is set:
+				if {clan::%{clan::%player%}%::Leader} is player:
+					if {clan::%{clan::%player%}%::Dodani::*} contains arg-2:
+						remove arg-2 from {clan::%{clan::%player%}%::Dodani::*}
+						delete {clan::%arg-2%}
+						send "" to arg-2 parsed as offline player
+						set {_mess} to {Config::Utils::Kicked}
+						replace all "{CLAN}" with {clan::%player%} in {_mess}
+						send {_mess} to arg-2 parsed as offline player
+						send "" to arg-2 parsed as offline player
+						set {_mess} to {Config::Utils::SomeoneKicked}
+						replace all "{PLAYER}" with arg-2 in {_mess}
+						send {_mess} to arg-2 parsed as offline player
+						loop {clan::%{clan::%player%}%::Dodani::*}:
+							send "" to loop-value
+							send {_mess} to loop-value
+							send "" to loop-value
+						send "" to player
+						send {_mess} to player
+						send "" to player
+					else:
+						send {Config::Utils::PlayerNotAdded}
+				else:
+					send {Config::Utils::NoLeader}
+			else:
+				send {Config::Utils::NoClan}
+			stop
+		send ""
+		loop {Config::Utils::ClanHelp::*}:
+			send loop-value
+		send ""
+
+function claninfo(player: player, tag: text):
+	loop all players:
+		add loop-player to {_online::*}
+	loop {clan::%{_tag}%::Dodani::*}:
+		if {_online::*} contains loop-value:
+			add "&a%loop-value%" to {_players::*}
+		else:
+			add "&c%loop-value%" to {_players::*}
+	if {_players::*} is set:
+		set {_players} to "%{_players::*}%"
+	else:
+		set {_players} to "&eNone"
+	replace all "," with "&7," in {_players}
+	replace all " and" with "&7," in {_players}
+	send "" to {_player}
+	set {_mess} to {Config::Update35::ClanInfo}
+	replace all "{TAG}" with "%{_tag}%" in {_mess}
+	send {_mess} to {_player}
+	set {_mess} to {Config::Update35::ClanLeader}
+	replace all "{LEADER}" with "%{clan::%{_tag}%::Leader}%" in {_mess}
+	send {_mess} to {_player}
+	send "" to {_player}
+	set {_mess} to {Config::Update35::ClanMembers}
+	replace all "{MEMBERS}" with "%{_players}%" in {_mess}
+	send formatted {_mess} to {_player}
+	send "" to {_player}
+
+function timeformat(time: timespan) :: string:
+	set {_time} to "%{_time}%"
+	set {_timespan::*} to {_time} parsed as "%number% %string%[s][ and %number% %string%[s]]"
+	set {_first} to "%round({_timespan::1})%%first character of {_timespan::2}%"
+	set {_second} to "%round({_timespan::3})%%first character of {_timespan::4}%"
+	if {_second} is "60m":
+		set {_second} to "59m"
+	if {_second} is "24h":
+		set {_second} to "23h"
+	return ("%{_first}% %{_second}%" if {_timespan::3} is set, else "%{_first}%")
+
+command /melhoria:
+	aliases: melhorias, upgrade, upgrades, isupgrade, isupgrades, islandupgrades
+	trigger:
+		upgrades(player)
+
+command /setwarp [<text>]:
+	permission: *
+	trigger:
+		if {Warps::%arg-1%} is set:
+			send "&aReplaced &6&l%arg-1%&a warp Location!"
+		else:
+			send "&aCreated warp &6&l%arg-1%&a!"
+		if arg-1 is set:
+			play sound "entity.player.levelup" with pitch 2 for player
+			set {Warps::%arg-1%} to arg-1
+			set {Warps::%arg-1%::Loc} to location at player
+
+command /delwarp [<text>]:
+	permission: *
+	trigger:
+		if {Warps::%arg-1%} is set:
+			send "&aRemoved &6&l%arg-1% &awarp!"
+			delete {Warps::%arg-1%}
+			delete {Warps::%arg-1%::Loc}
+			play sound "entity.player.levelup" with pitch 2 for player
+		else:
+			send "&cThis warp doesn't exist!"
+			play sound "entity.illusioner.mirror_move" with pitch 2 for player
+
+command /warp [<text>]:
+	trigger:
+		if arg-1 is set:
+			warptp(player, arg-1)
+		else:
+			warp(player)
+command /warps [<text>]:
+	trigger:
+		if arg-1 is set:
+			warptp(player, arg-1)
+		else:
+			warp(player)
+
+on tab complete of "/warp" and "/delwarp":
+	set tab completions for position 1 to {Warps::*}
+
+function warp(player: player):
+	set {_x} to chest inventory with 4 rows named {Config::GUIS::Warps::%{Bedrock::%{_player}%}%}
+	set {_slots::*} to 11, 12, 13, 14, 15, 21, 22, 23
+	loop {_slots::*}:
+		set slot loop-value of {_x} to {Config::GUIS::Warps::Warp%loop-counter%}
+	open {_x} for {_player}
+
+function warptp(player: player, warp: text):
+	if {Warps::%{_warp}%} is set:
+		close {_player}'s inventory
+		animation({_player})
+		wait 0.5 second
+		set {_loc} to {Warps::%{_warp}%::Loc}
+		teleport {_player} to {_loc}
+		teleported({_player})
+	else:
+		send {Config::Utils::UnknownWarp} to {_player}
+		play sound "entity.illusioner.mirror_move" with pitch 2 for {_player}
+	stop
+
+command /fly:
+	trigger:
+		if player has permission "essentials.fly":
+			execute player command "essentials:fly"
+		else:
+			set {_owner} to placeholder "bskyblock_island_owner" from player
+			if {Upgrades::%{_owner}%::Flight} > 0:
+				execute console command "lp user %player% permission set essentials.fly"
+			wait 1 tick
+			execute player command "essentials:fly"
+
+on inventory click:
+	if name of current inventory of player is {Config::GUIS::Upgrades::Default} or {Config::GUIS::Upgrades::Bedrock}:
+		cancel event
+		if clicked slot is 11:
+			itemupgrade(player)
+		if clicked slot is 13:
+			islandupgrades(player)
+		if clicked slot is 15:
+			caveupgrades(player)
+		stop
+	if name of current inventory of player is {Config::GUIS::Warps::Default} or {Config::GUIS::Warps::Bedrock}:
+		cancel event
+		set {_slots::*} to 11 and 12 and 15 and 21 and 22 and 23
+		set {_warps::*} to "crates" and "cave" and "top" and "island" and "pond" and "afk"
+		loop {_slots::*}:
+			if clicked slot is loop-value:
+				if {_warps::%loop-counter%} is "island":
+					set {_x} to placeholder "bskyblock_island_owner" from player
+					close player's inventory
+					if {_x} is set:
+						animation(player)
+						wait 0.5 second
+						execute player command "bskyblock:island go"
+					else:
+						execute player command "bskyblock:island create"
+				else:
+					warptp(player, {_warps::%loop-counter%})
+		if clicked slot is 13:
+			farms(player, "Farm")
+		if clicked slot is 14:
+			farms(player, "Sawmill")
+		stop
+	if name of current inventory of player is {Config::GUIS::SawmillWarps::Default} or {Config::GUIS::SawmillWarps::Bedrock}:
+		cancel event
+		set {_warps::*} to "oak" and "birch" and "spruce" and "darkoak" and "jungle"
+		loop {_warps::*}:
+			if clicked slot is 10+loop-counter:
+				warptp(player, loop-value)
+		if clicked slot is 30 or 31 or 32:
+			warp(player)
+		stop
+	if name of current inventory of player is {Config::GUIS::FarmWarps::Default} or {Config::GUIS::FarmWarps::Bedrock}:
+		cancel event
+		set {_warps::*} to "wheat" and "potato" and "carrot" and "beetroot" and "lilac"
+		loop {_warps::*}:
+			if clicked slot is 10+loop-counter:
+				warptp(player, loop-value)
+		if clicked slot is 30 or 31 or 32:
+			warp(player)
+		stop
+	if name of current inventory of player is {Config::GUIS::CaveUpgrades::Default} or {Config::GUIS::CaveUpgrades::Bedrock}:
+		cancel event
+		if clicked slot is 11:
+			if {CaveUpgrade-Regen::%player%} is not set:
+				if player's balance is bigger or equal to {Config::GUIS::Update35::FastRegen}:
+					close player's inventory
+					remove {Config::GUIS::Update35::FastRegen} from player's balance
+					set {CaveUpgrade-Regen::%player%} to true
+					play sound "entity.player.levelup" with pitch 1.65
+					send {Config::Global::Success}
+				else:
+					play sound "entity.illusioner.mirror_move" with pitch 2 for player
+					send {Config::Global::NotEnough}
+		if clicked slot is 13:
+			if {CaveUpgrade-Exp::%player%} is not set:
+				if player's balance is bigger or equal to {Config::GUIS::Update35::MoreExp}:
+					close player's inventory
+					remove {Config::GUIS::Update35::MoreExp} from player's balance
+					set {CaveUpgrade-Exp::%player%} to true
+					play sound "entity.player.levelup" with pitch 1.65
+					send {Config::Global::Success}
+				else:
+					play sound "entity.illusioner.mirror_move" with pitch 2 for player
+					send {Config::Global::NotEnough}
+		if clicked slot is 15:
+			if {CaveUpgrade-Area::%player%} is not set:
+				if player's balance is bigger or equal to {Config::GUIS::Update35::NewArea}:
+					if player is in world "world":
+						if x-coordinates of player >= 500:
+							close player's inventory
+							remove {Config::GUIS::Update35::NewArea} from player's balance
+							set {CaveUpgrade-Area::%player%} to true
+							play sound "entity.player.levelup" with pitch 1.65
+							send {Config::Global::Success}
+							Caveunlock2(player)
+						else:
+							send {Config::PVMine::NeedInCave}
+							play sound "entity.illusioner.mirror_move" with pitch 2 for player
+					else:
+						send {Config::PVMine::NeedInCave}
+						play sound "entity.illusioner.mirror_move" with pitch 2 for player
+				else:
+					play sound "entity.illusioner.mirror_move" with pitch 2 for player
+					send {Config::Global::NotEnough}
+		stop
+	if name of current inventory of player is {Config::GUIS::Daily::Default} or {Config::GUIS::Daily::Bedrock}:
+		cancel event
+		if clicked slot is chest minecart with enchantment glint:
+			set {_lore::*} to uncolored lore of clicked slot
+			set {_shards::*} to {_lore::6} split at " "
+			if {_shards::3} is set:
+				add {_shards::3} to {Tokens::%player%}
+			set {Daily::%player%::Claim} to 24 hours from now
+			add 1 to {Daily::%player%::Prev}
+			set {_mess} to {Config::Utils::DailyReward}
+			replace all "{PLAYER}" with "%player%" in {_mess}
+			replace all "{DAY}" with "%{Daily::%player%::Day}%" in {_mess}
+			send {_mess} to all players
+			play sound "entity.experience_orb.pickup" with pitch 2 for all players
+			close player's inventory
+			set {_title1} to {Config::Utils::DailyReward::Title::1}
+			replace all "{DAY}" with "%{Daily::%player%::Day}%" in {_title1}
+			send player title {_title1} with subtitle {Config::Utils::DailyReward::Title::2} for 2 seconds
+			set {_pitch} to 0.30
+			loop 5 times:
+				add 0.3 to {_pitch}
+				play sound "entity.player.levelup" with pitch {_pitch} for player
+				wait 0.5 second
+		stop
+	if name of current inventory of player is {Config::GUIS::ClanTagColor::Default} or {Config::GUIS::ClanTagColor::Bedrock}:
+		cancel event
+		if clicked slot is 11 or 12 or 13 or 14 or 15 or 16:
+			close player's inventory
+			if {Tokens::%player%} >= 100:
+				remove 100 from {Tokens::%player%}
+				if clicked slot is 10:
+					set {clan::%{clan::%player%}%::Color::*} to "&c"
+					set {_color} to "&cRed"
+				if clicked slot is 11:
+					set {clan::%{clan::%player%}%::Color::*} to "&6"
+					set {_color} to "&6Orange"
+				if clicked slot is 12:
+					set {clan::%{clan::%player%}%::Color::*} to "&a"
+					set {_color} to "&aLime"
+				if clicked slot is 13:
+					set {clan::%{clan::%player%}%::Color::*} to "&e"
+					set {_color} to "&eYellow"
+				if clicked slot is 14:
+					set {clan::%{clan::%player%}%::Color::*} to "&d"
+					set {_color} to "&dMagenta"
+				if clicked slot is 15:
+					set {clan::%{clan::%player%}%::Color::*} to "&9"
+					set {_color} to "&9Blue"
+				if clicked slot is 16:
+					set {clan::%{clan::%player%}%::Color::*} to "&3"
+					set {_color} to "&3Cyan"
+				set {_mess} to {Config::Utils::ColorPurchased}
+				replace all "{COLOR}" with "%{_color}%" in {_mess}
+				send {_mess}
+				play sound "entity.player.levelup" with pitch 2 for player
+			else:
+				send {Config::Global::NotEnoughShards}
+				play sound "entity.illusioner.mirror_move" with pitch 2 for player
+		else if clicked slot is 22:
+			close player's inventory
+			if {Tokens::%player%} >= 250:
+				remove 250 from {Tokens::%player%}
+				set {clan::%{clan::%player%}%::Color::*} to "Rainbow"
+				set {_mess} to {Config::Utils::ColorPurchased}
+				replace all "{COLOR}" with rainbow("&lRainbow") in {_mess}
+				send {_mess}
+				play sound "entity.player.levelup" with pitch 2 for player
+			else:
+				send {Config::Global::NotEnoughShards}
+				play sound "entity.illusioner.mirror_move" with pitch 2 for player
+		stop
+	if name of current inventory of player is {Config::GUIS::Icons::Default} or {Config::GUIS::Icons::Bedrock}:
+		cancel event
+		if clicked slot is 48 or 49 or 50:
+			send {Config::Utils::IconsReset}
+			delete {Prefix::%player%::Color}
+			delete {Prefix::%player%::Icon}
+			play sound "entity.player.levelup" with pitch 2 for player
+			close player's inventory
+			stop
+		set {_x::*} to uncolored name of clicked slot split at " "
+		if {_x::2} is set:
+			if {_x::2} is "Color":
+				close player's inventory
+				if {Prefix::%player%::Icon} is "":
+					send {Config::Utils::NeedPrefix}
+					play sound "entity.illusioner.mirror_move" with pitch 2 for player
+				else:
+					if clicked slot is 37:
+						set {Prefix::%player%::Color} to "&c"
+						set {_color} to "&cRed"
+					if clicked slot is 38:
+						set {Prefix::%player%::Color} to "&6"
+						set {_color} to "&6Orange"
+					if clicked slot is 39:
+						set {Prefix::%player%::Color} to "&a"
+						set {_color} to "&aLime"
+					if clicked slot is 40:
+						set {Prefix::%player%::Color} to "&e"
+						set {_color} to "&eYellow"
+					if clicked slot is 41:
+						set {Prefix::%player%::Color} to "&d"
+						set {_color} to "&dMagenta"
+					if clicked slot is 42:
+						set {Prefix::%player%::Color} to "&9"
+						set {_color} to "&9Blue"
+					if clicked slot is 43:
+						set {Prefix::%player%::Color} to "&3"
+						set {_color} to "&3Cyan"
+					set {_mess} to {Config::Utils::ColorChosed}
+					replace all "{COLOR}" with "%{_color}%" in {_mess}
+					send {_mess}
+					play sound "entity.player.levelup" with pitch 2 for player
+			else:
+				if {_x::2} is {Prefix::%player%::Icon}:
+					stop
+				close player's inventory
+				if {Tokens::%player%} >= 100:
+					remove 100 from {Tokens::%player%}
+					set {Prefix::%player%::Icon} to {_x::2}
+					set {_mess} to {Config::Utils::PrefixBought}
+					replace all "{PREFIX}" with "%{_x::2}%" in {_mess}
+					send {_mess}
+					send ""
+					play sound "entity.player.levelup" with pitch 2 for player
+				else:
+					send {Config::Global::NotEnoughShards}
+					play sound "entity.illusioner.mirror_move" with pitch 2 for player
+		stop
+
+function teleported(player: player):
+	send {Config::Utils::WarpTeleport} to {_player}
+	play sound "entity.player.levelup" with pitch 2 for {_player}
+	wait 1 tick
+	make 25 of cloud at {_player} with extra 0.2
+
+command /glow:
+	aliases: glowing
+	permission: glow.use
+	permission message: &cThis command is available from ɴᴇᴛʜᴇʀɪᴛᴇ rank
+	trigger:
+		if "%active potion effects of player%" contains "glowing":
+			remove glowing from player
+			send {Config::Global::ToggleOff}
+			play sound "entity.experience_orb.pickup" with pitch 1.3
+		else:
+			apply glowing of tier 1 without any particles to player for 99999 days
+			send {Config::Global::ToggleOn}
+			play sound "entity.experience_orb.pickup" with pitch 1.7
+
+command /chatgame:
+	permission: *
+	trigger:
+		send "&aStarted ChatGame!"
+		chatgame()
+
+function chatgame():
+	set {_a} to random integer between 1 and 3
+	set {_c} to ""
+	if {_a} is 1:
+		set {_1} to random integer between 55 and 999
+		set {_2} to random integer between 55 and 999
+		set {_3} to "+"
+	if {_a} is 2:
+		set {_1} to random integer between 55 and 999
+		set {_2} to random integer between 55 and 999
+		set {_3} to "-"
+	if {_a} is 3:
+		set {_1} to random integer between 3 and 15
+		set {_2} to random integer between 3 and 15
+		set {_3} to "*"
+		set {_c} to "  "
+	set {ChatGame} to "%{_1}%|%{_3}%|%{_2}%"
+	set {_check} to "%{_1}%|%{_3}%|%{_2}%"
+	send "" to all players
+	send {Config::Utils::ChatGameTitle} to all players
+	send "" to all players
+	send {Config::Utils::ChatGameDesc} to all players
+	send "" to all players
+	set {_mess} to {Config::Utils::ChatGameAsk}
+	replace all "{SPACEFIX}" with "%{_c}%" in {_mess}
+	replace all "{NUM1}" with "%{_1}%" in {_mess}
+	replace all "{SYMBOL}" with "%{_3}%" in {_mess}
+	replace all "{NUM2}" with "%{_2}%" in {_mess}
+	send formatted {_mess} to all players
+	send "" to all players
+	play sound "entity.player.levelup" with pitch 0.5 to all players
+	wait 30 seconds
+	if {_check} is {ChatGame}:
+		delete {ChatGame}
+		send "" to all players
+		send {Config::Utils::NobodyAnswer} to all players
+		send "" to all players
+		set {_pitch} to 2
+		loop 5 times:
+			play sound "block.note_block.hat" with pitch {_pitch} for all players
+			remove 0.2 from {_pitch}
+			wait 0.3 second
+
+every {@chatgame}:
+	chatgame()
+
+on chat:
+	if {ChatGame} is set:
+		set {_data::*} to {ChatGame} split at "|"
+		if {_data::2} is "+":
+			set {_answer} to {_data::1} parsed as number + {_data::3} parsed as number
+		if {_data::2} is "-":
+			set {_answer} to {_data::1} parsed as number - {_data::3} parsed as number
+		if {_data::2} is "*":
+			set {_answer} to {_data::1} parsed as number * {_data::3} parsed as number
+		if message is "%{_answer}%":
+			delete {ChatGame}
+			set {_reward} to random integer between 1000 and 9999
+			add {_reward} to player's balance
+			set {_reward2} to random integer between 5 and 10
+			add {_reward2} to {Tokens::%player%}
+			send "" to all players
+			set {_mess} to {Config::Utils::GoodAnswer}
+			replace all "{PLAYER}" with "%player%" in {_mess}
+			send {_mess} to all players
+			send "" to player
+			set {_mess} to {Config::Utils::ChatGameRew}
+			replace all "{MONEY}" with "%{_reward}%" in {_mess}
+			replace all "{SHARDS}" with "%{_reward2}%" in {_mess}
+			send {_mess} to player
+			send "" to all players
+			play sound "entity.player.levelup" with pitch 1.4 to all players
+
+on inventory click:
+	if name of current inventory of player is {Config::GUIS::Ranks::Default} or {Config::GUIS::Ranks::Bedrock}:
+		cancel event
+		if clicked slot is 10 or 19 or 28 or 37 or 12 or 21 or 30 or 39 or 14 or 23 or 32 or 41 or 16 or 25 or 34 or 43:
+			send ""
+			send {Config::Gens::Keys::Purchase}
+			send ""
+			send {Config::Gens::Keys::Info::1}
+			send {Config::Gens::Keys::Info::2}
+			send ""
+			send formatted "%{Config::Gens::Keys::Info::3}%"
+			send ""
+			send {Config::Gens::Keys::Info::4}
+			send ""
+			close player's inventory
+			play sound "entity.experience_orb.pickup" with pitch 2 for player
+command /keys:
+	aliases: key
+	trigger:
+		send ""
+		send {Config::Gens::Keys::Purchase}
+		send ""
+		send {Config::Gens::Keys::Info::1}
+		send {Config::Gens::Keys::Info::2}
+		send ""
+		send formatted {Config::Gens::Keys::Info::3}
+		send ""
+		send {Config::Gens::Keys::Info::4}
+		send ""
+		close player's inventory
+		play sound "entity.experience_orb.pickup" with pitch 2 for player
+
+function timespan_format(time: timespan) :: string:
+    set {_time} to "%{_time}%"
+    set {_timespan::*} to {_time} parsed as "%number% %string%[s][ and %number% %string%[s]]"
+    set {_first} to "%round({_timespan::1})%%first character of {_timespan::2}%"
+    set {_second} to "%round({_timespan::3})%%first character of {_timespan::4}%"
+    return ("%{_first}% %{_second}%" if {_timespan::3} is set, else "%{_first}%")
+
+every 3 minutes:
+	set {_x} to random integer between 1 and 7
+	play sound "entity.wandering_trader.yes" with pitch 2 for all players
+	send "" to all players
+	send {Config::Utils::TipsHeader} to all players
+	send "" to all players
+	send {Config::Utils::Mess%{_x}%::1} to all players
+	send "" to all players
+	send {Config::Utils::Mess%{_x}%::2} to all players
+	send {Config::Utils::Mess%{_x}%::3} to all players
+	send "" to all players
+
+command /leilao:
+	aliases: leilão, auction, auctions
+	trigger:
+		execute player command "ah"
+
+on entering "portal":
+	push player upwards with speed 0.4
+	push player west with speed 0.9
+	wait 0.5 second
+	execute player command "privatecave"

@@ -1,0 +1,24 @@
+location: world:39,500:18,000:-53,500
+enabled: true
+display-range: 48
+update-range: 48
+update-interval: 20
+facing: 0.0
+down-origin: false
+pages:
+- lines:
+  - content: '#ICON:lime_glazed_terracotta'
+    height: 0.6
+  - content: '&6Mina de Larimar &e250★'
+    height: 0.3
+  - content: ''
+    height: 0.3
+  - content: '&fᴅɪsᴘᴏɴíᴠᴇʟ ᴀ ᴘᴀʀᴛɪʀ ᴅᴏ &fɴíᴠᴇʟ &e&l250'
+    height: 0.3
+  - content: '&fᴠᴀʟᴏʀ ᴅᴏ ɪᴛᴇᴍ: &a&l96.000$'
+    height: 0.3
+  - content: ''
+    height: 0.3
+  - content: '&a[ᴄᴏᴍᴘʀᴇ sᴜᴀ ᴘɪᴄᴀʀᴇᴛᴀ ɴᴏ /ᴘɪᴄᴀʀᴇᴛᴀ]'
+    height: 0.3
+  actions: {}

@@ -1,0 +1,28 @@
+location: world:-132,500:98,500:-124,500
+enabled: true
+display-range: 48
+update-range: 48
+update-interval: 20
+facing: 0.0
+down-origin: false
+pages:
+- lines:
+  - content: '#ICON:Potato'
+    height: 0.6
+  - content: '&6Fazenda de Batata &e40★'
+    height: 0.3
+  - content: ''
+    height: 0.3
+  - content: '&fᴅɪsᴘᴏɴɪíᴠᴇʟ ᴀ ᴘᴀʀᴛɪʀ ᴅᴏ ɴíᴠᴇʟ &e&l40'
+    height: 0.3
+  - content: '&fᴠᴀʟᴏʀ ᴅᴏ ɪᴛᴇᴍ: &a&l25$'
+    height: 0.3
+  - content: ''
+    height: 0.3
+  - content: '%gens_farmevent%'
+    height: 0.3
+  - content: ''
+    height: 0.3
+  - content: '&a[ᴄᴏᴍᴘʀᴇ ᴜᴍᴀ ᴇɴxᴀᴅᴀ ᴜsᴀɴᴅᴏ /ғᴇʀʀᴀᴍᴇɴᴛᴀs]'
+    height: 0.3
+  actions: {}

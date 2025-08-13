@@ -1,0 +1,36 @@
+location: world:-8,001:105,000:17,998
+enabled: true
+display-range: 48
+update-range: 48
+update-interval: 20
+facing: 0.0
+down-origin: false
+pages:
+- lines:
+  - content: <#ede21a>&lᴛᴏᴘ 10 ᴊᴏɢᴀᴅᴏʀᴇs ʀɪᴄᴏs
+    height: 0.3
+  - content: <#fff42b>1. &f%ajlb_lb_vault_eco_balance_fixed_1_alltime_name% <#fff42b>(%ajlb_lb_vault_eco_balance_fixed_1_alltime_value%$)
+    height: 0.3
+  - content: <#fff42b>2. &f%ajlb_lb_vault_eco_balance_fixed_2_alltime_name% <#fff42b>(%ajlb_lb_vault_eco_balance_fixed_2_alltime_value%$)
+    height: 0.3
+  - content: <#fff42b>3. &f%ajlb_lb_vault_eco_balance_fixed_3_alltime_name% <#fff42b>(%ajlb_lb_vault_eco_balance_fixed_3_alltime_value%$)
+    height: 0.3
+  - content: <#fff42b>4. &f%ajlb_lb_vault_eco_balance_fixed_4_alltime_name% <#fff42b>(%ajlb_lb_vault_eco_balance_fixed_4_alltime_value%$)
+    height: 0.3
+  - content: <#fff42b>5. &f%ajlb_lb_vault_eco_balance_fixed_5_alltime_name% <#fff42b>(%ajlb_lb_vault_eco_balance_fixed_5_alltime_value%$)
+    height: 0.3
+  - content: <#fff42b>6. &f%ajlb_lb_vault_eco_balance_fixed_6_alltime_name% <#fff42b>(%ajlb_lb_vault_eco_balance_fixed_6_alltime_value%$)
+    height: 0.3
+  - content: <#fff42b>7. &f%ajlb_lb_vault_eco_balance_fixed_7_alltime_name% <#fff42b>(%ajlb_lb_vault_eco_balance_fixed_7_alltime_value%$)
+    height: 0.3
+  - content: <#fff42b>8. &f%ajlb_lb_vault_eco_balance_fixed_8_alltime_name% <#fff42b>(%ajlb_lb_vault_eco_balance_fixed_8_alltime_value%$)
+    height: 0.3
+  - content: <#fff42b>9. &f%ajlb_lb_vault_eco_balance_fixed_9_alltime_name% <#fff42b>(%ajlb_lb_vault_eco_balance_fixed_9_alltime_value%$)
+    height: 0.3
+  - content: <#fff42b>10. &f%ajlb_lb_vault_eco_balance_fixed_10_alltime_name% <#fff42b>(%ajlb_lb_vault_eco_balance_fixed_10_alltime_value%$)
+    height: 0.3
+  - content: ''
+    height: 0.3
+  - content: <#fff42b>#1. &f%ajlb_lb_vault_eco_balance_fixed_1_alltime_name%
+    height: 0.3
+  actions: {}

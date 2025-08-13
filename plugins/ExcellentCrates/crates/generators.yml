@@ -1,0 +1,736 @@
+Name: Generators Crate
+Description: []
+ItemProvider:
+  Type: VANILLA
+  Tag:
+    Value: '{components:{"minecraft:custom_name":{bold:0b,extra:["Generators Crate"],italic:0b,obfuscated:0b,strikethrough:0b,text:"",underlined:0b},"minecraft:profile":{id:[I;-850160402,1534147744,-2009838519,1945945916],name:"1ff041976a09dd05",properties:[{name:"textures",value:"eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMWZmMDQxOTc2YTA5ZGQwNTNlM2QxZDRlNjExYWFjMDk1OTRkNzRmYzcxYTBlYzRkYTAxMTA0MTZkMzE3ZGJhOCJ9fX0="}]},"minecraft:tooltip_display":{hidden_components:["minecraft:mooshroom/variant","minecraft:custom_data","minecraft:writable_book_content","minecraft:provides_trim_material","minecraft:weapon","minecraft:container","minecraft:bucket_entity_data","minecraft:tropical_fish/pattern","minecraft:use_cooldown","minecraft:villager/variant","minecraft:damage_resistant","minecraft:lock","minecraft:cat/variant","minecraft:frog/variant","minecraft:block_state","minecraft:pot_decorations","minecraft:llama/variant","minecraft:glider","minecraft:rarity","minecraft:block_entity_data","minecraft:cat/collar","minecraft:suspicious_stew_effects","minecraft:unbreakable","minecraft:parrot/variant","minecraft:axolotl/variant","minecraft:cow/variant","minecraft:damage","minecraft:entity_data","minecraft:use_remainder","minecraft:potion_contents","minecraft:intangible_projectile","minecraft:repair_cost","minecraft:painting/variant","minecraft:consumable","minecraft:enchantable","minecraft:creative_slot_lock","minecraft:break_sound","minecraft:lodestone_tracker","minecraft:wolf/sound_variant","minecraft:tropical_fish/base_color","minecraft:tropical_fish/pattern_color","minecraft:salmon/size","minecraft:tool","minecraft:bundle_contents","minecraft:wolf/variant","minecraft:container_loot","minecraft:can_place_on","minecraft:firework_explosion","minecraft:map_id","minecraft:bees","minecraft:fox/variant","minecraft:base_color","minecraft:blocks_attacks","minecraft:debug_stick_state","minecraft:stored_enchantments","minecraft:enchantment_glint_override","minecraft:death_protection","minecraft:trim","minecraft:food","minecraft:profile","minecraft:equippable","minecraft:sheep/color","minecraft:rabbit/variant","minecraft:potion_duration_scale","minecraft:provides_banner_patterns","minecraft:map_post_processing","minecraft:note_block_sound","minecraft:written_book_content","minecraft:attribute_modifiers","minecraft:horse/variant","minecraft:repairable","minecraft:charged_projectiles","minecraft:enchantments","minecraft:instrument","minecraft:ominous_bottle_amplifier","minecraft:banner_patterns","minecraft:can_break","minecraft:map_color","minecraft:jukebox_playable","minecraft:fireworks","minecraft:chicken/variant","minecraft:dyed_color","minecraft:max_stack_size","minecraft:shulker/color","minecraft:map_decorations","minecraft:recipes","minecraft:wolf/collar","minecraft:pig/variant","minecraft:max_damage"]}},count:1,id:"minecraft:player_head"}'
+    DataVersion: 4325
+ItemStackable: false
+Permission_Required: false
+Preview:
+  Enabled: true
+  Id: generators
+Animation:
+  Enabled: true
+  Id: spinningwheel
+Opening:
+  Cooldown: 0
+Key:
+  Required: true
+  Ids:
+  - generators
+Block:
+  Positions:
+  - -37,99,19,world
+  Pushback:
+    Enabled: true
+  Hologram:
+    Enabled: true
+    Template: default
+    Y_Offset: 0.0
+  Effect:
+    Model: none
+    Particle:
+      Name: BLOCK
+      Material: STONE
+Milestones:
+  Repeatable: false
+_dataver: 600
+Rewards:
+  List:
+    froglight_generator:
+      Type: ITEM
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: false
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:custom_data":{GenLevel:40},"minecraft:custom_name":{extra:[{bold:0b,color:"#F4DC90",italic:0b,obfuscated:0b,strikethrough:0b,text:"F",underlined:0b},{bold:0b,color:"#F4DC90",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b},{bold:0b,color:"#F4DC91",italic:0b,obfuscated:0b,strikethrough:0b,text:"o",underlined:0b},{bold:0b,color:"#F4DD93",italic:0b,obfuscated:0b,strikethrough:0b,text:"g",underlined:0b},{bold:0b,color:"#F4DF96",italic:0b,obfuscated:0b,strikethrough:0b,text:"l",underlined:0b},{bold:0b,color:"#F4E09A",italic:0b,obfuscated:0b,strikethrough:0b,text:"i",underlined:0b},{bold:0b,color:"#F5E29E",italic:0b,obfuscated:0b,strikethrough:0b,text:"g",underlined:0b},{bold:0b,color:"#F5E4A3",italic:0b,obfuscated:0b,strikethrough:0b,text:"h",underlined:0b},{bold:0b,color:"#F6E7A8",italic:0b,obfuscated:0b,strikethrough:0b,text:"t",underlined:0b},{bold:0b,color:"#F6E9AD",italic:0b,obfuscated:0b,strikethrough:0b,text:"
+              ",underlined:0b},{bold:0b,color:"#F6EBB2",italic:0b,obfuscated:0b,strikethrough:0b,text:"G",underlined:0b},{bold:0b,color:"#F7EEB7",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#F7F0BC",italic:0b,obfuscated:0b,strikethrough:0b,text:"n",underlined:0b},{bold:0b,color:"#F8F2C0",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#F8F3C4",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b},{bold:0b,color:"#F8F5C7",italic:0b,obfuscated:0b,strikethrough:0b,text:"a",underlined:0b},{bold:0b,color:"#F8F6C9",italic:0b,obfuscated:0b,strikethrough:0b,text:"t",underlined:0b},{bold:0b,color:"#F8F6CA",italic:0b,obfuscated:0b,strikethrough:0b,text:"o",underlined:0b},{bold:0b,color:"#F9F7CB",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b}],text:""},"minecraft:enchantments":{"minecraft:infinity":69},"minecraft:lore":[{extra:[{bold:0b,color:"dark_gray",italic:0b,obfuscated:0b,strikethrough:0b,text:"ɢᴇɴᴇʀᴀᴛᴏʀ
+              ʟᴇᴠᴇʟ 40★",underlined:0b}],text:""},"",{extra:[" ",{bold:0b,color:"gold",italic:0b,obfuscated:0b,strikethrough:0b,text:"⌚ ",underlined:0b},{color:"white",italic:0b,text:"ɪᴛᴇᴍ ɢᴇɴᴇʀᴀᴛɪᴏɴ ᴛɪᴍᴇ: "},{color:"gold",italic:0b,text:"20s"}],text:""},{extra:[" ",{bold:0b,color:"yellow",italic:0b,obfuscated:0b,strikethrough:0b,text:"$ ",underlined:0b},{color:"white",italic:0b,text:"ᴠᴀʟᴏʀ ᴅᴏ ɪᴛᴇᴍ: "},{color:"yellow",italic:0b,text:"52500$"}],text:""},"",{extra:[" ",{bold:0b,color:"green",italic:0b,obfuscated:0b,strikethrough:0b,text:"☄
+              ",underlined:0b},{color:"white",italic:0b,text:"ᴜᴘɢʀᴀᴅᴇ ɢᴇɴᴇʀᴀᴛᴏʀ "},{color:"green",italic:0b,text:"sʜɪғᴛ+ʀᴍʙ"}],text:""}],"minecraft:tooltip_display":{hidden_components:["minecraft:enchantments"]}},count:1,id:"minecraft:ochre_froglight"}'
+            DataVersion: 4325
+      PreviewData:
+        Tag:
+          Value: '{}'
+          DataVersion: 4189
+    honey_block_generator:
+      Type: ITEM
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: false
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:custom_data":{GenLevel:39},"minecraft:custom_name":{extra:[{bold:0b,color:"#D18119",italic:0b,obfuscated:0b,strikethrough:0b,text:"H",underlined:0b},{bold:0b,color:"#D18119",italic:0b,obfuscated:0b,strikethrough:0b,text:"o",underlined:0b},{bold:0b,color:"#D28119",italic:0b,obfuscated:0b,strikethrough:0b,text:"n",underlined:0b},{bold:0b,color:"#D3831A",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#D4841C",italic:0b,obfuscated:0b,strikethrough:0b,text:"y",underlined:0b},{bold:0b,color:"#D7861D",italic:0b,obfuscated:0b,strikethrough:0b,text:"
+              ",underlined:0b},{bold:0b,color:"#D9881F",italic:0b,obfuscated:0b,strikethrough:0b,text:"B",underlined:0b},{bold:0b,color:"#DC8B21",italic:0b,obfuscated:0b,strikethrough:0b,text:"l",underlined:0b},{bold:0b,color:"#DF8D24",italic:0b,obfuscated:0b,strikethrough:0b,text:"o",underlined:0b},{bold:0b,color:"#E29026",italic:0b,obfuscated:0b,strikethrough:0b,text:"c",underlined:0b},{bold:0b,color:"#E59329",italic:0b,obfuscated:0b,strikethrough:0b,text:"k",underlined:0b},{bold:0b,color:"#E8962B",italic:0b,obfuscated:0b,strikethrough:0b,text:"
+              ",underlined:0b},{bold:0b,color:"#EB992D",italic:0b,obfuscated:0b,strikethrough:0b,text:"G",underlined:0b},{bold:0b,color:"#EE9B30",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#F19E32",italic:0b,obfuscated:0b,strikethrough:0b,text:"n",underlined:0b},{bold:0b,color:"#F3A034",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#F6A235",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b},{bold:0b,color:"#F7A337",italic:0b,obfuscated:0b,strikethrough:0b,text:"a",underlined:0b},{bold:0b,color:"#F8A538",italic:0b,obfuscated:0b,strikethrough:0b,text:"t",underlined:0b},{bold:0b,color:"#F9A538",italic:0b,obfuscated:0b,strikethrough:0b,text:"o",underlined:0b},{bold:0b,color:"#FAA639",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b}],text:""},"minecraft:enchantments":{"minecraft:infinity":69},"minecraft:lore":[{extra:[{bold:0b,color:"dark_gray",italic:0b,obfuscated:0b,strikethrough:0b,text:"ɢᴇɴᴇʀᴀᴛᴏʀ
+              ʟᴇᴠᴇʟ 39★",underlined:0b}],text:""},"",{extra:[" ",{bold:0b,color:"gold",italic:0b,obfuscated:0b,strikethrough:0b,text:"⌚ ",underlined:0b},{color:"white",italic:0b,text:"ɪᴛᴇᴍ ɢᴇɴᴇʀᴀᴛɪᴏɴ ᴛɪᴍᴇ: "},{color:"gold",italic:0b,text:"20s"}],text:""},{extra:[" ",{bold:0b,color:"yellow",italic:0b,obfuscated:0b,strikethrough:0b,text:"$ ",underlined:0b},{color:"white",italic:0b,text:"ᴠᴀʟᴏʀ ᴅᴏ ɪᴛᴇᴍ: "},{color:"yellow",italic:0b,text:"50000$"}],text:""},"",{extra:[" ",{bold:0b,color:"green",italic:0b,obfuscated:0b,strikethrough:0b,text:"☄
+              ",underlined:0b},{color:"white",italic:0b,text:"ᴜᴘɢʀᴀᴅᴇ ɢᴇɴᴇʀᴀᴛᴏʀ "},{color:"green",italic:0b,text:"sʜɪғᴛ+ʀᴍʙ"}],text:""}],"minecraft:tooltip_display":{hidden_components:["minecraft:enchantments"]}},count:1,id:"minecraft:honey_block"}'
+            DataVersion: 4325
+      PreviewData:
+        Tag:
+          Value: '{}'
+          DataVersion: 4189
+    red_mushroom_generator:
+      Type: ITEM
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: false
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:custom_data":{GenLevel:38},"minecraft:custom_name":{extra:[{bold:0b,color:"#BC221F",italic:0b,obfuscated:0b,strikethrough:0b,text:"R",underlined:0b},{bold:0b,color:"#BC221F",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#BC221F",italic:0b,obfuscated:0b,strikethrough:0b,text:"d",underlined:0b},{bold:0b,color:"#BC221F",italic:0b,obfuscated:0b,strikethrough:0b,text:" ",underlined:0b},{bold:0b,color:"#BD221F",italic:0b,obfuscated:0b,strikethrough:0b,text:"M",underlined:0b},{bold:0b,color:"#BD2320",italic:0b,obfuscated:0b,strikethrough:0b,text:"u",underlined:0b},{bold:0b,color:"#BE2320",italic:0b,obfuscated:0b,strikethrough:0b,text:"s",underlined:0b},{bold:0b,color:"#BF2421",italic:0b,obfuscated:0b,strikethrough:0b,text:"h",underlined:0b},{bold:0b,color:"#C02521",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b},{bold:0b,color:"#C12522",italic:0b,obfuscated:0b,strikethrough:0b,text:"o",underlined:0b},{bold:0b,color:"#C22623",italic:0b,obfuscated:0b,strikethrough:0b,text:"o",underlined:0b},{bold:0b,color:"#C22723",italic:0b,obfuscated:0b,strikethrough:0b,text:"m",underlined:0b},{bold:0b,color:"#C32824",italic:0b,obfuscated:0b,strikethrough:0b,text:"
+              ",underlined:0b},{bold:0b,color:"#C42825",italic:0b,obfuscated:0b,strikethrough:0b,text:"G",underlined:0b},{bold:0b,color:"#C52925",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#C62A26",italic:0b,obfuscated:0b,strikethrough:0b,text:"n",underlined:0b},{bold:0b,color:"#C72A26",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#C72B27",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b},{bold:0b,color:"#C82B27",italic:0b,obfuscated:0b,strikethrough:0b,text:"a",underlined:0b},{bold:0b,color:"#C82B27",italic:0b,obfuscated:0b,strikethrough:0b,text:"t",underlined:0b},{bold:0b,color:"#C82B27",italic:0b,obfuscated:0b,strikethrough:0b,text:"o",underlined:0b},{bold:0b,color:"#C92C28",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b}],text:""},"minecraft:enchantments":{"minecraft:infinity":69},"minecraft:lore":[{extra:[{bold:0b,color:"dark_gray",italic:0b,obfuscated:0b,strikethrough:0b,text:"ɢᴇɴᴇʀᴀᴛᴏʀ
+              ʟᴇᴠᴇʟ 38★",underlined:0b}],text:""},"",{extra:[" ",{bold:0b,color:"gold",italic:0b,obfuscated:0b,strikethrough:0b,text:"⌚ ",underlined:0b},{color:"white",italic:0b,text:"ɪᴛᴇᴍ ɢᴇɴᴇʀᴀᴛɪᴏɴ ᴛɪᴍᴇ: "},{color:"gold",italic:0b,text:"20s"}],text:""},{extra:[" ",{bold:0b,color:"yellow",italic:0b,obfuscated:0b,strikethrough:0b,text:"$ ",underlined:0b},{color:"white",italic:0b,text:"ᴠᴀʟᴏʀ ᴅᴏ ɪᴛᴇᴍ: "},{color:"yellow",italic:0b,text:"47500$"}],text:""},"",{extra:[" ",{bold:0b,color:"green",italic:0b,obfuscated:0b,strikethrough:0b,text:"☄
+              ",underlined:0b},{color:"white",italic:0b,text:"ᴜᴘɢʀᴀᴅᴇ ɢᴇɴᴇʀᴀᴛᴏʀ "},{color:"green",italic:0b,text:"sʜɪғᴛ+ʀᴍʙ"}],text:""}],"minecraft:tooltip_display":{hidden_components:["minecraft:enchantments"]}},count:1,id:"minecraft:red_mushroom_block"}'
+            DataVersion: 4325
+      PreviewData:
+        Tag:
+          Value: '{}'
+          DataVersion: 4189
+    bamboo_generator:
+      Type: ITEM
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: false
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:custom_data":{GenLevel:37},"minecraft:custom_name":{extra:[{bold:0b,color:"#B9A649",italic:0b,obfuscated:0b,strikethrough:0b,text:"B",underlined:0b},{bold:0b,color:"#B9A649",italic:0b,obfuscated:0b,strikethrough:0b,text:"a",underlined:0b},{bold:0b,color:"#BAA74A",italic:0b,obfuscated:0b,strikethrough:0b,text:"m",underlined:0b},{bold:0b,color:"#BCA94B",italic:0b,obfuscated:0b,strikethrough:0b,text:"b",underlined:0b},{bold:0b,color:"#BFAB4D",italic:0b,obfuscated:0b,strikethrough:0b,text:"o",underlined:0b},{bold:0b,color:"#C2AE50",italic:0b,obfuscated:0b,strikethrough:0b,text:"o",underlined:0b},{bold:0b,color:"#C6B153",italic:0b,obfuscated:0b,strikethrough:0b,text:"
+              ",underlined:0b},{bold:0b,color:"#CAB555",italic:0b,obfuscated:0b,strikethrough:0b,text:"G",underlined:0b},{bold:0b,color:"#CDB859",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#D1BC5B",italic:0b,obfuscated:0b,strikethrough:0b,text:"n",underlined:0b},{bold:0b,color:"#D5BF5E",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#D8C261",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b},{bold:0b,color:"#DBC463",italic:0b,obfuscated:0b,strikethrough:0b,text:"a",underlined:0b},{bold:0b,color:"#DDC664",italic:0b,obfuscated:0b,strikethrough:0b,text:"t",underlined:0b},{bold:0b,color:"#DEC765",italic:0b,obfuscated:0b,strikethrough:0b,text:"o",underlined:0b},{bold:0b,color:"#DFC866",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b}],text:""},"minecraft:enchantments":{"minecraft:infinity":69},"minecraft:lore":[{extra:[{bold:0b,color:"dark_gray",italic:0b,obfuscated:0b,strikethrough:0b,text:"ɢᴇɴᴇʀᴀᴛᴏʀ
+              ʟᴇᴠᴇʟ 37★",underlined:0b}],text:""},"",{extra:[" ",{bold:0b,color:"gold",italic:0b,obfuscated:0b,strikethrough:0b,text:"⌚ ",underlined:0b},{color:"white",italic:0b,text:"ɪᴛᴇᴍ ɢᴇɴᴇʀᴀᴛɪᴏɴ ᴛɪᴍᴇ: "},{color:"gold",italic:0b,text:"20s"}],text:""},{extra:[" ",{bold:0b,color:"yellow",italic:0b,obfuscated:0b,strikethrough:0b,text:"$ ",underlined:0b},{color:"white",italic:0b,text:"ᴠᴀʟᴏʀ ᴅᴏ ɪᴛᴇᴍ: "},{color:"yellow",italic:0b,text:"45000$"}],text:""},"",{extra:[" ",{bold:0b,color:"green",italic:0b,obfuscated:0b,strikethrough:0b,text:"☄
+              ",underlined:0b},{color:"white",italic:0b,text:"ᴜᴘɢʀᴀᴅᴇ ɢᴇɴᴇʀᴀᴛᴏʀ "},{color:"green",italic:0b,text:"sʜɪғᴛ+ʀᴍʙ"}],text:""}],"minecraft:tooltip_display":{hidden_components:["minecraft:enchantments"]}},count:1,id:"minecraft:stripped_bamboo_block"}'
+            DataVersion: 4325
+      PreviewData:
+        Tag:
+          Value: '{}'
+          DataVersion: 4189
+    dripstone_generator:
+      Type: ITEM
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: false
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:custom_data":{GenLevel:36},"minecraft:custom_name":{extra:[{bold:0b,color:"#816253",italic:0b,obfuscated:0b,strikethrough:0b,text:"D",underlined:0b},{bold:0b,color:"#816253",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b},{bold:0b,color:"#816353",italic:0b,obfuscated:0b,strikethrough:0b,text:"i",underlined:0b},{bold:0b,color:"#826454",italic:0b,obfuscated:0b,strikethrough:0b,text:"p",underlined:0b},{bold:0b,color:"#846656",italic:0b,obfuscated:0b,strikethrough:0b,text:"s",underlined:0b},{bold:0b,color:"#866958",italic:0b,obfuscated:0b,strikethrough:0b,text:"t",underlined:0b},{bold:0b,color:"#886C59",italic:0b,obfuscated:0b,strikethrough:0b,text:"o",underlined:0b},{bold:0b,color:"#8A6F5C",italic:0b,obfuscated:0b,strikethrough:0b,text:"n",underlined:0b},{bold:0b,color:"#8C725E",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#8F7661",italic:0b,obfuscated:0b,strikethrough:0b,text:"
+              ",underlined:0b},{bold:0b,color:"#927A63",italic:0b,obfuscated:0b,strikethrough:0b,text:"G",underlined:0b},{bold:0b,color:"#947D65",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#968068",italic:0b,obfuscated:0b,strikethrough:0b,text:"n",underlined:0b},{bold:0b,color:"#988369",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#9A866B",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b},{bold:0b,color:"#9C886D",italic:0b,obfuscated:0b,strikethrough:0b,text:"a",underlined:0b},{bold:0b,color:"#9D896E",italic:0b,obfuscated:0b,strikethrough:0b,text:"t",underlined:0b},{bold:0b,color:"#9D8A6E",italic:0b,obfuscated:0b,strikethrough:0b,text:"o",underlined:0b},{bold:0b,color:"#9E8B6F",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b}],text:""},"minecraft:enchantments":{"minecraft:infinity":69},"minecraft:lore":[{extra:[{bold:0b,color:"dark_gray",italic:0b,obfuscated:0b,strikethrough:0b,text:"ɢᴇɴᴇʀᴀᴛᴏʀ
+              ʟᴇᴠᴇʟ 36★",underlined:0b}],text:""},"",{extra:[" ",{bold:0b,color:"gold",italic:0b,obfuscated:0b,strikethrough:0b,text:"⌚ ",underlined:0b},{color:"white",italic:0b,text:"ɪᴛᴇᴍ ɢᴇɴᴇʀᴀᴛɪᴏɴ ᴛɪᴍᴇ: "},{color:"gold",italic:0b,text:"20s"}],text:""},{extra:[" ",{bold:0b,color:"yellow",italic:0b,obfuscated:0b,strikethrough:0b,text:"$ ",underlined:0b},{color:"white",italic:0b,text:"ᴠᴀʟᴏʀ ᴅᴏ ɪᴛᴇᴍ: "},{color:"yellow",italic:0b,text:"42500$"}],text:""},"",{extra:[" ",{bold:0b,color:"green",italic:0b,obfuscated:0b,strikethrough:0b,text:"☄
+              ",underlined:0b},{color:"white",italic:0b,text:"ᴜᴘɢʀᴀᴅᴇ ɢᴇɴᴇʀᴀᴛᴏʀ "},{color:"green",italic:0b,text:"sʜɪғᴛ+ʀᴍʙ"}],text:""}],"minecraft:tooltip_display":{hidden_components:["minecraft:enchantments"]}},count:1,id:"minecraft:dripstone_block"}'
+            DataVersion: 4325
+      PreviewData:
+        Tag:
+          Value: '{}'
+          DataVersion: 4189
+    prismarine_generator:
+      Type: ITEM
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: false
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:custom_data":{GenLevel:35},"minecraft:custom_name":{extra:[{bold:0b,color:"#78B593",italic:0b,obfuscated:0b,strikethrough:0b,text:"P",underlined:0b},{bold:0b,color:"#77B493",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b},{bold:0b,color:"#77B493",italic:0b,obfuscated:0b,strikethrough:0b,text:"i",underlined:0b},{bold:0b,color:"#76B393",italic:0b,obfuscated:0b,strikethrough:0b,text:"s",underlined:0b},{bold:0b,color:"#75B294",italic:0b,obfuscated:0b,strikethrough:0b,text:"m",underlined:0b},{bold:0b,color:"#73B095",italic:0b,obfuscated:0b,strikethrough:0b,text:"a",underlined:0b},{bold:0b,color:"#71AF96",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b},{bold:0b,color:"#6FAD97",italic:0b,obfuscated:0b,strikethrough:0b,text:"i",underlined:0b},{bold:0b,color:"#6DAB98",italic:0b,obfuscated:0b,strikethrough:0b,text:"n",underlined:0b},{bold:0b,color:"#6BA999",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#69A79A",italic:0b,obfuscated:0b,strikethrough:0b,text:"
+              ",underlined:0b},{bold:0b,color:"#67A59B",italic:0b,obfuscated:0b,strikethrough:0b,text:"G",underlined:0b},{bold:0b,color:"#65A39C",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#63A19D",italic:0b,obfuscated:0b,strikethrough:0b,text:"n",underlined:0b},{bold:0b,color:"#61A09E",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#5F9E9F",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b},{bold:0b,color:"#5E9DA0",italic:0b,obfuscated:0b,strikethrough:0b,text:"a",underlined:0b},{bold:0b,color:"#5D9CA0",italic:0b,obfuscated:0b,strikethrough:0b,text:"t",underlined:0b},{bold:0b,color:"#5D9CA0",italic:0b,obfuscated:0b,strikethrough:0b,text:"o",underlined:0b},{bold:0b,color:"#5D9CA1",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b}],text:""},"minecraft:enchantments":{"minecraft:infinity":69},"minecraft:lore":[{extra:[{bold:0b,color:"dark_gray",italic:0b,obfuscated:0b,strikethrough:0b,text:"ɢᴇɴᴇʀᴀᴛᴏʀ
+              ʟᴇᴠᴇʟ 35★",underlined:0b}],text:""},"",{extra:[" ",{bold:0b,color:"gold",italic:0b,obfuscated:0b,strikethrough:0b,text:"⌚ ",underlined:0b},{color:"white",italic:0b,text:"ɪᴛᴇᴍ ɢᴇɴᴇʀᴀᴛɪᴏɴ ᴛɪᴍᴇ: "},{color:"gold",italic:0b,text:"20s"}],text:""},{extra:[" ",{bold:0b,color:"yellow",italic:0b,obfuscated:0b,strikethrough:0b,text:"$ ",underlined:0b},{color:"white",italic:0b,text:"ᴠᴀʟᴏʀ ᴅᴏ ɪᴛᴇᴍ: "},{color:"yellow",italic:0b,text:"40000$"}],text:""},"",{extra:[" ",{bold:0b,color:"green",italic:0b,obfuscated:0b,strikethrough:0b,text:"☄
+              ",underlined:0b},{color:"white",italic:0b,text:"ᴜᴘɢʀᴀᴅᴇ ɢᴇɴᴇʀᴀᴛᴏʀ "},{color:"green",italic:0b,text:"sʜɪғᴛ+ʀᴍʙ"}],text:""}],"minecraft:tooltip_display":{hidden_components:["minecraft:enchantments"]}},count:1,id:"minecraft:prismarine"}'
+            DataVersion: 4325
+      PreviewData:
+        Tag:
+          Value: '{}'
+          DataVersion: 4189
+    shroomlight_generator:
+      Type: ITEM
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: false
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:custom_data":{GenLevel:34},"minecraft:custom_name":{extra:[{bold:0b,color:"#FCC47D",italic:0b,obfuscated:0b,strikethrough:0b,text:"S",underlined:0b},{bold:0b,color:"#FBC47D",italic:0b,obfuscated:0b,strikethrough:0b,text:"h",underlined:0b},{bold:0b,color:"#FBC57E",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b},{bold:0b,color:"#FBC67F",italic:0b,obfuscated:0b,strikethrough:0b,text:"o",underlined:0b},{bold:0b,color:"#FBC882",italic:0b,obfuscated:0b,strikethrough:0b,text:"o",underlined:0b},{bold:0b,color:"#FBCA84",italic:0b,obfuscated:0b,strikethrough:0b,text:"m",underlined:0b},{bold:0b,color:"#FBCD87",italic:0b,obfuscated:0b,strikethrough:0b,text:"l",underlined:0b},{bold:0b,color:"#FBD08B",italic:0b,obfuscated:0b,strikethrough:0b,text:"i",underlined:0b},{bold:0b,color:"#FBD38F",italic:0b,obfuscated:0b,strikethrough:0b,text:"g",underlined:0b},{bold:0b,color:"#FBD693",italic:0b,obfuscated:0b,strikethrough:0b,text:"h",underlined:0b},{bold:0b,color:"#FBDA97",italic:0b,obfuscated:0b,strikethrough:0b,text:"t",underlined:0b},{bold:0b,color:"#FADE9B",italic:0b,obfuscated:0b,strikethrough:0b,text:"
+              ",underlined:0b},{bold:0b,color:"#FAE19F",italic:0b,obfuscated:0b,strikethrough:0b,text:"G",underlined:0b},{bold:0b,color:"#FAE4A3",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#FAE7A7",italic:0b,obfuscated:0b,strikethrough:0b,text:"n",underlined:0b},{bold:0b,color:"#FAEAAA",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#FAECAC",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b},{bold:0b,color:"#FAEEAF",italic:0b,obfuscated:0b,strikethrough:0b,text:"a",underlined:0b},{bold:0b,color:"#FAEFB0",italic:0b,obfuscated:0b,strikethrough:0b,text:"t",underlined:0b},{bold:0b,color:"#FAF0B1",italic:0b,obfuscated:0b,strikethrough:0b,text:"o",underlined:0b},{bold:0b,color:"#FAF1B2",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b}],text:""},"minecraft:enchantments":{"minecraft:infinity":69},"minecraft:lore":[{extra:[{bold:0b,color:"dark_gray",italic:0b,obfuscated:0b,strikethrough:0b,text:"ɢᴇɴᴇʀᴀᴛᴏʀ
+              ʟᴇᴠᴇʟ 34★",underlined:0b}],text:""},"",{extra:[" ",{bold:0b,color:"gold",italic:0b,obfuscated:0b,strikethrough:0b,text:"⌚ ",underlined:0b},{color:"white",italic:0b,text:"ɪᴛᴇᴍ ɢᴇɴᴇʀᴀᴛɪᴏɴ ᴛɪᴍᴇ: "},{color:"gold",italic:0b,text:"20s"}],text:""},{extra:[" ",{bold:0b,color:"yellow",italic:0b,obfuscated:0b,strikethrough:0b,text:"$ ",underlined:0b},{color:"white",italic:0b,text:"ᴠᴀʟᴏʀ ᴅᴏ ɪᴛᴇᴍ: "},{color:"yellow",italic:0b,text:"37500$"}],text:""},"",{extra:[" ",{bold:0b,color:"green",italic:0b,obfuscated:0b,strikethrough:0b,text:"☄
+              ",underlined:0b},{color:"white",italic:0b,text:"ᴜᴘɢʀᴀᴅᴇ ɢᴇɴᴇʀᴀᴛᴏʀ "},{color:"green",italic:0b,text:"sʜɪғᴛ+ʀᴍʙ"}],text:""}],"minecraft:tooltip_display":{hidden_components:["minecraft:enchantments"]}},count:1,id:"minecraft:shroomlight"}'
+            DataVersion: 4325
+      PreviewData:
+        Tag:
+          Value: '{}'
+          DataVersion: 4189
+    calcite_generator:
+      Type: ITEM
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: false
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:custom_data":{GenLevel:33},"minecraft:custom_name":{extra:[{bold:0b,color:"#D6D8D4",italic:0b,obfuscated:0b,strikethrough:0b,text:"C",underlined:0b},{bold:0b,color:"#D6D8D4",italic:0b,obfuscated:0b,strikethrough:0b,text:"a",underlined:0b},{bold:0b,color:"#D7D9D5",italic:0b,obfuscated:0b,strikethrough:0b,text:"l",underlined:0b},{bold:0b,color:"#D9DBD7",italic:0b,obfuscated:0b,strikethrough:0b,text:"c",underlined:0b},{bold:0b,color:"#DBDDD9",italic:0b,obfuscated:0b,strikethrough:0b,text:"i",underlined:0b},{bold:0b,color:"#DEDFDC",italic:0b,obfuscated:0b,strikethrough:0b,text:"t",underlined:0b},{bold:0b,color:"#E1E3E0",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#E5E6E4",italic:0b,obfuscated:0b,strikethrough:0b,text:"
+              ",underlined:0b},{bold:0b,color:"#E9EAE8",italic:0b,obfuscated:0b,strikethrough:0b,text:"G",underlined:0b},{bold:0b,color:"#ECEDEB",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#F0F0EF",italic:0b,obfuscated:0b,strikethrough:0b,text:"n",underlined:0b},{bold:0b,color:"#F3F4F3",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#F6F6F6",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b},{bold:0b,color:"#F8F8F8",italic:0b,obfuscated:0b,strikethrough:0b,text:"a",underlined:0b},{bold:0b,color:"#FAFAFA",italic:0b,obfuscated:0b,strikethrough:0b,text:"t",underlined:0b},{bold:0b,color:"#FBFBFB",italic:0b,obfuscated:0b,strikethrough:0b,text:"o",underlined:0b},{bold:0b,color:"#FCFCFC",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b}],text:""},"minecraft:enchantments":{"minecraft:infinity":69},"minecraft:lore":[{extra:[{bold:0b,color:"dark_gray",italic:0b,obfuscated:0b,strikethrough:0b,text:"ɢᴇɴᴇʀᴀᴛᴏʀ
+              ʟᴇᴠᴇʟ 33★",underlined:0b}],text:""},"",{extra:[" ",{bold:0b,color:"gold",italic:0b,obfuscated:0b,strikethrough:0b,text:"⌚ ",underlined:0b},{color:"white",italic:0b,text:"ɪᴛᴇᴍ ɢᴇɴᴇʀᴀᴛɪᴏɴ ᴛɪᴍᴇ: "},{color:"gold",italic:0b,text:"20s"}],text:""},{extra:[" ",{bold:0b,color:"yellow",italic:0b,obfuscated:0b,strikethrough:0b,text:"$ ",underlined:0b},{color:"white",italic:0b,text:"ᴠᴀʟᴏʀ ᴅᴏ ɪᴛᴇᴍ: "},{color:"yellow",italic:0b,text:"35000$"}],text:""},"",{extra:[" ",{bold:0b,color:"green",italic:0b,obfuscated:0b,strikethrough:0b,text:"☄
+              ",underlined:0b},{color:"white",italic:0b,text:"ᴜᴘɢʀᴀᴅᴇ ɢᴇɴᴇʀᴀᴛᴏʀ "},{color:"green",italic:0b,text:"sʜɪғᴛ+ʀᴍʙ"}],text:""}],"minecraft:tooltip_display":{hidden_components:["minecraft:enchantments"]}},count:1,id:"minecraft:calcite"}'
+            DataVersion: 4325
+      PreviewData:
+        Tag:
+          Value: '{}'
+          DataVersion: 4189
+    basalt_generator:
+      Type: ITEM
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: false
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:custom_data":{GenLevel:32},"minecraft:custom_name":{extra:[{bold:0b,color:"#5B5B5B",italic:0b,obfuscated:0b,strikethrough:0b,text:"B",underlined:0b},{bold:0b,color:"#5B5B5B",italic:0b,obfuscated:0b,strikethrough:0b,text:"a",underlined:0b},{bold:0b,color:"#5C5C5C",italic:0b,obfuscated:0b,strikethrough:0b,text:"s",underlined:0b},{bold:0b,color:"#5F5F5F",italic:0b,obfuscated:0b,strikethrough:0b,text:"a",underlined:0b},{bold:0b,color:"#626262",italic:0b,obfuscated:0b,strikethrough:0b,text:"l",underlined:0b},{bold:0b,color:"#656565",italic:0b,obfuscated:0b,strikethrough:0b,text:"t",underlined:0b},{bold:0b,color:"#6A6A6A",italic:0b,obfuscated:0b,strikethrough:0b,text:"
+              ",underlined:0b},{bold:0b,color:"#6E6E6E",italic:0b,obfuscated:0b,strikethrough:0b,text:"G",underlined:0b},{bold:0b,color:"#737373",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#777777",italic:0b,obfuscated:0b,strikethrough:0b,text:"n",underlined:0b},{bold:0b,color:"#7C7C7C",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#7F7F7F",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b},{bold:0b,color:"#828282",italic:0b,obfuscated:0b,strikethrough:0b,text:"a",underlined:0b},{bold:0b,color:"#858585",italic:0b,obfuscated:0b,strikethrough:0b,text:"t",underlined:0b},{bold:0b,color:"#868686",italic:0b,obfuscated:0b,strikethrough:0b,text:"o",underlined:0b},{bold:0b,color:"#878787",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b}],text:""},"minecraft:enchantments":{"minecraft:infinity":69},"minecraft:lore":[{extra:[{bold:0b,color:"dark_gray",italic:0b,obfuscated:0b,strikethrough:0b,text:"ɢᴇɴᴇʀᴀᴛᴏʀ
+              ʟᴇᴠᴇʟ 32★",underlined:0b}],text:""},"",{extra:[" ",{bold:0b,color:"gold",italic:0b,obfuscated:0b,strikethrough:0b,text:"⌚ ",underlined:0b},{color:"white",italic:0b,text:"ɪᴛᴇᴍ ɢᴇɴᴇʀᴀᴛɪᴏɴ ᴛɪᴍᴇ: "},{color:"gold",italic:0b,text:"20s"}],text:""},{extra:[" ",{bold:0b,color:"yellow",italic:0b,obfuscated:0b,strikethrough:0b,text:"$ ",underlined:0b},{color:"white",italic:0b,text:"ᴠᴀʟᴏʀ ᴅᴏ ɪᴛᴇᴍ: "},{color:"yellow",italic:0b,text:"32500$"}],text:""},"",{extra:[" ",{bold:0b,color:"green",italic:0b,obfuscated:0b,strikethrough:0b,text:"☄
+              ",underlined:0b},{color:"white",italic:0b,text:"ᴜᴘɢʀᴀᴅᴇ ɢᴇɴᴇʀᴀᴛᴏʀ "},{color:"green",italic:0b,text:"sʜɪғᴛ+ʀᴍʙ"}],text:""}],"minecraft:tooltip_display":{hidden_components:["minecraft:enchantments"]}},count:1,id:"minecraft:basalt"}'
+            DataVersion: 4325
+      PreviewData:
+        Tag:
+          Value: '{}'
+          DataVersion: 4189
+    magma_generator:
+      Type: ITEM
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: false
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:custom_data":{GenLevel:31},"minecraft:custom_name":{extra:[{bold:0b,color:"#E26310",italic:0b,obfuscated:0b,strikethrough:0b,text:"M",underlined:0b},{bold:0b,color:"#E26310",italic:0b,obfuscated:0b,strikethrough:0b,text:"a",underlined:0b},{bold:0b,color:"#E26512",italic:0b,obfuscated:0b,strikethrough:0b,text:"g",underlined:0b},{bold:0b,color:"#E36815",italic:0b,obfuscated:0b,strikethrough:0b,text:"m",underlined:0b},{bold:0b,color:"#E56C18",italic:0b,obfuscated:0b,strikethrough:0b,text:"a",underlined:0b},{bold:0b,color:"#E7721D",italic:0b,obfuscated:0b,strikethrough:0b,text:"
+              ",underlined:0b},{bold:0b,color:"#E87721",italic:0b,obfuscated:0b,strikethrough:0b,text:"G",underlined:0b},{bold:0b,color:"#EB7D26",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#ED832C",italic:0b,obfuscated:0b,strikethrough:0b,text:"n",underlined:0b},{bold:0b,color:"#EE8830",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#F08E35",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b},{bold:0b,color:"#F29238",italic:0b,obfuscated:0b,strikethrough:0b,text:"a",underlined:0b},{bold:0b,color:"#F3953B",italic:0b,obfuscated:0b,strikethrough:0b,text:"t",underlined:0b},{bold:0b,color:"#F3973D",italic:0b,obfuscated:0b,strikethrough:0b,text:"o",underlined:0b},{bold:0b,color:"#F4983E",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b}],text:""},"minecraft:enchantments":{"minecraft:infinity":69},"minecraft:lore":[{extra:[{bold:0b,color:"dark_gray",italic:0b,obfuscated:0b,strikethrough:0b,text:"ɢᴇɴᴇʀᴀᴛᴏʀ
+              ʟᴇᴠᴇʟ 31★",underlined:0b}],text:""},"",{extra:[" ",{bold:0b,color:"gold",italic:0b,obfuscated:0b,strikethrough:0b,text:"⌚ ",underlined:0b},{color:"white",italic:0b,text:"ɪᴛᴇᴍ ɢᴇɴᴇʀᴀᴛɪᴏɴ ᴛɪᴍᴇ: "},{color:"gold",italic:0b,text:"20s"}],text:""},{extra:[" ",{bold:0b,color:"yellow",italic:0b,obfuscated:0b,strikethrough:0b,text:"$ ",underlined:0b},{color:"white",italic:0b,text:"ᴠᴀʟᴏʀ ᴅᴏ ɪᴛᴇᴍ: "},{color:"yellow",italic:0b,text:"30000$"}],text:""},"",{extra:[" ",{bold:0b,color:"green",italic:0b,obfuscated:0b,strikethrough:0b,text:"☄
+              ",underlined:0b},{color:"white",italic:0b,text:"ᴜᴘɢʀᴀᴅᴇ ɢᴇɴᴇʀᴀᴛᴏʀ "},{color:"green",italic:0b,text:"sʜɪғᴛ+ʀᴍʙ"}],text:""}],"minecraft:tooltip_display":{hidden_components:["minecraft:enchantments"]}},count:1,id:"minecraft:magma_block"}'
+            DataVersion: 4325
+      PreviewData:
+        Tag:
+          Value: '{}'
+          DataVersion: 4189
+    crying_obsidian_generator:
+      Type: ITEM
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: false
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:custom_data":{GenLevel:30},"minecraft:custom_name":{extra:[{bold:0b,color:"#700FBD",italic:0b,obfuscated:0b,strikethrough:0b,text:"C",underlined:0b},{bold:0b,color:"#700EBD",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b},{bold:0b,color:"#700EBD",italic:0b,obfuscated:0b,strikethrough:0b,text:"y",underlined:0b},{bold:0b,color:"#700EBE",italic:0b,obfuscated:0b,strikethrough:0b,text:"i",underlined:0b},{bold:0b,color:"#710EBF",italic:0b,obfuscated:0b,strikethrough:0b,text:"n",underlined:0b},{bold:0b,color:"#710EC0",italic:0b,obfuscated:0b,strikethrough:0b,text:"g",underlined:0b},{bold:0b,color:"#720DC2",italic:0b,obfuscated:0b,strikethrough:0b,text:"
+              ",underlined:0b},{bold:0b,color:"#730DC4",italic:0b,obfuscated:0b,strikethrough:0b,text:"O",underlined:0b},{bold:0b,color:"#740DC5",italic:0b,obfuscated:0b,strikethrough:0b,text:"b",underlined:0b},{bold:0b,color:"#750CC8",italic:0b,obfuscated:0b,strikethrough:0b,text:"s",underlined:0b},{bold:0b,color:"#760CCA",italic:0b,obfuscated:0b,strikethrough:0b,text:"i",underlined:0b},{bold:0b,color:"#770BCC",italic:0b,obfuscated:0b,strikethrough:0b,text:"d",underlined:0b},{bold:0b,color:"#780BCF",italic:0b,obfuscated:0b,strikethrough:0b,text:"i",underlined:0b},{bold:0b,color:"#790BD1",italic:0b,obfuscated:0b,strikethrough:0b,text:"a",underlined:0b},{bold:0b,color:"#7A0AD3",italic:0b,obfuscated:0b,strikethrough:0b,text:"n",underlined:0b},{bold:0b,color:"#7B0AD5",italic:0b,obfuscated:0b,strikethrough:0b,text:"
+              ",underlined:0b},{bold:0b,color:"#7C09D8",italic:0b,obfuscated:0b,strikethrough:0b,text:"G",underlined:0b},{bold:0b,color:"#7D09D9",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#7E09DB",italic:0b,obfuscated:0b,strikethrough:0b,text:"n",underlined:0b},{bold:0b,color:"#7F08DD",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#7F08DE",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b},{bold:0b,color:"#8008DF",italic:0b,obfuscated:0b,strikethrough:0b,text:"a",underlined:0b},{bold:0b,color:"#8008E0",italic:0b,obfuscated:0b,strikethrough:0b,text:"t",underlined:0b},{bold:0b,color:"#8008E0",italic:0b,obfuscated:0b,strikethrough:0b,text:"o",underlined:0b},{bold:0b,color:"#8108E1",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b}],text:""},"minecraft:enchantments":{"minecraft:infinity":69},"minecraft:lore":[{extra:[{bold:0b,color:"dark_gray",italic:0b,obfuscated:0b,strikethrough:0b,text:"ɢᴇɴᴇʀᴀᴛᴏʀ
+              ʟᴇᴠᴇʟ 30★",underlined:0b}],text:""},"",{extra:[" ",{bold:0b,color:"gold",italic:0b,obfuscated:0b,strikethrough:0b,text:"⌚ ",underlined:0b},{color:"white",italic:0b,text:"ɪᴛᴇᴍ ɢᴇɴᴇʀᴀᴛɪᴏɴ ᴛɪᴍᴇ: "},{color:"gold",italic:0b,text:"20s"}],text:""},{extra:[" ",{bold:0b,color:"yellow",italic:0b,obfuscated:0b,strikethrough:0b,text:"$ ",underlined:0b},{color:"white",italic:0b,text:"ᴠᴀʟᴏʀ ᴅᴏ ɪᴛᴇᴍ: "},{color:"yellow",italic:0b,text:"27500$"}],text:""},"",{extra:[" ",{bold:0b,color:"green",italic:0b,obfuscated:0b,strikethrough:0b,text:"☄
+              ",underlined:0b},{color:"white",italic:0b,text:"ᴜᴘɢʀᴀᴅᴇ ɢᴇɴᴇʀᴀᴛᴏʀ "},{color:"green",italic:0b,text:"sʜɪғᴛ+ʀᴍʙ"}],text:""}],"minecraft:tooltip_display":{hidden_components:["minecraft:enchantments"]}},count:1,id:"minecraft:crying_obsidian"}'
+            DataVersion: 4325
+      PreviewData:
+        Tag:
+          Value: '{}'
+          DataVersion: 4189
+    obsidian_generator:
+      Type: ITEM
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: false
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:custom_data":{GenLevel:29},"minecraft:custom_name":{extra:[{bold:0b,color:"#6328B0",italic:0b,obfuscated:0b,strikethrough:0b,text:"O",underlined:0b},{bold:0b,color:"#6328B0",italic:0b,obfuscated:0b,strikethrough:0b,text:"b",underlined:0b},{bold:0b,color:"#6328B0",italic:0b,obfuscated:0b,strikethrough:0b,text:"s",underlined:0b},{bold:0b,color:"#6429B1",italic:0b,obfuscated:0b,strikethrough:0b,text:"i",underlined:0b},{bold:0b,color:"#6529B3",italic:0b,obfuscated:0b,strikethrough:0b,text:"d",underlined:0b},{bold:0b,color:"#662AB4",italic:0b,obfuscated:0b,strikethrough:0b,text:"i",underlined:0b},{bold:0b,color:"#672BB6",italic:0b,obfuscated:0b,strikethrough:0b,text:"a",underlined:0b},{bold:0b,color:"#692DB9",italic:0b,obfuscated:0b,strikethrough:0b,text:"n",underlined:0b},{bold:0b,color:"#6B2EBB",italic:0b,obfuscated:0b,strikethrough:0b,text:"
+              ",underlined:0b},{bold:0b,color:"#6C2FBD",italic:0b,obfuscated:0b,strikethrough:0b,text:"G",underlined:0b},{bold:0b,color:"#6E30BF",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#7032C2",italic:0b,obfuscated:0b,strikethrough:0b,text:"n",underlined:0b},{bold:0b,color:"#7133C4",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#7234C5",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b},{bold:0b,color:"#7334C7",italic:0b,obfuscated:0b,strikethrough:0b,text:"a",underlined:0b},{bold:0b,color:"#7435C8",italic:0b,obfuscated:0b,strikethrough:0b,text:"t",underlined:0b},{bold:0b,color:"#7435C8",italic:0b,obfuscated:0b,strikethrough:0b,text:"o",underlined:0b},{bold:0b,color:"#7536C9",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b}],text:""},"minecraft:enchantments":{"minecraft:infinity":69},"minecraft:lore":[{extra:[{bold:0b,color:"dark_gray",italic:0b,obfuscated:0b,strikethrough:0b,text:"ɢᴇɴᴇʀᴀᴛᴏʀ
+              ʟᴇᴠᴇʟ 29★",underlined:0b}],text:""},"",{extra:[" ",{bold:0b,color:"gold",italic:0b,obfuscated:0b,strikethrough:0b,text:"⌚ ",underlined:0b},{color:"white",italic:0b,text:"ɪᴛᴇᴍ ɢᴇɴᴇʀᴀᴛɪᴏɴ ᴛɪᴍᴇ: "},{color:"gold",italic:0b,text:"20s"}],text:""},{extra:[" ",{bold:0b,color:"yellow",italic:0b,obfuscated:0b,strikethrough:0b,text:"$ ",underlined:0b},{color:"white",italic:0b,text:"ᴠᴀʟᴏʀ ᴅᴏ ɪᴛᴇᴍ: "},{color:"yellow",italic:0b,text:"25000$"}],text:""},"",{extra:[" ",{bold:0b,color:"green",italic:0b,obfuscated:0b,strikethrough:0b,text:"☄
+              ",underlined:0b},{color:"white",italic:0b,text:"ᴜᴘɢʀᴀᴅᴇ ɢᴇɴᴇʀᴀᴛᴏʀ "},{color:"green",italic:0b,text:"sʜɪғᴛ+ʀᴍʙ"}],text:""}],"minecraft:tooltip_display":{hidden_components:["minecraft:enchantments"]}},count:1,id:"minecraft:obsidian"}'
+            DataVersion: 4325
+      PreviewData:
+        Tag:
+          Value: '{}'
+          DataVersion: 4189
+    honeycomb_generator:
+      Type: ITEM
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: false
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:custom_data":{GenLevel:28},"minecraft:custom_name":{extra:[{bold:0b,color:"#D6BB0D",italic:0b,obfuscated:0b,strikethrough:0b,text:"H",underlined:0b},{bold:0b,color:"#D6BB0D",italic:0b,obfuscated:0b,strikethrough:0b,text:"o",underlined:0b},{bold:0b,color:"#D6BB0D",italic:0b,obfuscated:0b,strikethrough:0b,text:"n",underlined:0b},{bold:0b,color:"#D8BD0E",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#D9BE10",italic:0b,obfuscated:0b,strikethrough:0b,text:"y",underlined:0b},{bold:0b,color:"#DBC011",italic:0b,obfuscated:0b,strikethrough:0b,text:"c",underlined:0b},{bold:0b,color:"#DEC213",italic:0b,obfuscated:0b,strikethrough:0b,text:"o",underlined:0b},{bold:0b,color:"#E0C515",italic:0b,obfuscated:0b,strikethrough:0b,text:"m",underlined:0b},{bold:0b,color:"#E3C818",italic:0b,obfuscated:0b,strikethrough:0b,text:"b",underlined:0b},{bold:0b,color:"#E6CB1A",italic:0b,obfuscated:0b,strikethrough:0b,text:"
+              ",underlined:0b},{bold:0b,color:"#E9CD1C",italic:0b,obfuscated:0b,strikethrough:0b,text:"G",underlined:0b},{bold:0b,color:"#ECD01F",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#EED321",italic:0b,obfuscated:0b,strikethrough:0b,text:"n",underlined:0b},{bold:0b,color:"#F1D523",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#F3D724",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b},{bold:0b,color:"#F4D826",italic:0b,obfuscated:0b,strikethrough:0b,text:"a",underlined:0b},{bold:0b,color:"#F6DA27",italic:0b,obfuscated:0b,strikethrough:0b,text:"t",underlined:0b},{bold:0b,color:"#F6DA27",italic:0b,obfuscated:0b,strikethrough:0b,text:"o",underlined:0b},{bold:0b,color:"#F7DB28",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b}],text:""},"minecraft:enchantments":{"minecraft:infinity":69},"minecraft:lore":[{extra:[{bold:0b,color:"dark_gray",italic:0b,obfuscated:0b,strikethrough:0b,text:"ɢᴇɴᴇʀᴀᴛᴏʀ
+              ʟᴇᴠᴇʟ 28★",underlined:0b}],text:""},"",{extra:[" ",{bold:0b,color:"gold",italic:0b,obfuscated:0b,strikethrough:0b,text:"⌚ ",underlined:0b},{color:"white",italic:0b,text:"ɪᴛᴇᴍ ɢᴇɴᴇʀᴀᴛɪᴏɴ ᴛɪᴍᴇ: "},{color:"gold",italic:0b,text:"20s"}],text:""},{extra:[" ",{bold:0b,color:"yellow",italic:0b,obfuscated:0b,strikethrough:0b,text:"$ ",underlined:0b},{color:"white",italic:0b,text:"ᴠᴀʟᴏʀ ᴅᴏ ɪᴛᴇᴍ: "},{color:"yellow",italic:0b,text:"22500$"}],text:""},"",{extra:[" ",{bold:0b,color:"green",italic:0b,obfuscated:0b,strikethrough:0b,text:"☄
+              ",underlined:0b},{color:"white",italic:0b,text:"ᴜᴘɢʀᴀᴅᴇ ɢᴇɴᴇʀᴀᴛᴏʀ "},{color:"green",italic:0b,text:"sʜɪғᴛ+ʀᴍʙ"}],text:""}],"minecraft:tooltip_display":{hidden_components:["minecraft:enchantments"]}},count:1,id:"minecraft:honeycomb_block"}'
+            DataVersion: 4325
+      PreviewData:
+        Tag:
+          Value: '{}'
+          DataVersion: 4189
+    amethyst_generator:
+      Type: ITEM
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: false
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:custom_data":{GenLevel:27},"minecraft:custom_name":{extra:[{bold:0b,color:"#9162E3",italic:0b,obfuscated:0b,strikethrough:0b,text:"A",underlined:0b},{bold:0b,color:"#9162E3",italic:0b,obfuscated:0b,strikethrough:0b,text:"m",underlined:0b},{bold:0b,color:"#9263E3",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#9365E3",italic:0b,obfuscated:0b,strikethrough:0b,text:"t",underlined:0b},{bold:0b,color:"#9567E4",italic:0b,obfuscated:0b,strikethrough:0b,text:"h",underlined:0b},{bold:0b,color:"#976AE5",italic:0b,obfuscated:0b,strikethrough:0b,text:"y",underlined:0b},{bold:0b,color:"#996DE6",italic:0b,obfuscated:0b,strikethrough:0b,text:"s",underlined:0b},{bold:0b,color:"#9C71E7",italic:0b,obfuscated:0b,strikethrough:0b,text:"t",underlined:0b},{bold:0b,color:"#9F75E8",italic:0b,obfuscated:0b,strikethrough:0b,text:"
+              ",underlined:0b},{bold:0b,color:"#A278EA",italic:0b,obfuscated:0b,strikethrough:0b,text:"G",underlined:0b},{bold:0b,color:"#A57CEB",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#A880EC",italic:0b,obfuscated:0b,strikethrough:0b,text:"n",underlined:0b},{bold:0b,color:"#AA83ED",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#AC86EE",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b},{bold:0b,color:"#AE88EF",italic:0b,obfuscated:0b,strikethrough:0b,text:"a",underlined:0b},{bold:0b,color:"#AF8AEF",italic:0b,obfuscated:0b,strikethrough:0b,text:"t",underlined:0b},{bold:0b,color:"#B08BEF",italic:0b,obfuscated:0b,strikethrough:0b,text:"o",underlined:0b},{bold:0b,color:"#B18CF0",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b}],text:""},"minecraft:enchantments":{"minecraft:infinity":69},"minecraft:lore":[{extra:[{bold:0b,color:"dark_gray",italic:0b,obfuscated:0b,strikethrough:0b,text:"ɢᴇɴᴇʀᴀᴛᴏʀ
+              ʟᴇᴠᴇʟ 27★",underlined:0b}],text:""},"",{extra:[" ",{bold:0b,color:"gold",italic:0b,obfuscated:0b,strikethrough:0b,text:"⌚ ",underlined:0b},{color:"white",italic:0b,text:"ɪᴛᴇᴍ ɢᴇɴᴇʀᴀᴛɪᴏɴ ᴛɪᴍᴇ: "},{color:"gold",italic:0b,text:"20s"}],text:""},{extra:[" ",{bold:0b,color:"yellow",italic:0b,obfuscated:0b,strikethrough:0b,text:"$ ",underlined:0b},{color:"white",italic:0b,text:"ᴠᴀʟᴏʀ ᴅᴏ ɪᴛᴇᴍ: "},{color:"yellow",italic:0b,text:"20000$"}],text:""},"",{extra:[" ",{bold:0b,color:"green",italic:0b,obfuscated:0b,strikethrough:0b,text:"☄
+              ",underlined:0b},{color:"white",italic:0b,text:"ᴜᴘɢʀᴀᴅᴇ ɢᴇɴᴇʀᴀᴛᴏʀ "},{color:"green",italic:0b,text:"sʜɪғᴛ+ʀᴍʙ"}],text:""}],"minecraft:tooltip_display":{hidden_components:["minecraft:enchantments"]}},count:1,id:"minecraft:amethyst_block"}'
+            DataVersion: 4325
+      PreviewData:
+        Tag:
+          Value: '{}'
+          DataVersion: 4189
+    purpur_generator:
+      Type: ITEM
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: false
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:custom_data":{GenLevel:26},"minecraft:custom_name":{extra:[{bold:0b,color:"#E7A1E7",italic:0b,obfuscated:0b,strikethrough:0b,text:"P",underlined:0b},{bold:0b,color:"#E7A1E7",italic:0b,obfuscated:0b,strikethrough:0b,text:"u",underlined:0b},{bold:0b,color:"#E7A2E7",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b},{bold:0b,color:"#E8A4E8",italic:0b,obfuscated:0b,strikethrough:0b,text:"p",underlined:0b},{bold:0b,color:"#EAA7EA",italic:0b,obfuscated:0b,strikethrough:0b,text:"u",underlined:0b},{bold:0b,color:"#EBAAEB",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b},{bold:0b,color:"#EDADED",italic:0b,obfuscated:0b,strikethrough:0b,text:"
+              ",underlined:0b},{bold:0b,color:"#EFB1EF",italic:0b,obfuscated:0b,strikethrough:0b,text:"G",underlined:0b},{bold:0b,color:"#F2B5F2",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#F4B9F4",italic:0b,obfuscated:0b,strikethrough:0b,text:"n",underlined:0b},{bold:0b,color:"#F6BCF6",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#F7BFF7",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b},{bold:0b,color:"#F9C2F9",italic:0b,obfuscated:0b,strikethrough:0b,text:"a",underlined:0b},{bold:0b,color:"#FAC4FA",italic:0b,obfuscated:0b,strikethrough:0b,text:"t",underlined:0b},{bold:0b,color:"#FAC5FA",italic:0b,obfuscated:0b,strikethrough:0b,text:"o",underlined:0b},{bold:0b,color:"#FBC6FB",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b}],text:""},"minecraft:enchantments":{"minecraft:infinity":69},"minecraft:lore":[{extra:[{bold:0b,color:"dark_gray",italic:0b,obfuscated:0b,strikethrough:0b,text:"ɢᴇɴᴇʀᴀᴛᴏʀ
+              ʟᴇᴠᴇʟ 26★",underlined:0b}],text:""},"",{extra:[" ",{bold:0b,color:"gold",italic:0b,obfuscated:0b,strikethrough:0b,text:"⌚ ",underlined:0b},{color:"white",italic:0b,text:"ɪᴛᴇᴍ ɢᴇɴᴇʀᴀᴛɪᴏɴ ᴛɪᴍᴇ: "},{color:"gold",italic:0b,text:"20s"}],text:""},{extra:[" ",{bold:0b,color:"yellow",italic:0b,obfuscated:0b,strikethrough:0b,text:"$ ",underlined:0b},{color:"white",italic:0b,text:"ᴠᴀʟᴏʀ ᴅᴏ ɪᴛᴇᴍ: "},{color:"yellow",italic:0b,text:"17500$"}],text:""},"",{extra:[" ",{bold:0b,color:"green",italic:0b,obfuscated:0b,strikethrough:0b,text:"☄
+              ",underlined:0b},{color:"white",italic:0b,text:"ᴜᴘɢʀᴀᴅᴇ ɢᴇɴᴇʀᴀᴛᴏʀ "},{color:"green",italic:0b,text:"sʜɪғᴛ+ʀᴍʙ"}],text:""}],"minecraft:tooltip_display":{hidden_components:["minecraft:enchantments"]}},count:1,id:"minecraft:purpur_block"}'
+            DataVersion: 4325
+      PreviewData:
+        Tag:
+          Value: '{}'
+          DataVersion: 4189
+    end_stone_generator:
+      Type: ITEM
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: false
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:custom_data":{GenLevel:25},"minecraft:custom_name":{extra:[{bold:0b,color:"#FFFFB7",italic:0b,obfuscated:0b,strikethrough:0b,text:"E",underlined:0b},{bold:0b,color:"#FFFFB7",italic:0b,obfuscated:0b,strikethrough:0b,text:"n",underlined:0b},{bold:0b,color:"#FFFFB8",italic:0b,obfuscated:0b,strikethrough:0b,text:"d",underlined:0b},{bold:0b,color:"#FFFFB9",italic:0b,obfuscated:0b,strikethrough:0b,text:" ",underlined:0b},{bold:0b,color:"#FEFEBB",italic:0b,obfuscated:0b,strikethrough:0b,text:"S",underlined:0b},{bold:0b,color:"#FFFFBD",italic:0b,obfuscated:0b,strikethrough:0b,text:"t",underlined:0b},{bold:0b,color:"#FEFECF",italic:0b,obfuscated:0b,strikethrough:0b,text:"o",underlined:0b},{bold:0b,color:"#FFFFC2",italic:0b,obfuscated:0b,strikethrough:0b,text:"n",underlined:0b},{bold:0b,color:"#FFFFC5",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#FFFFC9",italic:0b,obfuscated:0b,strikethrough:0b,text:"
+              ",underlined:0b},{bold:0b,color:"#FEFECC",italic:0b,obfuscated:0b,strikethrough:0b,text:"G",underlined:0b},{bold:0b,color:"#FFFFCF",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#FFFFD2",italic:0b,obfuscated:0b,strikethrough:0b,text:"n",underlined:0b},{bold:0b,color:"#FFFFD4",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#FFFFD6",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b},{bold:0b,color:"#FFFFD8",italic:0b,obfuscated:0b,strikethrough:0b,text:"a",underlined:0b},{bold:0b,color:"#FFFFD9",italic:0b,obfuscated:0b,strikethrough:0b,text:"t",underlined:0b},{bold:0b,color:"#FFFFDA",italic:0b,obfuscated:0b,strikethrough:0b,text:"o",underlined:0b},{bold:0b,color:"#FFFFDB",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b}],text:""},"minecraft:enchantments":{"minecraft:infinity":69},"minecraft:lore":[{extra:[{bold:0b,color:"dark_gray",italic:0b,obfuscated:0b,strikethrough:0b,text:"ɢᴇɴᴇʀᴀᴛᴏʀ
+              ʟᴇᴠᴇʟ 25★",underlined:0b}],text:""},"",{extra:[" ",{bold:0b,color:"gold",italic:0b,obfuscated:0b,strikethrough:0b,text:"⌚ ",underlined:0b},{color:"white",italic:0b,text:"ɪᴛᴇᴍ ɢᴇɴᴇʀᴀᴛɪᴏɴ ᴛɪᴍᴇ: "},{color:"gold",italic:0b,text:"20s"}],text:""},{extra:[" ",{bold:0b,color:"yellow",italic:0b,obfuscated:0b,strikethrough:0b,text:"$ ",underlined:0b},{color:"white",italic:0b,text:"ᴠᴀʟᴏʀ ᴅᴏ ɪᴛᴇᴍ: "},{color:"yellow",italic:0b,text:"15000$"}],text:""},"",{extra:[" ",{bold:0b,color:"green",italic:0b,obfuscated:0b,strikethrough:0b,text:"☄
+              ",underlined:0b},{color:"white",italic:0b,text:"ᴜᴘɢʀᴀᴅᴇ ɢᴇɴᴇʀᴀᴛᴏʀ "},{color:"green",italic:0b,text:"sʜɪғᴛ+ʀᴍʙ"}],text:""}],"minecraft:tooltip_display":{hidden_components:["minecraft:enchantments"]}},count:1,id:"minecraft:end_stone"}'
+            DataVersion: 4325
+      PreviewData:
+        Tag:
+          Value: '{}'
+          DataVersion: 4189
+    nether_wart_generator:
+      Type: ITEM
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: false
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:custom_data":{GenLevel:24},"minecraft:custom_name":{extra:[{bold:0b,color:"#A10000",italic:0b,obfuscated:0b,strikethrough:0b,text:"N",underlined:0b},{bold:0b,color:"#A10000",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#A10000",italic:0b,obfuscated:0b,strikethrough:0b,text:"t",underlined:0b},{bold:0b,color:"#A20101",italic:0b,obfuscated:0b,strikethrough:0b,text:"h",underlined:0b},{bold:0b,color:"#A40101",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#A60202",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b},{bold:0b,color:"#A80404",italic:0b,obfuscated:0b,strikethrough:0b,text:"
+              ",underlined:0b},{bold:0b,color:"#AA0505",italic:0b,obfuscated:0b,strikethrough:0b,text:"W",underlined:0b},{bold:0b,color:"#AD0606",italic:0b,obfuscated:0b,strikethrough:0b,text:"a",underlined:0b},{bold:0b,color:"#AF0808",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b},{bold:0b,color:"#B20A0A",italic:0b,obfuscated:0b,strikethrough:0b,text:"t",underlined:0b},{bold:0b,color:"#B50B0B",italic:0b,obfuscated:0b,strikethrough:0b,text:" ",underlined:0b},{bold:0b,color:"#B70D0D",italic:0b,obfuscated:0b,strikethrough:0b,text:"G",underlined:0b},{bold:0b,color:"#BA0E0E",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#BC0F0F",italic:0b,obfuscated:0b,strikethrough:0b,text:"n",underlined:0b},{bold:0b,color:"#BE1111",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#C01212",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b},{bold:0b,color:"#C21212",italic:0b,obfuscated:0b,strikethrough:0b,text:"a",underlined:0b},{bold:0b,color:"#C31313",italic:0b,obfuscated:0b,strikethrough:0b,text:"t",underlined:0b},{bold:0b,color:"#C31313",italic:0b,obfuscated:0b,strikethrough:0b,text:"o",underlined:0b},{bold:0b,color:"#C41414",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b}],text:""},"minecraft:enchantments":{"minecraft:infinity":69},"minecraft:lore":[{extra:[{bold:0b,color:"dark_gray",italic:0b,obfuscated:0b,strikethrough:0b,text:"ɢᴇɴᴇʀᴀᴛᴏʀ
+              ʟᴇᴠᴇʟ 24★",underlined:0b}],text:""},"",{extra:[" ",{bold:0b,color:"gold",italic:0b,obfuscated:0b,strikethrough:0b,text:"⌚ ",underlined:0b},{color:"white",italic:0b,text:"ɪᴛᴇᴍ ɢᴇɴᴇʀᴀᴛɪᴏɴ ᴛɪᴍᴇ: "},{color:"gold",italic:0b,text:"20s"}],text:""},{extra:[" ",{bold:0b,color:"yellow",italic:0b,obfuscated:0b,strikethrough:0b,text:"$ ",underlined:0b},{color:"white",italic:0b,text:"ᴠᴀʟᴏʀ ᴅᴏ ɪᴛᴇᴍ: "},{color:"yellow",italic:0b,text:"12000$"}],text:""},"",{extra:[" ",{bold:0b,color:"green",italic:0b,obfuscated:0b,strikethrough:0b,text:"☄
+              ",underlined:0b},{color:"white",italic:0b,text:"ᴜᴘɢʀᴀᴅᴇ ɢᴇɴᴇʀᴀᴛᴏʀ "},{color:"green",italic:0b,text:"sʜɪғᴛ+ʀᴍʙ"}],text:""}],"minecraft:tooltip_display":{hidden_components:["minecraft:enchantments"]}},count:1,id:"minecraft:nether_wart_block"}'
+            DataVersion: 4325
+      PreviewData:
+        Tag:
+          Value: '{}'
+          DataVersion: 4189
+    nether_brick_generator:
+      Type: ITEM
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: false
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:custom_data":{GenLevel:23},"minecraft:custom_name":{extra:[{bold:0b,color:"#7F2535",italic:0b,obfuscated:0b,strikethrough:0b,text:"N",underlined:0b},{bold:0b,color:"#7F2535",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#7F2535",italic:0b,obfuscated:0b,strikethrough:0b,text:"t",underlined:0b},{bold:0b,color:"#802535",italic:0b,obfuscated:0b,strikethrough:0b,text:"h",underlined:0b},{bold:0b,color:"#812536",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#822636",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b},{bold:0b,color:"#832737",italic:0b,obfuscated:0b,strikethrough:0b,text:"
+              ",underlined:0b},{bold:0b,color:"#852738",italic:0b,obfuscated:0b,strikethrough:0b,text:"B",underlined:0b},{bold:0b,color:"#862839",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b},{bold:0b,color:"#88293A",italic:0b,obfuscated:0b,strikethrough:0b,text:"i",underlined:0b},{bold:0b,color:"#8A2A3B",italic:0b,obfuscated:0b,strikethrough:0b,text:"c",underlined:0b},{bold:0b,color:"#8C2A3B",italic:0b,obfuscated:0b,strikethrough:0b,text:"k",underlined:0b},{bold:0b,color:"#8E2B3C",italic:0b,obfuscated:0b,strikethrough:0b,text:"
+              ",underlined:0b},{bold:0b,color:"#902C3D",italic:0b,obfuscated:0b,strikethrough:0b,text:"G",underlined:0b},{bold:0b,color:"#912D3E",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#932D3F",italic:0b,obfuscated:0b,strikethrough:0b,text:"n",underlined:0b},{bold:0b,color:"#942E40",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#952F40",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b},{bold:0b,color:"#962F41",italic:0b,obfuscated:0b,strikethrough:0b,text:"a",underlined:0b},{bold:0b,color:"#972F41",italic:0b,obfuscated:0b,strikethrough:0b,text:"t",underlined:0b},{bold:0b,color:"#972F41",italic:0b,obfuscated:0b,strikethrough:0b,text:"o",underlined:0b},{bold:0b,color:"#983042",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b}],text:""},"minecraft:enchantments":{"minecraft:infinity":69},"minecraft:lore":[{extra:[{bold:0b,color:"dark_gray",italic:0b,obfuscated:0b,strikethrough:0b,text:"ɢᴇɴᴇʀᴀᴛᴏʀ
+              ʟᴇᴠᴇʟ 23★",underlined:0b}],text:""},"",{extra:[" ",{bold:0b,color:"gold",italic:0b,obfuscated:0b,strikethrough:0b,text:"⌚ ",underlined:0b},{color:"white",italic:0b,text:"ɪᴛᴇᴍ ɢᴇɴᴇʀᴀᴛɪᴏɴ ᴛɪᴍᴇ: "},{color:"gold",italic:0b,text:"20s"}],text:""},{extra:[" ",{bold:0b,color:"yellow",italic:0b,obfuscated:0b,strikethrough:0b,text:"$ ",underlined:0b},{color:"white",italic:0b,text:"ᴠᴀʟᴏʀ ᴅᴏ ɪᴛᴇᴍ: "},{color:"yellow",italic:0b,text:"10000$"}],text:""},"",{extra:[" ",{bold:0b,color:"green",italic:0b,obfuscated:0b,strikethrough:0b,text:"☄
+              ",underlined:0b},{color:"white",italic:0b,text:"ᴜᴘɢʀᴀᴅᴇ ɢᴇɴᴇʀᴀᴛᴏʀ "},{color:"green",italic:0b,text:"sʜɪғᴛ+ʀᴍʙ"}],text:""}],"minecraft:tooltip_display":{hidden_components:["minecraft:enchantments"]}},count:1,id:"minecraft:nether_bricks"}'
+            DataVersion: 4325
+      PreviewData:
+        Tag:
+          Value: '{}'
+          DataVersion: 4189
+    nether_gold_generator:
+      Type: ITEM
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: false
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:custom_data":{GenLevel:22},"minecraft:custom_name":{extra:[{bold:0b,color:"#FF801B",italic:0b,obfuscated:0b,strikethrough:0b,text:"N",underlined:0b},{bold:0b,color:"#FF801B",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#FF831C",italic:0b,obfuscated:0b,strikethrough:0b,text:"t",underlined:0b},{bold:0b,color:"#FF861E",italic:0b,obfuscated:0b,strikethrough:0b,text:"h",underlined:0b},{bold:0b,color:"#FF8C21",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#FE9224",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b},{bold:0b,color:"#FF9A28",italic:0b,obfuscated:0b,strikethrough:0b,text:"
+              ",underlined:0b},{bold:0b,color:"#FEA22C",italic:0b,obfuscated:0b,strikethrough:0b,text:"G",underlined:0b},{bold:0b,color:"#FFAB31",italic:0b,obfuscated:0b,strikethrough:0b,text:"o",underlined:0b},{bold:0b,color:"#FFB536",italic:0b,obfuscated:0b,strikethrough:0b,text:"l",underlined:0b},{bold:0b,color:"#FFBF3B",italic:0b,obfuscated:0b,strikethrough:0b,text:"d",underlined:0b},{bold:0b,color:"#FFC940",italic:0b,obfuscated:0b,strikethrough:0b,text:" ",underlined:0b},{bold:0b,color:"#FFD345",italic:0b,obfuscated:0b,strikethrough:0b,text:"G",underlined:0b},{bold:0b,color:"#FFDC4A",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#FFE44E",italic:0b,obfuscated:0b,strikethrough:0b,text:"n",underlined:0b},{bold:0b,color:"#FFEC52",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#FFF255",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b},{bold:0b,color:"#FFF858",italic:0b,obfuscated:0b,strikethrough:0b,text:"a",underlined:0b},{bold:0b,color:"#FFFB5A",italic:0b,obfuscated:0b,strikethrough:0b,text:"t",underlined:0b},{bold:0b,color:"#FFFE5B",italic:0b,obfuscated:0b,strikethrough:0b,text:"o",underlined:0b},{bold:0b,color:"#FFFF5C",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b}],text:""},"minecraft:enchantments":{"minecraft:infinity":69},"minecraft:lore":[{extra:[{bold:0b,color:"dark_gray",italic:0b,obfuscated:0b,strikethrough:0b,text:"ɢᴇɴᴇʀᴀᴛᴏʀ
+              ʟᴇᴠᴇʟ 22★",underlined:0b}],text:""},"",{extra:[" ",{bold:0b,color:"gold",italic:0b,obfuscated:0b,strikethrough:0b,text:"⌚ ",underlined:0b},{color:"white",italic:0b,text:"ɪᴛᴇᴍ ɢᴇɴᴇʀᴀᴛɪᴏɴ ᴛɪᴍᴇ: "},{color:"gold",italic:0b,text:"20s"}],text:""},{extra:[" ",{bold:0b,color:"yellow",italic:0b,obfuscated:0b,strikethrough:0b,text:"$ ",underlined:0b},{color:"white",italic:0b,text:"ᴠᴀʟᴏʀ ᴅᴏ ɪᴛᴇᴍ: "},{color:"yellow",italic:0b,text:"8000$"}],text:""},"",{extra:[" ",{bold:0b,color:"green",italic:0b,obfuscated:0b,strikethrough:0b,text:"☄
+              ",underlined:0b},{color:"white",italic:0b,text:"ᴜᴘɢʀᴀᴅᴇ ɢᴇɴᴇʀᴀᴛᴏʀ "},{color:"green",italic:0b,text:"sʜɪғᴛ+ʀᴍʙ"}],text:""}],"minecraft:tooltip_display":{hidden_components:["minecraft:enchantments"]}},count:1,id:"minecraft:nether_gold_ore"}'
+            DataVersion: 4325
+      PreviewData:
+        Tag:
+          Value: '{}'
+          DataVersion: 4189
+    quartz_generator:
+      Type: ITEM
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: false
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:custom_data":{GenLevel:21},"minecraft:custom_name":{extra:[{bold:0b,color:"#F5DBBB",italic:0b,obfuscated:0b,strikethrough:0b,text:"Q",underlined:0b},{bold:0b,color:"#F5DBBB",italic:0b,obfuscated:0b,strikethrough:0b,text:"u",underlined:0b},{bold:0b,color:"#F5DCBD",italic:0b,obfuscated:0b,strikethrough:0b,text:"a",underlined:0b},{bold:0b,color:"#F5DEC1",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b},{bold:0b,color:"#F6E0C6",italic:0b,obfuscated:0b,strikethrough:0b,text:"t",underlined:0b},{bold:0b,color:"#F7E3CB",italic:0b,obfuscated:0b,strikethrough:0b,text:"z",underlined:0b},{bold:0b,color:"#F8E7D2",italic:0b,obfuscated:0b,strikethrough:0b,text:"
+              ",underlined:0b},{bold:0b,color:"#F9EBD9",italic:0b,obfuscated:0b,strikethrough:0b,text:"G",underlined:0b},{bold:0b,color:"#FAEEE0",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#FBF2E7",italic:0b,obfuscated:0b,strikethrough:0b,text:"n",underlined:0b},{bold:0b,color:"#FCF6EE",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#FDF9F3",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b},{bold:0b,color:"#FEFBF8",italic:0b,obfuscated:0b,strikethrough:0b,text:"a",underlined:0b},{bold:0b,color:"#FEFDFC",italic:0b,obfuscated:0b,strikethrough:0b,text:"t",underlined:0b},{bold:0b,color:"#FEFEFE",italic:0b,obfuscated:0b,strikethrough:0b,text:"o",underlined:0b},{bold:0b,color:"#FFFFFF",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b}],text:""},"minecraft:enchantments":{"minecraft:infinity":69},"minecraft:lore":[{extra:[{bold:0b,color:"dark_gray",italic:0b,obfuscated:0b,strikethrough:0b,text:"ɢᴇɴᴇʀᴀᴛᴏʀ
+              ʟᴇᴠᴇʟ 21★",underlined:0b}],text:""},"",{extra:[" ",{bold:0b,color:"gold",italic:0b,obfuscated:0b,strikethrough:0b,text:"⌚ ",underlined:0b},{color:"white",italic:0b,text:"ɪᴛᴇᴍ ɢᴇɴᴇʀᴀᴛɪᴏɴ ᴛɪᴍᴇ: "},{color:"gold",italic:0b,text:"20s"}],text:""},{extra:[" ",{bold:0b,color:"yellow",italic:0b,obfuscated:0b,strikethrough:0b,text:"$ ",underlined:0b},{color:"white",italic:0b,text:"ᴠᴀʟᴏʀ ᴅᴏ ɪᴛᴇᴍ: "},{color:"yellow",italic:0b,text:"6000$"}],text:""},"",{extra:[" ",{bold:0b,color:"green",italic:0b,obfuscated:0b,strikethrough:0b,text:"☄
+              ",underlined:0b},{color:"white",italic:0b,text:"ᴜᴘɢʀᴀᴅᴇ ɢᴇɴᴇʀᴀᴛᴏʀ "},{color:"green",italic:0b,text:"sʜɪғᴛ+ʀᴍʙ"}],text:""}],"minecraft:tooltip_display":{hidden_components:["minecraft:enchantments"]}},count:1,id:"minecraft:nether_quartz_ore"}'
+            DataVersion: 4325
+      PreviewData:
+        Tag:
+          Value: '{}'
+          DataVersion: 4189
+    soul_sand_generator:
+      Type: ITEM
+      Weight: 10.0
+      Rarity: common
+      Broadcast: false
+      Placeholder_Apply: false
+      Win_Limit:
+        Player:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+        Global:
+          Enabled: false
+          Amount: -1
+          Cooldown: 0
+          CooldownStep: 1
+      Ignored_For_Permissions: []
+      Required_Permissions: []
+      Custom_Preview: false
+      ItemsData:
+        '0':
+          Type: VANILLA
+          Tag:
+            Value: '{components:{"minecraft:custom_data":{GenLevel:20},"minecraft:custom_name":{extra:[{bold:0b,color:"#896652",italic:0b,obfuscated:0b,strikethrough:0b,text:"S",underlined:0b},{bold:0b,color:"#896652",italic:0b,obfuscated:0b,strikethrough:0b,text:"o",underlined:0b},{bold:0b,color:"#896652",italic:0b,obfuscated:0b,strikethrough:0b,text:"u",underlined:0b},{bold:0b,color:"#8A6753",italic:0b,obfuscated:0b,strikethrough:0b,text:"l",underlined:0b},{bold:0b,color:"#8B6854",italic:0b,obfuscated:0b,strikethrough:0b,text:"
+              ",underlined:0b},{bold:0b,color:"#8C6955",italic:0b,obfuscated:0b,strikethrough:0b,text:"S",underlined:0b},{bold:0b,color:"#8E6B56",italic:0b,obfuscated:0b,strikethrough:0b,text:"a",underlined:0b},{bold:0b,color:"#906D58",italic:0b,obfuscated:0b,strikethrough:0b,text:"n",underlined:0b},{bold:0b,color:"#926F5A",italic:0b,obfuscated:0b,strikethrough:0b,text:"d",underlined:0b},{bold:0b,color:"#94715C",italic:0b,obfuscated:0b,strikethrough:0b,text:" ",underlined:0b},{bold:0b,color:"#95725D",italic:0b,obfuscated:0b,strikethrough:0b,text:"G",underlined:0b},{bold:0b,color:"#97745F",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#997661",italic:0b,obfuscated:0b,strikethrough:0b,text:"n",underlined:0b},{bold:0b,color:"#9B7862",italic:0b,obfuscated:0b,strikethrough:0b,text:"e",underlined:0b},{bold:0b,color:"#9C7963",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b},{bold:0b,color:"#9D7A64",italic:0b,obfuscated:0b,strikethrough:0b,text:"a",underlined:0b},{bold:0b,color:"#9E7B65",italic:0b,obfuscated:0b,strikethrough:0b,text:"t",underlined:0b},{bold:0b,color:"#9E7B65",italic:0b,obfuscated:0b,strikethrough:0b,text:"o",underlined:0b},{bold:0b,color:"#9F7C66",italic:0b,obfuscated:0b,strikethrough:0b,text:"r",underlined:0b}],text:""},"minecraft:enchantments":{"minecraft:infinity":69},"minecraft:lore":[{extra:[{bold:0b,color:"dark_gray",italic:0b,obfuscated:0b,strikethrough:0b,text:"ɢᴇɴᴇʀᴀᴛᴏʀ
+              ʟᴇᴠᴇʟ 20★",underlined:0b}],text:""},"",{extra:[" ",{bold:0b,color:"gold",italic:0b,obfuscated:0b,strikethrough:0b,text:"⌚ ",underlined:0b},{color:"white",italic:0b,text:"ɪᴛᴇᴍ ɢᴇɴᴇʀᴀᴛɪᴏɴ ᴛɪᴍᴇ: "},{color:"gold",italic:0b,text:"20s"}],text:""},{extra:[" ",{bold:0b,color:"yellow",italic:0b,obfuscated:0b,strikethrough:0b,text:"$ ",underlined:0b},{color:"white",italic:0b,text:"ᴠᴀʟᴏʀ ᴅᴏ ɪᴛᴇᴍ: "},{color:"yellow",italic:0b,text:"5000$"}],text:""},"",{extra:[" ",{bold:0b,color:"green",italic:0b,obfuscated:0b,strikethrough:0b,text:"☄
+              ",underlined:0b},{color:"white",italic:0b,text:"ᴜᴘɢʀᴀᴅᴇ ɢᴇɴᴇʀᴀᴛᴏʀ "},{color:"green",italic:0b,text:"sʜɪғᴛ+ʀᴍʙ"}],text:""}],"minecraft:tooltip_display":{hidden_components:["minecraft:enchantments"]}},count:1,id:"minecraft:soul_sand"}'
+            DataVersion: 4325
+      PreviewData:
+        Tag:
+          Value: '{}'
+          DataVersion: 4189

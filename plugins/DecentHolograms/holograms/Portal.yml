@@ -1,0 +1,24 @@
+location: world:-1443,500:106,000:-1590,500
+enabled: true
+display-range: 48
+update-range: 48
+update-interval: 20
+facing: 0.0
+down-origin: false
+pages:
+- lines:
+  - content: <#fcfc2a>&lRETURN PORTAL</#fc8721>
+    height: 0.3
+  - content: ''
+    height: 0.3
+  - content: '&aWe hope you had fun!'
+    height: 0.3
+  - content: ''
+    height: 0.3
+  - content: '&fThis &eportal&f will take you back'
+    height: 0.3
+  - content: '&fto your &6island&f where you can'
+    height: 0.3
+  - content: '&fput your acquired items!"'
+    height: 0.3
+  actions: {}

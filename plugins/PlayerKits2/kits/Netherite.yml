@@ -1,0 +1,114 @@
+cooldown: 86400
+one_time: false
+auto_armor: false
+permission_required: true
+display:
+  default:
+    id: IRON_SWORD
+    name: '&6&lnetherite &aKit'
+    amount: 1
+    lore:
+    - '&7This is a description of the kit.'
+    - '&7You can add multiples &alines&7.'
+  no_permission:
+    id: BARRIER
+    name: '&6&lnetherite &aKit'
+    amount: 1
+    lore:
+    - '&cYou don''t have permissions to claim'
+    - '&cthis kit.'
+  cooldown:
+    id: STONE_SWORD
+    name: '&c&l%kit_name% &cKit'
+    amount: 1
+    lore:
+    - '&cYou need to wait &7%time%'
+    - '&cto claim this kit again.'
+    item_flags:
+    - HIDE_ATTRIBUTES
+items:
+  '1':
+    id: NETHERITE_SWORD
+    amount: 1
+    enchants:
+    - DAMAGE_ALL;5
+    - DURABILITY;3
+  '2':
+    id: NETHERITE_SWORD
+    amount: 1
+    enchants:
+    - KNOCKBACK;2
+  '3':
+    id: BOW
+    amount: 1
+    enchants:
+    - ARROW_FIRE;1
+    - ARROW_INFINITE;1
+    - ARROW_DAMAGE;5
+  '4':
+    id: BOW
+    amount: 1
+    enchants:
+    - ARROW_INFINITE;1
+    - ARROW_KNOCKBACK;2
+  '5':
+    id: DIAMOND_PICKAXE
+    amount: 1
+    enchants:
+    - DIG_SPEED;5
+    - LOOT_BONUS_BLOCKS;3
+    - DURABILITY;3
+  '6':
+    id: DIAMOND_AXE
+    amount: 1
+    enchants:
+    - DIG_SPEED;5
+    - DURABILITY;3
+  '7':
+    id: DIAMOND_SHOVEL
+    amount: 1
+    enchants:
+    - DIG_SPEED;5
+    - DURABILITY;3
+  '8':
+    id: ENCHANTED_GOLDEN_APPLE
+    amount: 1
+  '9':
+    id: GOLDEN_APPLE
+    amount: 3
+  '10':
+    id: COBWEB
+    amount: 16
+  '11':
+    id: BREAD
+    amount: 8
+  '12':
+    id: ENDER_PEARL
+    amount: 1
+  '13':
+    id: WATER_BUCKET
+    amount: 1
+  '14':
+    id: NETHERITE_HELMET
+    amount: 1
+    enchants:
+    - PROTECTION_ENVIRONMENTAL;4
+    - DURABILITY;3
+  '15':
+    id: NETHERITE_CHESTPLATE
+    amount: 1
+    enchants:
+    - PROTECTION_ENVIRONMENTAL;4
+    - DURABILITY;3
+  '16':
+    id: NETHERITE_LEGGINGS
+    amount: 1
+    enchants:
+    - PROTECTION_ENVIRONMENTAL;4
+    - DURABILITY;3
+  '17':
+    id: NETHERITE_BOOTS
+    amount: 1
+    enchants:
+    - PROTECTION_ENVIRONMENTAL;4
+    - DURABILITY;3

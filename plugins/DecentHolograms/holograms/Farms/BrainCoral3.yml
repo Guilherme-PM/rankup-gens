@@ -1,0 +1,28 @@
+location: world:-247,500:98,500:111,500
+enabled: true
+display-range: 48
+update-range: 48
+update-interval: 20
+facing: 0.0
+down-origin: false
+pages:
+- lines:
+  - content: '#ICON:Brain_coral'
+    height: 0.6
+  - content: '&6Brain Coral Farm &e1000★'
+    height: 0.3
+  - content: ''
+    height: 0.3
+  - content: '&fᴀᴠᴀɪʟᴀʙʟᴇ ғʀᴏᴍ &e&l1000 &fʟᴇᴠᴇʟ'
+    height: 0.3
+  - content: '&fɪᴛᴇᴍ ᴠᴀʟᴜᴇ: &a&l400 ᴍᴏɴᴇʏ'
+    height: 0.3
+  - content: ''
+    height: 0.3
+  - content: '%gens_farmevent%'
+    height: 0.3
+  - content: ''
+    height: 0.3
+  - content: '&a[ʙᴜʏ ʜᴏᴇ ᴜsɪɴɢ /ᴛᴏᴏʟs]'
+    height: 0.3
+  actions: {}

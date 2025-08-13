@@ -1,0 +1,118 @@
+# DOCUMENTATION: https://docs.artillex-studios.com/trade.html
+
+player-help:
+- ' '
+- '&#00ff1e&lTrade &7»'
+- ' &7- &6/trade &e<player> &3- &#00ff1eSend trade request'
+- ' &7- &6/trade &eaccept <player> &3- &#00ff1eAccept trade request'
+- ' &7- &6/trade &edeny <player> &3- &#00ff1eDeny trade request'
+- ' '
+
+admin-help:
+- ' '
+- '&#00ff1e&lTrade &7»'
+- ' &7- &6/trade &e<player> &3- &#00ff1eSend trade request'
+- ' &7- &6/trade &eaccept <player> &3- &#00ff1eAccept trade request'
+- ' &7- &6/trade &edeny <player> &3- &#00ff1eDeny trade request'
+- ' &7- &6/trade &ereload &3- &#00ff1eReload plugin'
+- ' &7- &6/trade &eforce <player> &3- &#00ff1eForce start a trade'
+- ' '
+
+reload:
+  success: '&#33FF33Plugin successfully reloaded!'
+  failed: '&#FF3333Failed to reload the plugin! Something is wrong in the &6%file%&#FF3333 file, look in the console or use a yaml validator to fix the errors!'
+
+trade:
+  started: '&#00ff1eYou have started a trade with &#00ff1e%player%&#00ff1e!'
+  completed: '&#00ff1eYour trade with &#00ff1e%player% &#00ff1ewas completed!'
+  aborted: '&#00ff1eYour trade with &#00ff1e%player% &#00ff1ewas aborted!'
+  blacklisted-item: '&#00ff1eThis item is blacklisted!'
+  inventory-full: '&#CCFFEEYou can''t put any more items in the gui, because your trade partner has no more empty slots.'
+  preview-info: '&#CCFFEEYou are opening the preview gui, this is meant for testing your configuration, clicking buttons will cause errors and might not work.'
+
+toggle:
+  enabled: '&#CCFFEEYou have enabled trade requests!'
+  disabled: '&#CCFFEEYou have disabled trade requests!'
+
+# summary after a successful trade
+summary:
+  get:
+    item: ' &#00FF00&l+ &#00FF00%amount%x %item%'
+    currency: ' &#00FF00&l+ &#00FF00%amount% %currency%'
+  give:
+    item: ' &#ff4747&l- &#ff4747%amount%x %item%'
+    currency: ' &#ff4747&l- &#ff4747%amount% %currency%'
+
+currency-editor:
+  success: '&#00ff1eSuccessfully changed value!'
+  failed: '&#00ff1eIncorrect value!'
+  not-enough: '&#00ff1eYou don''t have enough of this currency!'
+
+request:
+  sent-sender: '&#00ff1eYou have successfully sent a trade request to &#00ff1e%player%&#00ff1e!'
+  sent-receiver:
+    info: '&#00ff1eYou have received a trade request from &#00ff1e%player%&#00ff1e!'
+    accept:
+      message: ' &#00FF00/trade accept %player%'
+      hover: '&#00FF00Click here to &naccept&#00FF00 trade request!'
+    deny:
+      message: ' &#ff4747/trade deny %player%'
+      hover: '&#ff4747Click here to &ndeny&#ff4747 trade request!'
+  no-request: '&#ff4747You don''t have an active trade request from &#ff4747&l%player%&#ff4747!'
+  deny-sender: '&#ff4747You trade request was denied by &#ff4747&l%player%&ff4747!'
+  deny-receiver: '&#00ff1eYou have successfully denied &#ff4747&l%player%&#ff4747''s trade request!'
+  cant-trade-self: '&#ff4747You can''t send a trade request to yourself!'
+  already-in-trade: '&#ff4747The player is already trading with someone!'
+  already-sent: '&#ff4747You have already sent a trade request to &#ff4747&l%player%&#ff4747!'
+  too-far: '&#ff4747You are too far from &#ff4747&l%player% &#ff4747to send a trade request!'
+  not-accepting: '&#ff4747This player is not accepting trades right now!'
+  disallowed-gamemode: '&#ff4747Either you or the other player is in a disallowed gamemode!'
+  same-ip: '&#CCFFEEYou can''t trade with an account that has the same ip as you!'
+  below-required-amount: '&#CCFFEEYou are required to trade at least &f%amount% %currency%&#CCFFEE!'
+  blacklisted-world: '&#ff4747Trades are disabled in this world!'
+  expired: '&#ff4747Your trade request to &#ff4747&l%player% &#ff4747has expired!'
+  disabled-trading: '&#CCFFEEYou have disabled trades! Use &#00FFDD/trade toggle &#CCFFEEto enable.'
+
+# this must be 4 lines
+# note: currently the first line must be left empty
+currency-editor-sign:
+- ''
+- '-----------'
+- Write the new value
+- in the first line
+
+# list of sounds: https://www.digminecraft.com/lists/sound_list_pc.php
+# set to "" to disable
+sounds:
+  # trade sounds
+  started: entity.player.levelup
+  completed: entity.player.levelup
+  aborted: block.anvil.destroy
+  # trade requests
+  deny: block.anvil.land
+  requested: entity.experience_bottle.throw
+  # gui sounds
+  accept: ui.button.click
+  countdown: ui.button.click
+  cancel: ui.button.click
+
+# can be used in the gui title as %own-status% and %partner-status%
+placeholders:
+  ready: Ready
+  waiting: Waiting
+
+commands:
+  invalid-value: '&#ff4747Invalid parameter: &#BB0000%value%'
+  invalid-command: '&#ff4747Invalid command or subcommand!'
+  missing-argument: '&#ff4747Missing argument! You must specify a value for &#BB0000%value%&#ff4747.'
+  no-permission: '&#ff4747You don''t have permission to access this command!'
+  out-of-range: '&#ff4747The &#BB0000%number% &#ff4747must be between &#BB0000%min% &#ff4747and &#BB0000%m%&#ff4747!'
+  player-only: '&#ff4747You must be a player to use this command!'
+  invalid-player: '&#ff4747The player &#BB0000%player% &#ff4747can not be found!'
+  invalid-selector: '&#ff4747You can not use this selector in this command!'
+
+update-notifier: '&#AAFFCCThere is a new version of the plugin available! &#DDDDDD(&#FFFFFFcurrent: &#ff4747%current% &#DDDDDD| &#FFFFFFlatest: &#00FF00%latest%&#DDDDDD)'
+safety: '&#FF0000This feature has been disabled for safety reasons and updating the plugin is required, please contact the server administrators.'
+
+# do not change this
+version: '9'

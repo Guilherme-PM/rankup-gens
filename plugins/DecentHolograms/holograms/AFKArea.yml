@@ -1,0 +1,22 @@
+location: world:-43,500:101,000:-21,500
+enabled: true
+display-range: 48
+update-range: 48
+update-interval: 20
+facing: 0.0
+down-origin: false
+pages:
+- lines:
+  - content: <#00ff07>&lᴢᴏɴᴀ ᴀғᴋ</#00d606>
+    height: 0.3
+  - content: ''
+    height: 0.3
+  - content: '&fɴãᴏ ғᴀçᴀ ɴᴀᴅᴀ ᴇ ɢᴀɴʜᴇ ʀᴇᴄᴏᴍᴘᴇɴsᴀs'
+    height: 0.3
+  - content: '&fᴄᴏᴍᴘʟᴇᴛᴀᴍᴇɴᴛᴇ ᴅᴇ ɢʀᴀçᴀ'
+    height: 0.3
+  - content: ''
+    height: 0.3
+  - content: <#fcf932>[ᴄʟɪǫᴜᴇ ᴘᴀʀᴀ ᴀʙʀɪʀ]
+    height: 0.3
+  actions: {}

@@ -1,0 +1,23 @@
+enable: false
+slot: 5
+title: ''
+hidden: false
+sub-section: false
+display-item: false
+fill-item:
+  material: AIR
+nav-bar:
+  mode: INHERIT
+item:
+  material: BAT_SPAWN_EGG
+  displayname: '&a✂ Ovos de Invocação'
+  lore:
+  - ''
+  - '&fᴄᴀᴅᴀ ᴄᴀᴛᴇɢᴏʀɪᴀ ᴄᴏɴᴛéᴍ'
+  - '&fᴅɪғᴇʀᴇɴᴛᴇs ʙʟᴏᴄᴏs ᴇ ɪᴛᴇɴs'
+  - '&fǫᴜᴇ ᴠᴏᴄê ᴘᴏᴅᴇ ᴄᴏᴍᴘʀᴀʀ ᴏᴜ ᴠᴇɴᴅᴇʀ'
+  - ''
+  - '&fᴄᴀᴛᴇɢᴏʀɪᴀ: <#24fc2a>Ovos de Invocação'
+  - ''
+  - '<#fcf932>Clique aqui para selecionar!'
+  name: '&f&1'

@@ -1,0 +1,36 @@
+location: world:-4,500:104,500:0,500
+enabled: true
+display-range: 48
+update-range: 48
+update-interval: 20
+facing: 0.0
+down-origin: false
+pages:
+- lines:
+  - content: '&3&l▪ &8&m     &r &e*&6⭐&e* &r&8&m     &r &3&l▪'
+    height: 0.3
+  - content: ''
+    height: 0.3
+  - content: '&6&lʀᴀɴᴋᴜᴘ &f&lɢᴇɴs'
+    height: 0.3
+  - content: '&7Bem vindo &b%player_name%&7!'
+    height: 0.3
+  - content: ''
+    height: 0.3
+  - content: '&7Diga olá ao &aRankup Gens'
+    height: 0.3
+  - content: ''
+    height: 0.3
+  - content: '&7Comece sua incrível aventura criando'
+    height: 0.3
+  - content: '&7uma ilha, digite o comando &e/island'
+    height: 0.3
+  - content: ''
+    height: 0.3
+  - content: '&7Para mais informações, veja o &b/help'
+    height: 0.3
+  - content: ''
+    height: 0.3
+  - content: '&3&l▪ &8&m     &r &e*&6⭐&e* &r&8&m     &r &3&l▪'
+    height: 0.3
+  actions: {}

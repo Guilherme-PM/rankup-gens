@@ -1,0 +1,1349 @@
+# This script was written by Xqedii and sharing is not allowed!
+# You can change and edit everything in this file if you want
+
+# Utils4
+
+on load:
+	#              Item   Data   Name                                         Colors                Duration (Mins)     Type  Cost Strength
+	registerPotion(paper, 7000,  gradient("ᴘᴏçãᴏ ᴅᴇ xᴘ ɴᴏʀᴍᴀʟ",          ("ff3636", "ff7373")), 30,                 1,  16,   1)
+	registerPotion(paper, 7001,  gradient("ᴘᴏçãᴏ ᴅᴇ xᴘ ɢɪɢᴀɴᴛᴇ",             ("ff3636", "ff7373")), 90,                 1,  32,   2)
+	registerPotion(paper, 7002,  gradient("ᴘᴏçãᴏ ᴅᴇ xᴘ ᴇxᴄʟᴜsɪᴠᴀ",        ("ff3636", "ff7373")), 240,                1,  64,   3)
+
+	registerPotion(paper, 7003,  gradient("ᴘᴏçãᴏ ᴅᴇ ᴠᴇɴᴅᴀ ᴇxᴛʀᴀ ɴᴏʀᴍᴀʟ",         ("cea900", "ffd825")), 30,                 2,  16,   1)
+	registerPotion(paper, 7004,  gradient("ᴘᴏçãᴏ ᴅᴇ ᴠᴇɴᴅᴀ ᴇxᴛʀᴀ ɢɪɢᴀɴᴛᴇ",            ("cea900", "ffd825")), 90,                 2,  32,   2)
+	registerPotion(paper, 7005,  gradient("ᴘᴏçãᴏ ᴅᴇ ᴠᴇɴᴅᴀ ᴇxᴛʀᴀ ᴇxᴄʟᴜsɪᴠᴀ",       ("cea900", "ffd825")), 240,                2,  64,   3)
+
+	registerPotion(paper, 7006,  gradient("ᴘᴏçãᴏ ᴅᴇ ᴅᴏʙʀᴏ ᴅᴇ ᴅʀᴏᴘ ᴅᴇ ᴍáǫᴜɪɴᴀs ɴᴏʀᴍᴀʟ",   ("00ce91", "25ffbf")), 30,                 3,  16,   1)
+	registerPotion(paper, 7007,  gradient("ᴘᴏçãᴏ ᴅᴇ ᴅᴏʙʀᴏ ᴅᴇ ᴅʀᴏᴘ ᴅᴇ ᴍáǫᴜɪɴᴀs ɢɪɢᴀɴᴛᴇ",      ("00ce91", "25ffbf")), 90,                 3,  32,   2)
+	registerPotion(paper, 7008,  gradient("ᴘᴏçãᴏ ᴅᴇ ᴅᴏʙʀᴏ ᴅᴇ ᴅʀᴏᴘ ᴅᴇ ᴍáǫᴜɪɴᴀs ᴇxᴄʟᴜsɪᴠᴀ", ("00ce91", "25ffbf")), 240,                3,  64,   3)
+
+	registerPotion(paper, 7009,  gradient("ᴘᴏçãᴏ ᴅᴇ ᴅʀᴏᴘ ᴅᴜᴘʟᴏ ɴᴏʀᴍᴀʟ",        ("af5aff", "cb92ff")), 30,                 4,  16,   1)
+	registerPotion(paper, 7010,  gradient("ᴘᴏçãᴏ ᴅᴇ ᴅʀᴏᴘ ᴅᴜᴘʟᴏ ɢɪɢᴀɴᴛᴇ",           ("af5aff", "cb92ff")), 90,                 4,  32,   2)
+	registerPotion(paper, 7011,  gradient("ᴘᴏçãᴏ ᴅᴇ ᴅʀᴏᴘ ᴅᴜᴘʟᴏ ᴇxᴄʟᴜsɪᴠᴀ",      ("af5aff", "cb92ff")), 240,                4,  64,   3)
+
+	loop {TextDisplayList::*}:
+		kill loop-value parsed as entity
+	clear {TextDisplayList::*}
+	loop all players:
+		if {CurrentPet::%loop-player%} is set:
+			spawnpet(loop-player)
+	clear {EventBlock::*}
+	delete {FarmBlock::*}
+
+function registerPotion(item: item, id: number, name: text, duration: number, type: number,  cost: number, strength: number):
+	if {_type} is 1:
+		set {_ptype} to {Config::Utils4::Potion::DoubleXP}
+		set {_desc::*} to {Config::Utils4::Potion::DoubleXPDesc::*}
+		replace all "{MULTI}" with "%1+(({_strength}/10)*2)%" in {_desc::*}
+		set {_effect} to "DoubleXP" #Dont Translate
+	if {_type} is 2:
+		set {_ptype} to {Config::Utils4::Potion::ExtraSell}
+		set {_desc::*} to {Config::Utils4::Potion::ExtraSellDesc::*}
+		replace all "{MULTI}" with "%1+(({_strength}/20)*2)%" in {_desc::*}
+		set {_effect} to "ExtraSell" #Dont Translate
+	if {_type} is 3:
+		set {_ptype} to {Config::Utils4::Potion::DoubleGens}
+		set {_desc::*} to {Config::Utils4::Potion::DoubleGensDesc::*}
+		replace all "{CHANCE}" with "%{_strength}*20%" in {_desc::*}
+		set {_effect} to "DoubleGensDrop" #Dont Translate
+	if {_type} is 4:
+		set {_ptype} to {Config::Utils4::Potion::DoubleDrop}
+		set {_desc::*} to {Config::Utils4::Potion::DoubleDropDesc::*}
+		replace all "{CHANCE}" with "%{_strength}*30%" in {_desc::*}
+		set {_effect} to "DoubleDrop" #Dont Translate
+	set {_time} to "%{_duration}% minutes" parsed as timespan
+	set {_potionType} to {Config::Utils4::Potion::PotionType}
+	replace all "{TYPE}" with "%{_ptype}%" in {_potionType}
+	set {_potionDuration} to {Config::Utils4::Potion::Duration}
+	replace all "{DURATION}" with timeformat({_time}) in {_potionDuration}
+	set {GenData::Potion::%{_id}%} to {_item} with custom model data {_id} named {_name} with lore "" and {_potionType} and {_potionDuration} and "" and {_desc::*} and "" and {Config::Utils4::Potion::ClickToUse}
+	set int tag "PotionDuration" of custom nbt of {GenData::Potion::%{_id}%} to {_duration}
+	set int tag "PotionCost" of custom nbt of {GenData::Potion::%{_id}%} to {_cost}
+	set int tag "PotionData" of custom nbt of {GenData::Potion::%{_id}%} to {_id}
+	set string tag "PotionEffect" of custom nbt of {GenData::Potion::%{_id}%} to "%{_effect}%-%{_strength}%"
+
+function effect5X(loc: location, size: number, player: player, type: text, farm: text):
+	effect4(location 0.5 under {_loc}, "ffe436", {_size}, 2, false)
+	if {Config::Update35::DisableAnimations} is false:
+		wait 0.3 second
+	smoothBreakBlocks({_loc}, {_size}, {_player}, {_type}, {_farm})
+
+function Effect8X(player: player, amount: number, time: number, type: number):
+	set {_count} to 360/({_amount})
+	loop {_amount} times:
+		effect8({_player}, loop-value*{_count}, loop-value, {_amount}, ({_amount})/2, {_time}, {_type})
+
+on explosion:
+	if event-entity is in world "world":
+		cancel event
+
+function speedBoost(player: player, speed: number):
+	set {_a} to {SpeedDelay::%{_player}%}
+	set {_player}'s walking speed to {_speed}
+	wait 5 seconds
+	if {SpeedDelay::%{_player}%} is {_a}:
+		set {_player}'s walking speed to 0.2
+		delete {SpeedDelay::%{_player}%}
+
+function effect10(loc: location, player: player, size: number, type: text):
+	if {Config::Update35::DisableAnimations} is false:
+		spawn tnt at {_loc}
+		set {_a} to last spawned tnt
+		play sound "entity.creeper.primed" with volume 0.5 and pitch 1.5 at {_loc}
+		wait 2 seconds
+		kill {_a}
+	make 8 of explosion at {_loc} with offset vector(2, 2, 2)
+	play sound "entity.generic.explode" with volume 0.2 and pitch 1.3 at {_loc}
+	smoothBreakBlocks({_loc}, {_size}, {_player}, {_type}, "Farm")
+
+function ufoSFX(entity: entity):
+	loop 10 times:
+		play sound "entity.chicken.egg" with volume 1.5 and pitch 0.5 at {_entity}
+		wait 0.5 second
+		play sound "entity.chicken.egg" with volume 1.5 and pitch 0.6 at {_entity}
+		wait 0.5 second
+	play sound "entity.player.levelup" with volume 1.7 and pitch 2 at {_entity}
+
+function effect9(loc: location, player: player, type: text):
+	collectorAnim({_loc}, {_player}, {_type})
+	set {_loc} to location 13 above {_loc}
+	set yaw of {_loc} to 0
+	set pitch of {_loc} to 0
+	set {_newloc} to {_loc}
+	add random integer between -30 and 30 to x-coordinates of {_newloc}
+	add 6 to y-coordinates of {_newloc}
+	add random integer between -30 and 30 to z-coordinates of {_newloc}
+	remove 179 from yaw of {_newloc}
+	wait 2 tick
+
+	spawn item display at {_newloc}:
+		set {_entity} to the display
+		set display scale of entity to vector(0,0,0)
+		set display teleport duration of entity to 40
+		set interpolation start of entity to 0
+		set interpolation duration of entity to 40 ticks
+		set display item of {_entity} to gold nugget with custom model data 7013
+	wait 2 tick
+	if {Config::Update35::DisableAnimations} is false:
+		ufoSFX({_entity})
+	set display scale of {_entity} to vector(5,5,5)
+	teleport {_entity} to {_loc}
+	wait 2 second
+	set display teleport duration of {_entity} to 20
+	wait 2 tick
+	if {Config::Update35::DisableAnimations} is false:
+		ufoBeam({_loc})
+		ufoAnimation({_entity})
+		loop 8 times:
+			add 90 to yaw of {_loc}
+			teleport {_entity} to {_loc}
+			wait 1 second
+		set yaw of {_loc} to 0
+		add 179 to yaw of {_loc}
+		teleport {_entity} to {_loc}
+	add random integer between -30 and 30 to x-coordinates of {_loc}
+	add 10 to y-coordinates of {_loc}
+	add random integer between -30 and 30 to z-coordinates of {_loc}
+	set interpolation start of {_entity} to 0
+	set interpolation duration of {_entity} to 35 ticks
+	set display teleport duration of {_entity} to 40
+	set display scale of {_entity} to vector(0,0,0)
+	wait 0.1 second
+	teleport {_entity} to {_loc}
+	wait 1.9 second
+	kill {_entity}
+
+function ufoAnimation(entity: entity):
+	loop 16 times:
+		if mod(loop-value, 2) is 0:
+			set display item of {_entity} to gold nugget with custom model data 7013
+		else:
+			set display item of {_entity} to gold nugget with custom model data 7014
+		wait 0.5 second
+
+function ufoBeam(loc: location):
+	spawn item display at {_loc}:
+		set {_entity} to the display
+		set display scale of entity to vector(2,0,2)
+		set display left rotation of {_entity} to quaternion(0, 1, 0, 0)
+		set display teleport duration of entity to 30
+		set interpolation start of entity to 0
+		set interpolation duration of entity to 30 ticks
+		set display item of {_entity} to gold nugget with custom model data 7001
+	wait 2 tick
+	teleport {_entity} to location 13 under {_loc}
+	set display scale of {_entity} to vector(2,23,2)
+	loop 35 times:
+		wait 0.2 second
+		play sound "entity.item.pickup" with volume 1.5 and pitch 1 at {_loc}
+	set interpolation start of {_entity} to 0
+	set interpolation duration of {_entity} to 20 ticks
+	set display scale of {_entity} to vector(2,0,2)
+	teleport {_entity} to location 7 above {_loc}
+	wait 1 second
+	kill {_entity}
+
+function collectorAnim(loc: location, player: player, item: text):
+	set {_itemX} to {GenData::%{BlockData::%{_item}%::1}%}
+	if {Config::Update35::DisableAnimations} is false:
+		wait 2.5 seconds
+		loop 34*2 times:
+			collector({_loc}, {_itemX})
+			wait 2 tick
+			if mod(loop-counter, 10) is 0:
+				addexp({_player}, {BlockData::%{_item}%::1}, 64, "None", location at {_loc})
+	else:
+		addexp({_player}, {BlockData::%{_item}%::1}, 64*6, "None", location at {_loc})
+
+
+function collector(block: location, item: item):
+	set {_loc} to location 2 under {_block}
+	add random number between -1.5 and 1.5 to x-coordinates of {_loc}
+	add random number between -1.5 and 1.5 to z-coordinates of {_loc}
+	set yaw of {_loc} to random integer between 0 and 359
+	set pitch of {_loc} to random integer between -90 and 90
+	spawn item display at {_loc}:
+		set {_entity} to the display
+		set display scale of entity to vector(0,0,0)
+		set display teleport duration of entity to 20
+		set interpolation start of entity to 0
+		set interpolation duration of entity to 10 ticks
+		set display item of entity to {_item}
+	wait 2 tick
+	set display scale of {_entity} to vector(0.7,0.7,0.7)
+	set display left rotation of {_entity} to quaternion(0, 1, 1, 0)
+	teleport {_entity} to location 15 above {_loc}
+	wait 0.5 seconds
+	set interpolation start of {_entity} to 0
+	set interpolation duration of {_entity} to 10 ticks
+	set display scale of {_entity} to vector(0,0,0)
+	wait 0.5 seconds
+	kill {_entity}
+
+
+function ease_in_out(t: number, start: number, end: number) :: number:
+	if {_t} < 0.5:
+		set {_scale} to 2*{_t} ^2
+	else:
+		set {_scale} to 1 - 2 * (1 - {_t}) ^ 2
+	return {_start} + ({_end}-{_start}) * {_scale}
+
+function drawLine(loc1: location, loc2: location):
+	set {_v} to vector from {_loc1} to {_loc2}
+	set vector length of {_v} to 0.3
+	loop floor((distance between {_loc1} and {_loc2}) / 0.3) times:
+		set {_loc1} to {_loc1} ~ {_v}
+		show 1 electric spark at {_loc1}
+
+function effect8(player: player, yaw: number, count2: number, max: number, max2: number, time: number, type: number):
+	set {BlocksAura::%{_player}%} to true
+	set {_loc} to location 2 above {_player}
+	set pitch of {_loc} to 0
+	set yaw of {_loc} to {_yaw}
+	set {_a} to 7007+{_type}
+	if {_type} is 10:
+		set {_a} to random integer between 7008 and 7012
+	spawn item display at {_loc}:
+		set {_entity} to the display
+		set display scale of entity to vector(0,0,0)
+		set display teleport duration of entity to 6
+		set interpolation start of entity to 0
+		set interpolation duration of entity to 15 ticks
+		set display item of {_entity} to gold nugget with enchantment glint with custom model data {_a}
+	wait 2 ticks
+	set display scale of {_entity} to vector(0.5,0.5,0.5)
+	set {_count} to 20
+	set {_y} to 0
+	set {_change} to true
+	set {_wait} to 0
+
+	set {_add} to 40/{_max}
+	add floor({_count2}*{_add}) to {_wait}
+	if {_wait} is 20:
+		remove 1 from {_wait}
+	if floor({_count2}*{_add}) > 20:
+		remove 21 from {_wait}
+		set {_change} to false
+
+	loop {_time} times:
+		add 1 to {_wait}
+		if mod({_wait}, {_count}) is 0:
+			delete {_wait}
+			if {_change} is true:
+				set {_change} to false
+			else:
+				set {_change} to true
+		if {_change} is false:
+			set {_y} to ease_in_out(({_wait}/{_count}-0.05), 0, {_count})
+		else:
+			set {_y} to ease_in_out(({_wait}/{_count}-0.05), {_count}, 0)
+		set {_loc} to location 1.5 above {_player}
+		set pitch of {_loc} to 45
+		add 3 to {_yaw}
+		set yaw of {_loc} to {_yaw}
+		set {_loc2} to location 2.5 in front of {_loc}
+		set yaw of {_loc2} to 6*loop-value
+		add {_y}/({_count}/1) to y-coordinates of {_loc2}
+		teleport {_entity} to location 1 above {_loc2}
+		wait 1 tick
+		loop 4 times:
+			if loop-value-1 is 7+(loop-value-2*2):
+				set display teleport duration of {_entity} to 6 - loop-value-2
+		if loop-value is {_time}-20:
+			set interpolation start of {_entity} to 0
+			set interpolation duration of {_entity} to 15 ticks
+			set display scale of {_entity} to vector(0,0,0)
+	delete {BlocksAura::%{_player}%}
+	kill {_entity}
+
+function titleEffect(loc: location, data: number, time: number):
+	spawn a text display at {_loc}:
+		set {_display} to last spawned text display
+		set display billboard of {_display} to center
+		set display brightness of {_display} to displayBrightness(10,10)
+		set display text shadowed of {_display} to false
+		set display scale of entity to vector(0,0,0)
+		set display teleport duration of entity to 20
+		set interpolation start of entity to 0
+		set interpolation duration of entity to 40 ticks
+		set display text of {_display} to formatted ""
+		set display text background color of {_display} to bukkitColor(0,0,0,0)
+	add uuid of {_display} to {TextDisplayList::*}
+	wait 2 tick
+	set display scale of {_display} to vector(2,2,2)
+	while {_time} > 0:
+		remove 1 from {_time}
+		set {_min} to floor({_time} / 60)
+		set {_full_sec} to {_time} - ({_min} * 60)
+		set {_minstr} to "%{_min}%"
+		set {_sekstr} to "%{_full_sec}%"
+		if length of {_minstr} is 1:
+			set {_minstr} to "0%{_minstr}%"
+		if length of {_sekstr} is 1:
+			set {_sekstr} to "0%{_sekstr}%"
+		set {_output} to "%{_minstr}%:%{_sekstr}%"
+		if {_data} is 1:
+			set display text of {_display} to formatted "%{Config::GUIS::Update31::Effects::DoubleDrop}%%nl%&f%{_output}%"
+		else:
+			set display text of {_display} to formatted "%{Config::GUIS::Update31::Effects::DoubleXP}%%nl%&f%{_output}%"
+		wait 1 second
+	teleport {_display} to location 3 under {_loc}
+	wait 1 second
+	kill {_display}
+	remove uuid of {_display} from {TextDisplayList::*}
+
+function effect7(loc: location, data: number, time: number, size: number, type: text):
+	effect1SFX({_loc})
+	titleEffect(location 1.5 above {_loc}, {_data}, {_time})
+	set {FarmBlock::%location at {_loc}%} to {_size}
+	set {_loc} to location 1 above {_loc}
+	set pitch of {_loc} to 0
+	set yaw of {_loc} to 0
+	spawn item display at {_loc}:
+		set {_entity} to the display
+		set display scale of entity to vector(0,3.5,0)
+		set display teleport duration of entity to 40
+		set interpolation start of entity to 0
+		set interpolation duration of entity to 100 ticks
+		if {_data} is 1:
+			set {_info} to "DoubleDrop"
+			set display item of {_entity} to gold nugget with custom model data 7005
+		else:
+			set {_info} to "DoubleXP"
+			set display item of {_entity} to gold nugget with custom model data 7006
+	wait 2 tick
+	set display scale of {_entity} to vector({_size},3.5,{_size})
+	if {_size} is 3:
+		set {_radius} to 2
+	if {_size} is 4:
+		set {_radius} to 2
+	if {_size} is 5:
+		set {_radius} to 2.8
+	if {_size} is 6:
+		set {_radius} to 2.8
+	if {_size} is 7:
+		set {_radius} to 3.4
+	loop all blocks in radius {_size}+{_radius} around {_loc}:
+		set {_type} to "%type of loop-block%"
+		if {FarmFixBlock::%{_type}%} is set:
+			set {EventBlock::%location at loop-block%} to {_info}
+			add location at loop-block to {_list::*}
+	loop {_time} times:
+		add 45 to yaw of {_loc}
+		teleport {_entity} to {_loc}
+		wait 1 second
+	teleport {_entity} to location 3 under {_loc}
+	wait 1 second
+	kill {_entity}
+	kill {_entity2}
+	kill {_entity3}
+	loop {_list::*}:
+		delete {EventBlock::%location at loop-value%}
+	delete {FarmBlock::%location at {_loc}%}
+
+function effect5(loc: location):
+	set {_a} to block at {_loc}
+	set {_original} to {_loc}
+	set {_x} to x-coordinates of block at {_a}
+	set {_y} to y-coordinates of block at {_a}
+	set {_z} to z-coordinates of block at {_a}
+	set {_loc2} to location at {_x}, {_y}, {_z} in world "world"
+	set {_loc} to location at {_x}, {_y}, {_z}-0.502 in world "world"
+	spawn item display at {_loc}:
+		set {_entity} to the display
+		set display scale of entity to vector(1.001,1.001,16.04)
+		set display teleport duration of entity to 40
+		set interpolation start of entity to 0
+		set interpolation duration of entity to 20 ticks
+		set display item of {_entity} to gold nugget with enchantment glint with custom model data 7004
+	set {UpgrEntity::%{_original}%} to uuid of {_entity}
+	make 25 of electric spark at {_loc} with offset vector(0.4, 0.4, 0.4)
+
+function smoothBreakBlocks(loc: location, radius: number, player: player, type: text, farm: text):
+	if {_farm} is "Farm":
+		if {FarmFixBlock::%{_type}%} is not set:
+			stop
+		set {_replace} to air
+		set {_typeOF} to {FarmFixBlock::%{_type}%}
+	if {_farm} is "Cave":
+		if {CaveFixBlock::%{_type}%} is not set:
+			stop
+		set {_replace} to blackstone
+		set {_typeOF} to {CaveFixBlock::%{_type}%}
+	if {_farm} is "Sawmill":
+		if {SawmillFixBlock::%{_type}%} is not set:
+			stop
+		set {_radius} to {_radius}*1.5
+		set {_replace} to air
+		set {_typeOF} to {SawmillFixBlock::%{_type}%}
+	loop all blocks in radius ({_radius}/14)*20 around {_loc}:
+		if type of loop-block is type of {_typeOF}:
+			if {_finalType} is not set:
+				set {_finalType} to type of loop-block
+			add location at loop-value to {_dist::%distance between {_loc} and loop-value%::*}
+	if {_farm} is "Cave" or "Sawmill":
+		set {_level} to int tag "Tool-Level" of custom nbt of {_player}'s tool
+	loop indices of {_dist::*}:
+		add size of {_dist::%loop-value%::*} to {_total}
+		loop {_dist::%loop-value%::*}:
+			make 20 of block particle using {_typeOF} at loop-value-2 with offset vector(0.35, 0.35, 0.35)
+			set {_block} to block at location at loop-value-2
+			if {_farm} is "Cave":
+				blockincave({_block}, location at loop-value-2, {_player}, {_level}, true)
+			else if {_farm} is "Sawmill":
+				blockinsawmill({_block}, location at loop-value-2, {_player}, {_level}, true)
+			else:
+				play sound "block.crop.break" with pitch 1 at loop-value-2
+				if type of block at loop-value-2 is type of {_typeOF}:
+					set block at loop-value-2 to air
+		if {Config::Update35::DisableAnimations} is false:
+			if mod(loop-counter, 2) is 0:
+				wait 1 tick
+	addexp({_player}, {BlockData::%{_type}%::1}, {_total}, "None", {_loc})
+	if {_farm} is "Farm":
+		wait 2 seconds
+		loop indices of {_dist::*}:
+			loop {_dist::%loop-value%::*}:
+				set block at loop-value-2 to {_typeOF}
+
+function effect4(loc: location, color: text, size: number, speed: number, vert: boolean):
+	set {_amount} to 1
+	if {_vert} is true:
+		set {_amount} to 2
+		set pitch of {_loc} to -90
+		set yaw of {_loc} to 0
+	set {_size} to {_size}/10
+	spawn a text display at {_loc}:
+		set {_display1} to last spawned text display
+		if {_vert} is false:
+			set display billboard of {_display1} to center
+		else:
+			set display billboard of {_display1} to vertical
+		set display brightness of {_display1} to displayBrightness(10,10)
+		set display text shadowed of {_display1} to false
+		set display scale of entity to vector(0,0,0)
+		set interpolation start of entity to 0
+		set interpolation duration of entity to 40 ticks
+		set display text of {_display1} to formatted "<##%{_color}%>"
+		set display text background color of {_display1} to bukkitColor(0,0,0,0)
+	add uuid of {_display1} to {TextDisplayList::*}
+	if {_vert} is true:
+		set pitch of {_loc} to 90
+		spawn a text display at {_loc}:
+			set {_display2} to last spawned text display
+			if {_vert} is false:
+				set display billboard of {_display2} to center
+			else:
+				set display billboard of {_display2} to vertical
+			set display brightness of {_display2} to displayBrightness(10,10)
+			set display text shadowed of {_display2} to false
+			set display scale of entity to vector(0,0,0)
+			set interpolation start of entity to 0
+			set interpolation duration of entity to 40 ticks
+			set display text of {_display2} to formatted "<##%{_color}%>"
+			set display text background color of {_display2} to bukkitColor(0,0,0,0)
+		add uuid of {_display2} to {TextDisplayList::*}
+	wait 2 tick
+	play sound "block.beacon.activate" with volume 0.5 and pitch 2 at {_loc}
+	set {_a} to 0.2
+	set {_b} to -1
+	loop 50 times:
+		add 0.24*{_size} to {_ax}
+		loop {_amount} times:
+			set display scale of {_display%loop-value-2%} to vector({_ax},{_ax},{_ax})
+		add 1 to {_wait}
+		if {_wait} >= {_speed}:
+			delete {_wait}
+			wait 1 tick
+		set {_a} to {_a} * 1.025
+		set {_b} to {_b} - 5
+		loop {_amount} times:
+			set display text opacity of {_display%loop-value-2%} to {_b}
+			set display scale of {_display%loop-value-2%} to vector(6,6,6)
+	wait 5 seconds
+	loop {_amount} times:
+		kill {_display%loop-value%}
+		remove uuid of {_display%loop-value%} from {TextDisplayList::*}
+
+function effect3(loc: location, player: player, type: text):
+	set {_loc2} to location at {_loc}
+	if {Config::Update35::DisableAnimations} is false:
+		add 70 to y-coordinates of {_loc2}
+		add 40 to z-coordinates of {_loc2}
+		remove 40 from x-coordinates of {_loc2}
+		spawn item display at {_loc2}:
+			set {_entity} to the display
+			set display scale of entity to vector(0,0,0)
+			set display teleport duration of entity to 1
+			set interpolation start of entity to 0
+			set interpolation duration of entity to 40 ticks
+			set display item of {_entity} to gold nugget with custom model data 7003
+		wait 2 tick
+		set display scale of {_entity} to vector(4,4,4)
+		set display left rotation of {_entity} to quaternion(0, 0.7, 0.9, 0)
+		play sound "entity.elder_guardian.ambient" with volume 1.5 and pitch 1 at {_loc}
+		wait 0.2 second
+	set {_loc3} to {_loc}
+	set {_loc4} to {_loc2}
+	set {_v} to vector from {_loc4} to {_loc3}
+	set vector length of {_v} to 2.5
+	loop floor((distance between {_loc4} and {_loc3}) / 2.5) times:
+		set {_loc4} to {_loc4} ~ {_v}
+		make 5 of lava at {_loc4} with offset vector(1, 1, 1)
+		make 5 of flame at {_loc4} with extra 0.1
+		if loop-counter is 31:
+			effect4({_loc}, "ab1515", 6, 1.5, false)
+		if loop-counter is 33:
+			effect1({_loc}, 10, 4, {_player}, {_type})
+		wait 1 tick
+		teleport {_entity} to {_loc4}
+
+	play sound "entity.generic.explode" with volume 1.5 and pitch 0.5 at {_loc}
+	loop 5 times:
+		make 10 of explosion at {_loc} with offset vector(4, 4, 4)
+	make 50 of lava at {_loc} with offset vector(3, 3, 3)
+	make 150 of flame at {_loc} with extra 0.5
+	if {Config::Update35::DisableAnimations} is false:
+		wait 0.5 seconds
+		set {_entity2} to {_entity}
+		spawn item display at {_loc}:
+			set {_entity} to the display
+			set display left rotation of {_entity} to quaternion(0, 0.7, 0.9, 0)
+			set display scale of entity to vector(4,4,4)
+			set display teleport duration of entity to 30
+			set interpolation start of entity to 0
+			set interpolation duration of entity to 30 ticks
+			set display item of {_entity} to gold nugget with custom model data 7003
+		wait 2 tick
+		kill {_entity2}
+		set display scale of {_entity} to vector(0,0,0)
+		teleport {_entity} to location 1 under {_loc}
+	wait 3.5 second
+	kill {_entity}
+
+function effect2(loc: location, player: player, type: text):
+	set {_loc} to location 1.5 under {_loc}
+	loop 8 times:
+		set {_loc2} to {_loc}
+		add random integer between 10 and -10 to x-coordinates of {_loc2}
+		add random integer between 10 and -10 to z-coordinates of {_loc2}
+		groundBeam(location 20 above {_loc2})
+		play sound "block.beacon.activate" with pitch 1 at {_loc2}
+		play sound "entity.generic.explode" with volume 0.2 and pitch 2 at {_loc2}
+		breakBlocks({_loc2}, 3, {_player}, {_type}, "Farm")
+		if {Config::Update35::DisableAnimations} is false:
+			wait 0.4 second
+
+function groundBeam(loc: location):
+	spawn item display at {_loc}:
+		set {_entity} to the display
+		set display scale of entity to vector(0.5,35.5,0.5)
+		set display teleport duration of entity to 40
+		set interpolation start of entity to 0
+		set interpolation duration of entity to 30 ticks
+		set display item of {_entity} to gold nugget with custom model data 7001
+	wait 2 tick
+	set display scale of {_entity} to vector(1,35.5,1)
+	add 89 to yaw of {_loc}
+	teleport {_entity} to location 20 under {_loc}
+	wait 2.2 seconds
+	kill {_entity}
+
+function breakBlocks(loc: location, radius: number, player: player, type: text, farm: text):
+	if {_farm} is "Farm":
+		if {FarmFixBlock::%{_type}%} is not set:
+			stop
+		set {_replace} to air
+		set {_typeOF} to {FarmFixBlock::%{_type}%}
+	if {_farm} is "Cave":
+		if {CaveFixBlock::%{_type}%} is not set:
+			stop
+		set {_radius} to {_radius}/2
+		set {_replace} to blackstone
+		set {_typeOF} to {CaveFixBlock::%{_type}%}
+	if {_farm} is "Sawmill":
+		if {SawmillFixBlock::%{_type}%} is not set:
+			stop
+		set {_replace} to air
+		set {_typeOF} to {SawmillFixBlock::%{_type}%}
+	if {_farm} is "Cave" or "Sawmill":
+		set {_level} to int tag "Tool-Level" of custom nbt of {_player}'s tool
+	loop all blocks in radius {_radius} around {_loc}:
+		if type of loop-block is type of {_typeOF}:
+			make 20 of block particle using {_typeOF} at loop-block with offset vector(0.35, 0.35, 0.35)
+			if {_farm} is "Cave":
+				blockincave(loop-block, location at loop-block, {_player}, {_level}, true)
+			else if {_farm} is "Sawmill":
+				blockinsawmill(loop-block, location at loop-block, {_player}, {_level}, true)
+			else:
+				set block at loop-block to air
+				add location at loop-block to {_list::*}
+	addexp({_player}, {BlockData::%{_type}%::1}, size of {_list::*}, "None", {_loc})
+	wait 2 seconds
+	loop {_list::*}:
+		set block at loop-value to {_typeOF}
+
+function effect1SFX(loc: location):
+	loop 13 times:
+		play sound "entity.chicken.egg" with volume 0.2 and pitch 0.5+((1.5/13)*loop-value) at {_loc}
+		wait 1 tick
+
+function effect1(loc: location, radius: number, speed: number, player: player, type: text):
+	if {BlockData::%{_type}%::1} is not set:
+		stop
+	effect1SFX({_loc})
+	set {_loc} to location 0.6 above {_loc}
+	set pitch of {_loc} to 0
+	set yaw of {_loc} to 0
+	set {_timespan} to "%100/{_speed}% ticks" parsed as timespan
+	spawn item display at {_loc}:
+		set {_entity} to the display
+		set display scale of entity to vector(0,2.5,0)
+		set display teleport duration of entity to 20
+		set interpolation start of entity to 0
+		set interpolation duration of entity to {_timespan}
+		if {_speed} > 3:
+			set display item of {_entity} to gold nugget with custom model data 7002
+		else:
+			set display item of {_entity} to gold nugget with custom model data 7001
+	wait 2 tick
+	set display scale of {_entity} to vector({_radius},2.5,{_radius})
+	set display left rotation of {_entity} to quaternion(0, 0, 1, 0)
+
+	set {_div} to 16
+	if {_speed} > 3:
+		set {_div} to 14
+	loop all blocks in radius (22*({_radius}/{_div})) around {_loc}:
+		if type of loop-block is type of {FarmFixBlock::%{_type}%}:
+			if {_finalType} is not set:
+				set {_finalType} to type of loop-block
+			add location at loop-value to {_dist::%distance between {_loc} and loop-value%::*}
+	loop indices of {_dist::*}:
+		set {_sfx} to true
+		add size of {_dist::%loop-value%::*} to {_total}
+		loop {_dist::%loop-value%::*}:
+			make 20 of block particle using {FarmFixBlock::%{_type}%} at loop-value-2 with offset vector(0.35, 0.35, 0.35)
+			play sound "block.crop.break" with pitch 1 at loop-value-2
+			set block at loop-value-2 to air
+
+		if {Config::Update35::DisableAnimations} is false:
+			if {_speed} is 4:
+				add 1 to {_axd}
+				set {_checkX} to 2
+				if loop-counter > 16:
+					set {_checkX} to 4
+				if mod({_axd}, {_checkX}) is 0:
+					wait 1 tick
+			else:
+				if loop-counter < 4:
+					wait 7 ticks
+				else if loop-counter < 7:
+					wait 4 ticks
+				else if loop-counter < 17:
+					wait 3 ticks
+				else:
+					wait 2 ticks
+	addexp({_player}, {BlockData::%{_type}%::1}, {_total}, "None", {_loc})
+	teleport {_entity} to location 3 under {_loc}
+	wait 1 seconds
+	kill {_entity}
+	wait 2 seconds
+	loop indices of {_dist::*}:
+		loop {_dist::%loop-value%::*}:
+			set block at loop-value-2 to {FarmFixBlock::%{_type}%}
+
+on send command list:
+	if player has permission "*":
+		stop
+	else:
+		set command list to {Config::Utils::CommandList::*}
+
+command /boosters:
+	permission: *
+	trigger:
+		set {_items::*} to {Config::Utils4::ExpBooster} and {Config::Utils4::DropBooster} and {Config::Utils4::GenBooster}
+		set {_data::*} to "ExpBooster" and "DropBooster" and "GenBooster"
+		loop {_items::*}:
+			set {_item} to loop-value
+			set {_lore::*} to lore of {_item}
+			replace all "{DURATION}" in {_lore::*} with timespan_format("%{Config::Utils4::BoosterDur}% minutes" parsed as timespan)
+			set lore of {_item} to {_lore::*}
+			set string tag "BoosterInfo" of custom nbt of {_item} to {_data::%loop-counter%}
+			add {_item} to {_list::*}
+		give player {_list::*}
+		send "&aSuccess!"
+
+command /potion:
+	aliases: potions, elixir, elixirs
+	trigger:
+		potions(player)
+
+every 5 seconds:
+	loop all players:
+		if {CaveUpgrade-Regen::%loop-player%} is set:
+			if loop-player is in world "world":
+				if x-coords of loop-player > 1000:
+					apply haste 1 without any particles to loop-player for 10.5 seconds replacing existing effect
+		loop {ActivePotions::%loop-player%::*}:
+			if difference between {ActivePot::%loop-player%::%loop-value-2%::1} and now >= {ActivePot::%loop-player%::%loop-value-2%::2}:
+				delete {ActivePot::%loop-player%::%loop-value-2%::*}
+				delete {ActivePot::%loop-player%::%loop-value-2%}
+				remove loop-value-2 from {ActivePotions::%loop-player%::*}
+				delete {ActivePot::%{_player}%::%loop-value-2%}
+
+				set {_potionID} to loop-value-2
+				set {_potionName} to name of {GenData::Potion::%{_potionID}%}
+				delete {ActivePotID::%loop-player%::%{_effect}%}
+				set {_mess} to {Config::Utils3::PotionOver}
+				replace all "{POTION}" with "%{_potionName}%" in {_mess}
+				send {_mess} to loop-player
+				sfx(loop-player, "PotionEnd")
+		loop {ActiveBoosters::%loop-player%::*}:
+			if difference between {ActiveBooster::%loop-player%::%loop-value-2%::1} and now >= {ActiveBooster::%loop-player%::%loop-value-2%::2}:
+				delete {ActiveBooster::%loop-player%::%loop-value-2%::*}
+				delete {ActiveBooster::%loop-player%::%loop-value-2%}
+				remove loop-value-2 from {ActiveBoosters::%loop-player%::*}
+
+				set {_boosterName} to {BoosterName::%loop-value-2%}
+				set {_mess} to {Config::Utils3::BoostOver}
+				replace all "{BOOST}" with "%{_boosterName}%" in {_mess}
+				send {_mess} to loop-player
+				sfx(loop-player, "PotionEnd")
+
+function potions(player: player):
+	set {_x} to chest inventory with 5 rows named {Config::GUIS::Potions::%{Bedrock::%{_player}%}%}
+	set slot 41 of {_x} to {Config::GUIS::Potions::Active}
+	set slot 40 of {_x} to {Config::GUIS::Potions::Informations}
+	set slot 39 of {_x} to {Config::GUIS::Potions::Refresh}
+	set slot 4 of {_x} to {Config::GUIS::Potions::PotionShop}
+	set {_slots::*} to 21 and 22 and 23
+	if {NewPotionOffers} is not set:
+		set {NewPotionOffers} to 1
+	if {PotionsData::%{_player}%} is not set:
+		set {PotionsData::%{_player}%} to {NewPotionOffers}
+	if {DailyPotions::%{_player}%::*} is not set:
+		generateOffers({_player})
+	else:
+		if {PotionsData::%{_player}%} is not {NewPotionOffers}:
+			set {PotionsData::%{_player}%} to {NewPotionOffers}
+			generateOffers({_player})
+	loop {_slots::*}:
+		if {PurchasedPotions::%{_player}%::*} contains loop-counter:
+			set {_item} to {GenData::Potion::%{DailyPotions::%{_player}%::%loop-counter%}%}
+			set {_cost} to int tag "PotionCost" of custom nbt of {_item}
+			set {_lore::*} to lore of {_item}
+			delete {_lore::%size of {_lore::*}%}
+			set {_buy::*} to {Config::GUIS::Potions::PurchaseCost::*}
+			replace all "{COST}" with "%{_cost}%" in {_buy::*}
+			add {_buy::*} to {_lore::*}
+			set lore of {_item} to {_lore::*}
+			set slot loop-value of {_x} to {_item}
+		else:
+			set slot loop-value of {_x} to {Config::GUIS::Potions::Purchased}
+	open {_x} for {_player}
+
+function activePotions(player: player):
+	set {_x} to chest inventory with 5 rows named {Config::GUIS::ActivePotions::%{Bedrock::%{_player}%}%}
+	set slot 39 and 40 and 41 of {_x} to {Config::GUIS::ActivePotions::Back}
+	loop 4 times:
+		add integers between 1+(((loop-value)-1)*9) and 7+(((loop-value)-1)*9) to {_slots::*}
+	loop {ActivePotions::%{_player}%::*}:
+		set {_item} to {GenData::Potion::%loop-value%}
+		set {_effect} to string tag "PotionEffect" of custom nbt of {_item}
+		set {_eta} to {ActivePot::%{_player}%::%loop-value%::2}
+		remove difference between now and {ActivePot::%{_player}%::%loop-value%::1} from {_eta}
+		add {ActivePot::%{_player}%::Type::%{_effect}%} to {_eta}
+		set {_lore::*} to lore of {_item}
+		delete {_lore::3} and {_lore::8}
+		set {_lore1} to {Config::GUIS::ActivePotions::Reaming}
+		replace all "{ETA}" with timeformat({_eta}) in {_lore1}
+		set {_lore::*} to {_lore::*} and {_lore1}
+		set lore of {_item} to {_lore::*}
+		set slot {_slots::%loop-counter%} of {_x} to {_item}
+	set slot 0 and 8 and 9 and 17 and 18 and 26 and 27 and 35 of {_x} to air
+	open {_x} for {_player}
+
+function generateOffers(player: player):
+	loop 12 times:
+		add 6999+loop-value to {_list::*}
+	loop {DailyPotions::%{_player}%::*}:
+		remove loop-value from {_list::*}
+	clear {DailyPotions::%{_player}%::*}
+	set {PurchasedPotions::%{_player}%::*} to 1, 2, 3
+	loop 3 times:
+		set {_a} to random element out of {_list::*}
+		remove {_a} from {_list::*}
+		add {_a} to {DailyPotions::%{_player}%::*}
+
+every 2 seconds:
+	set {_list::*} to all players
+	if {_list::1} is set:
+		set {_time} to placeholder "localtime_timezone_CET" from {_list::1}
+		loop {Config::Dungeons::PotionsNewOffers::*}:
+			if "%{_time}%" contains "%loop-value%":
+				add 1 to {NewPotionOffers}
+
+on inventory click:
+	if name of current inventory of player is {Config::GUIS::ActivePotions::Default} or {Config::GUIS::ActivePotions::Bedrock}:
+		cancel event
+		if clicked slot is 39 or 40 or 41:
+			potions(player)
+		stop
+	if name of current inventory of player is {Config::GUIS::Potions::Default} or {Config::GUIS::Potions::Bedrock}:
+		cancel event
+		loop 3 times:
+			if clicked slot is 20+loop-value:
+				set {_cost} to int tag "PotionCost" of custom nbt of clicked slot
+				set {_data} to int tag "PotionData" of custom nbt of clicked slot
+				if {_cost} is set:
+					if player has {_cost} of {GenData::crystalshard}:
+						remove loop-value from {PurchasedPotions::%player%::*}
+						remove {_cost} of {GenData::crystalshard} from player's inventory
+						give player {GenData::Potion::%{_data}%}
+						set {_mess} to {Config::Utils3::PurchasedPotion}
+						replace all "{POTION}" with name of clicked slot in {_mess}
+						send {_mess}
+						play sound "entity.player.levelup" with pitch 2 for player
+						potions(player)
+					else:
+						send {Config::Utils3::NotEnoughCrystalShards}
+						play sound "entity.illusioner.mirror_move" with pitch 2 for player
+						stop
+				else:
+					send {Config::Utils3::AlreadyPurchased}
+					play sound "entity.illusioner.mirror_move" with pitch 2 for player
+					stop
+		if clicked slot is 39:
+			if player has 16 of {GenData::crystalshard}:
+				remove 16 of {GenData::crystalshard} from player's inventory
+				generateOffers(player)
+				send {Config::Utils3::PotionShopRefresh}
+				play sound "entity.witch.drink" with pitch 1.3 for player
+				potions(player)
+			else:
+				send {Config::Utils3::NotEnoughCrystalShards}
+				play sound "entity.illusioner.mirror_move" with pitch 2 for player
+				stop
+		if clicked slot is 41:
+			activePotions(player)
+
+
+
+
+
+
+
+
+
+command /pet:
+	aliases: pets
+	trigger:
+		petmenu(player)
+
+function petmenu(player: player):
+	set {_x} to chest inventory with 6 rows named {Config::GUIS::Pets::%{Bedrock::%{_player}%}%}
+	set {_item} to {Config::GUIS::Pets::Info}
+	replace all "{PET}" with "%{CurrentPet::%{_player}%} ? "None"%" in {_item}'s lore
+	set slot 4 of {_x} to {_item}
+	set slot 0 and 1 and 2 and 3 and 5 and 6 and 7 and 8 and 9 and 17 and 18 and 26 and 27 and 35 and 36 of {_x} to barrier
+	set {_list::*} to {CurrentPet::Item::%{_player}%} and {Pets::%{_player}%::*}
+	loop {_list::*}:
+		set {_item} to loop-value
+		set {_lore::*} to lore of {_item}
+		loop 4 times:
+			delete {_lore::%size of {_lore::*}%}
+		set {_Info::*} to {Config::GUIS::Pets::Summon}
+		set {_ID} to int tag "Pet-CustomID" of custom nbt of {_item}
+		if {CurrentPet::%{_player}%} is {_ID}:
+			set {_Info::*} to {Config::GUIS::Pets::Despawn}
+		else:
+			add {Config::GUIS::Pets::Convert} to {_Info::*}
+		add "" and {_Info::*} to {_lore::*}
+		set lore of {_item} to {_lore::*}
+		add {_item} to {_x}
+	set slot 48 and 49 and 50 of {_x} to {Config::GUIS::Pets::Close}
+	set slot 0 and 1 and 2 and 3 and 5 and 6 and 7 and 8 and 9 and 17 and 18 and 26 and 27 and 35 and 36 of {_x} to air
+	open {_x} for {_player}
+
+on inventory click:
+	if name of current inventory of player is {Config::GUIS::Pets::Default} or {Config::GUIS::Pets::Bedrock}:
+		cancel event
+		if clicked inventory is not player's inventory:
+			set {_item} to clicked slot
+			set {_ID} to int tag "Pet-CustomID" of custom nbt of {_item}
+			if {_ID} is set:
+				if click type is right mouse button:
+					if {CurrentPet::%player%} is {_ID}:
+						stop
+					set {_size} to size of {Pets::%player%::*}
+					remove petFormatter(clicked slot) from {Pets::%player%::*}
+					if size of {Pets::%player%::*} is {_size}:
+						loop {Pets::%player%::*}:
+							if name of loop-value is name of clicked slot:
+								set {_ID} to int tag "Pet-CustomID" of custom nbt of loop-value
+								if {CurrentPet::%player%} is not {_ID}:
+									remove loop-value from {Pets::%player%::*}
+									set {_Removed} to true
+									stop loop
+						if {_Removed} is not set:
+							close player's inventory
+							stop
+					play sound "block.beehive.exit" with pitch 2 for player
+					give player petFormatter(clicked slot)
+					set {_name::*} to name of petFormatter(clicked slot) split at " "
+					set {_mess} to {Config::Utils3::Despawn}
+					replace all "{NAME}" with "%{_name::3}%" in {_mess}
+					send {_mess}
+					play sound "block.beehive.exit" with pitch 1.5 for player
+					petmenu(player)
+				else:
+					close player's inventory
+					if {CurrentPet::%player%} is {_ID}:
+						kill {PlayerPet::%player%::Icon} parsed as entity
+						kill {PlayerPet::%player%::Text} parsed as entity
+						delete {PlayerPet::%player%::*}
+						set {_name::*} to name of petFormatter(clicked slot) split at " "
+						set {_mess} to {Config::Utils3::Despawn}
+						replace all "{NAME}" with "%{_name::3}%" in {_mess}
+						send {_mess}
+						play sound "block.beehive.exit" with pitch 1.5 for player
+						delete {CurrentPet::%player%}
+						add {CurrentPet::Item::%player%} to {Pets::%player%::*}
+						delete {CurrentPet::Item::%player%}
+					else:
+						if {CurrentPet::%player%} is set:
+							send {Config::Update351::AlreadyActive}
+							play sound "entity.illusioner.mirror_move" with pitch 2 for player
+							stop
+						despawn(player, {CurrentPet::%player%})
+						set {CurrentPet::%player%} to {_id}
+						set {CurrentPet::Item::%player%} to petFormatter(clicked slot)
+						set {_size} to size of {Pets::%player%::*}
+						remove petFormatter(clicked slot) from {Pets::%player%::*}
+						if size of {Pets::%player%::*} is {_size}:
+							loop {Pets::%player%::*}:
+								if name of loop-value is name of clicked slot:
+									remove loop-value from {Pets::%player%::*}
+									set {_Removed} to true
+									stop loop
+							if {_Removed} is not set:
+								close player's inventory
+								stop
+						set {_name::*} to name of petFormatter(clicked slot) split at " "
+						set {_mess} to {Config::Utils3::Summoned}
+						replace all "{NAME}" with "%{_name::3}%" in {_mess}
+						send {_mess}
+						play sound "block.beehive.exit" with pitch 2 for player
+						play sound "ui.toast.in" with volume 2 and pitch 2 for player
+						spawnpet(player)
+			if clicked slot is 48 or 49 or 50:
+				close player's inventory
+
+
+
+
+
+function petFormatter(item: item) :: item:
+	set {_lore::*} to {Config::GUIS::PetFormat::Lore} and ""
+	set {_level} to int tag "Pet-Level" of custom nbt of {_item}
+	set {_rarity} to int tag "Pet-Rarity" of custom nbt of {_item}
+	set {_exp} to int tag "Pet-Exp" of custom nbt of {_item}
+	set {_color} to "<##e6faff>"
+	set {_rarityname} to {Config::GUIS::PetFormat::Common}
+	if {_rarity} is 2:
+		set {_color} to "<##4dff40>"
+		set {_rarityname} to {Config::GUIS::PetFormat::Uncommon}
+	if {_rarity} is 3:
+		set {_color} to "<##8282ff>"
+		set {_rarityname} to {Config::GUIS::PetFormat::Rare}
+	if {_rarity} is 4:
+		set {_color} to "<##ff38fe>"
+		set {_rarityname} to {Config::GUIS::PetFormat::Epic}
+	if {_rarity} is 5:
+		set {_color} to "<##ffb41f>"
+		set {_rarityname} to {Config::GUIS::PetFormat::Legendary}
+	if {_rarity} is 6:
+		set {_color} to "<##FF00FF>"
+		set {_rarityname} to {Config::GUIS::PetFormat::Exclusive}
+	set {_name} to string tag "Pet-Name" of custom nbt of {_item}
+	set {_CurrName} to {Config::GUIS::PetFormat::FullName}
+	replace all "{LEVEL}" with "%{_level}%" in {_CurrName}
+	replace all "{COLOR}" with "%{_color}%" in {_CurrName}
+	replace all "{NAME}" with "%{_name}%" in {_CurrName}
+	set name of {_item} to {_CurrName}
+
+	if {PetStats::%{_name}%::Exp} is set:
+		set {_statDisplay} to {Config::GUIS::PetFormat::ExpMulti}
+		replace all "{EXP}" with "%({PetStats::%{_name}%::Exp}*(1+({_level}/300)))*(1+{_rarity}/40)%" in {_statDisplay}
+		add {_statDisplay} to {_lore::*}
+		set float tag "Multi-Exp" of custom nbt of {_item} to ({PetStats::%{_name}%::Exp}*(1+({_level}/300)))*(1+{_rarity}/40)
+	if {PetStats::%{_name}%::Tokens} is set:
+		set {_statDisplay} to {Config::GUIS::PetFormat::TokensMulti}
+		replace all "{TOKENS}" with "%({PetStats::%{_name}%::Tokens}*(1+({_level}/300)))*(1+{_rarity}/40)%" in {_statDisplay}
+		add {_statDisplay} to {_lore::*}
+		set float tag "Multi-Tokens" of custom nbt of {_item} to ({PetStats::%{_name}%::Tokens}*(1+({_level}/300)))*(1+{_rarity}/40)
+	if {PetStats::%{_name}%::Money} is set:
+		set {_statDisplay} to {Config::Update35::PetFormat::MoneyMulti}
+		replace all "{MONEY}" with "%({PetStats::%{_name}%::Money}*(1+({_level}/300)))*(1+{_rarity}/40)%" in {_statDisplay}
+		add {_statDisplay} to {_lore::*}
+		set float tag "Multi-Money" of custom nbt of {_item} to ({PetStats::%{_name}%::Money}*(1+({_level}/300)))*(1+{_rarity}/40)
+
+	if {_level} >= 100:
+		set {_expX::*} to {Config::GUIS::PetFormat::MaxBar::*}
+		replace all "{LEVEL}" with "%{_level}%" in {_expX::*}
+		replace all "{BAR}" with upgradeBar(1, 1, 15) in {_expX::*}
+		set {_exp::*} to {_expX::*}
+	else:
+		set {_exp1} to formatnumber("%{_exp}%")
+		set {_exp2} to formatnumber("%{_level}*100%")
+		set {_expX::*} to {Config::GUIS::PetFormat::Progress::*}
+		replace all "{LEVEL}" with "%{_level}+1%" in {_expX::*}
+		replace all "{PERCENT}" with "%({_exp}/({_level}*100))*100%" in {_expX::*}
+		replace all "{BAR}" with upgradeBar({_exp}, {_level}*100, 15) in {_expX::*}
+		replace all "{EXP}" with "%{_exp1}%" in {_expX::*}
+		replace all "{REQ}" with "%{_exp2}%" in {_expX::*}
+		set {_exp::*} to {_expX::*}
+
+	add "" and {_exp::*} and "" and {Config::GUIS::PetFormat::AddToMenu} and "" and "%{_color}%&l%{_rarityname}%" to {_lore::*}
+
+	set lore of {_item} to {_lore::*}
+	return {_item}
+
+on tab complete of "/adminpet":
+	if player has permission "*":
+		set tab completions for position 1 to "create", "delete", "icon", "exp", "tokens", "money", "give", "egg", "list"
+		if tab arg-1 = "delete" or "icon" or "exp" or "tokens" or "money" or "give":
+			set tab completions for position 2 to {PetList::*}
+		if tab arg-1 = "egg":
+			set tab completions for position 2 to "give" and "icon"
+		if tab arg-1 = "exp" or "tokens" or "money":
+			set tab completions for position 3 to 1, 1.5, 2, 2.5
+		if tab arg-1 = "give":
+			set tab completions for position 3 to 1, 5, 10, 25, 50, 75, 100
+			set tab completions for position 4 to 1, 2, 3, 4, 5, 6
+
+command /adminpet [<text>] [<text>] [<number>] [<number>]:
+	permission: *
+	trigger:
+		if arg-1 is not set:
+			send ""
+			send " <##00f818>/adminpet &eCreate [name] &3- &7Create new Pet"
+			send " <##00f818>/adminpet &eDelete [name] &3- &7Delete Pet"
+			send " <##00f818>/adminpet &eIcon [name] &3- &7Set Pet icon"
+			send " <##00f818>/adminpet &eExp [name] [amount] &3- &7Set Pet Exp Multi"
+			send " <##00f818>/adminpet &eTokens [name] [amount] &3- &7Set Pet Tokens Multi"
+			send " <##00f818>/adminpet &eMoney [name] [amount] &3- &7Set Pet Money Multi"
+			send " <##00f818>/adminpet &eGive [name] [level] [rarity (1-6) ] &3- &7Set Pet Tokens Multi"
+			send " <##00f818>/adminpet &eEgg [Give/Icon] &3- &7Give or set Egg icon"
+			send " <##00f818>/adminpet &eList &3- &7Displays all pets in one list"
+			send ""
+		else:
+			if arg-1 is "List":
+				send "&aList of pets:"
+				loop {PetList::*}:
+					set {_pet} to " &3- &e%loop-value% "
+					if {PetStats::%loop-value%::Exp} is set:
+						set {_pet} to "%{_pet}% &b(Exp: %{PetStats::%loop-value%::Exp} ? 0%x)"
+					if {PetStats::%loop-value%::Tokens} is set:
+						set {_pet} to "%{_pet}% &b(Tokens: %{PetStats::%loop-value%::Tokens} ? 0%x)"
+					if {PetStats::%loop-value%::Money} is set:
+						set {_pet} to "%{_pet}% &b(Money: %{PetStats::%loop-value%::Money} ? 0%x)"
+					send {_pet}
+				stop
+			if arg-2 is not set:
+				send "&cPet name is required!"
+				stop
+		if arg-1 is "Egg":
+			if arg-2 is "Give":
+				set {_PetsEgg} to {PetsEgg::Icon} named {Config::GUIS::Update31::MagicEgg::Name} with lore {Config::GUIS::Update31::MagicEgg::Lore::*}
+				set int tag "PetEgg" of custom nbt of {_PetsEgg} to 1
+				give player {_PetsEgg}
+				send "&aSuccess!"
+				stop
+			if arg-2 is "Icon":
+				set {PetsEgg::Icon} to player's tool
+				send "&aSuccess!"
+				stop
+			send "&cSelect Give or Icon!"
+			stop
+		if arg-1 is "Create" or "add":
+			if {PetList::*} contains arg-2:
+				send "&cThis pet already exist!"
+				stop
+			add arg-2 to {PetList::*}
+			set {PetIcon::%arg-2%} to stone
+			send "&aSuccess!"
+		if arg-1 is "Delete" or "remove":
+			if {PetList::*} contains arg-2:
+				remove arg-2 from {PetList::*}
+				send "&aPet removed!"
+				delete {PetIcon::%arg-2%}
+			else:
+				send "&cThis pet doesn't exist!"
+				stop
+		if arg-1 is "Icon" or "icons":
+			if {PetList::*} contains arg-2:
+				set {PetIcon::%arg-2%} to player's tool
+				send "&aIcon set!"
+			else:
+				send "&cThis pet doesn't exist!"
+				stop
+		if arg-1 is "Exp" or "Tokens" or "Money":
+			if {PetList::*} contains arg-2:
+				if arg-3 < 1:
+					delete {PetStats::%arg-2%::%arg-1%}
+					send "&aRemoved %arg-2% stats!"
+				else:
+					set {PetStats::%arg-2%::%arg-1%} to arg-3
+					send "&a%arg-1% stats set!"
+			else:
+				send "&cThis pet doesn't exist!"
+				stop
+		if arg-1 is "givepet" or "give":
+			if {PetList::*} contains arg-2:
+				if arg-3 is not set:
+					send "&cLevel is required! (1-100)"
+					stop
+				if arg-4 is not set:
+					send "&cRarity is required! (1-6)"
+					stop
+				givePet(player, arg-2, arg-3, arg-4)
+				send "&aSuccess!"
+			else:
+				send "&cThis pet doesn't exist!"
+				stop
+
+function givePet(player: player, petname: text, level: number, rarity: number):
+	if {PetIcon::%{_petname}%} is set:
+		set {_pet} to {PetIcon::%{_petname}%}
+		set string tag "Pet-Name" of custom nbt of {_pet} to {_petname}
+		set int tag "Pet-Level" of custom nbt of {_pet} to {_level}
+		set int tag "Pet-Exp" of custom nbt of {_pet} to 0
+		set int tag "Pet-Rarity" of custom nbt of {_pet} to {_rarity}
+		add 1 to {PetCustomID}
+		set int tag "Pet-CustomID" of custom nbt of {_pet} to {PetCustomID}
+		give {_player} petFormatter({_pet})
+
+every 10 seconds:
+	loop all players:
+		if {CurrentPet::Item::%loop-player%} is set:
+			set {_item} to {CurrentPet::Item::%loop-player%}
+			set {_name::*} to name of {CurrentPet::Item::%loop-player%} split at " "
+			set {_level} to int tag "Pet-Level" of custom nbt of {_item}
+			set {_exp} to int tag "Pet-Exp" of custom nbt of {_item}
+			add 3 to {_exp}
+			if {_exp} >= {_level}*100:
+				set {_newLevel} to true
+				set {_exp} to 0
+				set {_level} to {_level}+1
+				set {_mess} to {Config::Utils3::PetLevelup}
+				replace all "{PET}" with "%{_name::3}%" in {_mess}
+				replace all "{LEVEL}" with "%{_level}%" in {_mess}
+				send {_mess} to loop-player
+				play sound "entity.player.levelup" with pitch 2 for loop-player
+			set int tag "Pet-Exp" of custom nbt of {_item} to {_exp}
+			set int tag "Pet-Level" of custom nbt of {_item} to {_level}
+			set {CurrentPet::Item::%loop-player%} to petFormatter({_item})
+			if {_newLevel} is true:
+				petrespawn(loop-player)
+
+function despawn(player: player, id: number):
+	kill {PlayerPet::%{_player}%::Icon} parsed as entity
+	kill {PlayerPet::%{_player}%::Text} parsed as entity
+	delete {PlayerPet::%{_player}%::*}
+
+on respawn:
+	wait 10 tick
+	petrespawn(player)
+
+function petrespawn(player: player):
+	spawnpet({_player})
+
+function spawnpet(player: player):
+	set {_wait} to {CurrentPet::%{_player}%}
+	delete {CurrentPet::%{_player}%}
+	wait 1 tick
+	set {CurrentPet::%{_player}%} to {_wait}
+	kill {PlayerPet::%{_player}%::Icon} parsed as entity
+	kill {PlayerPet::%{_player}%::Text} parsed as entity
+	delete {PlayerPet::%{_player}%::*}
+	if {CurrentPet::%{_player}%} is set:
+		set {_world} to {_player}'s world
+		set {_loc2} to location at {_player}
+		set pitch of {_loc2} to 0
+		set {_loc} to location 1 above and 1.75 right {_loc2}
+		set pitch of {_loc} to 0
+		add 180 to yaw of {_loc}
+		set {_name} to name of {CurrentPet::Item::%{_player}%}
+		replace all "Lvl " with "Lv" in {_name}
+		replace all "<##FF00FF>" with "<##ff00fe>&l" in {_name}
+		spawn item display at location 0.8 above {_loc}:
+			set {_e1} to entity
+			set display item of entity to {CurrentPet::Item::%{_player}%}
+			set display scale of entity to vector(0, 0, 0)
+			set display teleport duration of entity to 4
+			set {PlayerPet::%{_player}%::Icon} to uuid of entity
+			set interpolation start of entity to 0
+			set interpolation duration of entity to 7 ticks
+			add uuid of entity to {TextDisplayList::*}
+		spawn a text display at location 1 above {_loc}:
+			set {_e2} to entity
+			set display billboard of entity to center
+			set display text of entity to {_name}
+			set display scale of entity to vector(0, 0, 0)
+			set display teleport duration of entity to 4
+			set {PlayerPet::%{_player}%::Text} to uuid of entity
+			set interpolation start of entity to 0
+			set interpolation duration of entity to 7 ticks
+			add uuid of entity to {TextDisplayList::*}
+		wait 2 tick
+		set display scale of {_e1} and {_e2} to vector(1, 1, 1)
+
+on skript stop:
+	loop all players:
+		kill {PlayerPet::%loop-player%::Icon} parsed as entity
+		kill {PlayerPet::%loop-player%::Text} parsed as entity
+
+every 4 ticks:
+	loop all players:
+		if {CurrentPet::%loop-player%} is set:
+			if {PlayerPet::%loop-player%::Icon} is not set:
+				spawnpet(loop-player)
+				continue
+
+			set {_icon} to {PlayerPet::%loop-player%::Icon} parsed as entity
+			set {_text} to {PlayerPet::%loop-player%::Text} parsed as entity
+
+			if {_icon} is not set:
+				spawnpet(loop-player)
+				continue
+
+			set {_playerLoc} to location at loop-player
+			set pitch of {_playerLoc} to 0
+			set {_petLoc} to location 1 above and 1.75 right {_playerLoc}
+			add 180 to yaw of {_petLoc}
+
+			teleport {_text} to location 1 above {_petLoc}
+			teleport {_icon} to location 0.8 above {_petLoc}
+			if {Config::Update35::DisableAnimations} is false:
+				petParticle({_petLoc})
+
+function petParticle(loc: location):
+	wait 4 tick
+	make 1 crit at location 0.3 above {_loc} with extra 0
+
+on join:
+	set player's walking speed to 0.2
+	delete {BlocksAura::%player%}
+	if {CurrentPet::%player%} is set:
+		spawnpet(player)
+
+on quit:
+	if {CurrentPet::%player%} is set:
+		despawn(player, {CurrentPet::%player%})
+
+on world change:
+	if {CurrentPet::%player%} is set:
+		wait 1 tick
+		spawnpet(player)
+
+on place:
+	set {_a} to player's tool
+	if string tag "Pet-Name" of custom nbt of {_a} is set:
+		cancel event
+
+on right click:
+	wait 1 tick
+	set {_name} to string tag "Pet-Name" of custom nbt of player's tool
+	if {_name} is set:
+		set {_size} to size of {Pets::%player%::*}
+		if {CurrentPet::Item::%player%} is set:
+			add 1 to {_size}
+		if {_size} >= 28:
+			send {Config::Utils3::PetLimit} to player
+			play sound "entity.illusioner.mirror_move" with pitch 2 for player
+			stop
+		add player's tool to {Pets::%player%::*}
+		set {_name::*} to name of petFormatter(player's tool) split at " "
+		set {_mess} to {Config::Utils3::PetAddedtoMenu}
+		replace all "{NAME}" with "%{_name::3}%" in {_mess}
+		send {_mess} to player
+		play sound "entity.experience_orb.pickup" with pitch 2 for player
+		remove player's tool from player
+
+	set {_id} to int tag "PotionData" of custom nbt of player's tool
+	set {_duration} to int tag "PotionDuration" of custom nbt of player's tool
+	set {_effect} to string tag "PotionEffect" of custom nbt of player's tool
+	if {_id} is set:
+		remove 1 of player's tool from player
+
+		set {_timeToAdd} to "%{_duration}% minutes" parsed as timespan
+		if {ActivePot::%player%::%{_id}%} is set:
+			add {_timeToAdd} to {ActivePot::%player%::%{_id}%::2}
+		else:
+			set {ActivePot::%player%::%{_id}%::*} to now and {_timeToAdd}
+			add {_id} to {ActivePotions::%player%::*}
+			set {ActivePot::%player%::%{_id}%} to true
+		set {_mess} to {Config::Utils3::PotionActivated}
+		replace all "{POTION}" with name of {GenData::Potion::%{_id}%} in {_mess}
+		replace all "{TIME}" with timeformat({_timeToAdd}) in {_mess}
+		send {_mess} to player
+		sfx(player, "PotionStart")
+	set {_boosterType} to string tag "BoosterInfo" of custom nbt of player's tool
+	if {_boosterType} is set:
+		set {_name} to name of player's tool
+		set {_duration} to {Config::Utils4::BoosterDur}
+		set {_timeToAdd} to "%{_duration}% minutes" parsed as timespan
+		set {BoosterName::%{_boosterType}%} to {_name}
+		remove 1 of player's tool from player
+
+		if {ActiveBooster::%player%::%{_boosterType}%} is set:
+			add {_timeToAdd} to {ActiveBooster::%player%::%{_boosterType}%::2}
+		else:
+			set {ActiveBooster::%player%::%{_boosterType}%::*} to now and {_timeToAdd}
+			add {_boosterType} to {ActiveBoosters::%player%::*}
+		set {_mess} to {Config::Utils3::BoostStart}
+		replace all "{NAME}" with "%{_name}%" in {_mess}
+		replace all "{TIME}" with timeformat({_timeToAdd}) in {_mess}
+		send {_mess} to player
+		sfx(player, "PotionStart")

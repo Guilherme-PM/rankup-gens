@@ -1,0 +1,17 @@
+
+location: world:-30,500:103,375:21,500
+enabled: true
+display-range: 48
+update-range: 48
+update-interval: 20
+facing: 0.0
+down-origin: false
+pages:
+- lines:
+  - content: <#F9E422>&lɢᴇɴs ᴄʀᴀᴛᴇ
+    height: 0.5
+  - content: '&aClick here to open!'
+    height: 0.3
+  - content: '&7ʙᴜʏ sᴏᴍᴇ ᴋᴇʏs /ᴋᴇʏs'
+    height: 0.3
+  actions: {}

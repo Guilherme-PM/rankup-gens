@@ -1,0 +1,169 @@
+# This script was written by Xqedii and sharing is not allowed!
+# You can change and edit everything in this file if you want
+
+# Discord
+
+
+on load:
+	clear {ReplyList::*}
+	send "" to console
+	send "&7[Discord] &aToken Information &7(Discord.sk)" to console
+	send "    &eIf you want to connect your minecraft server to discord" to console
+	send "    &eput your bot token in &a&nSkript/scripts/Configs/Config.sk" to console
+	send "    &6Info: &7If not, just delete Discord.sk :P" to console
+	send "" to console
+	wait 10 seconds
+	send "" to console
+	send "&7[Setup] <##ffba46>&lThank you for choosing Gens Setup v3.5.4! &c&l<3" to console
+	send "" to console
+	send "    <##ff503a>&lFor your safety, please read the following information:" to console
+	send "     <##ff694e>Sharing setup files or the entire setup without" to console
+	send "     <##ff694e>valid license is strictly prohibited!" to console
+	send "" to console
+	send "    <##fda414>&lSupport channels:" to console
+	send "     <##fda414>&lDiscord: &fdiscord.com/invite/6JQfeQEB4W" to console
+	send "     <##fda414>&lYouTube: &fyoutube.com/@Xqedii" to console
+	send "" to console
+	send "    <##fdcd45>After reviewing this information, you may delete this message" to console
+	send "    <##fdcd45>in Discord.sk. Don't forget to leave feedback on &lBuiltByBit&r<##fdcd45>!" to console
+	send "     <##ffd661>https://builtbybit.com/gens" to console
+	send "" to console
+
+define new bot named "Discord":
+    token: "%{Discord::BotToken}%"
+    intents: default intents
+    auto reconnect: true
+
+on load:
+	set {_profile} to new slash command named "profile" with description {Config::Update35::DiscordBot::CheckStats}
+	add new required string option named "user" with description {Config::Update35::DiscordBot::SelectUser} to options of {_profile}
+	update {_profile} locally in guild with id "%{Discord::GuildID}%"
+
+on slash command:
+	if event-string is "profile":
+		set {_p} to argument "user" as string
+		set {_player} to {_p} parsed as offline player
+		if {Level::%{_player}%} is not set:
+			reply with {Config::Discord::UserNotFound}
+		else:
+			create a new message and store it in {_msg}:
+				make embed:
+					set {_title} to {Config::Discord::Embed::Title}
+					replace all "{PLAYER}" with "%{_player}%" in {_title}
+					set title of embed to {_title}
+					add inline field named {Config::Update35::DiscordBot::Stats::1} with value "```%{_player}%```" to fields of embed
+					add inline field named {Config::Update35::DiscordBot::Stats::2} with value "```%{Level::%{_player}%}%```" to fields of embed
+					if {Rebirth::%{_player}%} is set:
+						add inline field named {Config::Update35::DiscordBot::Stats::3} with value "```%{Rebirth::%{_player}%}%```" to fields of embed
+					add inline field named {Config::Update35::DiscordBot::Stats::4} with value "```%{clan::%{_player}%} ? "None"%```" to fields of embed
+					if {Tokens::%{_player}%} is set:
+						add inline field named {Config::Update35::DiscordBot::Stats::5} with value "```%{Tokens::%{_player}%} ? 0%```" to fields of embed
+					add inline field named {Config::Update35::DiscordBot::Stats::6} with value "```%size of {New-Generator::%{_player}%::*}%/%{GensMAX::%{_player}%}%```" to fields of embed
+					set {_footer} to {Config::Discord::Embed::Footer}
+					replace all "{PLAYER}" with "%{_player}%" in {_footer}
+					set footer of embed to "%{_footer}%"
+					set embed color of embed to light blue
+					set timestamp of embed to now
+					set {_footericon} to {Config::Discord::Embed::FooterIcon}
+					replace all "{PLAYER}" with "%{_player}%" in {_footericon}
+					set {_thumbnail} to {Config::Discord::Embed::Thumbnail}
+					replace all "{PLAYER}" with "%{_player}%" in {_thumbnail}
+					set footer icon of embed to {_footericon}
+					set thumbnail of embed to {_thumbnail}
+				add last embed to the embeds of the message
+				make new component row and store it in {_rows}:
+					add new primary button with id "MC_DiscordMessage-%{_player}%" named {Config::Update35::DiscordBot::SendMessage} with reaction "pencil2" to components of the row builder
+				add {_rows} to rows of the message
+			reply with {_msg}
+
+on button click:
+	if event-string contains "MC_DiscordMessage-":
+		set {_a::*} to event-string split at "-"
+		set {_display} to {Config::Update35::DiscordBot::SendMessageTo}
+		replace all "{USER}" with "%{_a::2}%" in {_display}
+		set {_modal} to new modal with id event-string named {_display}
+		set {_mess} to new short text input with id "Mess" named {Config::Update35::DiscordBot::EnterMess}
+		set required state of {_mess} to true
+		set maximum range of {_mess} to 50
+		add {_mess} to the rows of {_modal}
+		show {_modal} to the user
+
+on modal receive:
+	if event-string contains "MC_DiscordMessage-":
+		set {_mess} to value of text input with id "Mess"
+		set {_replyid} to random integer between 111111 and 999999
+		set {ReplyList::%{_replyid}%::User} to "%event-user%"
+		set {ReplyList::%{_replyid}%::Id} to discord id of event-user
+		set {ReplyList::%{_replyid}%::PrevMess} to {_mess}
+		set {_a::*} to event-string split at "-"
+		set {_message} to {Config::Update35::DiscordBot::Received}
+		replace all "{MESS}" with colored {_mess} in {_message}
+		replace all "{USER}" with "%event-user%" in {_message}
+		replace all "{REPLYID}" with "%{_replyid}%" in {_message}
+		send formatted {_message} to {_a::2} parsed as offline player
+		play sound "entity.experience_orb.pickup" with pitch 1 for {_a::2} parsed as offline player
+		set {_message} to {Config::Update35::DiscordBot::Sent}
+		replace all "{PLAYER}" with "%{_a::2}%" in {_message}
+		reply with hidden {_message}
+		wait 60 seconds
+		delete {ReplyList::%{_replyid}%}
+
+command /^dcreply [<text>] [<number>]:
+	trigger:
+		if arg-1 is "^Server^":
+			if {ReplyList::%arg-2%::User} is set:
+				setreply(player, arg-2)
+			else:
+				send {Config::Update35::DiscordBot::ResponseTime}
+
+function setreply(player: player, id: number):
+	set {_PrevUser} to {ReplyList::%{_id}%::User}
+	send "" to {_player}
+	set {_mess} to {Config::Update35::DiscordBot::SendMess}
+	replace all "{PLAYER}" with "%{_PrevUser}%" in {_mess}
+	send {_mess} to {_player}
+	set {Reply::%{_player}%} to {_id}
+	while {ReplyList::%{_id}%::User} is {_PrevUser}:
+		wait 1 second
+	if {Reply::%{_player}%} is {_id}:
+		send {Config::Update35::DiscordBot::ResponseTime} to {_player}
+		delete {Reply::%{_player}%}
+
+on chat:
+	if {Reply::%player%} is set:
+		cancel event
+		reply(player, {Reply::%player%}, message)
+
+function reply(player: player, id: number, reply: text):
+	delete {Reply::%{_player}%}
+	delete {ReplyList::%{_replyid}%}
+	play sound "entity.player.levelup" with pitch 2 for {_player}
+	set {_PrevUser} to {ReplyList::%{_id}%::User}
+	set {_PrevId} to {ReplyList::%{_id}%::Id}
+	set {_PrevMessage} to {ReplyList::%{_id}%::PrevMess}
+	set {_a} to user with id {_PrevId}
+	if {_a} is not set:
+		stop
+	set {_mess} to {Config::Update35::DiscordBot::Sent}
+	replace all "{PLAYER}" with "%{_PrevUser}%" in {_mess}
+	send {_mess} to {_player}
+	set {_reply} to {Config::Update35::DiscordBot::Reply}
+	replace all "{PLAYER}" with "%{_player}%" in {_reply}
+	set {_replyfrom} to {Config::Update35::DiscordBot::ReplyFrom}
+	replace all "{PLAYER}" with "%{_player}%" in {_reply}
+	open private channel of {_a} and store it in {_msg}
+	create a new message and store it in {_embed}:
+		make embed:
+			add field named {Config::Update35::DiscordBot::YourMessage} with value "%{_PrevMessage}%" to fields of embed
+			add field named {_reply} with value "%{_Reply}%" to fields of embed
+			set footer of embed to {_replyfrom}
+			set embed color of embed to light blue
+			set timestamp of embed to now
+			set {_footericon} to {Config::Discord::Embed::FooterIcon}
+			replace all "{PLAYER}" with "%{_player}%" in {_footericon}
+			set {_thumbnail} to {Config::Discord::Embed::Thumbnail2}
+			replace all "{PLAYER}" with "%{_player}%" in {_thumbnail}
+			set footer icon of embed to {_footericon}
+			set thumbnail of embed to {_thumbnail}
+		add last embed to the embeds of the message
+	post {_embed} to {_msg}

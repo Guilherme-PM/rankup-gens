@@ -1,0 +1,46 @@
+location: world:-7,003:104,000:14,996
+enabled: true
+display-range: 48
+update-range: 48
+update-interval: 20
+facing: 0.0
+down-origin: false
+pages:
+- lines:
+  - content: <#1fde4c>&lᴛᴏᴘ 10 ʙʟᴏᴄᴏs ᴘᴏsɪᴄɪᴏɴᴀᴅᴏs
+    height: 0.3
+  - content: <#33f561>1. &f%ajlb_lb_statistic_mine_block_1_alltime_name% <#33f561>(%ajlb_lb_statistic_mine_block_1_alltime_value%
+      blocos)
+    height: 0.3
+  - content: <#33f561>2. &f%ajlb_lb_statistic_mine_block_2_alltime_name% <#33f561>(%ajlb_lb_statistic_mine_block_2_alltime_value%
+      blocos)
+    height: 0.3
+  - content: <#33f561>3. &f%ajlb_lb_statistic_mine_block_3_alltime_name% <#33f561>(%ajlb_lb_statistic_mine_block_3_alltime_value%
+      blocos)
+    height: 0.3
+  - content: <#33f561>4. &f%ajlb_lb_statistic_mine_block_4_alltime_name% <#33f561>(%ajlb_lb_statistic_mine_block_4_alltime_value%
+      blocos)
+    height: 0.3
+  - content: <#33f561>5. &f%ajlb_lb_statistic_mine_block_5_alltime_name% <#33f561>(%ajlb_lb_statistic_mine_block_5_alltime_value%
+      blocos)
+    height: 0.3
+  - content: <#33f561>6. &f%ajlb_lb_statistic_mine_block_6_alltime_name% <#33f561>(%ajlb_lb_statistic_mine_block_6_alltime_value%
+      blocos)
+    height: 0.3
+  - content: <#33f561>7. &f%ajlb_lb_statistic_mine_block_7_alltime_name% <#33f561>(%ajlb_lb_statistic_mine_block_7_alltime_value%
+      blocos)
+    height: 0.3
+  - content: <#33f561>8. &f%ajlb_lb_statistic_mine_block_8_alltime_name% <#33f561>(%ajlb_lb_statistic_mine_block_8_alltime_value%
+      blocos)
+    height: 0.3
+  - content: <#33f561>9. &f%ajlb_lb_statistic_mine_block_9_alltime_name% <#33f561>(%ajlb_lb_statistic_mine_block_9_alltime_value%
+      blocos)
+    height: 0.3
+  - content: <#33f561>10. &f%ajlb_lb_statistic_mine_block_10_alltime_name% <#33f561>(%ajlb_lb_statistic_mine_block_10_alltime_value%
+      blocos)
+    height: 0.3
+  - content: ''
+    height: 0.3
+  - content: <#33f561>#1. &f%ajlb_lb_statistic_mine_block_1_alltime_name%
+    height: 0.3
+  actions: {}

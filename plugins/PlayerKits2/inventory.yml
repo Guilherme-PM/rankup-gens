@@ -1,0 +1,13 @@
+inventories:
+  main_inventory:
+    slots: 9
+    title: "     &c&lThis gui is disabled!"
+  premium_kits_inventory:
+    slots: 9
+    title: "     &c&lThis gui is disabled!"
+  preview_inventory:
+    slots: 9
+    title: "     &c&lThis gui is disabled!"
+  buy_requirements_inventory:
+    slots: 9
+    title: "     &c&lThis gui is disabled!"

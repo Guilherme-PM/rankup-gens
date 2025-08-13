@@ -1,0 +1,108 @@
+prefix: '&a'
+
+shopinfo: |-
+  &6&m-                                                                             -
+  &6Owner: &a%owner
+  &6Stock: &a%stock
+  &6Item: &a%item
+  &6&m-                                                                             -
+shopinfo_buy: '&aBuy &6%amount &afor &6%price&a!'
+shopinfo_sell: '&aSell &6%amount &afor &6%price&a!'
+
+iteminfo: '&6Item Information:'
+iteminfo_fullname: ' &6Full Name: &a%item'
+iteminfo_shopname: ' &6Shop Sign: &a%item'
+iteminfo_repaircost: ' &6Repair Cost: &a%cost'
+iteminfo_book: |-
+  &6Book Title: &a%title
+  &6Book Author: &a%author
+  &6Book Pages: &a%pages
+iteminfo_book_generation: '&6Book Generation: &a%generation'
+iteminfo_lore: |-
+  &6Lore:
+  &r%lore
+METRICS: |-
+  &6[Shop] &aMetrics:
+  &6Accounts: &a%accounts
+  &6Average transactions: &a%totalTransactions &7(buy: &7%buyTransactions &7sell: &7%sellTransactions&7)
+  &6Average items traded: &a%totalItems &7(bought: &7%boughtItems &7sold: &7%soldItems&7)
+ACCESS_DENIED: "&cYou dont have permission to access that shops storage container!"
+TRADE_DENIED: "&cYou dont have permission to trade with that shop!"
+TRADE_DENIED_ACCESS_PERMS: "&cYou cannot trade with shops that you have access to!"
+TRADE_DENIED_CREATIVE_MODE: "&cYou cannot trade with shops while you are in creative mode!"
+
+NOT_ENOUGH_MONEY: "&cYou don't have enough money!"
+NOT_ENOUGH_MONEY_SHOP: "&cShop owner doesn't have enough money!"
+
+CLIENT_DEPOSIT_FAILED: "&cMoney deposit to your account failed!"
+SHOP_DEPOSIT_FAILED: "&cMoney deposit to shop owner failed!"
+NO_ECONOMY_ACCOUNT: "&cEconomy account from shop owner doesn't exist!"
+
+NO_BUYING_HERE: "&cYou can't buy items in this shop!"
+NO_SELLING_HERE: "&cYou can't sell items in this shop!"
+
+NOT_ENOUGH_SPACE_IN_INVENTORY: "&cYou haven't got enough space in inventory!"
+NOT_ENOUGH_SPACE_IN_CHEST: "&cThere isn't enough space in chest!"
+NOT_ENOUGH_ITEMS_TO_SELL: "&cYou don't have enough items to sell!"
+NOT_ENOUGH_SPACE_IN_YOUR_SHOP: |-
+  &c[&c&l%item&r&c shop is full] &7(%seller&7 tried to sell)
+  &6In world: &a%world
+  &6At position: &a%x/%y/%z)
+
+NOT_ENOUGH_STOCK: "&cThis shop is out of stock!"
+NOT_ENOUGH_STOCK_IN_YOUR_SHOP: |-
+  &c[&c&l%price %item shop &r&cis out of stock] &7(%buyer tried to buy)
+  &6In world: &a%world
+  &6At position: &a%x/%y/%z)
+
+YOU_BOUGHT_FROM_SHOP: "&aYou bought &6&l%item&a from &6&l%owner&a for &6&l%price&a!"
+SOMEBODY_BOUGHT_FROM_YOUR_SHOP: |-
+  &a[&6&l%buyer &abought %item for &6&l%price&a]
+   &6In world: &a%world
+   &6At position: &a%x/%y/%z)
+
+YOU_SOLD_TO_SHOP: "&aYou sold &6&l%item &ato &6&l%buyer &afor &6&l%price&a!"
+SOMEBODY_SOLD_TO_YOUR_SHOP: |-
+  &a[&6&l%seller &asold &6&l%item&a for &6&l%price&a]
+   &6In world: &a%world
+   &6At position: &a%x/%y/%z)
+
+YOU_CANNOT_CREATE_SHOP: "&cYou can't create this type of shop!"
+NO_CHEST_DETECTED: "&cCouldn't find a chest!"
+INVALID_SHOP_DETECTED: "&cThe shop cannot be used!"
+INVALID_SHOP_PRICE: "&cThe shop has an invalid price!"
+INVALID_SHOP_QUANTITY: "&cThe shop has an invalid quantity!"
+CANNOT_ACCESS_THE_CHEST: "&cYou don't have permissions to access this chest!"
+
+SELL_PRICE_HIGHER_THAN_BUY_PRICE: "&cSell price is above the buy price!"
+SELL_PRICE_ABOVE_MAX: "&cSell price &l%price&r&c is above maximum &l%maxprice&r&c!"
+SELL_PRICE_BELOW_MIN: "&cSell price &l%price&r&c  is below minimum &l%minprice&r&c!"
+BUY_PRICE_ABOVE_MAX: "&cBuy price &l%price&r&c  is above maximum &l%maxprice&r&c!"
+BUY_PRICE_BELOW_MIN: "&cBuy price &l%price&r&c  is below minimum &l%minprice&r&c!"
+
+CLICK_TO_AUTOFILL_ITEM: "&aClick the sign with the item that this shop is for!"
+NO_ITEM_IN_HAND: You don't have an item in your hand to autofill!
+
+PROTECTED_SHOP: "&aSuccessfully protected the shop with LWC!"
+PROTECTED_SHOP_SIGN: "&aSuccessfully protected the shop sign with LWC!"
+SHOP_CREATED: "&aShop successfully created!"
+SHOP_FEE_PAID: "&aYou have been charged &6&l%amount&a!"
+SHOP_REFUNDED: "&aYou have been refunded &6&l%amount&a!"
+ITEM_GIVEN: "&aGiven &6&l%item&r&a to &6&l%player&a!"
+
+RESTRICTED_SIGN_CREATED: "&aSign successfully created!"
+
+PLAYER_NOT_FOUND: "&cPlayer not found!"
+NO_PERMISSION: "&cYou don't have permissions to do that!"
+INCORRECT_ITEM_ID: "&cYou have specified an invalid item id!"
+INVALID_CLIENT_NAME: "&cYour username is not a valid Minecraft username!"
+NOT_ENOUGH_PROTECTIONS: "&cCould not create a protection!"
+NO_SHOP_FOUND: "&cNo shop found!"
+
+CANNOT_CREATE_SHOP_HERE: "&cYou can't create shop here!"
+
+TOGGLE_MESSAGES_OFF: "&cYou will no longer receive messages from your shop(s)!"
+TOGGLE_MESSAGES_ON: "&aYou will now receive messages from your shop(s)!"
+
+TOGGLE_ACCESS_ON: "&cYou can no longer trade at shops that you have access to!"
+TOGGLE_ACCESS_OFF: "&aYou can now trade at shops that you have access to!"
