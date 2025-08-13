@@ -1,0 +1,1264 @@
+#   _____                     _____      _                    _____             __ _
+#  / ____|                   / ____|    | |                  / ____|           / _(_)
+# | |  __  ___ _ __  ___    | (___   ___| |_ _   _ _ __     | |     ___  _ __ | |_ _  __ _
+# | | |_ |/ _ \ '_ \/ __|    \___ \ / _ \ __| | | | '_ \    | |    / _ \| '_ \|  _| |/ _` |
+# | |__| |  __/ | | \__ \    ____) |  __/ |_| |_| | |_) |   | |___| (_) | | | | | | | (_| |
+#  \_____|\___|_| |_|___/   |_____/ \___|\__|\__,_| .__/     \_____\___/|_| |_|_| |_|\__, |
+#                                                 | |                                 __/ |
+#                                                 |_|                                |___/
+
+# Welcome in Config.sk file available from version v1.3!
+# Here you can easily translate everything in setup
+
+# Tips: (Resource Pack)
+#  Wanna add jumping text?   Use <##FFFFFD>Text Here or <##FCA805>Another Text
+#  Wanna add no-shadow text? Use <##FFFEFD>No shadow text!
+#  Maybe rainbow RGB text?   Use <##FF00FF>Example
+
+# /reloadconfig
+
+on load:
+# --------[ Global Config ]--------
+
+	set {Config::Global::IslandWorld} to  "bskyblock_world"
+	set {Config::Global::Motd1} to        "              &b&k!&r &c&k!&r &e&k!&r %formatted gradient("&lRankup Gens", ("fcf932", "fffd59"))% &7[1.21.8] &e&k!&r &c&k!&r &b&k!&r"
+	set {Config::Global::Motd2} to        "                %formatted gradient("ɴᴏᴠᴏ ʀᴀɴᴋᴜᴘ ᴇsᴛɪʟᴏ ɢᴇɴs!", ("49fc84", "70d9ab"))% &c❤"
+	set {Config::Global::ResourcePackLink} to  "https://drive.google.com/uc?export=download&id=1tGmX0Nn1Z9j6SvASh_R4e44kFbK0qlJ2"
+	set {Config::Global::ResourcePackLink-1_21_6} to  "https://drive.google.com/uc?export=download&id=1pidesQ1tNTlwc8YwzX308-i6lvdRQn5F" # Pack without shaders folder
+
+	set {Config::Global::Permission} to      "&4❌ &cVocê não tem permissão para usar este comando!"
+	set {Config::Global::Success} to         "&aSucesso!"
+	set {Config::Global::NotEnough} to       "&4❌ &cVocê não tem dinheiro suficiente!"
+	set {Config::Global::NotEnoughShards} to "&4❌ &cVocê não tem tokens suficientes!"
+	set {Config::Global::EnterPlayer} to     "&4❌ &cDigite o nickname do jogador!"
+	set {Config::Global::PlayerOffline} to   "&4❌ &cEste jogador está Offline!"
+
+	set {Config::Global::ResourcePackKick} to true # Kick a player if they don't accept a resource pack?
+	set {Config::Global::KickReason} to "Você não aceitou o Texture Pack!"
+	set {Config::Global::KickFailed} to "Download do Resource Pack Falhou!"
+	set {Config::Global::DownloadInfo} to "%nl%&6Por favor aceite o &a&nResourcePack&6 para tornar a%nl%&6jogabilidade ainda melhor e mais interessante!%nl%%nl%&aGraças ao nosso Resource Pack, você verá muitas%nl%&anovas funcionalidades e efeitos incríveis que você%nl%&anão experimentará em outros servidores!%nl%%nl%&e|%nl%|%nl%|%nl%_____/         %nl%/                    %nl%|                     %nl%\/                     "
+
+	set {Config::Global::DisplayRarity} to true   # Display rarity in items lore?
+
+	set {Config::Global::BedrockSupport} to "." # The Symbol that begins the player's nickname Bedrock
+
+	wait 1 tick
+	if {Config::Global::DisplayRarity} is true:
+		set {Config::Global::Rarity-Common::*}    to "", "&f"
+		set {Config::Global::Rarity-Rare::*}      to "", "&f"
+		set {Config::Global::Rarity-Epic::*}      to "", "&f"
+		set {Config::Global::Rarity-Legendary::*} to "", "&f"
+	else:
+		set {_l::*} to "Common", "Rare", "Epic", "Legendary" # Dont translate
+		loop {_l::*}:
+			delete {Config::Global::Rarity-%loop-value%::*}
+
+	set {Config::Global::Enabled} to   "&aEnabled"
+	set {Config::Global::Disabled} to  "&cDisabled"
+
+	set {Config::Global::ToggleOn} to  "&aEnabled!"
+	set {Config::Global::ToggleOff} to "&cDisabled!"
+	set {Config::Global::FirstMessTitle} to "           &3&l▪ &8&m     &r %formatted gradient("&lBem-vindo ao GenBlock", ("fcfc2a", "fc8721"))% &8&m     &3&l ▪"
+	set {Config::Global::FirstMess1}     to "         &7Sua incrível &bAventura &7começará em breve..."
+	set {Config::Global::FirstMess2}     to "              &7O tutorial começará em 10 segundos!"
+	set {Config::Global::FirstMess3}     to "                   &3Desejamos um ótimo jogo!"
+
+	send " <##00f818>○ &aReloaded &eGlobal Config" to {ReloadPlayer}
+	wait 1 tick
+
+# --------[ GenBlock Tools ]--------
+
+	set {Config::Tools::Tool} to     "{TOOL} &6★{LEVEL}"
+	set {Config::Tools::Pickaxe} to  "Pickaxe"
+	set {Config::Tools::Axe} to      "Axe"
+	set {Config::Tools::Hoe} to      "Enxada"
+	set {Config::Tools::UpgradedTitle1} to "&lUpgraded" # Male
+	set {Config::Tools::UpgradedTitle2} to "&lUpgraded" # Female
+	set {Config::Tools::MythicTitle1} to   "<##FF00FF>&lMythical" # Male
+	set {Config::Tools::MythicTitle2} to   "<##FF00FF>&lMythical" # Female
+
+	set {Config::Tools::OnlyOwner} to false # Only the owner can use the tool
+	set {Config::Tools::OnlyOwnerMess} to "&4❌ &cThis tool belongs to {OWNER}!"
+
+	set {Config::Tools::Gen::GenEvery} to       " &6⌚ &fɢᴇʀᴀçãᴏ ᴅᴇ ɪᴛᴇɴs ᴀ ᴄᴀᴅᴀ: &620s"
+	set {Config::Tools::Gen::SpawnEvery} to     " &6⌚ &fsᴘᴀᴡɴᴀ ᴀ ᴄᴀᴅᴀ: &620s"
+	set {Config::Tools::Gen::ItemLevel} to      "&8ɴíᴠᴇʟ ᴅᴏ ɪᴛᴇᴍ {LEVEL}★"
+	set {Config::Tools::Gen::GeneratorLevel} to "&8ɴíᴠᴇʟ ᴅᴏ ɢᴇʀᴀᴅᴏʀ {LEVEL}★"
+
+	set {Config::Tools::HoeBoost} to 3 # Size of TNT Explosion
+	set {Config::Tools::PickaxeBeams} to 8 # Amount of Beams
+	set {Config::Tools::AxeLasers} to 10 # Amount of Lasers
+
+	send " <##00f818>○ &aReloaded &eTools" to {ReloadPlayer}
+	wait 1 tick
+
+# --------[ Cinematic ]--------
+
+	set {Config::Cinematic::CinematicOnJoin} to true     #Should the animation be turned on at first join
+
+	set {Config::Cinematic::Started} to     "&aO Tutorial começou!"
+	set {Config::Cinematic::CommandsOff} to "&4❌ &cVocê não pode usar comandos agora!"
+	set {Config::Cinematic::Skipped} to     "&aTutorial pulado!"
+	set {Config::Cinematic::SkipTimes} to   "&aClique mais &6{TIMES} &avezes para pular!"
+
+	set {Config::Cinematic::Welcome::1::1::*} to "<##1ef91e>&lBem-vindo %%player%%!", "<##82ffc9>Deixe-nos mostrar o servidor"                     and "4 seconds", "5 ticks", "5 ticks", "1.5 second"
+	set {Config::Cinematic::Welcome::1::2::*} to "{ANIMATION}"                                                         and "", "0 seconds", "0 ticks", "0 ticks", "8 second"
+
+	set {Config::Cinematic::Welcome::2::1::*} to "<##1ef91e>&lCaixas", "<##82ffc9>Aqui você pode usar as chaves obtidas!"              and "3 seconds", "5 ticks", "5 ticks", "1 second"
+	set {Config::Cinematic::Welcome::2::2::*} to "{ANIMATION}"                                                         and "", "0 seconds", "0 ticks", "0 ticks", "5 second"
+
+	set {Config::Cinematic::Welcome::3::1::*} to "<##1ef91e>&lGeradores", "<##82ffc9>Compre geradores que irão gerar itens!"                and "3 seconds", "5 ticks", "5 ticks", "1 second"
+	set {Config::Cinematic::Welcome::3::2::*} to "{ANIMATION}"                                                         and "", "0 seconds", "0 ticks", "0 ticks", "5 second"
+
+	set {Config::Cinematic::Welcome::4::1::*} to "<##1ef91e>&lElixires", "<##82ffc9>Aumente seus multiplicadores com elixires!"                    and "3 seconds", "5 ticks", "5 ticks", "1 second"
+	set {Config::Cinematic::Welcome::4::2::*} to "{ANIMATION}"                                                         and "", "0 seconds", "0 ticks", "0 ticks", "5 second"
+
+	set {Config::Cinematic::Welcome::5::1::*} to "<##1ef91e>&lFazenda de Trigo", "<##82ffc9>Aqui é onde você pode começar a ganhar suas primeiras moedas"             and "5 seconds", "5 ticks", "5 ticks", "1 second"
+	set {Config::Cinematic::Welcome::5::2::*} to "{ANIMATION}"                                                         and "", "0 seconds", "0 ticks", "0 ticks", "7 second"
+
+	set {Config::Cinematic::Welcome::6::1::*} to "<##1ef91e>&lCaverna", "<##82ffc9>Você pode melhorar ferramentas minerando na mina"   and "5 seconds", "5 ticks", "5 ticks", "1 second"
+	set {Config::Cinematic::Welcome::6::2::*} to "{ANIMATION}"                                                         and "", "0 seconds", "0 ticks", "0 ticks", "7 second"
+
+	set {Config::Cinematic::Welcome::7::1::*} to "<##1ef91e>&lIlha", "<##82ffc9>Este portal te levará para sua ilha!"              and "5 seconds", "5 ticks", "5 ticks", "1 second"
+	set {Config::Cinematic::Welcome::7::2::*} to "{ANIMATION}"                                                         and "", "0 seconds", "0 ticks", "0 ticks", "7 second"
+
+	set {Config::Cinematic::Welcome::8::1::*} to "<##1ef91e>&lÉ isso!", "<##82ffc9>Desejamos um Bom Jogo!"                     and "5 seconds", "5 ticks", "5 ticks", "1 second"
+	set {Config::Cinematic::Welcome::8::2::*} to "{ANIMATION}"                                                         and "", "0 seconds", "0 ticks", "0 ticks", "7 second"
+
+	send " <##00f818>○ &aReloaded &eCinematic" to {ReloadPlayer}
+	wait 1 tick
+
+# --------[ Discord ]--------
+
+	set {Discord::BotToken} to ""
+	set {Discord::GuildID} to "" # Paste your discord server ID Here (Right click, copy server ID)
+
+	set {Config::Discord::UserNotFound} to      "Cannot find your nickname in database! Set your Discord nickname to Minecraft nickname."
+	set {Config::Discord::UserNotSet} to        "Enter the nickname of the player whose statistics you want to see."
+	set {Config::Discord::Embed::Title} to      "{PLAYER}'s Profile"
+	set {Config::Discord::Embed::Footer} to     "Informations about {PLAYER}"
+	set {Config::Discord::Embed::FooterIcon} to "http://cravatar.eu/helmhead/{PLAYER}/128.png"
+	set {Config::Discord::Embed::Thumbnail} to  "http://cravatar.eu/helmhead/{PLAYER}/128.png"
+	set {Config::Discord::Embed::Thumbnail2} to "https://visage.surgeplay.com/bust/128/{PLAYER}"
+
+	send " <##00f818>○ &aReloaded &eDiscord" to {ReloadPlayer}
+	wait 1 tick
+
+# --------[ Generators ]--------
+
+	set {Config::Gens::EventName::FarmBoost} to "Farm Boost"
+	set {Config::Farms::EventsStart::*} to      "03:00PM" # LocalTime Placeholder. /papi ecloud download LocalTime /papi reload
+	set {Config::Farms::EventPlaceholder} to    "&e[ᴇᴠᴇɴᴛᴏ ᴅᴇ ғᴀᴢᴇɴᴅᴀ ɪɴɪᴄɪᴀ ás &615:00&e]" # LocalTime Placeholder. /papi ecloud download LocalTime /papi reload
+	set {Config::Farms::EventPlaceholder2} to   "&e[ᴏ ᴇᴠᴇɴᴛᴏ ᴅᴀ ғᴀᴢᴇɴᴅᴀ ᴇsᴛᴀ́ ᴀᴄᴏɴᴛᴇᴄᴇɴᴅᴏ ᴀɢᴏʀᴀ!]" # LocalTime Placeholder. /papi ecloud download LocalTime /papi reload
+	set {Config::Farms::Duration} to 3600 # 1 Hour
+	set {Config::Gens::Event::FarmBoost::*} to "        &7Todos os drops da fazenda irão estár em &ddobro&7", "       &7na &aduração&7 do evento!"
+
+	set {Config::Gens::Event::MaxGens} to 9           # Start amount
+	set {Config::Gens::Upgrade::MaxLimit} to 20     # Max Gens upgrade amount /upgrades
+	set {Config::Gens::ExtraGenSlot::Limit} to 50     # (Maximum amount of Generators)
+
+	set {Config::Gens::Event::BreakDown} to true      # There is a chance that the generator will break down and the player will have to repair it
+	set {Config::Gens::Event::BreakDownChance} to 1.00 # Chance that the generator will break down
+
+	set {Config::Gens::Event::UpgradedTitle1} to "&e&lENCANTADO" # Male
+	set {Config::Gens::Event::UpgradedTitle2} to "&e&lENCANTADO" # Female
+	wait 1 tick
+
+	set {Config::Gens::Event::OnIsland} to true # Generators only drop items when the player is on the island
+	set {Config::Gens::Event::Duration} to 300 # (in seconds) (You can change how often events start in Generators.sk by searching 'every 30 minutes:')
+
+	set {Config::Gens::UpgradedBlocks::Chance} to 6 # Chance for upgraded block in Cave
+	set {Config::Gens::Cave::ToolInfo1} to "&aUse &nShift+Botão Direito&a para a &6Vara de Pescar"
+	set {Config::Gens::Cave::ToolInfo2} to "&aUse o &nBotão Direito&a enquanto segura a ferramenta do &6/tools"
+
+	set {Config::Gens::Event::Header} to            "       &3&l▪ &8&m     &r {TITLE} &8&m     &3&l ▪"
+	set {Config::Gens::Event::Title} to             "&l{EVENT} Evento!"
+	set {Config::Gens::Event::DoubleXP::*} to       "       &7Cada ponto de &eexperiencia &7que voce ganhar sera", "    &6multiplicado&7 por &a2 &7e adicionado ao seu progresso!"
+	set {Config::Gens::Event::DoubleDrop::*} to     "         &7Seus &egeradores&7 vao te dar 2 vezes", "                &7mais itens que o normal!"
+	set {Config::Gens::Event::GensTier::*} to       "          &7Seus &egeradores&7 vao criar itens 1", "               &7nivel mais alto que o normal!"
+	set {Config::Gens::Event::FarmingBoost::*} to       "       &7Suas &eferramentas&7 tem 5 vezes mais chance de", "            &7ativar um boost que o normal!"
+	set {Config::Gens::Event::End} to               "&6&lGENS &8» &7Evento &b{EVENT}&7 terminou!"
+	set {Config::Gens::Event::DurTitle} to          "       &7Evento &b{EVENT}&7 vair durar por &b{TIME}&7!"
+	set {Config::Gens::Event::PlayerTitle} to       "&7Evento &b{EVENT}&7 vair durar por &b{TIME}&7!"
+	set {Config::Gens::EventName::DoubleXP} to      "XP em Dobro"
+	set {Config::Gens::EventName::DoubleDrop} to    "Dobro de Drops"
+	set {Config::Gens::EventName::GensTier} to      "+1 no Nível de Drop"
+	set {Config::Gens::EventName::FarmingBoost} to    "Boost nas Fazendas"
+	set {Config::Gens::EventName::MinutesPrefix} to "Minutos"
+	set {Config::Gens::EventName::EventTitle} to    "O {EVENT} está ocorrendo agora!"
+	set {Config::Gens::EventName::EventTitleLength} to 32 # If title dont fit in frame after translation, increase this number :D
+	wait 1 tick
+
+	# Text don't fit in frame after translation? Try to change numbers!
+	# First one = Background Size
+	# Second one = Distance from left to right (Bigger number = Text further to the left)
+	# Last one = Same as Second one but less change
+
+	set {Config::Gens::Tutorial::StartBalance} to 1000
+	set {Config::Gens::Tutorial::BuyTool} to       "&6Compre sua primeira ferramenta /ferramentas"
+	set {Config::Gens::Tutorial::ToolHoe} to       "&6Use sua eNXADA na fazenda /farm"
+	set {Config::Gens::Tutorial::ToolAxe} to       "&6Use seu MACHADO na sawmill /sawmill"
+	set {Config::Gens::Tutorial::ToolPickaxe} to   "&6Use sua Picareta na cave /cave"
+	set {Config::Gens::Tutorial::EarnMoney} to     "&6Ganhe 1000$ usando sua ferramenta"
+	set {Config::Gens::Tutorial::BuyPickaxe} to    "&6Compre sua picareta /pickaxe"
+	set {Config::Gens::Tutorial::64Cobblestone} to "&6Mine 64 Cobblestone ({AMOUNT}/64)"
+	set {Config::Gens::Tutorial::Convert} to       "&6Converta Cobblestone usando /convert"
+	set {Config::Gens::Tutorial::Upgrade} to       "&6Atualize suas ferramentas usando /melhoria"
+	set {Config::Gens::Tutorial::EarnMoney2} to    "&6Ganhe 5000$ usando sua ferramenta"
+	set {Config::Gens::Tutorial::BuyGen} to        "&6Compre maquinas usando /maquinas"
+	set {Config::Gens::Tutorial::PlaceGen} to      "&6Coloque suas máquinas na sua ilha /island"
+	set {Config::Gens::Tutorial::UpgradeGen} to    "&6Atualize suas máquinas ({AMOUNT}/16)"
+
+	set {Config::Gens::Tutorial::AutoSell::*} to     "&6&lAutoSell"     and "&7Está com o Status {TYPE}"
+	set {Config::Gens::Tutorial::AutoCompress::*} to "&6&lAutoCompress", "&7Está com o Status {TYPE}"
+
+	set {Config::Gens::SellItemUsing} to    " &e🔥 &fᴠᴇɴᴅᴀ ᴇsᴛᴇ ɪᴛᴇᴍ ᴄᴏᴍ &e/sᴇʟʟ"    # This lore will be displayed in items for sale
+	set {Config::Gens::ValueLore} to        " &6★ &fᴠᴀʟᴏʀ ᴅᴏ ɪᴛᴇᴍ: &6{VALUE}$"   # This will display Value of item in items for sale
+	set {Config::Gens::UsedToUpgrade} to    " &a⛏ &fᴜsᴇ ᴛʜɪs ɪᴛᴇᴍ ᴛᴏ ᴜᴘɢʀᴀᴅᴇ ʏᴏᴜʀ ᴛᴏᴏʟs"   # This will display Information if item can be used to Upgrade Tools
+	set {Config::Gens::ItemInfo-Cave} to    "&8ɪᴛᴇᴍ ᴅᴀ ᴄᴀᴠᴇʀɴᴀ"        # This will display at the top of collected item
+	set {Config::Gens::ItemInfo-Sawmill} to "&8ɪᴛᴇᴍ ᴅᴀ sᴇʀʀᴀʀɪᴀ"     # This will display at the top of collected item
+	set {Config::Gens::ItemInfo-Farm} to    "&8ɪᴛᴇᴍ ᴅᴀ ғᴀᴢᴇɴᴅᴀ"        # This will display at the top of collected item
+
+	set {Config::Gens::GenInfo-DropValue} to   " &e$ &fᴠᴀʟᴏʀ ᴅᴏ ɪᴛᴇᴍ: &e{VALUE}$"
+	set {Config::Gens::GenInfo-UpgradeInfo} to " &a☄ &fᴜᴘɢʀᴀᴅᴇ ɢᴇɴᴇʀᴀᴛᴏʀ &asʜɪғᴛ+ʀᴍʙ"
+	wait 1 tick
+
+	set {Config::Gens::Broken} to            "&4❌ &cUm dos seus Geradores está quebrado!"
+	set {Config::Gens::BrokenHologram::*} to "&cɢᴇʀᴀᴅᴏʀ ǫᴜᴇʙʀᴀᴅᴏ", "", "&7Este gerador está quebrado :(", "&7Conserte-o para que continue funcionando!", "", "&aClique aqui para gerenciar"
+	set {Config::Gens::SellDelay} to         "&4❌ &cEspere 3 segundos para vender!"
+	set {Config::Gens::ChangeDelay} to       "&4❌ &cEspere 3 segundos para fazer isso!"
+	set {Config::Gens::Sold} to              "&7Você vendeu seus items por um total de: &a{VALUE}&a$"
+	set {Config::Gens::SoldAuto} to          "&7Seus itens foram vendidos automaticamente por: &a{VALUE}&a$"
+	set {Config::Gens::SellNothing} to       "&4❌ &cVocê não possui nada para vender!"
+	set {Config::Gens::ChangeNothing} to     "&4❌ &cVocê precisa de pelo menos x64 itens iguais para converter!"
+	set {Config::Gens::ItemsChanged} to      "&7Seus itens foram alterados para &aEncantados&7!"
+	set {Config::Gens::CantDoThis} to        "&4❌ &cVocê não pode fazer isso!"
+	set {Config::Gens::CantUpgrade} to       "&4❌ &cVocê não pode melhorar este item!"
+	set {Config::Gens::CantPlace} to         "&4❌ &cVocê não pode colocar este bloco!"
+	set {Config::Gens::GensLevel} to         "&4❌ &cVocê precisa do nível {LEVEL}★ para minerar este bloco!"
+	set {Config::Gens::ToolMaxLevel} to      "&4❌ &cEsta ferramenta já atingiu o nível máximo!"
+	set {Config::Gens::NotEnoughItems} to    "&4❌ &cVocê não possui os itens necessários!"
+	set {Config::Gens::ToolRequired} to      "&4❌ &cFerramenta errada, use {TOOL}, compre no {COMMAND}"
+	set {Config::Gens::NextLevel::*} to      "<##fca805>&lNÍVEL ALCANÇADO!", "&eVocê foi para o nível &6&l{LEVEL}"
+	set {Config::Gens::RequiredRebirth} to   "&4❌ &cEste upgrade requer &l{REQ}&c Rebirth!"
+	set {Config::Gens::MaxedBoost} to        "&4❌ &cEste upgrade já está no nível máximo"
+	set {Config::Gens::UpgradeBoost} to      "&aVocê atualizou &6&l{TYPE}&a para o nível &6&l{LEVEL}&a!"
+	set {Config::Gens::TokensReceived} to    "&6&lTokens &8» &7Recebeu &b{AMOUNT} Tokens&7 por ficar AFK."
+	wait 1 tick
+
+	set {Config::Gens::ToolLevelReq} to   "&4❌ &cNível de ferramenta 🔥{LEVEL} necessário!"
+	set {Config::Gens::Disenchant} to     "&aFerramenta foi desencantada!"
+	set {Config::Gens::MaxEnchant} to     "&4❌ &cNível máximo de encantamento atingido!"
+	set {Config::Gens::EnchantUpgrade} to "&aAtualizou &6&l{ENCHANT}&a!"
+	set {Config::Gens::Enchanted} to      "&aFerramenta foi encantada!"
+
+	set {Config::Gens::Placed::*} to    "&aFerramenta foi colocada!", "&dAtualize-a usando Shift+RMB"
+	set {Config::Gens::Generators} to   "&aSua ilha agora tem &6&l{GENS} &eGeradores!"
+	set {Config::Gens::NoGenerators} to "&aSua ilha não tem Geradores!"
+	set {Config::Gens::GensLimit} to    "&4❌ &cVocê já atingiu o limite de Geradores!"
+	set {Config::Gens::NoSpace} to      "&4❌ &cVocê não tem espaço no seu inventário!"
+	set {Config::Gens::NotYour} to      "&4❌ &cEste gerador pertence a {PLAYER}!"
+	set {Config::Gens::MaxLevel} to     "&4❌ &cEste é o nível máximo do Gerador!"
+	set {Config::Gens::Upgrade} to      "&aGerador atualizado!"
+	set {Config::Gens::Repair} to       "&aGerador reparado!"
+	set {Config::Gens::UnknownBreak} to "&4❌ &cUm dos seus geradores foi removido!"
+
+	set {Config::Gens::ActionBar} to   "&6{HELPTEXT} &8→ &7Seu nível: &b{LEVEL} &8| &7Progresso: &b{EXP}&8/&e{REQUIRED} &8(&b{PERCENT}%%&8)"
+	set {Config::Gens::ExpReceived} to " &a&l+{ADD}"
+	set {Config::Gens::HelpText::*} to "/sᴀᴡᴍɪʟʟ", "/ᴄᴀᴠᴇ", "/ғᴀʀᴍ"
+
+	set {Config::Gens::FishingAntiAFK} to true # While fishing you have to click R (Right) and L (Left) randomly
+
+	send " <##00f818>○ &aReloaded &eGenerators" to {ReloadPlayer}
+	wait 1 tick
+
+# --------[ PrivateMine ]--------
+
+	set {Config::PVMine::MineRestart::Title::*} to "&4&l(!)", "&cAs minas foram reiniciadas!"
+
+	set {Config::PVMine::MineRestart} to     "&4❌ &cAs minas foram reiniciadas!"
+	set {Config::PVMine::FallIntoLava} to    "&4❌ &cPróxima vez, tenha mais cuidado :)"
+	set {Config::PVMine::Teleport} to        "&aTeleportado para sua Caverna privada!"
+	set {Config::PVMine::FindingLoc} to      "&aProcurando localização para sua Caverna..."
+	set {Config::PVMine::LocFound} to        "&aCave selecionada com ID &b{CAVEID}&a!"
+	set {Config::PVMine::Generating} to      "&aGerando sua Caverna..."
+	set {Config::PVMine::Finish} to          "&aCaverna foi gerada!"
+	set {Config::PVMine::NeedInCave} to      "&4❌ &cVocê precisa estar em sua Caverna para fazer isso!"
+	set {Config::PVMine::NoCavesAvaiable} to "&4❌ &cNenhuma Caverna disponível!"
+
+	set {Config::PVMine::NextArea::*} to "<##FCA805>&lPARABÉNS!", "&aNova área desbloqueada!"
+
+	send " <##00f818>○ &aReloaded &ePrivateMine" to {ReloadPlayer}
+	wait 1 tick
+
+# --------[ Refinery ]--------
+
+	set {Config::Refinery::NotYour} to   "&4❌ &cEsta refineria pertence a {PLAYER}!"
+	set {Config::Refinery::Upgrade} to   "&aRefineria atualizada!"
+	set {Config::Refinery::WrongWood} to "&4❌ &cVocê não tem este tipo de madeira!"
+	set {Config::Refinery::Refuel} to    "&aVocê replenishou a refineria!"
+	set {Config::Refinery::Placed::*} to "&aRefineria colocada!", "&dAtive-a usando RMB"
+	set {Config::Refinery::ItemPlace} to "&aᴄᴏʟᴏǫᴜᴇ ᴘᴀʀᴀ ᴀᴛɪᴠᴀʀ!"
+	set {Config::Refinery::ItemActive} to "&aʀᴇғɪɴᴀʀɪᴀ ᴀᴛɪᴠᴀᴅᴀ!"
+	set {Config::Refinery::Checkmark} to "&a✔"
+	set {Config::Refinery::Cross} to "&c❌"
+	set {Config::Refinery::ItemLore::*} to "", "&7ᴀ ʀᴇғɪɴᴀʀɪᴀ ᴘᴇʀᴍɪᴛɪʀá ǫᴜᴇ ᴠᴏᴄê", "&7ᴛʀᴀɴsғᴏʀᴍᴇ ᴍᴀᴅᴇɪʀᴀ ᴅᴀ", "&7sᴇʀʀᴀʀɪᴀ ᴇᴍ ᴍᴀᴅᴇɪʀᴀ ᴍᴇʟʜᴏʀᴀᴅᴀ", "", " <##1ef91e>★ &fᴍᴇʟʜᴏʀɪᴀs:", "  {DOUBLEDROP} &fᴅʀᴏᴘ ᴅᴜᴘʟᴏ", "  {SPEED} &fᴠᴇʟᴏᴄɪᴅᴀᴅᴇ", "", "{BOTTOM}"
+	set {Config::Refinery::OakRefinery} to "&lʀᴇғɪɴᴀʀɪᴀ ᴅᴇ ᴄᴀʀᴠᴀʟʜᴏ"
+	set {Config::Refinery::BirchRefinery} to "&lBIRCH REFINERY"
+	set {Config::Refinery::SpruceRefinery} to "&lSPRUCE REFINERY"
+	set {Config::Refinery::DarkOakRefinery} to "&lDARK OAK REFINERY"
+	set {Config::Refinery::JungleRefinery} to "&lJUNGLE REFINERY"
+	wait 1 tick
+
+
+	send " <##00f818>○ &aReloaded &eRefinery" to {ReloadPlayer}
+
+# --------[ Structure ]--------
+
+	set {Config::Structure::NpcName} to  "JERRY"
+	set {Config::Structure::NpcTitle} to "&aSpeed Builder"
+	set {Config::Structure::NpcType} to  "Villager" # "Villager" Or "Player"
+	set {Config::Structure::NpcSkin} to  "Xqedii" # Paste your nick here for ex. Driveen
+
+	set {Config::Structure::IslandBuild} to 2 # How fast island should build. (2 is default)
+
+	set {Config::Structure::NpcTalk::1} to "&6&l{NPCNAME} > &aOlá &6&l{PLAYER}&a!"
+	set {Config::Structure::NpcTalk::2} to "&6&l{NPCNAME} > &aAgora você está na sua nova ilha!"
+	set {Config::Structure::NpcTalk::3} to "&6&l{NPCNAME} > &aEstou aqui para ajudá-lo a configurar seu primeiro gerador."
+	set {Config::Structure::NpcTalk::4} to "&6&l{NPCNAME} > &aEu irei construir uma ilha onde você pode colocar os geradores."
+	set {Config::Structure::NpcTalk::5} to "&6&l{NPCNAME} > &aEstá pronto?"
+
+	set {Config::Structure::BuildFinish::1} to "&6&l{NPCNAME} > &aConcluiu de construir a ilha!"
+	set {Config::Structure::BuildFinish::2} to "&6&l{NPCNAME} > &aClique com o botão direito no gerador para atualizá-lo!"
+	set {Config::Structure::BuildFinish::3} to "&6&l{NPCNAME} > &aTenha um bom jogo!"
+
+	set {Config::Structure::DontDisturb} to    "&6&l{NPCNAME} > &aEstou construindo uma ilha..."
+	set {Config::Structure::LeaderRequired} to "&4❌ &c{NPCNAME} deseja falar com o líder da ilha!"
+	wait 1 tick
+
+# --------[ BossbarStats ]--------
+
+	set {Config::BossbarStats::Enabled} to true # Enable / Disable stats at the top of the screen
+	set {Config::BossbarStats::LoadingPack::*} to     "<##dedb24>&lA textura está sendo carregada!", "<##80fbc6>Sua textura será carregada em breve..."
+
+# --------[ Utils1 ]--------
+
+	# Commands that are available after clicking tab
+	# Do not translate unless you have changed commands in other .sk files
+	set {Config::Utils::CommandList::*} to "panel", "ispanel", "islandpanel", "is", "island", "ah", "trade", "fly", "auction", "autctions", "autocompress", "autosell", "bal", "banner", "banners", "buyaxe", "buyfishingrod", "buygen", "buygenerator", "buygenerators", "buyhoe", "buypickaxe", "buyrank", "buyrefinery", "buytool", "buytools", "cave", "change", "clan", "color", "colors", "compress", "convert", "daily", "deletehome", "delhome", "diamond", "discord", "dungeon", "dungeons", "emerald", "emoji", "emote", "emotes", "farm", "farms", "fishingrod", "gamma", "gen", "generator", "generators", "glow", "glowing", "gold", "help", "helpop", "home", "icon", "icons", "isupgrade", "islandupgrades", "isupgrades", "key", "keys", "kit", "leaderboard", "leave", "level", "mycave", "mymine", "netherite", "nick", "pet", "pets", "pickaxe", "pond", "prefix", "prefixes", "privatecave", "privatemine", "progress", "pvcave", "pvmine", "rank", "ranks", "refinery", "sawmill", "sell", "sellall", "sethome", "shop", "spawn", "store", "suit", "suits", "token", "tokens", "tool", "tools", "top", "top10", "top3", "tpa", "tpaccept", "upgrade", "upgrades", "vote", "warp", "warps", "elixir", "elixirs", "potion", "potions", "rebirth", "rebirths"
+
+	set {Config::Utils::WelcomeMess} to true   # Message when player with rank join server
+	set {Config::Utils::DiscordLink} to   "dc.example.com"
+	set {Config::Utils::VoteLink} to      "vote.example.com"
+	set {Config::Utils::StoreLink} to     "store.example.com"
+	set {Config::Utils::SpawnTeleport} to "&aTeletransportado para o spawn!"
+	set {Config::Utils::JoinMessage} to   "&b>&c>&e> {RANK} &f{NICK} &6entrou no servidor! &e<&c<&b<"
+	set {Config::Utils::Emotes} to        " <##f9f631>&lᴇᴍᴏᴛᴇs ᴏɴ ᴄʜᴀᴛ"
+	wait 1 tick
+
+	set {Config::Gens::Keys::Purchase} to   "  <##27ec24>&lsᴇʀᴠᴇʀ sᴛᴏʀᴇ"
+	set {Config::Gens::Keys::Info::1} to    " &2⛏ &fIf you would like to purchase ranks, keys"
+	set {Config::Gens::Keys::Info::2} to    "    &for other accessories, visit our website!"
+	set {Config::Gens::Keys::Info::3} to    " &6★ <tooltip:<##f9f631>Click here to open!><link:https://%{Config::Utils::StoreLink}%>&bClick here to open Store!"
+	set {Config::Gens::Keys::Info::4} to    " <##27ec24>Thank you for every purchase!"
+
+	set {Config::Gens::Vote::Vote} to       "  <##27ec24>&lᴠᴏᴛᴇ ғᴏʀ sᴇʀᴠᴇʀ"
+	set {Config::Gens::Vote::Info::1} to    " &2⛏ &fLike our server on the list"
+	set {Config::Gens::Vote::Info::2} to    "    &fto receive an amazing prize!"
+	set {Config::Gens::Vote::Info::3} to    " &6★ <tooltip:<##f9f631>Click here to vote!><link:https://%{Config::Utils::VoteLink}%>&bClick here to vote!"
+	set {Config::Gens::Vote::Info::4} to    " <##27ec24>Thank you for voting!"
+
+	set {Config::Gens::Discord::Discord} to    "  <##27ec24>&lᴅɪsᴄᴏʀᴅ sᴇʀᴠᴇʀ"
+	set {Config::Gens::Discord::Info::1} to    " &2⛏ &fClick here to join the Discord server"
+	set {Config::Gens::Discord::Info::2} to    "    &fand stay up to date with what's new!"
+	set {Config::Gens::Discord::Info::3} to    " &6★ <tooltip:<##f9f631>Click here to join!><link:https://%{Config::Utils::DiscordLink}%>&bClick here to join Discord!"
+	set {Config::Gens::Discord::Info::4} to    " <##27ec24>Thank you for joining the server!"
+	wait 1 tick
+
+	set {Config::Utils::ChatFormat}  to "&6{LEVEL}🔥 &8♢ {COLOR}{ICON}{RANK} &f{NICK} &8» &f{MESSAGE}"
+	set {Config::Utils::ClanHelp::1} to " <##00f818>/clan &ecreate [tag] &3- &7Creates new Clan"
+	set {Config::Utils::ClanHelp::2} to " <##00f818>/clan &ejoin [tag] &3- &7Joins to Clan"
+	set {Config::Utils::ClanHelp::3} to " <##00f818>/clan &einvite [player] &3- &7Invites to Clan"
+	set {Config::Utils::ClanHelp::4} to " <##00f818>/clan &ekick [player] &3- &7Kicks from Clan"
+	set {Config::Utils::ClanHelp::5} to " <##00f818>/clan &einfo [tag] &3- &7Shows info about Clan"
+	set {Config::Utils::ClanHelp::6} to " <##00f818>/clan &ecolor &3- &7Changes color of clan Tag"
+	set {Config::Utils::ClanHelp::7} to " <##00f818>/clan &eleave &3- &7Leaves current Clan"
+	set {Config::Utils::ClanHelp::8} to " <##00f818>/clan &edisband &3- &7Deleted current Clan"
+
+	set {Config::Utils::EnterClanTag} to    "&4❌ &cDigite o Tag do Clã!"
+	set {Config::Utils::UnknownClan} to     "&4❌ &cNenhum Clã com este Tag foi encontrado"
+	set {Config::Utils::TAGTooShort} to     "&4❌ &cClan Tag é muito curto!"
+	set {Config::Utils::TAGTooLong} to      "&4❌ &cClan Tag é muito longo!"
+	set {Config::Utils::TagExist} to        "&4❌ &cClan Tag já está em uso!"
+	set {Config::Utils::AlreadyInClan} to   "&4❌ &cVocê já está em um Clã!"
+	set {Config::Utils::NoLeader} to        "&4❌ &cVocê não é o líder!"
+	set {Config::Utils::NoClan} to          "&4❌ &cVocê não tem Clã!"
+	set {Config::Utils::ClanCreated} to     "&aClã &6&l{CLAN}&a foi criado!"
+	set {Config::Utils::ClanDeleted} to     "&aClã &6&l{CLAN}&a foi excluído!"
+	set {Config::Utils::ClanDeleted2} to    "&aClã &6&l{CLAN}&a foi excluído!"
+	set {Config::Utils::Invited} to         "&aConvite enviado para &6&l{PLAYER}&a!"
+	set {Config::Utils::NoInvite} to        "&4❌ &cVocê não tem convite para este clã!"
+	set {Config::Utils::InviteReceived1} to "&aRecebido convite para clã &6&l{CLAN}"
+	set {Config::Utils::InviteReceived2} to "&aPara entrar no {TOOLTIP}&6Clique aqui&a!"
+	set {Config::Utils::InviteTooltip} to   "&aClique aqui para entrar!"
+	set {Config::Utils::AlreadyInvited} to  "&4❌ &cEsta pessoa já recebeu convite!"
+	set {Config::Utils::AlreadyInClan} to   "&4❌ &cEste jogador já tem Clã!"
+	set {Config::Utils::LeaderCantLeave} to "&4❌ &cLeader cannot leave Clan!"
+	set {Config::Utils::LeftClan} to        "&eYou left the &6&l{CLAN} &eclan!"
+	set {Config::Utils::SomeoneLeft} to     "&aO membro &6{PLAYER} &asaiu do clã!"
+	set {Config::Utils::JoinedClan} to      "&aJoined to clan &6&l{CLAN}&a!"
+	set {Config::Utils::SomeoneJoined} to   "&aMember &6{PLAYER} &ajoined to Clan!"
+	set {Config::Utils::Kicked} to          "&eYou have been kicked out of &6&l{CLAN}"
+	set {Config::Utils::SomeoneKicked} to   "&aMember &6{PLAYER} &ahas been kicked from Clan!"
+	set {Config::Utils::PlayerNotAdded} to  "&4❌ &cEste jogador não foi adicionado!"
+	set {Config::Utils::UnknownWarp} to     "&4❌ &cEste warp não existe!"
+	set {Config::Utils::UpgradeLimit} to    "&4❌ &cLimite de melhorias atingido!"
+	set {Config::Utils::CannotClaimNow} to  "&4❌ &cVocê não pode reivindicar esta recompensa agora!"
+	set {Config::Utils::ClaimedReward} to   "&aRecompensa do dia &6&l{DAY}&a reivindicada!"
+	wait 1 tick
+
+	set {Config::Utils::WarpTeleport} to     "&aTeleportado!"
+	set {Config::Utils::UpgradePurchased} to "&aMelhoria comprada!"
+	set {Config::Utils::ColorPurchased} to   "&aCor {COLOR}&a comprada com sucesso!"
+	set {Config::Utils::ColorReset} to       "&aAs cores foram resetadas!"
+	set {Config::Utils::IconsReset} to       "&aOs ícones foram resetados!"
+	set {Config::Utils::NeedPrefix} to       "&4❌ &cVocê precisa ter um prefixo para selecionar uma cor!"
+	set {Config::Utils::ColorChosed} to      "&aVocê escolheu a cor {COLOR}&a!"
+	set {Config::Utils::PrefixBought} to     "&aVocê comprou o prefixo &6{PREFIX}&a!"
+	set {Config::Utils::ChatGameTitle} to    "          &3&l▪ &8&m     &r %formatted gradient("&lJogo do Chat", ("f9a600", "f8f04b"))% &8&m     &3&l ▪"
+	set {Config::Utils::ChatGameDesc} to     "       &7Resolva isso e ganhe &brecompensa&7!"
+	set {Config::Utils::ChatGameAsk} to      "                 {SPACEFIX}&b{NUM1} {SYMBOL} {NUM2}"
+	set {Config::Utils::NobodyAnswer} to     "&6&lJogo do Chat &8» &7Ninguém soube a resposta!"
+	set {Config::Utils::GoodAnswer} to       "&6&lJogo do Chat &8» &7Parabéns! &e{PLAYER} &7venceu o Jogo do Chat!"
+	set {Config::Utils::ChatGameRew} to      " &a+{MONEY} Dinheiro  &d+{SHARDS} Tokens"
+	wait 1 tick
+
+	set {Config::Utils::SellChest::Placed} to      "&6&lBaú de Venda &afoi colocado!"
+	set {Config::Utils::SellChest::Destroyed} to   "&6&lBaú de Venda &afoi destruído!"
+	set {Config::Utils::SellChest::Hologram::*} to "%formatted gradient("&lBAÚ DE VENDA", ("f9a600", "f8f04b"))% &8[&b10x10&8]", "", "&7Dono do Baú: &b{PLAYER}", "&7Ganhos do Baú: &b${MONEY}", "", "&aClique aqui para gerenciar"
+
+	set {Config::Utils::TipsHeader} to "          &3&l▪ &8&m     &r &6&lʀᴀɴᴋᴜᴘ &f&lɢᴇɴs &8&m     &3&l ▪"
+	set {Config::Utils::Mess1::*} to "       &7ᴠᴏᴄê ᴘʀᴇᴄɪsᴀ ᴅᴇ &bʙʟᴏᴄᴏs &7ᴅᴇ ᴄᴏɴsᴛʀᴜçãᴏ?" and "    &7ᴇɴᴛʀᴇ ɴᴀ &eʟᴏᴊᴀ ᴅᴇ ɪᴛᴇɴs &7ᴏɴᴅᴇ ᴠᴏᴄê ᴘᴏᴅᴇ " and "    &7ᴄᴏᴍᴘʀᴀʀ ɪᴛᴇɴs úᴛᴇɪs ᴜsᴀɴᴅᴏ &6/ʟᴏᴊᴀ"
+	set {Config::Utils::Mess2::*} to "      &7ᴠᴏᴄê ᴘʀᴇᴄɪsᴀ ᴠᴇɴᴅᴇʀ sᴇᴜs &bɪᴛᴇɴs&7?" and "    &7ᴇɴᴛʀᴇ ɴᴏ &eᴍᴇʀᴄᴀᴅᴏ &7ᴇ ᴀɴᴜɴᴄɪᴇ sᴇᴜs ɪᴛᴇɴs" and "     &7ᴘᴏʀ ᴜᴍ ᴠᴀʟᴏʀ ᴜsᴀɴᴅᴏ &6/ʟᴇɪʟaᴏ"
+	set {Config::Utils::Mess3::*} to "   &7ᴠᴏᴄᴇ ɢᴏsᴛᴀʀɪᴀ ᴅᴇ ᴠᴇʀ ᴀs ᴄᴏɴǫᴜɪsᴛᴀs?" and "    &7ɢᴀɴʜᴇ ᴠᴀʀɪᴏs &eɪᴛᴇɴs&7 ᴇ ᴄᴏɴsɪɢᴀ ɪɴᴄʀɪᴠᴇɪs" and "      &7ʀᴇᴄᴏᴍᴘᴇɴsᴀs ᴜsᴀɴᴅᴏ &6/ᴄᴏɴǫᴜɪsᴛᴀs"
+	set {Config::Utils::Mess4::*} to "       &7ᴠᴏᴄᴇ ɢᴏsᴛᴀʀɪᴀ ᴅᴇ ᴍᴇʟʜᴏʀᴀʀ sᴜᴀ ɪʟʜᴀ?" and "   &7ᴍᴇʟʜᴏʀᴇ sᴜᴀ &eɪʟʜᴀ&7 ᴇ ɢᴇʀᴀᴅᴏʀᴇs ᴘᴀʀᴀ" and "   &7ɢᴇʀᴀʀ ɪᴛᴇɴs ᴍᴀɪs ʀᴀᴘɪᴅᴏ ᴜsᴀɴᴅᴏ &6/ᴍᴇʟʜᴏʀɪᴀs"
+	set {Config::Utils::Mess5::*} to "      &7ᴇɴᴛʀᴇ ᴇᴍ ɴᴏssᴀ ᴄᴏᴍᴜɴɪᴅᴀᴅᴇ ɴᴏ &bᴅɪsᴄᴏʀᴅ" and "  &7ᴇɴᴛʀᴇ ɴᴏ ɴᴏssᴏ &eᴅɪsᴄᴏʀᴅ&7 ᴘᴀʀᴀ ʀᴇᴄᴇʙᴇʀ ɪɴғᴏʀᴍᴀᴄᴏᴇs" and "       &7ᴍᴀɪs ʀᴀᴘɪᴅᴏ ᴇ sᴇᴍᴘʀᴇ ғɪᴄᴀʀ ᴀᴛᴜᴀʟɪᴢᴀᴅᴏ"
+	set {Config::Utils::Mess6::*} to "      &7ᴠᴏᴄᴇ sᴀʙɪᴀ sᴏʙʀᴇ ᴀ &d&lᴢᴏɴᴀ ᴀғᴋ&7?", "     &7ɢᴀɴʜᴇ ᴜᴍᴀ &dᴄʜᴀᴠᴇ ᴍᴀɢɪᴄᴀ&7 ᴀ ᴄᴀᴅᴀ &a10 ᴍɪɴᴜᴛᴏs&7!", "          &7ᴄᴏᴍᴇᴄᴇ ᴀɢᴏʀᴀ ᴜsᴀɴᴅᴏ &b/ᴡᴀʀᴘ ᴀғᴋ&7!"
+	set {Config::Utils::Mess7::*} to "         &7ᴠᴏᴄᴇ sᴀʙɪᴀ sᴏʙʀᴇ &e&l/ᴄᴀᴠᴇʀɴᴀ&7?" and "   &7ᴠᴏᴄᴇ ᴘᴏᴅᴇ ᴍɪɴᴇʀᴀʀ &bʀᴇᴄᴜʀsᴏs &7ʟᴀ ǫᴜᴇ sᴇʀᴀᴏ" and "      &7ᴜᴛᴇɪs ᴘᴀʀᴀ &aᴍᴇʟʜᴏʀᴀʀ &7sᴜᴀs ғᴇʀʀᴀᴍᴇɴᴛᴀs!"
+
+	send " <##00f818>○ &aReloaded &eUtils1" to {ReloadPlayer}
+	wait 1 tick
+
+# --------[ Utils2 ]--------
+
+	set {Config::Utils2::ExtraGenSlot::Item} to heart of the sea with enchantment glint
+	set {Config::Utils2::ExtraGenSlot::Name-1} to    "&l{AMOUNT}+ GENERATOR SLOT"
+	set {Config::Utils2::ExtraGenSlot::Name-2} to    "&l{AMOUNT}+ GENERATOR SLOTS"
+	set {Config::Utils2::ExtraGenSlot::Colors::*} to "38a5ff", "6ebdff"
+	set {Config::Utils2::ExtraGenSlot::Lore::*} to   "", "&fᴀᴅᴅs <##f9e83d>+{AMOUNT} &fʙᴏɴᴜs ɢᴇɴᴇʀᴀᴛᴏʀ sʟᴏᴛ", "&fᴍᴀxɪᴍᴜᴍ ʙᴏɴᴜs ɢᴇɴᴇʀᴀᴛᴏʀs: <##f9e83d>{MAX}", "", "&eClick here to use!" and {Config::Global::Rarity-Legendary::*}
+
+	set {Config::Utils2::HomeCreated} to       "&aCriada casa &6&l{HOME}&a!"
+	set {Config::Utils2::HomeTeleport} to      "&aTeleportado para casa &6&l{HOME}&a!"
+	set {Config::Utils2::HomeDeleted} to       "&aDeletada casa {HOME}!"
+	set {Config::Utils2::UnknownHome} to       "&4❌ &cEsta casa não existe!"
+	set {Config::Utils2::HomeName} to          "&4❌ &cDigite o nome da casa!"
+	set {Config::Utils2::NameTooLong} to       "&4❌ &cCrie um nome mais curto!"
+	set {Config::Utils2::HouseAlreadyExist} to "&4❌ &cJá existe uma casa com este nome!"
+	set {Config::Utils2::UnsafePlace} to       "&4❌ &cEste lugar não é seguro!"
+	set {Config::Utils2::HomeLimit} to         "&4❌ &cVocê já atingiu o número máximo de casas!"
+	set {Config::Utils2::CantSetHome} to       "&4❌ &cVocê não pode definir uma casa aqui!"
+
+	set {Config::Utils2::Balance} to     "&e{PLAYER}'s balance: &6&l{MONEY}"
+	set {Config::Utils2::YourBalance} to "&eYour balance: &6&l{MONEY}"
+	set {Config::Utils2::BalTooltip} to  "&a{MONEY} Money"
+	set {Config::Utils2::HelpOpWait} to  "&4❌ &cWait 1 minute before next help!"
+	set {Config::Utils2::HelpNoMess} to  "&4❌ &cEnter the message you want to send!"
+	set {Config::Utils2::SmallMess} to   "&4❌ &cDescribe your problem in more detail!"
+	wait 1 tick
+
+	set {Config::Utils2::TpaSelf} to      "&4❌ &cVocê não pode se teleportar para si mesmo!"
+	set {Config::Utils2::TpaAlready} to   "&4❌ &cVocê já enviou uma solicitação para este jogador!"
+	set {Config::Utils2::TpaSent} to      "&aUma solicitação foi enviada para &6&l{PLAYER}&a!"
+	set {Config::Utils2::TpaReceived} to  "&aSolicitação de teletransporte recebida de &6&l{PLAYER}&a!"
+	set {Config::Utils2::TpaExpired1} to  "&4❌ &cSolicitação de teletransporte expirada para {PLAYER}!"
+	set {Config::Utils2::TpaExpired2} to  "&4❌ &cSolicitação de teletransporte expirada de {PLAYER}!"
+	set {Config::Utils2::TpaAccept1} to   "&aSolicitação de teletransporte aceita de &6&l{PLAYER}&a!"
+	set {Config::Utils2::TpaAccept2} to   "&aJogador &6&l{PLAYER} &aaceitou a solicitação de teletransporte!"
+	set {Config::Utils2::NoRequest} to    "&4❌ &cVocê não recebeu uma solicitação de este jogador!"
+	set {Config::Utils2::Teleported} to   "&aTeleportado para &6&l{PLAYER}&a!"
+	set {Config::Utils2::CannotAccept} to "&4❌ &cTeleportação não pode ser aceita!"
+
+	set {Config::Utils2::ExtraSlotMax} to   "&4❌ &cChegou ao máximo de geradores!"
+	set {Config::Utils2::SlotsIncreased} to "&aLimite de geradores aumentado para &6&l{AMOUNT}&a!"
+	set {Config::Utils2::SlotsTitle::*} to  "<##FCA805>&lBONUS GENERATOR!", "&eSeu novo limite é &6&l{AMOUNT}&e!"
+
+	set {Config::Utils2::ReportSent} to     "&aRelatório enviado com sucesso!"
+	set {Config::Utils2::ReportReceived} to "&aRelatório recebido! &b(Clique aqui para ver!)"
+	set {Config::Utils2::ReportSelf} to     "&4❌ &cDeseja reportar você mesmo?"
+	set {Config::Utils2::ReportTooltip} to  "&b&lREPORT%nl%&7Jogador: &a{PLAYER}%nl%&7Motivo: &a{REASON}%nl%%nl%&7Recebido de: &a{FROM}%nl%%nl%&7Data: &bAgora"
+
+	set {Config::Utils2::CommandDisabled} to  "&4❌ &cNão existe este comando!" # Commands like //calc, /plugins etc
+	set {Config::Utils2::RankColorGold} to    "&4❌ &cEsta cor pode ser usada por ɢᴏʟᴅ rank!"
+	set {Config::Utils2::RankColorDiamond} to "&4❌ &cEsta cor pode ser usada por ᴅɪᴀᴍᴏɴᴅ rank!"
+	set {Config::Utils2::RankCommandGold} to  "&4❌ &cEste comando está disponível apenas para ɢᴏʟᴅ rank"
+
+	send " <##00f818>○ &aReloaded &eUtils2" to {ReloadPlayer}
+	wait 1 tick
+
+
+# --------[ Utils3 ]--------
+
+	set {Config::Utils3::Level1Format} to " &7Seu progresso no &6Gens&7 &8| &bInformações sobre {PLAYER}"
+	set {Config::Utils3::Level2Format} to "  &f• &e⛏ {LEVEL} ɴíᴠᴇʟ  &3• • • •  &6{EXP}&7/&e{REQ} &fᴇxᴘ"
+	set {Config::Utils3::Level3Format} to "    {PROGRESS_BAR}"
+	set {Config::Utils3::Level4Format} to "  &f• &6★ &bSeus tokens: {TOKENS}"
+	set {Config::Utils3::Level5Format} to " &7ɢᴀɴʜᴇ ᴛᴏᴋᴇɴs ᴊᴏɢᴀɴᴅᴏ ɴᴏ sᴇʀᴠɪᴅᴏʀ"
+	set {Config::Utils3::NotEnoughTokens} to "&4❌ &cVocê não tem Tokens suficientes!"
+	set {Config::Utils3::TokensPurchased} to "&6&lLoja &8» &7Você comprou &b{ITEM} &7por &a{TOKENS} Tokens&7."
+	set {Config::Utils3::HoloChanged} to "&aExibição do holograma foi alterada!"
+
+	set {Config::Utils3::WelcomeMess1} to "  <##27f024>&laᴡᴡᴡ.ʀᴀɴᴋᴜᴘɢᴇɴs.ᴄᴏᴍ"
+	set {Config::Utils3::WelcomeMess2} to " &a○ &7Jogadores online: <##27f024>{ONLINE}"
+	set {Config::Utils3::WelcomeMess3} to " &2⛏ &7Está com pouca grana? Venda seus <##ff952b>itens&7."
+	set {Config::Utils3::WelcomeMess4} to " &6★ &7Olhe nossos vips: <##27f024>/ranks&7."
+	set {Config::Utils3::WelcomeMess5} to " &a○ &7Servidor criado por <##27f024>Driveen&7! Se você possui"
+	set {Config::Utils3::WelcomeMess6} to " &a○ &7uma sugestão, nos envie em nosso <##27f024>discord&7!"
+	set {Config::Utils3::WelcomeMess7} to " <##27f024>Tenha um ótimo jogo! &c❤"
+
+	send " <##00f818>○ &aReloaded &eUtils3" to {ReloadPlayer}
+	wait 1 tick
+
+# --------[ Utils4 ]--------
+
+	set {Config::Utils4::BoosterDur} to 30 #(30 minutes)
+	set {Config::Utils4::ExpBooster} to dragon breath named  "<##ff66e0>ɪᴍᴘᴜʟsɪᴏɴᴀᴅᴏʀ ᴅᴇ ᴇxᴘ"   with lore "", " &a⚗ &fᴅᴜʀᴀçãᴏ: &a{DURATION}", "", " &7ᴇsᴛᴇ ɪᴍᴘᴜʟsɪᴏɴᴀᴅᴏʀ ɪʀᴀ ᴀᴜᴍᴇɴᴛᴀʀ", " &7sᴇᴜ ᴍᴜʟᴛɪᴘʟɪᴄᴀᴅᴏʀ ᴅᴇ ᴇxᴘ ᴇᴍ <##ff66e0>x2.0", "", "&aᴄʟɪǫᴜᴇ ᴄᴏᴍ ᴏ ʙᴏᴛãᴏ ᴅɪʀᴇɪᴛᴏ ᴘᴀʀᴀ ᴜsᴀʀ!"
+	set {Config::Utils4::DropBooster} to dragon breath named "<##5eff1f>ɪᴍᴘᴜʟsɪᴏɴᴀᴅᴏʀ ᴅᴇ ᴅʀᴏᴘ"  with lore "", " &a⚗ &fᴅᴜʀᴀçãᴏ: &a{DURATION}", "", " &7ᴇsᴛᴇ ɪᴍᴘᴜʟsɪᴏɴᴀᴅᴏʀ ɪʀᴀ ᴀᴜᴍᴇɴᴛᴀʀ", " &7ᴅʀᴏᴘ ᴅᴀs ғᴀʀᴍs ᴇᴍ <##5eff1f>x2"       and "", "&aᴄʟɪǫᴜᴇ ᴄᴏᴍ ᴏ ʙᴏᴛãᴏ ᴅɪʀᴇɪᴛᴏ ᴘᴀʀᴀ ᴜsᴀʀ!"
+	set {Config::Utils4::GenBooster} to dragon breath named  "<##36ff7f>ɪᴍᴘᴜʟsɪᴏɴᴀᴅᴏʀ ᴅᴇ ɢᴇʀᴀᴅᴏʀᴇs"  with lore "", " &a⚗ &fᴅᴜʀᴀçãᴏ: &a{DURATION}", "", " &7ᴇsᴛᴇ ɪᴍᴘᴜʟsɪᴏɴᴀᴅᴏʀ ɪʀᴀ ᴀᴜᴍᴇɴᴛᴀʀ", " &7ᴅʀᴏᴘ ᴅᴏs ɢᴇʀᴀᴅᴏʀᴇs ᴇᴍ <##36ff7f>x2"        and "", "&aᴄʟɪǫᴜᴇ ᴄᴏᴍ ᴏ ʙᴏᴛãᴏ ᴅɪʀᴇɪᴛᴏ ᴘᴀʀᴀ ᴜsᴀʀ!"
+	set {Config::Utils4::Potion::DoubleXP} to "ᴅᴜᴘʟᴏ xᴘ"
+	set {Config::Utils4::Potion::DoubleXPDesc::*} to " &7sᴇᴜ ᴇxᴘ ᴄᴏʟᴇᴛᴀᴅᴏ sᴇʀᴀ", " &7ᴍᴜʟᴛɪᴘʟɪᴄᴀᴅᴏ ᴘᴏʀ <##ff7373>x{MULTI}"
+	set {Config::Utils4::Potion::ExtraSell} to "ᴠᴇɴᴅᴀ ᴇxᴛʀᴀ"
+	set {Config::Utils4::Potion::ExtraSellDesc::*} to " &7sᴇᴜs ɢᴀɴʜᴏs ᴅᴏs ᴠᴇɴᴅᴇᴅᴏʀᴇs", " &7sᴇʀãᴏ ᴍᴜʟᴛɪᴘʟɪᴄᴀᴅᴏs ᴘᴏʀ <##ffd825>x{MULTI}"
+	set {Config::Utils4::Potion::DoubleGens} to "ᴅʀᴏᴘ ᴅᴜᴘʟᴏ ᴅᴇ ɢᴇʀᴀᴅᴏʀᴇs"
+	set {Config::Utils4::Potion::DoubleGensDesc::*} to " &7ᴠᴏᴄê ᴛᴇᴍ <##25ffbf>{CHANCE}%%&7 ᴅᴇ ᴄʜᴀɴᴄᴇ ᴅᴇ ᴅᴜᴘʟɪᴄᴀʀ", " &7sᴇᴜs ᴅʀᴏᴘs ᴅᴏs ɢᴇʀᴀᴅᴏʀᴇs"
+	set {Config::Utils4::Potion::DoubleDrop} to "ᴅʀᴏᴘ ᴅᴜᴘʟᴏ"
+	set {Config::Utils4::Potion::DoubleDropDesc::*} to " &7ᴠᴏᴄê ᴛᴇᴍ <##cb92ff>{CHANCE}%%&7 ᴅᴇ ᴄʜᴀɴᴄᴇ ᴅᴇ ᴅᴜᴘʟɪᴄᴀʀ", " &7sᴇᴜs ᴅʀᴏᴘs ᴅᴇ ᴛᴏᴅᴀs ᴀs ғᴀʀᴍs"
+	set {Config::Utils4::Potion::PotionType} to " &e🧪 &fᴛɪᴘᴏ ᴅᴇ ᴘᴏçãᴏ: &e{TYPE}"
+	set {Config::Utils4::Potion::Duration} to " &a⌛ &fᴅᴜʀᴀçãᴏ: &a{DURATION}"
+	set {Config::Utils4::Potion::ClickToUse} to "&aᴄʟɪǫᴜᴇ ᴄᴏᴍ ᴏ ʙᴏᴛãᴏ ᴅɪʀᴇɪᴛᴏ ᴘᴀʀᴀ ᴜsᴀʀ!"
+
+	# You can add more hours using for example ("01:00AM", "02:00AM")
+	set {Config::Dungeons::PotionsNewOffers::*} to "01:00AM" # Reset /potions offers
+	set {Config::Utils3::PetLevelup} to "&aSeu {PET} &anívelou para o nível &9{LEVEL}&a!"
+	set {Config::Utils3::PetAddedtoMenu} to "&aSucesso ao adicionar {NAME}&a ao seu menu de pets!"
+	set {Config::Utils3::PetLimit} to "&4❌ &cReachou o limite de pets no seu menu de pets!"
+	set {Config::Utils3::Summoned} to "&aSeu {NAME}&a foi invocado!"
+	set {Config::Utils3::Despawn} to "&aSeu {NAME}&a foi desinvocado!"
+	set {Config::Utils3::NotEnoughCrystalShards} to "&4❌ &cVocê não possui fragmentos de cristal!"
+	set {Config::Utils3::PotionShopRefresh} to "&aAs ofertas da loja de poções foram atualizadas!"
+	set {Config::Utils3::AlreadyPurchased} to "&4❌ &cEsta oferta já foi comprada!"
+	set {Config::Utils3::PurchasedPotion} to "&aComprada {POTION}&a!"
+	set {Config::Utils3::PotionOver} to "&aPoção {POTION}&a está esgotada!"
+	set {Config::Utils3::BoostOver} to "&a{BOOST}&a está esgotado!"
+	set {Config::Utils3::BoostStart} to "&aAtivado {NAME}&a por &6{TIME}&a!"
+	set {Config::Utils3::PotionActivated} to "&aAtivada {POTION}&a por &6{TIME}&a!"
+
+# --------[ Utils5 ]--------
+
+	set {Config::Utils5::Rebirth::Mess1} to " <##27ec24>&lʀᴇɴᴀsᴄɪᴍᴇɴᴛᴏ {REBIRTH}"
+	set {Config::Utils5::Rebirth::Mess2} to " &a○ &7Recompensas para esta Rebirth:"
+	set {Config::Utils5::Rebirth::Mess3} to " <##1ef91e>★ &7Multiplicador: <##1ef91e>x{OLD} <##1ce81c>→ <##1ef91e>x{NEW}"
+	set {Config::Utils5::Rebirth::Mess4} to " <##16fa3c>⛏ &7Geradores: <##16fa3c>+3 slots"
+	set {Config::Utils5::Rebirth::Mess5} to " <##27f024>Desejamos um bom jogo! &c❤"
+	set {Config::Utils5::Rebirth::Title::*} to "<##FCA805>&lRenascimento!", "<##f9f631>Renascimento <##FF00FF>&l{REBIRTH}"
+	wait 1 tick
+
+# --------[ Update v1.5 ]--------
+
+	set {Config::Update.V1.5::NotYourChest}      to "&4❌ &cVocê não pode vender os itens deste baú!"
+	set {Config::Update.V1.5::Nothingtosell}     to "&4❌ &cNada para vender!"
+	set {Config::Update.V1.5::SellwandDestroeyd} to "&4❌ &cSua varinha quebrou!"
+	set {Config::Update.V1.5::Success}           to "&aSua varinha vendeu &6&l{ITEMS} itens! &7(Total de {TOTAL}$)"
+
+	set {Config::Dungeons::AvailableCommands::*} to "leave", "feed", "kit", "shop", "ranks", "store", "dungeonhelp", "dungeonshelp"
+	set {Config::Dungeons::RequiredPlayers} to 1
+	set {Config::Dungeons::Counter} to 15
+	set {Config::Dungeons::DamageBlood} to true
+	set {Config::Dungeons::DungeonPrefix} to formatted gradient("&lDungeons", ("de3131", "ff5c5c"))
+
+	set {Config::Dungeons::DungeonTitle} to     "          &3&l▪ &8&m     &r {PREFIX} &8&m     &3&l ▪"
+	set {Config::Dungeons::DungeonOpen::*} to   "       &7Dungeons has just started!", "      &7If you want to join dungeons", "        &7type command &e/dungeons"
+	set {Config::Dungeons::DungeonClosed::*} to "      &7Dungeons have been closed!", "      &7The &cboss&7 was not defeated in", "            &7the allotted time!"
+	set {Config::Dungeons::DungeonEnd::*} to    "       &7Dungeons have been completed!", "  &7Congratulations on completing the dungeons!", "        &7Next Dungeons comming soon!"
+	wait 1 tick
+
+	set {Config::Dungeons::CloseTitle::*} to      "&4&lX", "&cAs Masmorras foram fechadas!"
+	set {Config::Dungeons::CloseMess} to          "&4❌ &cAs Masmorras foram fechadas!"
+	set {Config::Dungeons::Finished} to           "&4❌ &cAs Masmorras terminaram!"
+	set {Config::Dungeons::CountdownStop} to      "&eA contagem regressiva foi interrompida!"
+	set {Config::Dungeons::Sarting} to            "&aIniciando em &6&l{SECONDS} &asegundos!"
+	set {Config::Dungeons::BossDefeated} to       "&6&lSUCESSO! &aO Chefe foi derrotado!"
+	set {Config::Dungeons::PortalUsed} to         "&6&lSUCESSO! &aA Masmorra foi completada!"
+	set {Config::Dungeons::KeyReceived} to        " &e&nChave do portão foi recebida!"
+	set {Config::Dungeons::KeyReceivedBar} to     "&aA &6&lChave&a do portão foi recebida!"
+	set {Config::Dungeons::RoomCleared} to        "&6&lSUCESSO! &aSala &6&l{ROOM} &afoi limpa!"
+	set {Config::Dungeons::CommandDisabled::*} to "&4❌ &cComando desativado durante as Masmorras!", " &a&nSe quiser sair, digite /sair"
+	set {Config::Dungeons::NotInDungeons} to      "&4❌ &cVocê não está nas Masmorras!"
+	set {Config::Dungeons::AlreadyInDungeons} to  "&4❌ &cVocê já está nas Masmorras!"
+	set {Config::Dungeons::DungeonsClosed} to     "&4❌ &cAs Masmorras estão fechadas no momento!"
+	set {Config::Dungeons::PlayerJoined} to       "&6&l{PLAYER}&a entrou nas Masmorras! &6({PLAYERS})"
+	set {Config::Dungeons::PlayerLeft} to         "&6&l{PLAYER}&a saiu das Masmorras! &6({REAMINING})"
+	set {Config::Dungeons::YouJoined} to          "&aVocê entrou nas Masmorras!"
+	set {Config::Dungeons::YouLeft} to            "&aVocê saiu das Masmorras!"
+	set {Config::Dungeons::Death::*} to           "&4❌ &cVocê foi morto por monstros!", " &a&nVocê não perdeu nada, continue jogando :)"
+	set {Config::Dungeons::Received} to           " &e&nRecebeu&r &6&l&n{ITEM}&r &e&nNível&r &6&l&n{LEVEL}&r &e&n!"
+	set {Config::Dungeons::FoundChest} to         "&6&l{PLAYER} &aEncontrou um baú mágico!"
+	set {Config::Dungeons::NoKey} to              "&4❌ &cVocê não tem chaves!"
+	set {Config::Dungeons::BossGate} to           "&4❌ &cDerrote o chefe e o portão se abrirá!"
+	set {Config::Dungeons::StartGate} to          "&4❌ &cO portão abrirá quando as masmorras começarem!"
+	set {Config::Dungeons::GateLater} to          "&4❌ &cDesbloqueie os portões anteriores primeiro!"
+	set {Config::Dungeons::GateOpen} to           "&6&l{PLAYER} &aabriu o portão para a próxima área!"
+	set {Config::Dungeons::EndBossbar} to         "&aO &6&lPortão&a para retornar foi aberto!"
+	wait 1 tick
+
+	set {Config::Dungeons::StartTitle::*} to   "&7", "&aIniciar!"
+	set {Config::Dungeons::TimerTitle::*} to   "&c&l{SECONDS}", "&aPrepare-se!"
+	set {Config::Dungeons::BossSpawned::*} to  "&7", "<##FCA805>&lᴄʜᴇғᴇ ɴᴀsᴄᴇᴜ"
+	set {Config::Dungeons::VictoryTitle::*} to "&7", "<##FCA805>&lᴠɪᴛóʀɪᴀ!"
+	set {Config::Dungeons::StartSoon::*} to    "&c&l{SECONDS}", "&aSegundos para começar!"
+
+	set {Config::Dungeons::WaitingForPlayers} to "{PREFIX} &7| &aEsperando por jogadores &e(&a{CURRENT}&b/&6{REQUIRED}&e)"
+	set {Config::Dungeons::NextWaveIn} to        "&aPróxima onda em &6&l{KILLS} &aabates!"
+	set {Config::Dungeons::BossHealthBar} to     "&c&lᴠɪᴅᴀ ᴅᴏ ᴄʜᴇғᴇ &a(&6{HP}&e/&6{MAXHP}&a)"
+	set {Config::Dungeons::StartingBar} to       "&aIniciando em &6&l{SECONDS} &asegundos!"
+	set {Config::Dungeons::WaveStarting} to      "&aOnda &6&l{WAVE} &ainiciando em &6&l{SECONDS} &asegundos!"
+
+
+	set {Config::Dungeons::HealthTag} to "&c{NAME} &a{HEALTH}&e/&6{MAXHEALTH} &c❤"
+	set {Config::Dungeons::CinematicTime} to 6
+	set {Config::Dungeons::BossHealth} to 250
+	set {Config::Dungeons::GlobDiff} to 1 # Changing this to for example 1.5, mobs will spawn with armors, swords etc. often
+	set {Config::Dungeons::DropRate} to 1 # Same as Global Difficulty. Bigger number = more drops from mobs
+
+	# For multiple hours, use for example: "06:00PM", "07:00AM"
+	set {Config::Dungeons::DungeonStartTime::*} to "06:00PM"     # LocalTime Placeholder. /papi ecloud download LocalTime /papi reload
+	set {Config::Dungeons::DungeonEndTime::*} to   "07:00PM"       # LocalTime Placeholder. /papi ecloud download LocalTime /papi reload
+
+	set {Config::Dungeons::GensRequirements} to true # Do better generators require a higher level?
+	set {Config::Dungeons::GensReq} to "&4❌ &cSeu nível é muito baixo!"
+
+	send " <##00f818>○ &aReloaded &eUpdate V1.5" to {ReloadPlayer}
+
+# --------[ GUIS ]--------
+
+	set {Config::GUIS::DungeonsHelp::Default} to "&f七七七七七七七七끌"
+	set {Config::GUIS::DungeonsHelp::Bedrock} to "&8Ajuda da Dungeon"
+	set {Config::GUIS::DungeonsHelp::Slot1}   to bone named formatted gradient("&lMONSTROS", ("f9a600", "f8f04b")) with lore "", "&7Monstros aparecerão em cada onda", "&7e sua quantidade e &apoder&7 irá", "&7depender do &dnível da onda&7.", "", "&7Cada mob tem uma &6recompensa&7 que", "&7dropa após ser morto.", "", "&7Se você &cmorrer&7, você irá para o", "&7início da dungeon e você", "&7&6&nnão perderá&7 nada, então não se preocupe &3:)"
+	set {Config::GUIS::DungeonsHelp::Slot2}   to name tag named formatted gradient("&lPORTAS", ("f9a600", "f8f04b")) with lore "", "&7As portas podem ser &aabertas&7 após", "&7completar várias &6ondas&7 em cada sala.", "", "&7A &6última porta&7 que leva ao", "&cboss&7 só pode ser aberta quando", "&7todas as &aoutras portas&7 forem abertas.", "", "&7Para abrir a porta, apenas &e&nclique com botão direito&7 nela!"
+	set {Config::GUIS::DungeonsHelp::Slot3}   to bell named formatted gradient("&lRECOMPENSAS", ("f9a600", "f8f04b")) with lore "", "&7Cada mob que você mata te dá uma", "&7&drecompensa&7 aleatória. Quanto mais vida um", "&7mob tiver, &6melhor&7 a recompensa.", "", "&7Após matar o &cboss&7, todos que", "&7participaram da dungeon irão", "&7receber uma incrível &arecompensa&7."
+	set {Config::GUIS::DungeonsHelp::Slot4}   to chest minecart named formatted gradient("&lBAÚS", ("f9a600", "f8f04b")) with lore "", "&7Você pode encontrar &ebaús&7 por toda", "&7a &cdungeon&7 que irão te dar", "&7um gerador!", "", "&7Baús &anormalmente&7 dão geradores", "&7mas também existe uma chance", "&7de um &6Item GenBlock&7!"
+	set {Config::GUIS::DungeonsHelp::Slot5}   to campfire named formatted gradient("&lONDAS", ("f9a600", "f8f04b")) with lore "", "&7Cada &esala&7 tem várias ondas.", "&7Cada rodada fica mais &cdifícil&7 e", "&7algumas até tem &6novos monstros&7!", "", "&7Quanto mais avançada a &erodada&7, mais", "&cvida&7 e melhor &eequipamento&7", "&7os &amonstros&7 terão."
+	wait 1 tick
+	set {Config::GUIS::BuyGen::Default}     to      "&f七七七七七七七七㈀"
+	set {Config::GUIS::BuyGen::Bedrock}     to      "&8Máquinas"
+	set {Config::GUIS::BuyGen::Drop}        to      " <##fc9d1c>⌚ &fᴛᴇᴍᴘᴏ ᴅᴇ ɢᴇʀᴀçãᴏ ᴅᴇ ɪᴛᴇɴs: <##eab057>20s"
+	set {Config::GUIS::BuyGen::Cost}        to      " <##94fc00>☄ &fᴄᴜsᴛᴏ ᴅᴇ ᴄᴏᴍᴘʀᴀ: <##94fc00>{VAL}$"
+	set {Config::GUIS::BuyGen::ItemLevel}   to "&8ᴍáǫᴜɪɴᴀ ʟᴇᴠᴇʟ {LEVEL}★"
+	set {Config::GUIS::BuyGen::Value}       to     " <##86e301>$ &fᴠᴀʟᴏʀ ᴅᴏ ɪᴛᴇᴍ: <##86e301>{VALUE}$"
+	set {Config::GUIS::BuyGen::Info}        to      "&aᴄʟɪǫᴜᴇ ᴘᴀʀᴀ ᴄᴏᴍᴘʀᴀʀ!"
+	set {Config::GUIS::BuyGen::NotUnlocked} to red stained glass pane named "&c{GENERATOR}" with lore "", "&7ᴇsᴛᴇ ɢᴇʀᴀᴅᴏʀ sᴇʀá", "&7ᴅᴇsʙʟᴏǫᴜᴇᴀᴅᴏ ǫᴜᴀɴᴅᴏ ᴠᴏᴄê", "&7ᴀᴛɪɴɢɪʀ ᴏ ɴíᴠᴇʟ {LEVEL}!", "", "&cɢᴇʀᴀᴅᴏʀ ʙʟᴏǫᴜᴇᴀᴅᴏ!"
+	set {Config::GUIS::ItemUpgrade::Default} to "&f七七七七七七七七다"
+	set {Config::GUIS::ItemUpgrade::Bedrock} to "&8Upgrade"
+	set {Config::GUIS::ItemUpgrade::ToolBoosts} to sunflower named "&ePoderes da Ferramenta" with lore "", "&7ᴅᴇsʙʟᴏǫᴜᴇɪ ᴘᴏᴅᴇʀᴇs ᴘᴀʀᴀ sᴜᴀs ғᴇʀʀᴀᴍᴇɴᴛᴀs", "&7ᴇ ᴄᴏɴsɪɢᴀ ғᴀʀᴍᴀʀ ɪᴛᴇɴs ᴍᴀɪs ʀáᴘɪᴅᴏ", "", "&aᴄʟɪǫᴜᴇ ᴘᴀʀᴀ ᴀʙʀɪʀ!"
+	set {Config::GUIS::ItemUpgrade::Rebirth} to honeycomb named "&eRenascimento" with lore "", "&7ᴀᴅɪᴄɪᴏɴᴇ ᴍᴜʟᴛɪᴘʟɪᴄᴀᴅᴏʀᴇs ᴅᴇ ᴅɪɴʜᴇɪʀᴏ", "&7ᴇ ʟɪᴍɪᴛᴇs ᴅᴇ ɢᴇʀᴀᴅᴏʀᴇs ᴀᴏ ʀᴇɴᴀsᴄᴇʀ!", "", " <##efc422>★ &fʀᴇɴᴀsᴄɪᴍᴇɴᴛᴏ ᴀᴛᴜᴀʟ: <##efc422>{REBIRTH}", "", "&aᴄʟɪǫᴜᴇ ᴘᴀʀᴀ ᴀʙʀɪʀ!"
+	set {Config::GUIS::ItemUpgrade::UpgradeItem} to gold nugget with custom model data 7000 named "<##1ef91e>Atualizar Item" with lore "", "&7ᴀᴛᴜᴀʟɪᴢᴇ sᴇᴜ ɪᴛᴇᴍ ᴘᴀʀᴀ", "&7ᴏ ᴘʀóxɪᴍᴏ ɴíᴠᴇʟ ᴇ ᴀᴜᴍᴇɴᴛᴇ sᴇᴜs sᴛᴀᴛᴜs", "", " <##1ef91e>★ &fɴíᴠᴇʟ: <##1ef91e>{LEVEL} → {NEWLEVEL}", "", " <##84e001>☄ &fᴄᴜsᴛᴏ ᴅᴇ ᴄᴏᴍᴘʀᴀ <##84e001>{MONEY}$", " <##92f900>⛏ &fɪᴛᴇɴs ɴᴇᴄᴇssáʀɪᴏs: <##92f900>{ITEMS}", "", "&aᴄʟɪǫᴜᴇ ᴘᴀʀᴀ ᴀᴛᴜᴀʟɪᴢᴀʀ!"
+	set {Config::GUIS::ItemUpgrade::MaximumLevel} to gold nugget with custom model data 7000 named "&cNível Máximo" with lore "", "&7ᴇsᴛᴇ ɪᴛᴇᴍ ᴊá ᴇsᴛᴀ ɴᴏ ɴíᴠᴇʟ ᴍáxɪᴍᴏ"
+	wait 1 tick
+
+	set {Config::GUIS::GenInfo::Default} to "&f七七七七七七七七후"
+	set {Config::GUIS::GenInfo::Bedrock} to "&8Máquinas"
+	set {Config::GUIS::GenInfo::Upgrade} to "&eᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ ᴍᴇʟʜᴏʀᴀʀ!"
+	set {Config::GUIS::GenInfo::NextLevel} to " <##84e001>★ &fɴíᴠᴇʟ: <##84e001>{CURRENT} → {NEW}"
+	set {Config::GUIS::GenInfo::Cost} to " <##92f900>☄ &fᴄᴜsᴛᴏ ᴅᴇ ᴄᴏᴍᴘʀᴀ: <##92f900>{COST}$"
+	set {Config::GUIS::GenInfo::RepairCost} to " <##92f900>☄ &fᴄᴜsᴛᴏ ᴅᴇ ʀᴇᴘᴀʀᴏ: <##92f900>{COST}$"
+	set {Config::GUIS::GenInfo::Repair} to gold nugget with custom model data 7000 named "<##fcf932>Reparar" with lore "", "&7ᴇsᴛᴇ ɢᴇʀᴀᴅᴏʀ ᴇsᴛá ǫᴜᴇʙʀᴀᴅᴏ, ᴇɴᴛãᴏ", "&7ɴãᴏ ɢᴇʀᴀ ɪᴛᴇɴs. Conserte-o para", "&7ǫᴜᴇ ᴇʟᴇ ᴘᴏssᴀ ɢᴇʀᴀʀ ɴᴏᴠᴀᴍᴇɴᴛᴇ!", "", "{COST}", "", "&aᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ ʀᴇᴘᴀʀᴀʀ!"
+	set {Config::GUIS::GenInfo::MaxLevel} to gold nugget with custom model data 7000 named "<##fcf932>Nível Máximo" with lore "", "&7ᴇsᴛᴇ ɢᴇʀᴀᴅᴏʀ ᴇsᴛá ᴍᴇʟʜᴏʀᴀᴅᴏ", "&7ᴀᴏ ɴíᴠᴇʟ ᴍáxɪᴍᴏ!", "", "&cɴíᴠᴇʟ ᴍáxɪᴍᴏ ᴀʟᴄᴀɴçᴀᴅᴏ!"
+	set {Config::GUIS::GenInfo::UpgradeGen} to gold nugget with custom model data 7000 named "<##fcf932>Melhorar" with lore "", "&7ᴍᴇʟʜᴏʀᴇ sᴇᴜ ɢᴇʀᴀᴅᴏʀ ᴘᴀʀᴀ", "&7ᴏ ᴘʀóxɪᴍᴏ ɴíᴠᴇʟ ᴘᴀʀᴀ ɢᴇʀᴀʀ", "&7ɪᴛᴇɴs ᴍᴇʟʜᴏʀᴇs!", "", "{LEVEL}", "", "{COST}", "", "{INFO}"
+	set {Config::GUIS::GenInfo::Statistics} to gold nugget with custom model data 7000 named "<##f9f631>Estatísticas" with lore "", "&7ɪɴғᴏʀᴍᴀçõᴇs sᴏʙʀᴇ ᴏ", "&7ɢᴇʀᴀᴅᴏʀ ᴀᴛᴜᴀʟ", "", " <##fcf932>☄ &fɪᴛᴇɴs ɢᴇʀᴀᴅᴏs: <##fcf932>{ITEMS} ɪᴛᴇɴs", "", " <##efc422>★ &fᴠᴀʟᴏʀ ᴛᴏᴛᴀʟ: <##efc422>{TOTAL}$"
+	set {Config::GUIS::GenInfo::Informations} to gold nugget with custom model data 7000 named "<##f9f631>Informações" with lore "", "&7ᴠᴏᴄê ᴘᴏᴅᴇ ᴄᴏɴsᴇɢᴜɪʀ ᴀɪɴᴅᴀ ᴍᴀɪs ɪᴛᴇɴs ᴅᴏ sᴇᴜ", "&7ɢᴇʀᴀᴅᴏʀ ᴍᴇʟʜᴏʀᴀɴᴅᴏ ᴇʟᴇ ᴇᴍ /ᴍᴇʟʜᴏʀɪᴀs", "", " <##efc422>★ &fᴠᴇʟᴏᴄɪᴅᴀᴅᴇ: <##efc422>1 ɪᴛᴇᴍ / 20 sᴇɢ", "", "&aᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ ᴍᴇʟʜᴏʀᴀʀ!"
+
+	set {Config::GUIS::Tools::Default} to "&f七七七七七七七七한"
+	set {Config::GUIS::Tools::Bedrock} to "&8Selecionar Ferramenta"
+	set {Config::GUIS::Tools::Axe} to wooden axe named "&aMachado" with lore "", "&7ᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ ᴄᴏᴍᴘʀᴀʀ", "&7ᴜᴍ ɴᴏᴠᴏ ᴍᴀᴄʜᴀᴅᴏ!", "", "&aᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ sᴇʟᴇᴄɪᴏɴᴀʀ!"
+	set {Config::GUIS::Tools::Pickaxe} to wooden pickaxe named "&aPicareta" with lore "", "&7ᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ ᴄᴏᴍᴘʀᴀʀ", "&7ᴜᴍᴀ ɴᴏᴠᴀ ᴘɪᴄᴀʀᴇᴛᴀ!", "", "&aᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ sᴇʟᴇᴄɪᴏɴᴀʀ!"
+	set {Config::GUIS::Tools::Hoe} to wooden hoe named "&aEnxada" with lore "", "&7ᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ ᴄᴏᴍᴘʀᴀʀ", "&7ᴜᴍᴀ ɴᴏᴠᴀ ᴇɴxᴀᴅᴀ!", "", "&aᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ sᴇʟᴇᴄɪᴏɴᴀʀ!"
+	set {Config::GUIS::Tools::FishingRod} to fishing rod named "&aVara de Pesca" with lore "", "&7ᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ ᴄᴏᴍᴘʀᴀʀ", "&7ᴜᴍᴀ ɴᴏᴠᴀ ᴠᴀʀᴀ ᴅᴇ ᴘᴇsᴄᴀ!", "", "&aᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ sᴇʟᴇᴄɪᴏɴᴀʀ!"
+	wait 1 tick
+	set {Config::GUIS::BuyTool::Axe::Default} to "&f七七七七七七七七로七"
+	set {Config::GUIS::BuyTool::Axe::Bedrock} to "&8Comprar Machado"
+	set {Config::GUIS::BuyTool::Pickaxe::Default} to "&f七七七七七七七七로七七"
+	set {Config::GUIS::BuyTool::Pickaxe::Bedrock} to "&8Comprar Picareta"
+	set {Config::GUIS::BuyTool::Hoe::Default} to "&f七七七七七七七七로七七七"
+	set {Config::GUIS::BuyTool::Hoe::Bedrock} to "&8Comprar Enxada"
+	set {Config::GUIS::BuyTool::FishingRod::Default} to "&f七七七七七七七七로七七七七"
+	set {Config::GUIS::BuyTool::FishingRod::Bedrock} to "&8Comprar Vara de Pesca"
+	set {Config::GUIS::BuyTool::Confirm} to gold nugget with custom model data 7000 named "<##fcf932>Confirmar" with lore "", " <##24fc2a>☄ &fᴄᴜsᴛᴏ ᴅᴇ ᴄᴏᴍᴘʀᴀ: <##24fc2a>250$", "", "&aᴄʟɪǫᴜᴇ ᴘᴀʀᴀ ᴄᴏᴍᴘʀᴀʀ!"
+	wait 1 tick
+
+	set {Config::GUIS::Cave::Default} to "&f七七七七七七七七는"
+	set {Config::GUIS::Cave::Bedrock} to "&8Selecionar Caverna"
+	set {Config::GUIS::Cave::Public} to gold nugget with custom model data 7000 named "&aMina" with lore "", "&7ᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ ɪʀ", "&7ᴘᴀʀᴀ ᴀ ᴍɪɴᴀ", "", "&aᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ ᴛᴇʟᴇᴘᴏʀᴛᴀʀ!"
+	set {Config::GUIS::Cave::Private} to gold nugget with custom model data 7000 named "&aCaverna Privada" with lore "", "&7ᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ ɪʀ", "&7ᴘᴀʀᴀ sᴜᴀ ᴄᴀᴠᴇʀɴᴀ ᴘʀɪᴠᴀᴅᴀ", "", "&eᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ ᴛᴇʟᴇᴘᴏʀᴛᴀʀ!"
+
+	set {Config::GUIS::UnlockCave::Default} to "&f七七七七七七七七붕"
+	set {Config::GUIS::UnlockCave::Bedrock} to "&8Desbloquear Caverna"
+	set {Config::GUIS::UnlockCave::Cost} to gold nugget with custom model data 7000 named "&aConfirmar" with lore "", "&7sᴇ ᴠᴏᴄᴇ ǫᴜᴇʀ ᴄᴏᴍᴘʀᴀʀ", "&7ᴀ ᴄᴀᴠᴇʀɴᴀ, ᴄʟɪǫᴜᴇ ᴀǫᴜɪ!", "", " <##92f900>☄ &fᴄᴜsᴛᴏ ᴅᴇ ᴄᴏᴍᴘʀᴀ: <##92f900>1,000,000$", "", "&aᴄʟɪǫᴜᴇ ᴘᴀʀᴀ ᴄᴏᴍᴘʀᴀʀ!"
+
+	set {Config::GUIS::Refinery::Default} to "&f七七七七七七七七오"
+	set {Config::GUIS::Refinery::Bedrock} to "&8Comprar Refinaria"
+	set {Config::GUIS::Refinery::Oak} to blast furnace with enchantment glint named formatted gradient("&lREFINARIA DE CARVALHO", ("87c6ff", "87c6ff")) with lore "", "&7ᴀ ʀᴇғɪɴᴀʀɪᴀ ɪʀá ᴘᴇʀᴍɪᴛɪʀ ǫᴜᴇ ᴠᴏᴄê", "&7ᴛʀᴀɴsғᴏʀᴍᴇ ᴍᴀᴅᴇɪʀᴀ ᴅᴀ", "&7sᴇʀʀᴀʀɪᴀ ᴇᴍ ᴍᴀᴅᴇɪʀᴀ ᴀᴘʀɪᴍᴏʀᴀᴅᴀ", "", " <##92f900>☄ &fᴄᴜsᴛᴏ ᴅᴇ ᴄᴏᴍᴘʀᴀ: <##92f900>{COST}$", "", "&aᴄʟɪǫᴜᴇ ᴘᴀʀᴀ ᴄᴏᴍᴘʀᴀʀ!"
+	set {Config::GUIS::Refinery::Birch} to blast furnace with enchantment glint named formatted gradient("&lREFINARIA DE BETULA", ("87c6ff", "87c6ff")) with lore "", "&7ᴀ ʀᴇғɪɴᴀʀɪᴀ ɪʀá ᴘᴇʀᴍɪᴛɪʀ ǫᴜᴇ ᴠᴏᴄê", "&7ᴛʀᴀɴsғᴏʀᴍᴇ ᴍᴀᴅᴇɪʀᴀ ᴅᴀ", "&7sᴇʀʀᴀʀɪᴀ ᴇᴍ ᴍᴀᴅᴇɪʀᴀ ᴀᴘʀɪᴍᴏʀᴀᴅᴀ", "", " <##92f900>☄ &fᴄᴜsᴛᴏ ᴅᴇ ᴄᴏᴍᴘʀᴀ: <##92f900>{COST}$", "", "&aᴄʟɪǫᴜᴇ ᴘᴀʀᴀ ᴄᴏᴍᴘʀᴀʀ!"
+	set {Config::GUIS::Refinery::Spruce} to blast furnace with enchantment glint named formatted gradient("&lREFINARIA DE PINHEIRO", ("87c6ff", "87c6ff")) with lore "", "&7ᴀ ʀᴇғɪɴᴀʀɪᴀ ɪʀá ᴘᴇʀᴍɪᴛɪʀ ǫᴜᴇ ᴠᴏᴄê", "&7ᴛʀᴀɴsғᴏʀᴍᴇ ᴍᴀᴅᴇɪʀᴀ ᴅᴀ", "&7sᴇʀʀᴀʀɪᴀ ᴇᴍ ᴍᴀᴅᴇɪʀᴀ ᴀᴘʀɪᴍᴏʀᴀᴅᴀ", "", " <##92f900>☄ &fᴄᴜsᴛᴏ ᴅᴇ ᴄᴏᴍᴘʀᴀ: <##92f900>{COST}$", "", "&aᴄʟɪǫᴜᴇ ᴘᴀʀᴀ ᴄᴏᴍᴘʀᴀʀ!"
+	set {Config::GUIS::Refinery::DarkOak} to blast furnace with enchantment glint named formatted gradient("&lREFINARIA DE CARVALHO ESCURO", ("87c6ff", "87c6ff")) with lore "", "&7ᴀ ʀᴇғɪɴᴀʀɪᴀ ɪʀá ᴘᴇʀᴍɪᴛɪʀ ǫᴜᴇ ᴠᴏᴄê", "&7ᴛʀᴀɴsғᴏʀᴍᴇ ᴍᴀᴅᴇɪʀᴀ ᴅᴀ", "&7sᴇʀʀᴀʀɪᴀ ᴇᴍ ᴍᴀᴅᴇɪʀᴀ ᴀᴘʀɪᴍᴏʀᴀᴅᴀ", "", " <##92f900>☄ &fᴄᴜsᴛᴏ ᴅᴇ ᴄᴏᴍᴘʀᴀ: <##92f900>{COST}$", "", "&aᴄʟɪǫᴜᴇ ᴘᴀʀᴀ ᴄᴏᴍᴘʀᴀʀ!"
+	set {Config::GUIS::Refinery::Jungle} to blast furnace with enchantment glint named formatted gradient("&lREFINARIA DE SELVA", ("87c6ff", "87c6ff")) with lore "", "&7ᴀ ʀᴇғɪɴᴀʀɪᴀ ɪʀá ᴘᴇʀᴍɪᴛɪʀ ǫᴜᴇ ᴠᴏᴄê", "&7ᴛʀᴀɴsғᴏʀᴍᴇ ᴍᴀᴅᴇɪʀᴀ ᴅᴀ", "&7sᴇʀʀᴀʀɪᴀ ᴇᴍ ᴍᴀᴅᴇɪʀᴀ ᴀᴘʀɪᴍᴏʀᴀᴅᴀ", "", " <##92f900>☄ &fᴄᴜsᴛᴏ ᴅᴇ ᴄᴏᴍᴘʀᴀ: <##92f900>{COST}$", "", "&aᴄʟɪǫᴜᴇ ᴘᴀʀᴀ ᴄᴏᴍᴘʀᴀʀ!"
+	wait 1 tick
+
+	set {Config::GUIS::RefineryMenu::Default} to "&f七七七七七七七七역"
+	set {Config::GUIS::RefineryMenu::Bedrock} to "&8Refinaria"
+	set {Config::GUIS::RefineryMenu::Upgrade1Max::*} to " <##82dd01>⌛ &fAtual: &e5s &6&l(MAX)", "", "&eLimite de melhoria atingido!"
+	set {Config::GUIS::RefineryMenu::Upgrade1::*} to " <##82dd01>⌛ &fAtual: &610s &b→ &e5s", "", " <##90f600>☄ &fᴄᴜsᴛᴏ ᴅᴇ ᴄᴏᴍᴘʀᴀ: <##90f600>{COST}$", "", "&aClique aqui para melhorar!"
+	set {Config::GUIS::RefineryMenu::Upgrade2Max::*} to " <##82dd01>⌛ &fAtual: &aDesbloqueado!", "", "&eLimite de melhoria atingido!"
+	set {Config::GUIS::RefineryMenu::Upgrade2::*} to " <##82dd01>⌛ &fAtual: &cAinda não desbloqueado!", "", " <##90f600>☄ &fᴄᴜsᴛᴏ ᴅᴇ ᴄᴏᴍᴘʀᴀ: <##90f600>{COST}$", "", "&aClique aqui para melhorar!"
+	set {Config::GUIS::RefineryMenu::Speed} to gold nugget with custom model data 7000 named "<##90f600>Velocidade" with lore "", "&7ᴍᴇʟʜᴏʀᴀ sᴜᴀ ʀᴇғɪɴᴀʀɪᴀ ᴘᴀʀᴀ", "&7ɢᴇʀᴀʀ ɪᴛᴇɴs 2 ᴠᴇᴢᴇs", "&7ᴍᴀɪs ʀáᴘɪᴅᴏ ǫᴜᴇ ᴏ ɴᴏʀᴍᴀʟ", "{BOTTOM}"
+	set {Config::GUIS::RefineryMenu::DoubleDrop} to gold nugget with custom model data 7000 named "<##90f600>Drop Duplo" with lore "", "&7ᴍᴇʟʜᴏʀᴀ sᴜᴀ ʀᴇғɪɴᴀʀɪᴀ ᴘᴀʀᴀ", "&7ɢᴇʀᴀʀ 2 ᴍᴀᴅᴇɪʀᴀs ᴍᴇʟʜᴏʀᴀᴅᴀs", "&7ᴅᴇ ᴜᴍᴀ ᴠᴇᴢ!", "{BOTTOM}"
+	set {Config::GUIS::RefineryMenu::Refuel} to gold nugget with custom model data 7000 named "<##90f600>&lReabastecer" with lore "", "&7ᴀᴅɪᴄɪᴏɴᴇ ᴍᴀᴅᴇɪʀᴀ ɴᴀ ʀᴇғɪɴᴀʀɪᴀ", "&7ᴘᴀʀᴀ ᴄᴏᴍᴇçᴀʀ ᴀ ᴛʀᴀʙᴀʟʜᴀʀ ᴇ ᴄᴏɴᴠᴇʀᴛᴇʀ", "&7ᴇᴍ ᴍᴀᴅᴇɪʀᴀs ᴍᴇʟʜᴏʀᴀᴅᴀs", "", "&fInformações:", " <##82dd01>🪓 &fᴄᴏᴍʙᴜsᴛíᴠᴇʟ: <##82dd01>{BLOCKS} ʙʟᴏᴄᴏs", " <##90f600>⌛ &fᴛᴇᴍᴘᴏ: <##90f600>{ETA}", "", "&fA madeira que você colocar na refinaria", "&fPrecisa ser do mesmo tipo!", "", "&aClique aqui para reabastecer!"
+	set {Config::GUIS::IslandConfirm::Default} to "&f七七七七七七七七주"
+	set {Config::GUIS::IslandConfirm::Bedrock} to "&8Criar Ilha"
+	set {Config::GUIS::IslandConfirm::Confirm} to gold nugget with custom model data 7000 named "<##90f600>Começar a construir uma ilha?" with lore "", "&7ǫᴜᴀɴᴅᴏ sᴇʟᴇᴄɪᴏɴᴀᴅᴏ, {NPC} ɪʀá", "&7ᴄᴏɴsᴛʀᴜɪʀ ᴜᴍᴀ ɪʟʜᴀ ᴄᴏᴍ sᴇᴜ", "&7ᴘʀɪᴍᴇɪʀᴏ ɢᴇʀᴀᴅᴏʀ.", "", "&aClique aqui para construir!"
+	wait 1 tick
+	set {Config::GUIS::Ranks::Default} to "&f七七七七七七七七㈓"
+	set {Config::GUIS::Ranks::GoldName} to "&f"
+	set {Config::GUIS::Ranks::GoldInfo::*} to "", "&7ᴠᴏᴄê ᴘᴏᴅᴇ ᴄᴏᴍᴘʀᴀʀ ᴏ ʀᴀɴᴋ", "&7ᴇᴍ ɴᴏssᴏ sɪᴛᴇ!", "", " <##efc422>🔥 &fʙᴇɴᴇғíᴄɪᴏs ᴅᴏ ʀᴀɴᴋ:", "  <##84e001>• &eMensagem de Boas-vindas", "  <##84e001>• &eCores extras no chat", "  <##84e001>• &eEmotes no chat", "  <##84e001>• &eBaú Diário", "  <##84e001>• &eKit do Rank", "  <##84e001>• &eAcesso ao Sentar e Deitar", "  <##84e001>• &eAcesso ao &6/heal", "  <##84e001>• &eAcesso ao &6/feed", "  <##84e001>• &eAcesso ao &6/ec", "  <##84e001>• &eAcesso ao &6/wb", "  <##84e001>• &eLimite de Leilão &68", "", " <##24fc2a>☄ &fʙᴇɴᴇғíᴄɪᴏs ᴇsᴘᴇᴄɪᴀɪs:", "  <##84e001>• &eᴅᴇsʙʟᴏǫᴜᴇɪᴏ ɪɴsᴛᴀɴᴛâɴᴇᴏ ᴅᴀs &6ғᴀᴢᴇɴᴅᴀs &eɴíᴠᴇʟ &62", "", " <##fcf932>⭐ &fᴘʀᴇғɪxᴏ ᴅᴏ ʀᴀɴᴋ:", "  <##84e001>• &f &f{PLAYER} &6&l> &fOlá!", "", "&aClique aqui para comprar!"
+	set {Config::GUIS::Ranks::DiamondName} to "&f"
+	set {Config::GUIS::Ranks::DiamondInfo::*} to "", "&7ᴠᴏᴄê ᴘᴏᴅᴇ ᴄᴏᴍᴘʀᴀʀ ᴏ ʀᴀɴᴋ", "&7ᴇᴍ ɴᴏssᴏ sɪᴛᴇ!", "", " <##efc422>🔥 &fʙᴇɴᴇғíᴄɪᴏs ᴅᴏ ʀᴀɴᴋ:", "  <##84e001>• &eMensagem de Boas-vindas", "  <##84e001>• &eCores extras no chat", "  <##84e001>• &eEmotes no chat", "  <##84e001>• &eBaú Diário", "  <##84e001>• &eKit do Rank", "  <##84e001>• &eVoar no spawn", "  <##84e001>• &eAcesso ao Sentar e Deitar", "  <##84e001>• &eAcesso ao &6/repair", "  <##84e001>• &eAcesso ao &6/heal", "  <##84e001>• &eAcesso ao &6/feed", "  <##84e001>• &eAcesso ao &6/ec", "  <##84e001>• &eAcesso ao &6/wb", "  <##84e001>• &eLimite de Leilão &611", "", " <##24fc2a>☄ &fʙᴇɴᴇғíᴄɪᴏs ᴇsᴘᴇᴄɪᴀɪs:", "  <##84e001>• &eᴅᴇsʙʟᴏǫᴜᴇɪᴏ ɪɴsᴛᴀɴᴛâɴᴇᴏ ᴅᴀs &6ғᴀᴢᴇɴᴅᴀs &eɴíᴠᴇʟ &63", "", " <##fcf932>⭐ &fᴘʀᴇғɪxᴏ ᴅᴏ ʀᴀɴᴋ:", "  <##84e001>• &f &f{PLAYER} &b&l> &fOlá!", "", "&aClique aqui para comprar!"
+	set {Config::GUIS::Ranks::EmeraldName} to "&f"
+	set {Config::GUIS::Ranks::EmeraldInfo::*} to "", "&7ᴠᴏᴄê ᴘᴏᴅᴇ ᴄᴏᴍᴘʀᴀʀ ᴏ ʀᴀɴᴋ", "&7ᴇᴍ ɴᴏssᴏ sɪᴛᴇ!", "", " <##efc422>🔥 &fʙᴇɴᴇғíᴄɪᴏs ᴅᴏ ʀᴀɴᴋ:", "  <##84e001>• &eMensagem de Boas-vindas", "  <##84e001>• &eCores extras no chat", "  <##84e001>• &eEmotes no chat", "  <##84e001>• &eBaú Diário", "  <##84e001>• &eKit do Rank", "  <##84e001>• &eVoar no spawn", "  <##84e001>• &eAcesso ao Sentar e Deitar", "  <##84e001>• &eAcesso ao &6/repair", "  <##84e001>• &eAcesso ao &6/heal", "  <##84e001>• &eAcesso ao &6/feed", "  <##84e001>• &eAcesso ao &6/ec", "  <##84e001>• &eAcesso ao &6/wb", "  <##84e001>• &eLimite de Leilão &613", "", " <##24fc2a>☄ &fʙᴇɴᴇғíᴄɪᴏs ᴇsᴘᴇᴄɪᴀɪs:", "  <##84e001>• &eᴅᴇsʙʟᴏǫᴜᴇɪᴏ ɪɴsᴛᴀɴᴛâɴᴇᴏ ᴅᴀs &6ғᴀᴢᴇɴᴅᴀs &eɴíᴠᴇʟ &64", "", " <##fcf932>⭐ &fᴘʀᴇғɪxᴏ ᴅᴏ ʀᴀɴᴋ:", "  <##84e001>• &f &f{PLAYER} &a&l> &fOlá!", "", "&aClique aqui para comprar!"
+	set {Config::GUIS::Ranks::NetheriteName} to "&f"
+	set {Config::GUIS::Ranks::NetheriteInfo::*} to "", "&7ᴠᴏᴄê ᴘᴏᴅᴇ ᴄᴏᴍᴘʀᴀʀ ᴏ ʀᴀɴᴋ", "&7ᴇᴍ ɴᴏssᴏ sɪᴛᴇ!", "", " <##efc422>🔥 &fʙᴇɴᴇғíᴄɪᴏs ᴅᴏ ʀᴀɴᴋ:", "  <##84e001>• &eMensagem de Boas-vindas", "  <##84e001>• &eCores extras no chat", "  <##84e001>• &eEmotes no chat", "  <##84e001>• &eBaú Diário", "  <##84e001>• &eKit do Rank", "  <##84e001>• &eVoar no spawn", "  <##84e001>• &eAcesso ao Sentar e Deitar", "  <##84e001>• &eAcesso ao &6/repair", "  <##84e001>• &eAcesso ao &6/heal", "  <##84e001>• &eAcesso ao &6/feed", "  <##84e001>• &eAcesso ao &6/ec", "  <##84e001>• &eAcesso ao &6/wb", "  <##84e001>• &eAcesso ao &6/glow", "", " <##24fc2a>☄ &fʙᴇɴᴇғíᴄɪᴏs ᴇsᴘᴇᴄɪᴀɪs:", "  <##84e001>• &eᴅᴇsʙʟᴏǫᴜᴇɪᴏ ɪɴsᴛᴀɴᴛâɴᴇᴏ ᴅᴀs &6ғᴀᴢᴇɴᴅᴀs &eɴíᴠᴇʟ &65", "", " <##fcf932>⭐ &fᴘʀᴇғɪxᴏ ᴅᴏ ʀᴀɴᴋ:", "  <##84e001>• &f &f{PLAYER} &d&l> &fOlá!", "", "&aClique aqui para comprar!"
+	set {Config::GUIS::ClanTagColor::Default} to "&f七七七七七七七七화"
+	set {Config::GUIS::ClanTagColor::Bedrock} to "&8Cor da Tag do Clã"
+	set {Config::GUIS::ClanTagColor::Name} to "&l&nCor da TAG"
+	set {Config::GUIS::ClanTagColor::Colors::*} to "&cVermelho", "&6Laranja", "&aLima", "&eAmarelo", "&dMagenta", "&9Azul", "&3Ciano", "<##FF00FF>Arco-íris"
+	set {Config::GUIS::ClanTagColor::Desc::*} to "", "&fǫᴜᴇʀ ᴜᴍᴀ ᴄᴏʀ ᴅɪғᴇʀᴇɴᴛᴇ", "&fᴘᴀʀᴀ ᴀ ᴛᴀɢ ᴅᴏ sᴇᴜ ᴄʟã?", "", " <##fcf932>✎ &fᴄᴏʀ: {COLOR}", "", " <##fcf932>☄ &fᴄᴜsᴛᴏ: <##fcf932>{COST} ᴛᴏᴋᴇɴs", "", "&aᴄʟɪǫᴜᴇ ᴘᴀʀᴀ ᴄᴏᴍᴘʀᴀʀ!"
+	wait 1 tick
+	set {Config::GUI::Icons::List::*} to "⚡", "⛏", "❤", "⭐", "☄", "⌛", "⌚", "✎", "⚔", "☠", "🔥", "🗡", "🏹", "🪓", "🔱", "🎣", "🧪", "🛡", "✂", "🍖", "🔔"
+	set {Config::GUIS::Icons::Default} to "&f七七七七七七七七㈂"
+	set {Config::GUIS::Icons::Bedrock} to "&8Ícones"
+	set {Config::GUIS::Icons::Buy} to "&aᴄʟɪǫᴜᴇ ᴘᴀʀᴀ ᴄᴏᴍᴘʀᴀʀ!"
+	set {Config::GUIS::Icons::Selected} to "&eAtualmente selecionado!"
+	set {Config::GUIS::Icons::Prefix} to name tag named "&fPrefixo: &e{ICON}" with lore "", "&fᴀᴘós ᴀ ᴄᴏᴍᴘʀᴀ, ᴜᴍ &6{ICON} &fɪʀá", "&fᴀᴘᴀʀᴇᴄᴇʀ ɴᴀ ғʀᴇɴᴛᴇ ᴅᴏ sᴇᴜ ɴɪᴄᴋɴᴀᴍᴇ", "", " <##92f900>☄ &fᴄᴜsᴛᴏ ᴅᴇ ᴄᴏᴍᴘʀᴀ: <##92f900>100 ᴛᴏᴋᴇɴs", "", "{BOTTOM}"
+	set {Config::GUIS::Icons::Name} to "&l&nCor do Prefixo"
+	set {Config::GUIS::Icons::Colors::*} to "&cVermelho", "&6Laranja", "&aLima", "&eAmarelo", "&dMagenta", "&9Azul", "&3Ciano"
+	set {Config::GUIS::Icons::Desc::*} to "", "&fǫᴜᴇʀ ᴜᴍᴀ ᴄᴏʀ ᴅɪғᴇʀᴇɴᴛᴇ", "&fᴘᴀʀᴀ sᴇᴜ ᴘʀᴇғɪxᴏ?", "", " <##1ef91e>☽ &fᴄᴏʀ: {COLOR}", "", " <##92f900>☄ &fᴄᴜsᴛᴏ: <##92f900>Grátis", "", "&cᴠᴏᴄê ᴘʀᴇᴄɪsᴀ ᴛᴇʀ ᴜᴍ ᴘʀᴇғɪxᴏ", "&cᴘᴀʀᴀ ᴍᴜᴅᴀʀ ᴀ ᴄᴏʀ", "", "&aClique aqui para selecionar!"
+	set {Config::GUIS::Icons::Reset} to gold nugget with custom model data 7000 named "&cResetar Ícones" with lore "", "&7ʀᴇsᴇᴛᴀʀ sᴇᴜs íᴄᴏɴᴇs ᴇ", "&7ᴄᴏʀᴇs ᴘᴀʀᴀ ᴏ ᴘᴀᴅʀãᴏ", "", "&aClique aqui para resetar!"
+	wait 1 tick
+	set {Config::GUIS::Upgrades::Default} to "&f七七七七七七七七ㇴ"
+	set {Config::GUIS::Upgrades::Bedrock} to "&8Melhorias"
+	set {Config::GUIS::Upgrades::Tools} to iron pickaxe named "<##90f600>Ferramentas" with lore "", "&7ᴍᴇʟʜᴏʀᴇ ᴏ ɪᴛᴇᴍ ǫᴜᴇ ᴠᴏᴄê", "&7ᴇsᴛá sᴇɢᴜʀᴀɴᴅᴏ ᴘᴀʀᴀ ᴏ ᴘʀóxɪᴍᴏ", "&7ɴíᴠᴇʟ ᴘᴀʀᴀ ᴄᴏɴsᴇɢᴜɪʀ ɪᴛᴇɴs ᴍᴇʟʜᴏʀᴇs!", "", "&aClique aqui para melhorar!"
+	set {Config::GUIS::Upgrades::Generators} to hay block named "<##90f600>Geradores" with lore "", "&7ᴀǫᴜɪ ᴠᴏᴄê ᴠᴀɪ ᴍᴇʟʜᴏʀᴀʀ sᴜᴀ", "&7ɪʟʜᴀ ᴇ ɢᴇʀᴀᴅᴏʀᴇs ᴘᴀʀᴀ", "&7ɢᴇʀᴀʀ ɪᴛᴇɴs ᴍᴀɪs ʀáᴘɪᴅᴏ!", "", "&aClique aqui para melhorar!"
+	set {Config::GUIS::Upgrades::PrivateCave} to golden pickaxe named "<##90f600>Caverna Privada" with lore "", "&7ᴍᴇʟʜᴏʀᴇ sᴜᴀ ᴄᴀᴠᴇʀɴᴀ ᴘᴀʀᴀ", "&7ᴄᴏɴsᴇɢᴜɪʀ ᴏs ʀᴇᴄᴜʀsᴏs ɴᴇᴄᴇssáʀɪᴏs", "&7ᴇ ɴíᴠᴇɪs ᴍᴜɪᴛᴏ ᴍᴀɪs ʀáᴘɪᴅᴏ!", "", "&aClique aqui para melhorar!"
+	set {Config::GUIS::CaveUpgrades::Default} to "&f七七七七七七七七임"
+	set {Config::GUIS::CaveUpgrades::Bedrock} to "&8Melhorias da Caverna"
+	set {Config::GUIS::CaveUpgrades::Upgrade::*} to " <##92f900>☄ &fᴄᴜsᴛᴏ ᴅᴇ ᴄᴏᴍᴘʀᴀ: <##92f900>{COST}", "", "&aClique aqui para melhorar!"
+	set {Config::GUIS::CaveUpgrades::Limit} to "&eLimite de melhoria atingido!"
+	set {Config::GUIS::CaveUpgrades::Upgrade1} to "&cAinda não desbloqueado!"
+	set {Config::GUIS::CaveUpgrades::Upgrade1Max} to "&aDesbloqueado!"
+	set {Config::GUIS::CaveUpgrades::Upgrade1Info} to iron pickaxe with enchantment glint named "<##90f600>Mineração Rápida" with lore "", "&7ᴇɴǫᴜᴀɴᴛᴏ ᴇsᴛɪᴠᴇʀ ɴᴀ áʀᴇᴀ ᴅᴀ sᴜᴀ ᴍɪɴᴀ ᴘʀɪᴠᴀᴅᴀ", "&7ᴠᴏᴄê ʀᴇᴄᴇʙᴇʀá ᴜᴍ ᴇғᴇɪᴛᴏ ᴘᴇʀᴍᴀɴᴇɴᴛᴇ ᴅᴇ ᴘʀᴇssᴀ I", "", " <##84e001>⌛ &fᴀᴛᴜᴀʟ: <##84e001>{STATUS}", "{BOTTOM}"
+	set {Config::GUIS::CaveUpgrades::Upgrade2} to "&ex1 Exp &b→ &6x2 Exp"
+	set {Config::GUIS::CaveUpgrades::Upgrade2Max} to "&ex2 Exp"
+	set {Config::GUIS::CaveUpgrades::Upgrade2Info} to experience bottle named "<##90f600>Mais Experiência" with lore "", "&7ᴄᴀᴅᴀ ᴍɪɴéʀɪᴏ ǫᴜᴇ ᴠᴏᴄê ᴍɪɴᴇʀᴀʀ ᴠᴀɪ", "&7ᴛᴇ ᴅᴀʀ ᴍᴜɪᴛᴏ ᴍᴀɪs ᴇxᴘ ǫᴜᴇ ᴀɴᴛᴇs", "", " <##84e001>⌛ &fᴇxᴘ ᴀᴛᴜᴀʟ: <##84e001>{STATUS}", "{BOTTOM}"
+	set {Config::GUIS::CaveUpgrades::Upgrade3} to "&cAinda não desbloqueado!"
+	set {Config::GUIS::CaveUpgrades::Upgrade3Max} to "&aDesbloqueado!"
+	set {Config::GUIS::CaveUpgrades::Upgrade3Info} to filled map with enchantment glint named "<##90f600>Nova Área" with lore "", "&7ᴅᴇsʙʟᴏǫᴜᴇɪᴇ ᴀ ᴘʀóxɪᴍᴀ ʀᴇɢɪãᴏ ᴅᴀ ᴄᴀᴠᴇʀɴᴀ", "&7ᴏɴᴅᴇ ᴠᴏᴄê ᴇɴᴄᴏɴᴛʀᴀʀá ᴏs ᴍɪɴéʀɪᴏs ᴍᴀɪs ᴀᴠᴀɴçᴀᴅᴏs"
+	wait 1 tick
+
+	set {Config::GUIS::IsUpgrades::Default} to "&f七七七七七七七七몽"
+	set {Config::GUIS::IsUpgrades::Bedrock} to "&8Melhorias da Ilha"
+	set {Config::GUIS::IsUpgrades::Purchase::*} to " <##92f900>☄ &fᴄᴜsᴛᴏ ᴅᴇ ᴄᴏᴍᴘʀᴀ: <##92f900>{COST}", "", "&aᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ ᴍᴇʟʜᴏʀᴀʀ!"
+	set {Config::GUIS::IsUpgrades::Limit} to "&eʟɪᴍɪᴛᴇ ᴅᴇ ᴍᴇʟʜᴏʀɪᴀ ᴀʟᴄᴀɴçᴀᴅᴏ!"
+	set {Config::GUIS::IsUpgrades::InfoFormat} to "&6{CURRENT} &b→ &e{NEW}"
+	set {Config::GUIS::IsUpgrades::InfoFormatMax} to "&e{CURRENT} &6&l(MAX)"
+	set {Config::GUIS::IsUpgrades::NotUnlocked} to "&cAinda não desbloqueado!"
+	set {Config::GUIS::IsUpgrades::Unlocked} to "&aDesbloqueado!"
+	set {Config::GUIS::IsUpgrades::Upgrade1} to hay block named "<##f6f330>Máximo de Geradores" with lore "", "&7ᴀᴜᴍᴇɴᴛᴇ ᴏ ɴúᴍᴇʀᴏ", "&7ᴍáxɪᴍᴏ ᴅᴇ ɢᴇʀᴀᴅᴏʀᴇs", "&7ǫᴜᴇ ᴠᴏᴄᴇ̂ ᴘᴏᴅᴇ ᴄᴏʟᴏᴄᴀʀ!", "", " <##84e001>⌛ &fᴀᴛᴜᴀʟ: {CURRENT}", "{BOTTOM}"
+	set {Config::GUIS::IsUpgrades::Upgrade2} to nether star named "&aBônus de Gerador" with lore "", "&7ᴅá ᴀ ᴠᴏᴄᴇ̂ ᴜᴍᴀ ᴄʜᴀɴᴄᴇ", "&7ᴅᴇ ʀᴇᴄᴇʙᴇʀ ᴅʀᴏᴘ ᴅᴜᴘʟᴏ", "&7ᴅᴏs ɢᴇʀᴀᴅᴏʀᴇs!", "", " <##84e001>⌛ &fᴀᴛᴜᴀʟ: {CURRENT}", "{BOTTOM}"
+	set {Config::GUIS::IsUpgrades::Upgrade3} to item frame named "&aTamanho da Ilha" with lore "", "&7ᴀᴜᴍᴇɴᴛᴇ ᴏ ᴛᴀᴍᴀɴʜᴏ", "&7ᴅᴀ sᴜᴀ ɪʟʜᴀ ᴇ ᴄᴏɴsᴛʀᴜᴀ", "&7ᴇsᴛʀᴜᴛᴜʀᴀs ᴍᴀɪᴏʀᴇs!", "", " <##84e001>⌛ &fᴀᴛᴜᴀʟ: {CURRENT}", "{BOTTOM}"
+	set {Config::GUIS::IsUpgrades::Upgrade4} to campfire named "&aMembros da Ilha" with lore "", "&7ᴀᴜᴍᴇɴᴛᴇ ᴏ ᴍáxɪᴍᴏ", "&7ᴅᴇ ᴍᴇᴍʙʀᴏs ǫᴜᴇ ᴠᴏᴄᴇ̂ ᴘᴏᴅᴇ", "&7ᴀᴅɪᴄɪᴏɴᴀʀ ɴᴀ sᴜᴀ ɪʟʜᴀ!", "", " <##84e001>⌛ &fᴀᴛᴜᴀʟ: {CURRENT}", "{BOTTOM}"
+	set {Config::GUIS::IsUpgrades::Upgrade5} to feather named "&aVoo na Ilha" with lore "", "&7ᴘᴇʀᴍɪᴛᴇ ǫᴜᴇ ᴠᴏᴄᴇ̂ ᴇ ᴏᴜᴛʀᴏs", "&7ᴊᴏɢᴀᴅᴏʀᴇs ᴠᴏᴇᴍ ɴᴀ sᴜᴀ ɪʟʜᴀ!", "", " <##84e001>⌛ &fᴀᴛᴜᴀʟ: {CURRENT}", "{BOTTOM}"
+
+	set {Config::GUIS::Warps::Default} to "&f七七七七七七七七㈒"
+	set {Config::GUIS::Warps::Bedrock} to "&8Warps"
+	set {Config::GUIS::Warps::Warp1} to orange shulker box named "<##90f600>Caixas" with lore "", "&7ᴀᴏ ᴄʟɪᴄᴀʀ ᴠᴏᴄᴇ sᴇʀᴀ", "&7ᴛᴇʟᴇᴘᴏʀᴛᴀᴅᴏ ᴘᴀʀᴀ ᴀs ᴄᴀɪxᴀs", "", "&aᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ ᴛᴇʟᴇᴘᴏʀᴛᴀʀ!"
+	set {Config::GUIS::Warps::Warp2} to golden pickaxe named "<##90f600>Caverna" with lore "", "&7ᴀᴏ ᴄʟɪᴄᴀʀ ᴠᴏᴄᴇ sᴇʀᴀ", "&7ᴛᴇʟᴇᴘᴏʀᴛᴀᴅᴏ ᴘᴀʀᴀ ᴀ ᴄᴀᴠᴇʀɴᴀ", "", "&aᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ ᴛᴇʟᴇᴘᴏʀᴛᴀʀ!"
+	set {Config::GUIS::Warps::Warp3} to wheat named "<##90f600>Fazendas" with lore "", "&7ᴠᴇᴊᴀ ᴀs ᴡᴀʀᴘs ᴅɪsᴘᴏɴɪᴠᴇɪs", "&7ᴅᴀ ᴄᴀᴛᴇɢᴏʀɪᴀ ᴅᴇ ғᴀᴢᴇɴᴅᴀs", "", "&aᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ ᴛᴇʟᴇᴘᴏʀᴛᴀʀ!"
+	set {Config::GUIS::Warps::Warp4} to iron axe named "<##90f600>Serraria" with lore "", "&7ᴠᴇᴊᴀ ᴀs ᴡᴀʀᴘs ᴅɪsᴘᴏɴɪᴠᴇɪs", "&7ᴅᴀ ᴄᴀᴛᴇɢᴏʀɪᴀ ᴅᴇ sᴇʀʀᴀʀɪᴀ", "", "&aᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ ᴛᴇʟᴇᴘᴏʀᴛᴀʀ!"
+	set {Config::GUIS::Warps::Warp5} to sunflower named "<##90f600>Top 10" with lore "", "&7ᴀᴏ ᴄʟɪᴄᴀʀ ᴠᴏᴄᴇ sᴇʀᴀ", "&7ᴛᴇʟᴇᴘᴏʀᴛᴀᴅᴏ ᴘᴀʀᴀ ᴏ ᴛᴏᴘ", "", "&aᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ ᴛᴇʟᴇᴘᴏʀᴛᴀʀ!"
+	set {Config::GUIS::Warps::Warp6} to campfire named "<##90f600>Ilha" with lore "", "&7ᴀᴏ ᴄʟɪᴄᴀʀ ᴠᴏᴄᴇ sᴇʀᴀ", "&7ᴛᴇʟᴇᴘᴏʀᴛᴀᴅᴏ ᴘᴀʀᴀ sᴜᴀ ɪʟʜᴀ", "", "&aᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ ᴛᴇʟᴇᴘᴏʀᴛᴀʀ!"
+	set {Config::GUIS::Warps::Warp7} to pufferfish named "<##90f600>Lago" with lore "", "&7ᴀᴏ ᴄʟɪᴄᴀʀ ᴠᴏᴄᴇ sᴇʀᴀ", "&7ᴛᴇʟᴇᴘᴏʀᴛᴀᴅᴏ ᴘᴀʀᴀ ᴏ ʟᴀɢᴏ", "", "&aᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ ᴛᴇʟᴇᴘᴏʀᴛᴀʀ!"
+	set {Config::GUIS::Warps::Warp8} to dragon breath named "<##90f600>Área AFK" with lore "", "&7ᴀᴏ ᴄʟɪᴄᴀʀ ᴠᴏᴄᴇ sᴇʀᴀ", "&7ᴛᴇʟᴇᴘᴏʀᴛᴀᴅᴏ ᴘᴀʀᴀ ᴀ ᴀʀᴇᴀ ᴀғᴋ", "", "&aᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ ᴛᴇʟᴇᴘᴏʀᴛᴀʀ!"
+	wait 1 tick
+
+	set {Config::GUIS::Homes::Default} to "&f七七七七七七七七하"
+	set {Config::GUIS::Homes::Bedrock} to "&8Casas"
+	set {Config::GUIS::Homes::NoHome} to barrier named "&cVocê não tem casas!" with lore "", "&7sᴇ ᴠᴏᴄᴇ̂ ǫᴜɪsᴇʀ ᴄʀɪᴀʀ ᴜᴍᴀ ᴄᴀsᴀ", "&7ᴠᴏᴄᴇ̂ ᴘʀᴇᴄɪsᴀ ᴜsᴀʀ ᴏ ᴄᴏᴍᴀɴᴅᴏ", "", "&fᴄᴏᴍᴀɴᴅᴏs:", " <##1ef91e>◆ &fᴄʀɪᴀʀ ᴄᴀsᴀ: <##1ef91e>/sethome [nome]", "", "&eʟᴇᴍʙʀᴇ-sᴇ ᴅᴇ ᴇsᴄᴏʟʜᴇʀ ᴜᴍ ʙᴏᴍ ʟᴜɢᴀʀ!"
+	set {Config::GUIS::Homes::Home} to sunflower named "<##f9f631>Casa &l{NAME}" with lore "", "&fɪɴғᴏʀᴍᴀçᴏ̃ᴇs:", " <##1ef61e>★ &fᴅᴏɴᴏ: <##1ef61e>{OWNER}", " <##16f73b>⛏ &fᴍᴜɴᴅᴏ: <##16f73b>{WORLD}", "", "&7sᴇ ᴠᴏᴄᴇ̂ ǫᴜɪsᴇʀ sᴇ ᴛᴇʟᴇᴘᴏʀᴛᴀʀ ᴘᴀʀᴀ ᴄᴀsᴀ,", "&7ᴠᴏᴄᴇ̂ ᴘᴏᴅᴇ ғᴀᴢᴇʀ ɪssᴏ ғᴀᴄɪʟᴍᴇɴᴛᴇ", "&7ᴄʟɪᴄᴀɴᴅᴏ ɴᴇsᴛᴇ ɪᴛᴇᴍ!", "", "&eʙᴏᴛᴀ̃ᴏ ᴇsǫᴜᴇʀᴅᴏ ᴘᴀʀᴀ ᴛᴇʟᴇᴘᴏʀᴛᴀʀ!", "&bʙᴏᴛᴀ̃ᴏ ᴅɪʀᴇɪᴛᴏ ᴘᴀʀᴀ ᴅᴇʟᴇᴛᴀʀ!"
+
+	set {Config::GUIS::Colors::Default} to "&f七七七七七七七七집"
+	set {Config::GUIS::Colors::Bedrock} to "&8Cores"
+	set {Config::GUIS::Colors::ExampleMess} to "Esta é uma mensagem de exemplo"
+	set {Config::GUIS::Colors::GoldMessage} to magenta dye named "<##ffc23d>Cor %formatted gradient("&lɢᴏʟᴅ", ("fba800", "ffe608"))%" with lore "", " &cEsta cor pode ser usada pelo rank ɢᴏʟᴅ!", "", " <##84e001>★ &fᴇxᴇᴍᴘʟᴏ ᴅᴇ ᴍᴇɴsᴀɢᴇᴍ: {EXAMPLE}", "", "&aᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ sᴇʟᴇᴄɪᴏɴᴀʀ!"
+	set {Config::GUIS::Colors::GoldNick} to purple dye named "<##ffc23d>Cor %formatted gradient("&lɢᴏʟᴅ", ("fba800", "ffe608"))%" with lore "", " &cEsta cor pode ser usada pelo rank ɢᴏʟᴅ!", "", " <##84e001>★ &fᴇxᴇᴍᴘʟᴏ ᴅᴇ ɴɪᴄᴋ: {EXAMPLE}", "", "&aᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ sᴇʟᴇᴄɪᴏɴᴀʀ!"
+	set {Config::GUIS::Colors::BoldNick} to yellow dye named "<##ffc23d>Nick Negrito" with lore "", "&fEste efeito combina com cores!", "", " <##84e001>★ &fᴇxᴇᴍᴘʟᴏ ᴅᴇ ɴɪᴄᴋ: &f&l{EXAMPLE}", "", " <##92f900>☄ &fᴄᴜsᴛᴏ ᴅᴇ ᴄᴏᴍᴘʀᴀ: <##92f900>100 ᴛᴏᴋᴇɴs", "", "&aᴄʟɪǫᴜᴇ ᴘᴀʀᴀ ᴄᴏᴍᴘʀᴀʀ!"
+	set {Config::GUIS::Colors::DiamondNick} to purple dye named "<##ffc23d>Cor %formatted gradient("&lᴅɪᴀᴍᴏɴᴅ", ("54fbfb", "77ffff"))%" with lore "", " &cEsta cor pode ser usada pelo rank ᴅɪᴀᴍᴏɴᴅ!", "", " <##84e001>★ &fᴇxᴇᴍᴘʟᴏ ᴅᴇ ɴɪᴄᴋ: {EXAMPLE}", "", "&aᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ sᴇʟᴇᴄɪᴏɴᴀʀ!"
+	set {Config::GUIS::Colors::DiamondMessage} to magenta dye named "<##ffc23d>Cor %formatted gradient("&lᴅɪᴀᴍᴏɴᴅ", ("54fbfb", "77ffff"))%" with lore "", " &cEsta cor pode ser usada pelo rank ᴅɪᴀᴍᴏɴᴅ!", "", " <##84e001>★ &fᴇxᴇᴍᴘʟᴏ ᴅᴇ ᴍᴇɴsᴀɢᴇᴍ: %formatted gradient("Esta é uma mensagem de exemplo", ("3249fa", "7cd4f7"))%", "", "&aᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ sᴇʟᴇᴄɪᴏɴᴀʀ!"
+	set {Config::GUIS::Colors::NickColors} to map named "<##ffc23d>Cor do Nick" with lore "", "&fɪɴғᴏʀᴍᴀçõᴇs:", " <##84e001>★ &fᴇxᴇᴍᴘʟᴏ ᴅᴇ ɴɪᴄᴋ: {EXAMPLE}", "", " <##92f900>☄ &fᴄᴜsᴛᴏ ᴅᴇ ᴄᴏᴍᴘʀᴀ: <##92f900>50 ᴛᴏᴋᴇɴs", "", "&aᴄʟɪǫᴜᴇ ᴘᴀʀᴀ ᴄᴏᴍᴘʀᴀʀ!"
+	set {Config::GUIS::Colors::MessageColors} to paper named "<##ffc23d>Cor da Mensagem" with lore "", "&fɪɴғᴏʀᴍᴀçõᴇs:", " <##84e001>★ &fᴇxᴇᴍᴘʟᴏ ᴅᴇ ᴍᴇɴsᴀɢᴇᴍ: {EXAMPLE}", "", " <##92f900>☄ &fᴄᴜsᴛᴏ ᴅᴇ ᴄᴏᴍᴘʀᴀ: <##92f900>50 ᴛᴏᴋᴇɴs", "", "&aᴄʟɪǫᴜᴇ ᴘᴀʀᴀ ᴄᴏᴍᴘʀᴀʀ!"
+	set {Config::GUIS::Colors::Reset} to gold nugget with custom model data 7000 named "&cResetar Cores" with lore "", "&7ʀᴇsᴇᴛᴀʀ sᴜᴀ ᴍᴇɴsᴀɢᴇᴍ ᴇ ɴɪᴄᴋ", "&7ᴘᴀʀᴀ ᴀs ᴄᴏʀᴇs ᴘᴀᴅʀᴀᴏ.", "", "&aᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ ʀᴇsᴇᴛᴀʀ!"
+	wait 1 tick
+
+	set {Config::GUIS::Kits::Default} to "&f七七七七七七七七㈄"
+	set {Config::GUIS::Kits::Bedrock} to "&8Kits"
+	set {Config::GUIS::Kits::InfoClaim} to "&aᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ ᴄᴏʟᴇᴛᴀʀ!"
+	set {Config::GUIS::Kits::InfoGold} to "&cᴅɪsᴘᴏɴɪᴠᴇʟ ᴀ ᴘᴀʀᴛɪʀ ᴅᴏ ʀᴀɴᴋ ᴏᴜʀᴏ"
+	set {Config::GUIS::Kits::InfoDiamond} to "&cᴅɪsᴘᴏɴɪᴠᴇʟ ᴀ ᴘᴀʀᴛɪʀ ᴅᴏ ʀᴀɴᴋ ᴅɪᴀᴍᴀɴᴛᴇ"
+	set {Config::GUIS::Kits::InfoEmerald} to "&cᴅɪsᴘᴏɴɪᴠᴇʟ ᴀ ᴘᴀʀᴛɪʀ ᴅᴏ ʀᴀɴᴋ ᴇsᴍᴇʀᴀʟᴅᴀ"
+	set {Config::GUIS::Kits::InfoNetherite} to "&cᴅɪsᴘᴏɴɪᴠᴇʟ ᴀ ᴘᴀʀᴛɪʀ ᴅᴏ ʀᴀɴᴋ ɴᴇᴛʜᴇʀɪᴛᴇ"
+	set {Config::GUIS::Kits::Item::Keys} to tripwire hook with enchantment glint named "<##f9f631>&lChaves &r<##f9f631>Kit" with lore     "", "&7ᴀᴘᴇɴᴀs ʀᴀɴᴋ ᴅɪᴀᴍᴀɴᴛᴇ"   and "&7ᴘᴏᴅᴇ ᴄᴏʟᴇᴛᴀʀ ᴇsᴛᴇ ᴋɪᴛ", "", "&fɪɴғᴏʀᴍᴀçõᴇs:", " <##f99b1c>⌚ &fᴅɪsᴘᴏɴɪᴠᴇʟ ᴇᴍ: <##f99b1c>{TIME}"      and "", "&8ᴇsᴛᴇ ᴋɪᴛ ᴘᴏᴅᴇ sᴇʀ ᴄᴏʟᴇᴛᴀᴅᴏ", "&8ᴀ ᴄᴀᴅᴀ 24 ʜᴏʀᴀs.", "", "{INFO}"
+	set {Config::GUIS::Kits::Item::Default} to leather helmet named "<##f9f631>&lPadrão &r<##f9f631>Kit" with lore     "", "&7ǫᴜᴀʟǫᴜᴇʀ ᴊᴏɢᴀᴅᴏʀ"      and "&7ᴘᴏᴅᴇ ᴄᴏʟᴇᴛᴀʀ ᴇsᴛᴇ ᴋɪᴛ", "", "&fɪɴғᴏʀᴍᴀçõᴇs:", " <##f99b1c>⌚ &fᴅɪsᴘᴏɴɪᴠᴇʟ ᴇᴍ: <##f99b1c>{TIME}"   and "", "&8ᴇsᴛᴇ ᴋɪᴛ ᴘᴏᴅᴇ sᴇʀ ᴄᴏʟᴇᴛᴀᴅᴏ", "&8ᴀ ᴄᴀᴅᴀ 6 ʜᴏʀᴀs.", "", "{INFO}"
+	set {Config::GUIS::Kits::Item::Gold} to golden helmet named "<##f9f631>&lOuro &r<##f9f631>Kit" with lore         "", "&7ᴀᴘᴇɴᴀs ʀᴀɴᴋ ᴏᴜʀᴏ"      and "&7ᴘᴏᴅᴇ ᴄᴏʟᴇᴛᴀʀ ᴇsᴛᴇ ᴋɪᴛ", "", "&fɪɴғᴏʀᴍᴀçõᴇs:", " <##f99b1c>⌚ &fᴅɪsᴘᴏɴɪᴠᴇʟ ᴇᴍ: <##f99b1c>{TIME}"      and "", "&8ᴇsᴛᴇ ᴋɪᴛ ᴘᴏᴅᴇ sᴇʀ ᴄᴏʟᴇᴛᴀᴅᴏ", "&8ᴀ ᴄᴀᴅᴀ 24 ʜᴏʀᴀs.", "", "{INFO}"
+	set {Config::GUIS::Kits::Item::Diamond} to iron helmet named "<##f9f631>&lDiamante &r<##f9f631>Kit" with lore        "", "&7ᴀᴘᴇɴᴀs ʀᴀɴᴋ ᴅɪᴀᴍᴀɴᴛᴇ"   and "&7ᴘᴏᴅᴇ ᴄᴏʟᴇᴛᴀʀ ᴇsᴛᴇ ᴋɪᴛ", "", "&fɪɴғᴏʀᴍᴀçõᴇs:", " <##f99b1c>⌚ &fᴅɪsᴘᴏɴɪᴠᴇʟ ᴇᴍ: <##f99b1c>{TIME}"   and "", "&8ᴇsᴛᴇ ᴋɪᴛ ᴘᴏᴅᴇ sᴇʀ ᴄᴏʟᴇᴛᴀᴅᴏ", "&8ᴀ ᴄᴀᴅᴀ 24 ʜᴏʀᴀs.", "", "{INFO}"
+	set {Config::GUIS::Kits::Item::Emerald} to diamond helmet named "<##f9f631>&lEsmeralda &r<##f9f631>Kit" with lore     "", "&7ᴀᴘᴇɴᴀs ʀᴀɴᴋ ᴇsᴍᴇʀᴀʟᴅᴀ"   and "&7ᴘᴏᴅᴇ ᴄᴏʟᴇᴛᴀʀ ᴇsᴛᴇ ᴋɪᴛ", "", "&fɪɴғᴏʀᴍᴀçõᴇs:", " <##f99b1c>⌚ &fᴅɪsᴘᴏɴɪᴠᴇʟ ᴇᴍ: <##f99b1c>{TIME}"   and "", "&8ᴇsᴛᴇ ᴋɪᴛ ᴘᴏᴅᴇ sᴇʀ ᴄᴏʟᴇᴛᴀᴅᴏ", "&8ᴀ ᴄᴀᴅᴀ 24 ʜᴏʀᴀs.", "", "{INFO}"
+	set {Config::GUIS::Kits::Item::Netherite} to netherite helmet named "<##f9f631>&lNetherite &r<##f9f631>Kit" with lore "", "&7ᴀᴘᴇɴᴀs ʀᴀɴᴋ ɴᴇᴛʜᴇʀɪᴛᴇ", "&7ᴘᴏᴅᴇ ᴄᴏʟᴇᴛᴀʀ ᴇsᴛᴇ ᴋɪᴛ", "", "&fɪɴғᴏʀᴍᴀçõᴇs:", " <##f99b1c>⌚ &fᴅɪsᴘᴏɴɪᴠᴇʟ ᴇᴍ: <##f99b1c>{TIME}", "", "&8ᴇsᴛᴇ ᴋɪᴛ ᴘᴏᴅᴇ sᴇʀ ᴄᴏʟᴇᴛᴀᴅᴏ", "&8ᴀ ᴄᴀᴅᴀ 24 ʜᴏʀᴀs.", "", "{INFO}"
+	set {Config::GUIS::Kits::Item::Food} to honey bottle named "<##f9f631>&lComida &r<##f9f631>Kit" with lore          "", "&7ǫᴜᴀʟǫᴜᴇʀ ᴊᴏɢᴀᴅᴏʀ"      and "&7ᴘᴏᴅᴇ ᴄᴏʟᴇᴛᴀʀ ᴇsᴛᴇ ᴋɪᴛ", "", "&fɪɴғᴏʀᴍᴀçõᴇs:", " <##f99b1c>⌚ &fᴅɪsᴘᴏɴɪᴠᴇʟ ᴇᴍ: <##f99b1c>{TIME}"      and "", "&8ᴇsᴛᴇ ᴋɪᴛ ᴘᴏᴅᴇ sᴇʀ ᴄᴏʟᴇᴛᴀᴅᴏ", "&8ᴀ ᴄᴀᴅᴀ 6 ʜᴏʀᴀs.", "", "{INFO}"
+	wait 1 tick
+
+	set {Config::GUIS::Help::Default} to "&f七七七七七七七七어"
+	set {Config::GUIS::Help::Bedrock} to "&8Ajuda"
+	set {Config::GUIS::Help::Slot1} to bookshelf named "<##f6f330>Comandos" with lore "", " &3- &a/generators &3- &7Abre menu de geradores", " &3- &a/auctions &3- &7Menu de leilões dos jogadores", " &3- &a/autosell &3- &7Ativa ou desativa venda automática", " &3- &a/refinery &3- &7Abre a Loja de Refinaria", " &3- &a/sawmill &3- &7Teleporta para serraria", " &3- &a/island &3- &7Abre o painel da ilha", " &3- &a/tools &3- &7Loja com Ferramentas GenBlock", " &3- &a/clan &3- &7Informações sobre clãs", " &3- &a/home &3- &7Abre o menu de casas", " &3- &a/farm &3- &7Teleporta para fazenda", " &3- &a/cave &3- &7Teleporta para caverna"
+	set {Config::GUIS::Help::Slot2} to book named "<##f6f330>Como Ganhar" with lore "", "&7No modo &eGenBlock&7, para ganhar dinheiro", "&7você deve coletar &dItens&7 das minas,", "&7serrarias e fazendas, além de melhorar", "&7seus &aGeradores &7e ferramentas.", "", "&fEncontre sua melhor maneira de fazer", "&fdinheiro e chegar ao topo!"
+	set {Config::GUIS::Help::Slot3} to hopper named "<##f6f330>Melhorias" with lore "", "&7Aqui você pode melhorar sua mina,", "&7ferramentas e as estatísticas dos seus", "&7geradores atuais!", "", "&aᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ ᴍᴇʟʜᴏʀᴀʀ!"
+	set {Config::GUIS::Help::Slot4} to hay block named "<##f6f330>Geradores" with lore "", "&7Na loja de geradores você pode", "&7comprar geradores que irão criar", "&7itens para você vender!", "", "&bQuanto maior o nível do gerador,", "&bmelhores itens ele gera!", "", "&aᴄʟɪǫᴜᴇ ᴘᴀʀᴀ ᴄᴏᴍᴘʀᴀʀ!"
+	set {Config::GUIS::Help::Slot5} to campfire named "<##f6f330>Warps" with lore "", "&7Com warps você pode se mover pelo", "&7servidor muito mais rápido do que", "&7simplesmente andando!", "", "&aᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ ᴛᴇʟᴇᴘᴏʀᴛᴀʀ!"
+	set {Config::GUIS::Help::Slot6} to gold ingot named "<##f6f330>Loja" with lore "", "&7Nesta loja você pode comprar", "&7itens básicos ou blocos para construir", "&7e decorar sua ilha!", "", "&aᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ ᴍᴏsᴛʀᴀʀ!"
+	set {Config::GUIS::Help::Slot7} to golden helmet named "<##f6f330>Ranks" with lore "", "&7Nesta loja você pode comprar", "&7ranks que te darão permissões", "&7adicionais, como vários", "&7comandos ou cosméticos", "", "&aᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ ᴍᴏsᴛʀᴀʀ!"
+	set {Config::GUIS::Help::Slot8} to item frame named "<##f6f330>Cor do Chat" with lore "", "&7Você pode mudar a cor do seu", "&7nickname ou a cor de toda", "&7mensagem a qualquer momento", "&7comprando uma cor!", "", "&aᴄʟɪǫᴜᴇ ᴘᴀʀᴀ ᴄᴏᴍᴘʀᴀʀ!"
+	set {Config::GUIS::Help::Slot9} to iron axe named "<##f6f330>Kits" with lore "", "&7Receba kits do servidor feitos", "&7para seu rank para começar e", "&7continuar jogando no servidor!", "", "&bCada rank tem seu próprio", "&bconjunto único com itens diferentes!", "", "&aᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ ᴘᴇɢᴀʀ!"
+	set {Config::GUIS::Help::Slot10} to chest minecart named "<##f6f330>Recompensas Diárias" with lore "", "&7Ganhe recompensas de Chaves grátis", "&7todo dia e ganhe itens incríveis!", "", "&aᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ ᴘᴇɢᴀʀ!"
+	set {Config::GUIS::Help::Slot11} to name tag named "<##f6f330>Prefixo do Chat" with lore "", "&7Compre a cor e prefixo", "&7que será mostrado antes do", "&7seu nickname no chat!", "", "&aᴄʟɪǫᴜᴇ ᴘᴀʀᴀ ᴄᴏᴍᴘʀᴀʀ!"
+	set {Config::GUIS::Help::Slot12} to oak sapling named "<##f6f330>Sua Ilha" with lore "", "&7Abra o painel da ilha onde", "&7você encontrará várias configurações", "&7que permitirão gerenciá-la mais rápido!", "", "&aᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ ᴀʙʀɪʀ!"
+	wait 1 tick
+
+	set {Config::GUIS::SellChest::Default} to "&f七七七七七七七七을"
+	set {Config::GUIS::SellChest::Bedrock} to "&8BauDeVenda"
+	set {Config::GUIS::SellChest::Hologram} to gold nugget with custom model data 7000 named "<##f9f631>Holograma" with lore "", "&7ᴀᴛɪᴠᴀʀ ᴏᴜ ᴅᴇsᴀᴛɪᴠᴀʀ ᴏ ʜᴏʟᴏɢʀᴀᴍᴀ ᴍᴏsᴛʀᴀɴᴅᴏ", "&7ɪɴғᴏʀᴍᴀçõᴇs ᴀᴄɪᴍᴀ ᴅᴏ ʙᴀᴜ", "", " <##92f900>★ &fsᴛᴀᴛᴜs ᴀᴛᴜᴀʟ: {STATUS}", "", "&aᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ ᴀʟᴛᴇʀɴᴀʀ!"
+	set {Config::GUIS::SellChest::Informations} to gold nugget with custom model data 7000 named "<##f9f631>Informações" with lore "", "&7ɪɴғᴏʀᴍᴀçõᴇs sᴏʙʀᴇ ᴏ", "&7ʙᴀᴜ ᴅᴇ ᴠᴇɴᴅᴀ ᴀᴛᴜᴀʟ", "", " <##fcf932>☄ &fɪᴛᴇɴs ᴄᴏʟᴇᴛᴀᴅᴏs: <##fcf932>{ITEMS} ɪᴛᴇɴs", "", " <##efc422>★ &fᴠᴀʟᴏʀ ᴛᴏᴛᴀʟ: <##efc422>{TOTAL}$"
+
+	set {Config::GUIS::Tokens::Default} to "&f七七七七七七七七"
+	set {Config::GUIS::Tokens::Bedrock} to "&8Tokens"
+	set {Config::GUIS::Tokens::Purchased} to "&aᴘᴜʀᴄʜᴀsᴇᴅ!"
+	set {Config::GUIS::Tokens::ClickToBuy} to "&aᴄʟɪǫᴜᴇ ᴘᴀʀᴀ ᴄᴏᴍᴘʀᴀʀ!"
+	set {Config::GUIS::Tokens::Info} to book with enchantment glint named "&aComo conseguir Tokens?" with lore " &7ᴀ &bᴘʀɪᴍᴇɪʀᴀ &7ғᴏʀᴍᴀ ᴇ́ ᴊᴏɢᴀʀ ɴᴏ sᴇʀᴠɪᴅᴏʀ.", " &7ᴀ ᴄᴀᴅᴀ &e30 ᴍɪɴᴜᴛᴏs&7 ᴊᴏɢᴀᴅᴏs, ᴠᴏᴄᴇ̂", " &7ʀᴇᴄᴇʙᴇʀᴀ́ &d5 ᴛᴏᴋᴇɴs &7ᴇ ᴀʟɢᴜᴍ ᴅɪɴʜᴇɪʀᴏ.", "", " &7ᴀ &bsᴇɢᴜɴᴅᴀ &7ғᴏʀᴍᴀ ᴇ́ ᴀ ᴀ́ʀᴇᴀ ᴀғᴋ", " &7ᴜsᴀɴᴅᴏ ᴏ ᴄᴏᴍᴀɴᴅᴏ: &e/ᴡᴀʀᴘ ᴀғᴋ", "", " &7Você tem: &a{TOKENS} Tokens"
+	set {Config::GUIS::Tokens::Slot1} to golden helmet named "&fAcesso ao <##f6f330>/hat" with lore "", "&fᴀᴘᴏ́s ᴀ ᴄᴏᴍᴘʀᴀ ᴠᴏᴄᴇ̂ ʀᴇᴄᴇʙᴇʀᴀ́", "&fᴀᴄᴇssᴏ ᴀ ᴇsᴛᴇ ᴄᴏᴍᴀɴᴅᴏ!", "", " <##92f900>☄ &fᴄᴜsᴛᴏ ᴅᴇ ᴄᴏᴍᴘʀᴀ: <##92f900>500 Tokens", "", "{BOTTOM}"
+	set {Config::GUIS::Tokens::Slot2} to cake named "&fAcesso ao <##f6f330>/feed" with lore "", "&fᴀᴘᴏ́s ᴀ ᴄᴏᴍᴘʀᴀ ᴠᴏᴄᴇ̂ ʀᴇᴄᴇʙᴇʀᴀ́", "&fᴀᴄᴇssᴏ ᴀ ᴇsᴛᴇ ᴄᴏᴍᴀɴᴅᴏ!", "", " <##92f900>☄ &fᴄᴜsᴛᴏ ᴅᴇ ᴄᴏᴍᴘʀᴀ: <##92f900>500 Tokens", "", "{BOTTOM}"
+	set {Config::GUIS::Tokens::Slot3} to iron hoe named "&fEnxada de Ferro &6★15 &7(3x3 Área)" with lore "", "&fᴀᴘᴏ́s ᴀ ᴄᴏᴍᴘʀᴀ ᴠᴏᴄᴇ̂", "&fʀᴇᴄᴇʙᴇʀᴀ́ ᴇxᴀᴛᴀᴍᴇɴᴛᴇ ᴇsᴛᴇ ɪᴛᴇᴍ!", "", " <##92f900>☄ &fᴄᴜsᴛᴏ ᴅᴇ ᴄᴏᴍᴘʀᴀ: <##92f900>6000 Tokens", "", "{BOTTOM}"
+	set {Config::GUIS::Tokens::Slot4} to stick with enchantment glint named "&fItem: &bVarinha de Venda &7(100 Usos)" with lore "", "&fᴀᴘᴏ́s ᴀ ᴄᴏᴍᴘʀᴀ ᴠᴏᴄᴇ̂", "&fʀᴇᴄᴇʙᴇʀᴀ́ ᴇxᴀᴛᴀᴍᴇɴᴛᴇ ᴇsᴛᴇ ɪᴛᴇᴍ!", "", " <##92f900>☄ &fᴄᴜsᴛᴏ ᴅᴇ ᴄᴏᴍᴘʀᴀ: <##92f900>750 Tokens", "", "{BOTTOM}"
+	set {Config::GUIS::Tokens::Slot5} to {PetsEgg::Icon} named "&fItem: &aOvo Mágico" with lore "", "&fᴀᴘᴏ́s ᴀ ᴄᴏᴍᴘʀᴀ ᴠᴏᴄᴇ̂", "&fʀᴇᴄᴇʙᴇʀᴀ́ ᴇxᴀᴛᴀᴍᴇɴᴛᴇ ᴇsᴛᴇ ɪᴛᴇᴍ!", "", " <##92f900>☄ &fᴄᴜsᴛᴏ ᴅᴇ ᴄᴏᴍᴘʀᴀ: <##92f900>4500 Tokens", "", "{BOTTOM}"
+	set {Config::GUIS::Tokens::Slot6} to elytra named "&fItem: &eElytra" with lore "", "&fᴀᴘᴏ́s ᴀ ᴄᴏᴍᴘʀᴀ ᴠᴏᴄᴇ̂", "&fʀᴇᴄᴇʙᴇʀᴀ́ ᴇxᴀᴛᴀᴍᴇɴᴛᴇ ᴇsᴛᴇ ɪᴛᴇᴍ!", "", " <##92f900>☄ &fᴄᴜsᴛᴏ ᴅᴇ ᴄᴏᴍᴘʀᴀ: <##92f900>550 Tokens", "", "{BOTTOM}"
+	set {Config::GUIS::Tokens::Slot7} to tripwire hook with enchantment glint named "&fItem: &6Chave Lendária" with lore "", "&fᴀᴘᴏ́s ᴀ ᴄᴏᴍᴘʀᴀ ᴠᴏᴄᴇ̂", "&fʀᴇᴄᴇʙᴇʀᴀ́ ᴇxᴀᴛᴀᴍᴇɴᴛᴇ ᴇsᴛᴇ ɪᴛᴇᴍ!", "", " <##92f900>☄ &fᴄᴜsᴛᴏ ᴅᴇ ᴄᴏᴍᴘʀᴀ: <##92f900>500 Tokens", "", "{BOTTOM}"
+	set {Config::GUIS::Tokens::Slot8} to feather named "&fAcesso ao <##f6f330>/fly" with lore "", "&fᴀᴘᴏ́s ᴀ ᴄᴏᴍᴘʀᴀ ᴠᴏᴄᴇ̂ ʀᴇᴄᴇʙᴇʀᴀ́", "&fᴀᴄᴇssᴏ ᴀ ᴇsᴛᴇ ᴄᴏᴍᴀɴᴅᴏ!", "", " <##92f900>☄ &fᴄᴜsᴛᴏ ᴅᴇ ᴄᴏᴍᴘʀᴀ: <##92f900>1500 Tokens", "", "{BOTTOM}"
+	set {Config::GUIS::Tokens::Slot9} to stick with enchantment glint named "&fItem: &bVarinha de Venda &7(250 Usos)" with lore "", "&fᴀᴘᴏ́s ᴀ ᴄᴏᴍᴘʀᴀ ᴠᴏᴄᴇ̂", "&fʀᴇᴄᴇʙᴇʀᴀ́ ᴇxᴀᴛᴀᴍᴇɴᴛᴇ ᴇsᴛᴇ ɪᴛᴇᴍ!", "", " <##92f900>☄ &fᴄᴜsᴛᴏ ᴅᴇ ᴄᴏᴍᴘʀᴀ: <##92f900>1200 Tokens", "", "{BOTTOM}"
+	set {Config::GUIS::Tokens::Slot10} to hay block named "&fDinheiro: &a1.000.000.000$" with lore "", "&fᴀᴘᴏ́s ᴀ ᴄᴏᴍᴘʀᴀ ᴠᴏᴄᴇ̂", "&fʀᴇᴄᴇʙᴇʀᴀ́ ᴇssᴀ ǫᴜᴀɴᴛɪᴀ ᴅᴇ ᴅɪɴʜᴇɪʀᴏ!", "", " <##92f900>☄ &fᴄᴜsᴛᴏ ᴅᴇ ᴄᴏᴍᴘʀᴀ: <##92f900>1500 Tokens", "", "{BOTTOM}"
+	set {Config::GUIS::Tokens::Slot11} to chest named "&fItem: &eBaú de Venda &7(10x10)" with lore "", "&fᴀᴘᴏ́s ᴀ ᴄᴏᴍᴘʀᴀ ᴠᴏᴄᴇ̂", "&fʀᴇᴄᴇʙᴇʀᴀ́ ᴇxᴀᴛᴀᴍᴇɴᴛᴇ ᴇsᴛᴇ ɪᴛᴇᴍ!", "", " <##92f900>☄ &fᴄᴜsᴛᴏ ᴅᴇ ᴄᴏᴍᴘʀᴀ: <##92f900>2000 Tokens", "", "{BOTTOM}"
+	set {Config::GUIS::Tokens::Slot12} to beacon named "&fItem: &dSinalizador" with lore "", "&fᴀᴘᴏ́s ᴀ ᴄᴏᴍᴘʀᴀ ᴠᴏᴄᴇ̂", "&fʀᴇᴄᴇʙᴇʀᴀ́ ᴇxᴀᴛᴀᴍᴇɴᴛᴇ ᴇsᴛᴇ ɪᴛᴇᴍ!", "", " <##92f900>☄ &fᴄᴜsᴛᴏ ᴅᴇ ᴄᴏᴍᴘʀᴀ: <##92f900>3500 Tokens", "", "{BOTTOM}"
+
+	set {Config::GUIS::Top::Default} to "&f七七七七七七七七뜻"
+	set {Config::GUIS::Top::Bedrock} to "&8Top"
+	set {Config::GUIS::Top::Slot1} to sunflower named "<##ede21a>&lᴛᴏᴘ 10 ᴊᴏɢᴀᴅᴏʀᴇs ᴅɪɴʜᴇɪʀᴏ" with lore "&7ᴛᴏᴘ 10 ᴍᴇʟʜᴏʀᴇs ᴊᴏɢᴀᴅᴏʀᴇs ᴇᴍ ᴛᴇʀᴍᴏs ᴅᴇ ᴅɪɴʜᴇɪʀᴏ"
+	set {Config::GUIS::Top::Slot2} to golden pickaxe named "<##1fde4c>&lᴛᴏᴘ 10 ᴊᴏɢᴀᴅᴏʀᴇs ʙʟᴏᴄᴏs" with lore "&7ᴛᴏᴘ 10 ᴍᴇʟʜᴏʀᴇs ᴊᴏɢᴀᴅᴏʀᴇs ᴇᴍ ᴛᴇʀᴍᴏs ᴅᴇ ʙʟᴏᴄᴏs ǫᴜᴇʙʀᴀᴅᴏs"
+	set {Config::GUIS::Top::Slot3} to clock named "<##e351e8>&lᴛᴏᴘ 10 ᴊᴏɢᴀᴅᴏʀᴇs ᴛᴇᴍᴘᴏ" with lore "&7ᴛᴏᴘ 10 ᴍᴇʟʜᴏʀᴇs ᴊᴏɢᴀᴅᴏʀᴇs ᴇᴍ ᴛᴇʀᴍᴏs ᴅᴇ ᴛᴇᴍᴘᴏ ᴅᴇ ᴊᴏɢᴏ"
+	set {Config::GUIS::Top::Slot4} to bone named "<#f24949>&lᴛᴏᴘ 10 ᴊᴏɢᴀᴅᴏʀᴇs ᴍᴏʙs" with lore "&7ᴛᴏᴘ 10 ᴍᴇʟʜᴏʀᴇs ᴊᴏɢᴀᴅᴏʀᴇs ᴇᴍ ᴛᴇʀᴍᴏs ᴅᴇ ᴍᴏʙs ᴍᴏʀᴛᴏs"
+	set {Config::GUIS::Top::Slot5} to amethyst shard named "<#6375ff>&lᴛᴏᴘ 10 ᴊᴏɢᴀᴅᴏʀᴇs ᴛᴏᴋᴇɴs" with lore "&7ᴛᴏᴘ 10 ᴍᴇʟʜᴏʀᴇs ᴊᴏɢᴀᴅᴏʀᴇs ᴇᴍ ᴛᴇʀᴍᴏs ᴅᴇ ᴛᴏᴋᴇɴs"
+	set {Config::GUIS::Top::Slot6} to experience bottle named "<#e6e325>&lᴛᴏᴘ 10 ᴊᴏɢᴀᴅᴏʀᴇs ɴɪᴠᴇʟ" with lore "&7ᴛᴏᴘ 10 ᴍᴇʟʜᴏʀᴇs ᴊᴏɢᴀᴅᴏʀᴇs ᴇᴍ ᴛᴇʀᴍᴏs ᴅᴇ ɴɪᴠᴇʟ"
+	set {Config::GUIS::Top::TopFormat1} to "<##fff42b>{POS}. &f{NICK} <##fff42b>({AMOUNT})"
+	set {Config::GUIS::Top::TopFormat2} to "<##33f561>{POS}. &f{NICK} <##33f561>({AMOUNT})"
+	set {Config::GUIS::Top::TopFormat3} to "<##fa6bff>{POS}. &f{NICK} <##fa6bff>({AMOUNT})"
+	set {Config::GUIS::Top::TopFormat4} to "<##ff5e5e>{POS}. &f{NICK} <##ff5e5e>({AMOUNT})"
+	set {Config::GUIS::Top::TopFormat5} to "<##8593ff>{POS}. &f{NICK} <##8593ff>({AMOUNT})"
+	set {Config::GUIS::Top::TopFormat6} to "<##fcf932>{POS}. &f{NICK} <##fcf932>({AMOUNT})"
+	wait 1 tick
+
+	set {Config::GUIS::Potions::Default} to "&f七七七七七七七七가"
+	set {Config::GUIS::Potions::Bedrock} to "&8Potions"
+	set {Config::GUIS::Potions::Active} to sunflower named "<##ffff2b>Poções Ativas" with lore "", "&7ᴠᴇʀɪғɪǫᴜᴇ sᴜᴀs ᴘᴏᴄᴏᴇs", "&7ᴀᴛɪᴠᴀs ᴇ ᴅᴜʀᴀçãᴏ ʀᴇsᴛᴀɴᴛᴇ", "", "&aᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ ᴠᴇʀ!"
+	set {Config::GUIS::Potions::Informations} to oak sign named "<##00fc15>&lInformações" with lore "", "<##24ff50>ᴛᴏᴅᴏs ᴏs ᴅɪᴀs &7ᴠᴏᴄê ᴇɴᴄᴏɴᴛʀᴀʀá ɴᴏᴠᴀs", "&7ᴏғᴇʀᴛᴀs ᴅᴇ ᴘᴏçõᴇs ɴᴀ &bʟᴏᴊᴀ", "", "&7ᴠᴏᴄê ᴘᴏᴅᴇ &6ᴀᴛᴜᴀʟɪᴢᴀʀ &7ᴀ ʟᴏᴊᴀ", "&7ᴀ ǫᴜᴀʟǫᴜᴇʀ ᴍᴏᴍᴇɴᴛᴏ ᴘᴀʀᴀ ʀᴇᴄᴇʙᴇʀ", "&7ᴀʟɢᴜᴍᴀs &aɴᴏᴠᴀs ᴏғᴇʀᴛᴀs &7ᴅᴇ ᴘᴏçõᴇs", "", "<##b4a1fc>ғʀᴀɢᴍᴇɴᴛᴏs ᴅᴇ ᴄʀɪsᴛᴀʟ &7ᴄᴀᴇᴍ ᴍᴜɪᴛᴏ", "&7ʀᴀʀᴀᴍᴇɴᴛᴇ ᴅᴀs <##f4ff24>ғᴀᴢᴇɴᴅᴀs"
+	set {Config::GUIS::Potions::Refresh} to honeycomb named "<##92f900>Atualizar oferta da loja" with lore "", "&7ᴀᴛᴜᴀʟɪᴢᴇ ᴀ ᴏғᴇʀᴛᴀ ᴅᴀ ʟᴏᴊᴀ ᴘᴀʀᴀ", "&7ʀᴇᴄᴇʙᴇʀ ɴᴏᴠᴀs ᴏғᴇʀᴛᴀs ᴅᴇ ᴘᴏᴄᴏᴇs", "", " <##92f900>⚗ &fᴄᴜsᴛᴏ ᴅᴇ ᴄᴏᴍᴘʀᴀ: <##92f900>16 ғʀᴀɢᴍᴇɴᴛᴏs ᴅᴇ ᴄʀɪsᴛᴀʟ", "", "&aᴄʟɪǫᴜᴇ ᴘᴀʀᴀ ᴄᴏᴍᴘʀᴀʀ!"
+	set {Config::GUIS::Potions::PotionShop} to brewing stand named "<##ffe14d>Loja de Poções" with lore "", "&7ᴀǫᴜɪ ᴠᴏᴄê ᴘᴏᴅᴇ ᴄᴏᴍᴘʀᴀʀ &dᴘᴏçõᴇs", "&7ǫᴜᴇ ɪʀãᴏ &aᴛᴇᴍᴘᴏʀᴀʀɪᴀᴍᴇɴᴛᴇ &7ᴀᴊᴜᴅᴀʀ", "&7ᴠᴏᴄê ᴀ &bᴘʀᴏɢʀᴇᴅɪʀ &7ᴍᴀɪs ʀáᴘɪᴅᴏ", "", "&7ᴠᴏᴄê ᴘᴏᴅᴇ ᴄᴏᴍᴘʀᴀʀ &6ᴘᴏçõᴇs", "&7ᴜsᴀɴᴅᴏ <##b4a1fc>ғʀᴀɢᴍᴇɴᴛᴏs ᴅᴇ ᴄʀɪsᴛᴀɪs", "&7ᴏʙᴛɪᴅᴏs ᴅᴀs &aғᴀᴢᴇɴᴅᴀs"
+	set {Config::GUIS::Potions::Purchased} to structure void named "<##ff4d4d>Oferta comprada" with lore "", "&7ᴇsᴛᴀ ᴏғᴇʀᴛᴀ ᴊá ғᴏɪ", "&7ᴄᴏᴍᴘʀᴀᴅᴀ. ᴠᴏʟᴛᴇ ᴀᴍᴀɴʜã", "&7ᴘᴀʀᴀ ᴀ ᴘʀóxɪᴍᴀ ᴘᴏçãᴏ"
+	set {Config::GUIS::Potions::PurchaseCost::*} to " <##92f900>☄ &fᴄᴜsᴛᴏ ᴅᴇ ᴄᴏᴍᴘʀᴀ: <##92f900>{COST} ғʀᴀɢᴍᴇɴᴛᴏs ᴅᴇ ᴄʀɪsᴛᴀʟ"
+
+	set {Config::GUIS::ActivePotions::Default} to "&f七七七七七七七七순"
+	set {Config::GUIS::ActivePotions::Bedrock} to "&8Poções Ativas"
+	set {Config::GUIS::ActivePotions::Back} to gold nugget with custom model data 7000 named "&cVoltar"
+	set {Config::GUIS::ActivePotions::Reaming} to "&7ᴛᴇᴍᴘᴏ ʀᴇsᴛᴀɴᴛᴇ: <##92f900>{ETA}"
+	wait 1 tick
+
+	set {Config::GUIS::Pets::Default} to "&f七七七七七七七七割"
+	set {Config::GUIS::Pets::Bedrock} to "&8Pets"
+	set {Config::GUIS::Pets::Info} to bone named "<##fcf932>Pets" with lore "&7ᴠᴇᴊᴀ ᴇ ɢᴇʀᴇɴᴄɪᴇ ᴛᴏᴅᴏs ᴏs sᴇᴜs ᴘᴇᴛs", "", "&7ᴜᴘᴇ sᴇᴜs ᴘᴇᴛs ᴊᴏɢᴀɴᴅᴏ", "&7ᴇ sᴇ ᴅɪᴠᴇʀᴛɪɴᴅᴏ ɴᴏ sᴇʀᴠɪᴅᴏʀ!", "", " <##efc422>☄ &fᴘᴇᴛ sᴇʟᴇᴄɪᴏɴᴀᴅᴏ: <##efc422>{PET}"
+	set {Config::GUIS::Pets::Summon} to "&eʙᴏᴛãᴏ ᴇsǫᴜᴇʀᴅᴏ ᴘᴀʀᴀ sᴜᴍᴏɴᴀʀ!"
+	set {Config::GUIS::Pets::Despawn} to "&cʙᴏᴛãᴏ ᴇsǫᴜᴇʀᴅᴏ ᴘᴀʀᴀ ʀᴇᴍᴏᴠᴇʀ!"
+	set {Config::GUIS::Pets::Convert} to "&eʙᴏᴛãᴏ ᴅɪʀᴇɪᴛᴏ ᴘᴀʀᴀ ᴄᴏɴᴠᴇʀᴛᴇʀ ᴇᴍ ɪᴛᴇᴍ!"
+	set {Config::GUIS::Pets::Close} to gold nugget with custom model data 7000 named "&cFechar"
+
+	set {Config::GUIS::PetFormat::Lore} to "&8ᴘᴇᴛ ᴅᴇ ɢᴇɴs"
+	set {Config::GUIS::PetFormat::Common} to "COMUM"
+	set {Config::GUIS::PetFormat::Uncommon} to "INCOMUM"
+	set {Config::GUIS::PetFormat::Rare} to "RARO"
+	set {Config::GUIS::PetFormat::Epic} to "ÉPICO"
+	set {Config::GUIS::PetFormat::Legendary} to "LENDÁRIO"
+	set {Config::GUIS::PetFormat::Exclusive} to "EXCLUSIVO"
+	set {Config::GUIS::PetFormat::FullName} to "&7[Nível {LEVEL}] {COLOR}{NAME}"
+	set {Config::GUIS::PetFormat::ExpMulti} to " <##efc422>🔥 &fᴍᴜʟᴛɪᴘʟɪᴄᴀᴅᴏʀ ᴅᴇ xᴘ: <##efc422>{EXP}x"
+	set {Config::GUIS::PetFormat::TokensMulti} to " <##fcf932>☄ &fᴍᴜʟᴛɪᴘʟɪᴄᴀᴅᴏʀ ᴅᴇ ᴛᴏᴋᴇɴs: <##fcf932>{TOKENS}x"
+	set {Config::GUIS::PetFormat::MaxBar::*} to " &7Nível do Pet {LEVEL}: &a100&6%%", "{BAR} &aMáximo"
+	set {Config::GUIS::PetFormat::Progress::*} to " &7Progresso para o nível {LEVEL}: &a{PERCENT}%%", "{BAR} &a{EXP}&6/&e{REQ}"
+	set {Config::GUIS::PetFormat::AddToMenu} to "&aᴄʟɪǫᴜᴇ ᴄᴏᴍ ᴏ ʙᴏᴛãᴏ ᴅɪʀᴇɪᴛᴏ ᴘᴀʀᴀ ᴀᴅɪᴄɪᴏɴᴀʀ ᴏ ᴘᴇᴛ ᴀᴏ ᴍᴇɴᴜ!"
+	wait 1 tick
+
+	set {Config::GUIS::ToolBoost::Default} to "&f七七七七七七七七행"
+	set {Config::GUIS::ToolBoost::Bedrock} to "&8Tool Boosts"
+	set {Config::GUIS::ToolBoost::Names::*} to "Xp Extra", "Tokens", "Explosão", "Velocidade", "TNT", "Circulo Mágico", "Raios", "Atualização da Sorte", "Alcance", "Meteoro", "UFO", "Eventos", "Blocos de Poder"
+	# Farm | Cave | Sawmill
+	set {Config::GUIS::ToolBoost::FarmNames::*} to "Fazenda", "Caverna", "Serraria", "Pesca"
+	set {Config::GUIS::ToolBoost::WorksIn::*} to "1|1|1|1", "1|1|1|1", "1|1|1|0", "1|1|1|0", "1|0|0|0", "1|0|0|0", "1|0|0|0", "1|1|1|1", "1|1|1|0", "1|0|0|0", "1|0|0|0", "1|0|0|0", "1|1|1|1"
+	set {Config::GUIS::ToolBoost::Desc::ExtraExp::*} to "&7ᴛᴇɴʜᴀ ᴀ ᴄʜᴀɴᴄᴇ ᴅᴇ ʀᴇᴄᴇʙᴇʀ", "&7ᴍᴀɪs xᴘ ǫᴜᴇ ᴏ ɴᴏʀᴍᴀʟ"
+	set {Config::GUIS::ToolBoost::Desc::Tokens::*} to "&7ᴛᴇɴʜᴀ ᴀ ᴄʜᴀɴᴄᴇ ᴅᴇ ʀᴇᴄᴇʙᴇʀ", "&7ᴜᴍᴀ ᴘᴇǫᴜᴇɴᴀ ǫᴜᴀɴᴛɪᴀ ᴅᴇ ᴛᴏᴋᴇɴs"
+	set {Config::GUIS::ToolBoost::Desc::TNT::*} to "&7ᴜᴍᴀ ᴘᴇǫᴜᴇɴᴀ ᴄʜᴀɴᴄᴇ ᴅᴇ ᴀᴘᴀʀᴇᴄᴇʀ ᴜᴍᴀ", "&7ᴛɴᴛ ǫᴜᴇ ɪʀá ᴅᴇsᴛʀᴜɪʀ ʙʟᴏᴄᴏs ᴀ ᴠᴏʟᴛᴀ"
+	set {Config::GUIS::ToolBoost::Desc::Explosion::*} to "&7ᴄʜᴀɴᴄᴇ ᴅᴇ ᴄʀɪᴀʀ ᴜᴍᴀ ᴇxᴘʟᴏsãᴏ", "&7ǫᴜᴇ ᴅᴇsᴛʀᴜɪʀá ʙʟᴏᴄᴏs ᴀᴏ ʀᴇᴅᴏʀ"
+	set {Config::GUIS::ToolBoost::Desc::Speed::*} to "&7ᴀᴘós ᴅᴇsᴛʀᴜɪʀ ᴜᴍ ʙʟᴏᴄᴏ", "&7ʀᴇᴄᴇʙᴇ ᴛᴇᴍᴘᴏʀᴀʀɪᴀᴍᴇɴᴛᴇ ᴏ ᴇғᴇɪᴛᴏ", "&7ᴅᴇ ᴠᴇʟᴏᴄɪᴅᴀᴅᴇ ᴀᴏ ᴄᴏʀʀᴇʀ"
+	set {Config::GUIS::ToolBoost::Desc::MagicCircle::*} to "&7ᴠᴏᴄᴇ ᴛᴇᴍ ᴜᴍᴀ ᴄʜᴀɴᴄᴇ ᴅᴇ ᴜᴍ ᴄɪʀᴄᴜʟᴏ", "&7ᴍáɢɪᴄᴏ ᴀᴘᴀʀᴇᴄᴇʀ ǫᴜᴇ ɪʀᴀ ᴄᴏʟᴇᴛᴀʀ", "&7ᴏs ʙʟᴏᴄᴏs ᴀᴏ sᴇᴜ ʀᴇᴅᴏʀ"
+	set {Config::GUIS::ToolBoost::Desc::Beams::*} to "&7ᴠᴏᴄᴇ ᴛᴇᴍ ᴜᴍᴀ ᴄʜᴀɴᴄᴇ ᴅᴇ ɢʀᴀɴᴅᴇs ʀᴀɪᴏs", "&7ᴀᴘᴀʀᴇᴄᴇʀᴇᴍ ǫᴜᴇ ɪʀãᴏ ᴄᴏʟᴇᴛᴀʀ ʙʟᴏᴄᴏs"
+	set {Config::GUIS::ToolBoost::Desc::LuckyUpgrade::*} to "&7ᴠᴏᴄᴇ ᴛᴇᴍ ᴜᴍᴀ ᴄʜᴀɴᴄᴇ ᴅᴇ ʀᴇᴄᴇʙᴇʀ ᴜᴍᴀ", "&7ᴠᴇʀsᴀᴏ ᴍᴇʟʜᴏʀᴀᴅᴀ ᴅᴏ ʙʟᴏᴄᴏ ᴍɪɴᴇʀᴀᴅᴏ"
+	set {Config::GUIS::ToolBoost::Desc::Meteor::*} to "&7ᴠᴏᴄᴇ ᴛᴇᴍ ᴜᴍᴀ ᴄʜᴀɴᴄᴇ ᴅᴇ ᴜᴍ ᴍᴇᴛᴇᴏʀɪᴛᴏ ᴀᴘᴀʀᴇᴄᴇʀ", "&7ǫᴜᴇ ᴅᴇsᴛʀᴜɪʀá ʙʟᴏᴄᴏs ᴀᴘós ᴀᴛᴇʀʀɪssᴀʀ"
+	set {Config::GUIS::ToolBoost::Desc::Radius::*} to "&7ᴠᴏᴄᴇ ᴛᴇᴍ ᴜᴍᴀ ᴄʜᴀɴᴄᴇ ᴅᴇ ᴅᴇsᴛʀᴜɪʀ ᴜᴍ", "&7ᴄᴀᴍᴘᴏ ᴍᴀɪᴏʀ ᴅᴇ ʙʟᴏᴄᴏs ᴅᴇ ᴜᴍᴀ ᴠᴇᴢ"
+	set {Config::GUIS::ToolBoost::Desc::UFO::*} to "&7ᴠᴏᴄᴇ ᴛᴇᴍ ᴜᴍᴀ ᴄʜᴀɴᴄᴇ ᴅᴇ ǫᴜᴇ ᴜᴍ ᴏᴠɴɪ", "&7ᴠᴇɴʜᴀ ᴇ ᴄᴏʟᴇᴛᴇ ᴜᴍᴀ ɢʀᴀɴᴅᴇ", "&7ǫᴜᴀɴᴛɪᴅᴀᴅᴇ ᴅᴇ ʙʟᴏᴄᴏs ᴅᴇ ᴜᴍᴀ ᴠᴇᴢ"
+	set {Config::GUIS::ToolBoost::Desc::Events::*} to "&7ᴠᴏᴄᴇ ᴛᴇᴍ ᴜᴍᴀ ᴄʜᴀɴᴄᴇ ᴅᴇ ɪɴɪᴄɪᴀʀ", "&7ᴜᴍ ᴇᴠᴇɴᴛᴏ ᴄᴜʀᴛᴏ ɴᴏ ǫᴜᴀʟ ᴏ", "&7ᴅʀᴏᴘ ᴏᴜ ᴇxᴘ sᴇʀá ᴀᴜᴍᴇɴᴛᴀᴅᴏ"
+	set {Config::GUIS::ToolBoost::Desc::BlocksAura::*} to "&7ᴠᴏᴄᴇ ᴛᴇᴍ ᴜᴍᴀ ᴄʜᴀɴᴄᴇ ᴅᴇ ᴜᴍᴀ ᴀᴜʀᴀ", "&7ᴀᴘᴀʀᴇᴄᴇʀ ǫᴜᴇ ɪʀᴀ ᴛᴇᴍᴘᴏʀᴀʀɪᴀᴍᴇɴᴛᴇ", "&7ᴍᴜʟᴛɪᴘʟɪᴄᴀʀ ᴛᴏᴅᴏs ᴏs ᴅʀᴏᴘs ᴘᴏʀ x4"
+
+	set {Config::GUIS::ToolBoost::ReqRebirth} to " <##f99b1c>🔥 &fʀᴇǫᴜᴇʀ ʀᴇɴᴀsᴄɪᴍᴇɴᴛᴏ: <##e7ae56>{REBIRTH}"
+	set {Config::GUIS::ToolBoost::WorksOn} to "&fғᴜɴᴄɪᴏɴᴀ ᴇᴍ:"
+	set {Config::GUIS::ToolBoost::Level} to "&8ɴíᴠᴇʟ ᴅᴏ ᴘᴏᴅᴇʀ {LEVEL}★"
+	set {Config::GUIS::ToolBoost::Max} to "&eɴíᴠᴇʟ ᴍáxɪᴍᴏ ᴀʟᴄᴀɴᴄᴀᴅᴏ!"
+	set {Config::GUIS::ToolBoost::Upgrade} to " <##92f900>☄ &fᴜᴘɢʀᴀᴅᴇ ᴄᴏsᴛ: <##92f900>{COST}$"
+	set {Config::GUIS::ToolBoost::ClickToUpgrade} to "&aᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴜᴘɢʀᴀᴅᴇ!"
+	set {Config::GUIS::ToolBoost::Progress::*} to " &7Nível do Poder {LEVEL}: &e{PERCENT}%%", "{BAR}&r &e{CURRENT}&2/&e{MAX}"
+	set {Config::GUIS::ToolBoost::ClickToBuy} to "&aᴄʟɪǫᴜᴇ ᴘᴀʀᴀ ᴄᴏᴍᴘʀᴀʀ!"
+	set {Config::GUIS::ToolBoost::NotUnlocked} to "&8ɴãᴏ ᴅᴇsʙʟᴏǫᴜᴇᴀᴅᴏ"
+	set {Config::GUIS::ToolBoost::NotUnlockedYet} to "&cᴀɪɴᴅᴀ ɴãᴏ ᴅᴇsʙʟᴏǫᴜᴇᴀᴅᴏ!"
+	set {Config::GUIS::ToolBoost::PurchaseCost} to " <##92f900>☄ &fᴄᴜsᴛᴏ ᴅᴇ ᴄᴏᴍᴘʀᴀ: <##92f900>{COST}$"
+	set {Config::GUIS::ToolBoost::Back} to gold nugget with custom model data 7000 named "&cVoltar"
+
+	set {Config::GUIS::Rebirth::Default} to "&f七七七七七七七七列"
+	set {Config::GUIS::Rebirth::Bedrock} to "&8Tool Boosts"
+	set {Config::GUIS::Rebirth::Rebirth} to honeycomb named "<##fcf932>Renascimento &l{REBIRTH}" with lore "&8ʀᴇɴᴀsᴄɪᴍᴇɴᴛᴏ", "", "&7Após o renascimento você manterá suas Ferramentas", "&7e Geradores e aumentará seu Multiplicador de Dinheiro,", "&7mas perderá Nível, Tokens e Dinheiro!", "", "&fʀᴇᴄᴏᴍᴘᴇɴsᴀs:", " <##1ef91e>★ &fᴍᴜʟᴛɪᴘʟɪᴄᴀᴅᴏʀ: <##1ef91e>x{OLD} <##1ce81c>→ <##1ef91e>x{NEW}", " <##16fa3c>⛏ &fɢᴇʀᴀᴅᴏʀᴇs: <##16fa3c>+3 sʟᴏᴛs"
+	set {Config::GUIS::Rebirth::Confirm} to gold nugget with custom model data 7000 named "<##fcf932>Renascimento &l{REBIRTH}" with lore "&8ʀᴇɴᴀsᴄɪᴍᴇɴᴛᴏ", "", "&7ǫᴜᴀɴᴅᴏ ᴠᴏᴄê ʀᴇɴᴀsᴄᴇʀ sᴇᴜs sᴛᴀᴛᴜs ɪʀãᴏ", "&7ᴠᴏʟᴛᴀʀ ᴘᴀʀᴀ ᴏ ɴíᴠᴇʟ 1, ᴍᴀs ᴠᴏᴄê ɪʀá ᴅᴇsʙʟᴏǫᴜᴇᴀʀ", "&7ᴍᴀɪs sʟᴏᴛs ᴅᴇ ɢᴇʀᴀᴅᴏʀᴇs ᴇ ᴍᴇʟʜᴏʀ ᴍᴜʟᴛɪᴘʟɪᴄᴀᴅᴏʀ!", "", "&fʀᴇǫᴜɪsɪᴛᴏs:", " <##f99b1c>🔥 &fɴɪᴠᴇʟ: <##f99b1c>{LEVEL}", " <##84e001>☄ &fᴅɪɴʜᴇɪʀᴏ: <##84e001>{COST}$", " <##92f900>🗡 &fᴛᴏᴋᴇɴs: <##92f900>{TOKENS}", "", "&fʀᴇᴄᴏᴍᴘᴇɴsᴀs:", " <##1ef91e>★ &fᴍᴜʟᴛɪᴘʟɪᴄᴀᴅᴏʀ: <##1ef91e>x{OLD} <##1ce81c>→ <##1ef91e>x{NEW}", " <##16fa3c>⛏ &fɢᴇʀᴀᴅᴏʀᴇs: <##16fa3c>+3 sʟᴏᴛs", "", "&aᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ ʀᴇɴᴀsᴄᴇʀ!"
+	send " <##00f818>○ &aReloaded &eGUIS" to {ReloadPlayer}
+
+# --------[ Update v3.1 ]--------
+
+	set {Config::GUIS::Update31::SellChest} to chest named "%formatted gradient("&lSELLCHEST", ("f9a600", "f8f04b"))% &8[&b10x10&8]" with lore " &eBest item on this server!", " &7Place this &6SellChest&7 on the ground", " &7to start selling items", "", " &e&nItems are sold in a 10x10 area", "", " &7All &6Items&7 in the area will be", " &7sold and their &eValue&7 will be", " &7sent straight to you!" and {Config::Global::Rarity-Legendary::*}
+	set boolean tag "SellChest" of custom nbt of {Config::GUIS::Update31::SellChest} to true
+
+	set {Config::GUIS::Update31::FarmingEvent} to "ғᴀʀᴍɪɴɢ ʙᴏᴏsᴛ ᴇᴠᴇɴᴛ"
+	set {Config::GUIS::Update31::MagicEgg::Name} to "&aMagic Egg"
+	set {Config::GUIS::Update31::MagicEgg::Lore::*} to "", "&7ᴀғᴛᴇʀ ᴘʟᴀᴄɪɴɢ, ʏᴏᴜ ᴡɪʟʟ ʀᴇᴄᴇɪᴠᴇ", "&7ᴀ ʀᴀɴᴅᴏᴍ ᴘᴇᴛ ᴡɪᴛʜ ᴀ ʀᴀɴᴅᴏᴍ", "&7ʀᴀʀɪᴛʏ ᴛʜᴀᴛ ᴡɪʟʟ ɪɴᴄʀᴇᴀsᴇ ʏᴏᴜʀ", "&7ᴍᴏɴᴇʏ ᴀɴᴅ ᴛᴏᴋᴇɴ ᴍᴜʟᴛɪᴘʟɪᴇʀ", "", "&aRight click to use!"
+	set {Config::GUIS::Update31::TokensStore::Names::*} to "Iron Hoe ★15 (3x3 Brush)", "SellWand (100 Uses)", "Magic Egg", "Elytra", "Legendary Key", "SellWand (250 Uses)", "1,000,000,000$", "SellChest (10x10)", "Beacon"
+	set {Config::GUIS::Update31::TokensStore::PermsNames::*} to "Hat Command", "Feed Command", "Access to Fly"
+	set {Config::GUIS::Update31::Effects::DoubleDrop} to "<##fd5cff>&lDouble Drop"
+	set {Config::GUIS::Update31::Effects::DoubleXP} to "<##b8e3ff>&lDouble XP"
+
+	set {Config::GUIS::Update31::Tools::Prefixes::*} to "Enxada", "Picareta", "Machado", "Vara de Pesca"
+	set {Config::GUIS::Update31::Tools::Male::*} to "de Madeira", "de Pedra", "Iron", "Golden", "Diamond", "Netherite"
+	set {Config::GUIS::Update31::Tools::Female::*} to "de Madeira", "de Pedra", "Iron", "Golden", "Diamond", "Netherite"
+	set {Config::GUIS::Update31::Tools::Farm} to " &b🔥 &fᴘᴏᴅᴇ sᴇʀ ᴜsᴀᴅᴏ ᴇᴍ &b/ғᴀᴢᴇɴᴅᴀ"
+	set {Config::GUIS::Update31::Tools::Cave} to " &b🔥 &fᴘᴏᴅᴇ sᴇʀ ᴜsᴀᴅᴏ ᴇᴍ &b/ᴍɪɴᴀ"
+	set {Config::GUIS::Update31::Tools::Sawmill} to " &b🔥 &fᴘᴏᴅᴇ sᴇʀ ᴜsᴀᴅᴏ ᴇᴍ &b/ʟᴇɴʜᴀᴅᴏʀ"
+	set {Config::GUIS::Update31::Tools::Pond} to " &b🔥 &fᴘᴏᴅᴇ sᴇʀ ᴜsᴀᴅᴏ ᴇᴍ &b/ᴘᴇsᴄᴀ"
+	set {Config::GUIS::Update31::Tools::XPMulti} to " <##4aed4a>⌛ &fᴍᴜʟᴛɪᴘʟɪᴄᴀᴅᴏʀ ᴅᴇ xᴘ: <##4aed4a>x{AMOUNT}"
+	set {Config::GUIS::Update31::Tools::DoubleDrop} to " <##f2f24e>⛏ &fᴅʀᴏᴘ ᴇᴍ ᴅᴏʙʀᴏ: <##f2f24e>{AMOUNT}%%"
+	set {Config::GUIS::Update31::Tools::ExtraBonus} to " <##f2c25a>☄ &fʙôɴᴜs ᴇxᴛʀᴀ: <##f2c25a>{AMOUNT}%%"
+	set {Config::GUIS::Update31::Tools::FishingSpeed} to " <##59b2ff>🎣 &fᴠᴇʟᴏᴄɪᴅᴀᴅᴇ ᴅᴇ ᴘᴇsᴄᴀ: <##59b2ff>x{AMOUNT}"
+	set {Config::GUIS::Update31::Tools::ShardChance} to " <##ff5e5e>♢ &fᴄʜᴀɴᴄᴇ ᴅᴇ ᴛᴏᴋᴇɴ: <##ff5e5e>{AMOUNT}%%"
+	set {Config::GUIS::Update31::Tools::Radius} to " <##FF00FF>★ &fᴀʟᴄᴀɴᴄᴇ ᴇxᴛʀᴀ: <##FF00FF>{RADIUS}x{RADIUS}"
+	set {Config::GUIS::Update31::Fishing::Match} to "&7Match clicks using left (L) and right (R)"
+
+# --------[ Update v3.5 ]--------
+
+	# Enable support for ItemsAdder and Oraxen
+	set {Config::Update35::ItemsAdderSupport} to false
+
+	# By changing this option you will disable some animations. This can have a positive effect on your server's performance
+	set {Config::Update35::DisableAnimations} to false
+	set {Config::Update35::DisableBreakMessage} to true
+	set {Config::Update35::BypassEditInfo} to true
+
+	# Display how many times has the tool been used
+	# This setting should not be changed once players have the tools.
+	set {Config::Update35::ToolStats} to false
+
+	set {Config::Update35::BoostChance} to 2 # Global Tool Boost chance multiplier
+
+	# Allow ranks with permission InstantFarm.1-5 to use farms with higher requirements
+	set {Config::Update35::RanksInstantFarm} to true
+
+	# If there are too many items on the ground and your server is lagging, you can change it so that all drops from generators are automatically sold
+	set {Config::Update35::VirtualGensItems} to false
+
+	set {Config::Update35::ToolStatsLore} to " <##f2c622>⛏ &fᴜsᴏs ᴅᴀ ғᴇʀʀᴀᴍᴇɴᴛᴀ: <##f2c622>{USES}"
+	set {Config::Update35::LevelUpHolo} to "<##00c8f9>&lSubiu de Nível"
+
+	set {Config::GUIS::Update35::FastRegen} to 50000000000
+	set {Config::GUIS::Update35::MoreExp} to 10000000000
+	set {Config::GUIS::Update35::NewArea} to 5000000000
+
+	set {Config::Update35::SellWandItem} to stick with enchantment glint named "<##24fc2a>ᴠᴀʀɪɴʜᴀ ᴅᴇ ᴠᴇɴᴅᴀ &8[&b{USES} Usos&8]"
+	set {Config::Update35::SellWandLore::*} to "&7Este item irá te ajudar a vender", "&7itens nos seus baús mais rápido!", "", "&fɪɴғᴏʀᴍᴀçõᴇs:", " <##fcf932>★ &fᴜsᴏs ʀᴇsᴛᴀɴᴛᴇs: <##fcf932>{USES}", " <##efc422>☀ &fᴍᴜʟᴛɪᴘʟɪᴄᴀᴅᴏʀ: <##efc422>x{MULTIPLIER}", "", "&aClique com o botão direito para vender!" and {Config::Global::Rarity-Epic::*}
+	set {Config::Update35::NotYourChest} to "&4❌ &cVocê não pode vender itens neste baú!"
+	set {Config::Update35::Nothingtosell} to "&4❌ &cA varinha não tem nada para vender!"
+	set {Config::Update35::SellwandDestroyed} to "&cA varinha de venda foi destruída!"
+	set {Config::Update35::Success::*} to "", " &b★ <##fcf932>&lᴠᴀʀɪɴʜᴀ ᴜsᴀᴅᴀ", " &7A varinha vendeu &b{ITEMS}&7 itens por um total de &b{TOTAL} &7Moedas", ""
+	set {Config::Update35::SellDelay} to "&4❌ &cAguarde {TIME} segundos antes de vender!"
+	set {Config::Update35::NoBroken} to "&aVocê não tem nenhum gerador quebrado!"
+	set {Config::Update35::RepairedAll} to "&aConsertou com sucesso &l{AMOUNT} &aGeradores!"
+	set {Config::Update35::ToolUpgradeLore} to " &6★ &fᴀᴛᴜᴀʟɪᴢᴇ ᴄᴏᴍ &6/ᴜᴘɢʀᴀᴅᴇ &fᴏu &6ʙᴏᴛãᴏ ᴅɪʀᴇɪᴛᴏ"
+	set {Config::Update35::NoIsland} to "&cVocê não possui uma ilha!"
+	wait 1 tick
+
+	set {Config::GUIS::Update35::Default} to "&f七七七七七七七七"
+	set {Config::GUIS::Update35::Bedrock} to "&8Skins de Ferramentas"
+	set {Config::GUIS::Update35::Reset} to gold nugget with custom model data 7000 named "&cResetar" with lore "&fʀᴇsᴇᴛᴀʀ ᴀ sᴋɪɴ ᴅᴏ sᴇᴜ ɪᴛᴇᴍ ᴘᴀʀᴀ" and "&fᴠᴏʟᴛᴀʀ ᴀᴏ ᴇsᴛᴀᴅᴏ ᴏʀɪɢɪɴᴀʟ" and "" and "<##1ef91e>Clique aqui para resetar!"
+	set {Config::GUIS::Update35::Names::*} to "Espada", "Picareta", "Machado", "Pá"
+	set {Config::GUIS::Update35::CategoryItem} to "<##fcf932>&l{CATEGORY} <##fcf932>Skins"
+	set {Config::GUIS::Update35::CategoryItemLore::*} to "" and "&fᴍᴜᴅᴇ ᴀs ᴄᴀᴛᴇɢᴏʀɪᴀs ᴘᴀʀᴀ sᴇʟᴇᴄɪᴏɴᴀʀ" and "&fsᴋɪɴs ᴘᴀʀᴀ ᴏᴜᴛʀᴏs ᴛɪᴘᴏs ᴅᴇ ғᴇʀʀᴀᴍᴇɴᴛᴀs" and "" and "&fᴄᴀᴛᴇɢᴏʀɪᴀ: <##efc422>{CATEGORY}" and "" and "<##1ef91e>Clique aqui para selecionar!"
+	set {Config::GUIS::Update35::SkinsNames::*} to "Coral", "Nulo", "Cósmico", "Titânio", "Plasma", "Chama", "Grama", "Flor", "Pérola", "Pedra do Fim", "Opala", "Purpur", "Coração", "Rubi", "Cogumelo", "Arco-íris", "Vidro", "Relâmpago"
+	set {Config::GUIS::Update35::CustomParticles} to " <#efc422>○ &fᴘᴀʀᴛɪᴄᴜʟᴀs ᴘᴇʀsᴏɴᴀʟɪᴢᴀᴅᴀs"
+	set {Config::GUIS::Update35::CustomSFX} to " <#efc422>○ &fsᴏɴs ᴘᴇʀsᴏɴᴀʟɪᴢᴀᴅᴏs"
+	set {Config::GUIS::Update35::Apply} to "<##1ef91e>Clique aqui para aplicar!"
+	set {Config::GUIS::Update35::Selected} to "<##fcf932>Atualmente selecionado!"
+	set {Config::GUIS::Update35::SelectedName} to "<##fcf932>&l{SKIN} <##fcf932>Skin de {ITEM}"
+	set {Config::GUIS::Update35::SelectedLore::*} to "" and "&fᴀᴘʟɪǫᴜᴇ ᴇsᴛᴀ sᴋɪɴ ɴᴀ sᴜᴀ ғᴇʀʀᴀᴍᴇɴᴛᴀ" and "&fᴘᴀʀᴀ sᴇ ᴅᴇsᴛᴀᴄᴀʀ ᴇɴᴛʀᴇ ᴏs ᴊᴏɢᴀᴅᴏʀᴇs!" and "" and "&fʀᴇᴄᴜʀsᴏs ᴇsᴘᴇᴄɪᴀɪs:"
+	set {Config::GUIS::Update35::LockedName} to "&c&l{SKIN} &cSkin de {ITEM}"
+	set {Config::GUIS::Update35::LockedLore::*} to "" and "&7ᴇsᴛᴀ sᴋɪɴ ᴇsᴛᴀ ʙʟᴏǫᴜᴇᴀᴅᴀ! ᴠᴏᴄᴇ ᴘᴏᴅᴇ ᴅᴇsʙʟᴏǫᴜᴇᴀʀ" and "&7ᴄᴏᴍᴘʀᴀɴᴅᴏ ᴏᴜ ᴀʟᴄᴀɴçᴀɴᴅᴏ ᴜᴍ" and "&7ɴɪᴠᴇʟ ᴍᴀɪs ᴀʟᴛᴏ" and "" and "&fʀᴇᴄᴜʀsᴏs ᴇsᴘᴇᴄɪᴀɪs:"
+	set {Config::GUIS::Update35::LockedLore2::*} to "" and " <##f9f631>☄ &fᴄᴜsᴛᴏ: <##f9f631>{COST} ᴛᴏᴋᴇɴs" and "" and "<##1ef91e>Clique aqui para desbloquear!"
+	wait 1 tick
+
+	set {Config::Update35::SkinPurchased} to "&aSkin comprada com sucesso!"
+	set {Config::Update35::SkinReset} to "&aSkins resetadas com sucesso!"
+	set {Config::Update35::NoSkin} to "&cEste item não possui skin!"
+	set {Config::Update35::SkinAlready} to "&cEsta skin já está selecionada!"
+	set {Config::Update35::SkinCooldown} to "&cPor favor aguarde um momento antes de trocar a skin!"
+	set {Config::Update35::SkinSelected} to "&aSkin selecionada com sucesso!"
+	set {Config::Update35::CantApplySkin} to "&cVocê não pode aplicar esta skin nesta ferramenta!"
+
+	set {Config::Update35::AFK::Default} to "&f"
+	set {Config::Update35::AFK::Bedrock} to "&8AFK"
+	set {Config::Update35::AFK::Prefixes::*} to "ᴍᴏɴᴇʏ", "ᴛᴏᴋᴇɴs", "ᴋᴇʏs"
+	set {Config::Update35::AFK::AFKArea} to clock named "<##fffc33>&lZona <##fffc33>AFK" with lore "" and "&fᴀ ᴢᴏɴᴀ ᴀғᴋ é ᴜᴍ ʟᴜɢᴀʀ ᴏɴᴅᴇ ᴠᴏᴄê" and "&fᴘᴏᴅᴇ ғɪᴄᴀʀ ǫᴜᴀɴᴅᴏ ɴãᴏ ᴛᴇᴍ ɴᴀᴅᴀ ᴘᴀʀᴀ" and "&fғᴀᴢᴇʀ, ᴍᴀs ᴀɪɴᴅᴀ ǫᴜᴇʀ ɢᴀɴʜᴀʀ ʀᴇᴄᴏᴍᴘᴇɴsᴀs." and "" and "&fғɪᴄᴀɴᴅᴏ ᴘᴀʀᴀᴅᴏ ᴇᴍ ᴜᴍᴀ ʀᴇɢɪãᴏ" and "&fᴅᴇsɪɢɴᴀᴅᴀ ᴅᴏ sᴘᴀᴡɴ, ᴠᴏᴄê ʀᴇᴄᴇʙᴇ" and "&fʀᴇᴄᴏᴍᴘᴇɴsᴀs ᴀ ᴄᴀᴅᴀ 10 ᴍɪɴᴜᴛᴏs!" and "" and "&fɪɴғᴏʀᴍᴀçõᴇs:" and " <##f2c622>⌚ &fᴛᴇᴍᴘᴏ ᴛᴏᴛᴀʟ ᴀғᴋ: <##f2c622>{TOTAL}"
+	set {Config::Update35::AFK::Rewards} to "<##24ff2b>&lRecompensas"
+	set {Config::Update35::AFK::RewardsLore::*} to "" and "&fǫᴜᴀʟǫᴜᴇʀ ʀᴇᴄᴏᴍᴘᴇɴsᴀ ǫᴜᴇ ᴠᴏᴄê ɢᴀɴʜᴀʀ" and "&fᴅᴀ ᴢᴏɴᴀ ᴀғᴋ ɪʀá ᴘᴀʀᴀ ᴇsᴛᴇ ᴍᴇɴᴜ." and "&fᴠᴏᴄê ᴘᴏᴅᴇ ᴄᴏʟᴇᴛá-ʟᴀs ғᴀᴄɪʟᴍᴇɴᴛᴇ" and "" and "&fʀᴇᴄᴏᴍᴘᴇɴsᴀs:"
+	set {Config::Update35::AFK::Informations} to paper with custom model data 7020 named "<##24ff2b>&lInformações" with lore "" and "&fǫᴜᴀɴᴛᴏ ᴍᴇʟʜᴏʀ sᴇᴜ ʀᴀɴᴋ, ᴍᴀɪᴏʀᴇs" and "&fsᴜᴀs ᴄʜᴀɴᴄᴇs ᴅᴇ ʀᴇᴄᴇʙᴇʀ ʀᴇᴄᴏᴍᴘᴇɴsᴀs!" and "" and "&fᴇsᴛᴀᴛísᴛɪᴄᴀs:" and " <##24ff2b>○ &fᴅɪɴʜᴇɪʀᴏ: <##24ff2b>{MONEY}%% &7(1000-5000)" and " <##24ff2b>○ &fᴛᴏᴋᴇɴs: <##24ff2b>{TOKENS}%% &7(5-15)" and " <##24ff2b>○ &fᴄʜᴀᴠᴇs: <##24ff2b>{KEYS}%% &7(x1)" and "" and "&fɪɴғᴏʀᴍᴀçõᴇs:" and " <##ffd82b>★ &fsᴇᴜ ʀᴀɴᴋ: <##ffd82b>{RANK}"
+	set {Config::Update35::AFK::Rew} to "<##24ff2b>Recompensa &l{TYPE} &7({PREFIX})"
+	set {Config::Update35::AFK::RewLore::*} to "" and "&fɪɴғᴏʀᴍᴀçõᴇs:" and " <##ffd82b>☄ &fǫᴜᴀɴᴛɪᴅᴀᴅᴇ: <##ffd82b>{PREFIX}" and "" and "&fᴘᴀʀᴀ ᴄᴏʟᴇᴛᴀʀ ᴇsᴛᴀ ʀᴇᴄᴏᴍᴘᴇɴsᴀ" and "&fᴄʟɪǫᴜᴇ ɴᴏ ʙᴏᴛãᴏ ᴀʙᴀɪxᴏ"
+	set {Config::Update35::AFK::ClaimName} to "<##24ff2b>Coletar"
+	set {Config::Update35::AFK::ClaimLore::*} to "" and "&fᴄᴏʟᴇᴛᴇ ᴀs ʀᴇᴄᴏᴍᴘᴇɴsᴀs ǫᴜᴇ" and "&fᴠᴏᴄê ɢᴀɴʜᴏᴜ ɴᴀ ᴢᴏɴᴀ ᴀғᴋ" and "" and "&fʀᴇᴄᴏᴍᴘᴇɴsᴀs:"
+	set {Config::Update35::AFK::ClaimLore2::*} to "" and "<##ffd82b>Clique aqui para coletar!"
+	wait 1 tick
+
+	set {Config::Update35::AFKBossbar} to "<##00fc08>ʀᴇᴄᴏᴍᴘᴇɴsᴀs ᴀғᴋ &fserão sorteadas em: &e{TIME}"
+	set {Config::Update35::AFKArea} to "<##fc1978>⌚ &3| <##00fc08>ᴠᴏᴄê ᴇsᴛá ᴀғᴋ &3| <##fc1978>⌚"
+	set {Config::Update35::AFKArea2} to "<##fcb900>Próximas recompensas em: <##fc1978>{TIME}"
+	set {Config::Update35::AFKDrawn} to "&aRecompensas sorteadas!"
+
+	set {Config::Update35::AFKRewClaimed} to "&aVocê tem recompensas a serem resgatadas!"
+	set {Config::Update35::NothingToClaim} to "&cVocê não possui nada para resgatar!"
+
+	set {Config::Update35::Vote::Thanks} to "<##1ef91e>&lVotes » <##82ffc9>Thanks for Voting for our server <##49fb84>{PLAYER}<##82ffc9>!"
+	set {Config::Update35::VoteParty::1} to " <##1ef51e>&lVote Party"
+	set {Config::Update35::VoteParty::2} to " <##dad824>ᴠᴏᴛᴇs ɢᴏᴀʟ ᴡᴀs sᴜᴄᴄᴇssғᴜʟʟʏ ᴀᴄʜɪᴇᴠᴇᴅ!"
+	set {Config::Update35::VoteParty::3} to " <##68c89d>ᴛʜᴀɴᴋ ʏᴏᴜ ᴀʟʟ ғᴏʀ ᴠᴏᴛɪɴɢ ғᴏʀ ᴏᴜʀ sᴇʀᴠᴇʀ!"
+	set {Config::Update35::VoteParty::4} to " <##68c89d>ᴛʜᴇ ʀᴇᴡᴀʀᴅ ғᴏʀ ʀᴇᴀᴄʜɪɴɢ ᴛʜᴇ ɢᴏᴀʟ ʜᴀs ʙᴇᴇɴ ᴀᴡᴀʀᴅᴇᴅ!"
+	set {Config::Update35::VoteParty::5} to " <tooltip:<##fbf832>Click here to vote!><link:{LINK}><##3ed670>ᴄʟɪᴄᴋ ʜᴇʀᴇ ᴛᴏ ᴠᴏᴛᴇ ғᴏʀ ᴏᴜʀ sᴇʀᴠᴇʀ!"
+
+	set {Config::Update35::VoteReward} to "legendary|1"
+	set {Config::Update35::VoteParty::*} to "skyblock|1", "legendary|3", "magical|6", "common|9"
+
+	set {Config::Update35::ResetDeleteIsland} to true # Should /adminpanel reset [player] reset the player's island?
+	set {Config::Update35::IslandGeneration} to "<##82ffc9>ɢᴇʀᴀçãᴏ ᴅᴀ ɪʟʜᴀ ᴇᴍ ᴘʀᴏɢʀᴇssᴏ..."
+	set {Config::Update35::IslandProgress} to "<##82ffc9>ɢᴇʀᴀçãᴏ ᴅᴀ ɪʟʜᴀ ᴇᴍ ᴘʀᴏɢʀᴇssᴏ... <##1ef91e>&l{PERCENT}%%"
+	set {Config::Update35::IslandDone} to "&aIlha gerada com sucesso!"
+	set {Config::Update35::IslandDone2} to "<##82ffc9>ᴀ ɪʟʜᴀ ғᴏɪ ɢᴇʀᴀᴅᴀ!"
+	wait 1 tick
+
+	set {Config::Update35::IsReset::Default} to "&f"
+	set {Config::Update35::IsReset::Bedrock} to "&8Resetar Ilha"
+	set {Config::Update35::IsReset::Button} to gold nugget with custom model data 7000 named "<##efc422>Resetar Ilha" with lore "" and "&fᴀssɪᴍ ǫᴜᴇ ᴠᴏᴄᴇ ʀᴇsᴇᴛᴀʀ sᴜᴀ ɪʟʜᴀ" and "&fɴᴀᴏ sᴇʀᴀ ᴘᴏssɪᴠᴇʟ ʀᴇᴄᴜᴘᴇʀᴀ-ʟᴀ!" and "" and "&eClique aqui para resetar!"
+
+	set {Config::Update35::MagicHoe} to diamond hoe with enchantment glint named "<##fceb3e>★ ᴇɴxᴀᴅᴀ ᴍᴀ́ɢɪᴄᴀ 3x3 ★" with lore "" and "&fᴇsᴛᴀ ᴇɴxᴀᴅᴀ ᴘᴇʀᴍɪᴛᴇ ǫᴜᴇ ᴠᴏᴄᴇ̂ ᴄᴏʟᴇᴛᴇ" and "&fᴛᴏᴅᴀs ᴀs ᴘʟᴀɴᴛᴀçᴏ̃ᴇs ᴇᴍ ᴜᴍᴀ ᴀ́ʀᴇᴀ 3x3" and "" and "&fᴇsᴛᴀᴛɪ́sᴛɪᴄᴀs:" and " <##FF00FF>☄ &fʀᴀɪᴏ: <##FF00FF>3x3" and "" and "<##fdd224>Clique esquerdo para usar!" and {Config::Global::Rarity-Legendary::*}
+	set {Config::Update35::MagicBoneMeal} to bone meal with enchantment glint named "<##fceb3e>★ ᴀᴅᴜʙᴏ ᴍᴀ́ɢɪᴄᴏ 3x3 ★" with lore "" and "&fᴇsᴛᴇ ᴀᴅᴜʙᴏ ᴘᴇʀᴍɪᴛᴇ ǫᴜᴇ ᴠᴏᴄᴇ̂ ᴀᴅᴜʙᴇ" and "&fᴘʟᴀɴᴛᴀçᴏ̃ᴇs ᴇᴍ ᴜᴍᴀ ᴀ́ʀᴇᴀ 3x3" and "" and "&fᴇsᴛᴀᴛɪ́sᴛɪᴄᴀs:" and " <##FF00FF>☄ &fʀᴀɪᴏ: <##FF00FF>3x3" and "" and "<##fdd224>Clique direito para usar!" and {Config::Global::Rarity-Legendary::*}
+	set {Config::Update35::WaitBeforeNext} to "&cPor favor, aguarde {SEC} segundos antes de usar novamente!"
+	set {Config::Update35::FullCrops} to "&cUse esta hoe para culturas totalmente maduras!"
+	set {Config::Update35::UnripeCrops} to "&cUse este bone meal para culturas não maduras!"
+
+	set {Config::Update35::ActiveGens::Default} to "&f"
+	set {Config::Update35::ActiveGens::Bedrock} to "&f"
+	set {Config::Update35::ActiveGensGen::*} to "" and "&fɪɴғᴏʀᴍᴀçõᴇs:" and "" and " <##fc9d1c>⌚ &fᴛᴇᴍᴘᴏ ᴅᴇ ɢᴇʀᴀçãᴏ: <##eab057>20s" and " <##86e301>$ &fᴠᴀʟᴏʀ ᴅᴏ ɪᴛᴇᴍ: <##86e301>{VALUE}$" and "" and " <##94fc00>☄ &fᴄᴜsᴛᴏ ᴅᴇ ᴍᴇʟʜᴏʀɪᴀ: <##94fc00>{UPGRADE}$" and "" and "&fʟᴏᴄᴀʟɪᴢᴀçãᴏ: <##94fc00>{CORDS}" and "" and "&aᴄʟɪǫᴜᴇ ᴄᴏᴍ ᴏ ʙᴏᴛãᴏ ᴇsǫᴜᴇʀᴅᴏ ᴘᴀʀᴀ ᴘᴇɢᴀʀ!" and "&bᴄʟɪǫᴜᴇ ᴄᴏᴍ ᴏ ʙᴏᴛãᴏ ᴅɪʀᴇɪᴛᴏ ᴘᴀʀᴀ ᴍᴇʟʜᴏʀᴀʀ!"
+	set {Config::Update35::ActiveGensGenMax::*} to "" and "&fɪɴғᴏʀᴍᴀçõᴇs:" and "" and " <##fc9d1c>⌚ &fᴛᴇᴍᴘᴏ ᴅᴇ ɢᴇʀᴀçãᴏ: <##eab057>20s" and " <##86e301>$ &fᴠᴀʟᴏʀ ᴅᴏ ɪᴛᴇᴍ: <##86e301>{VALUE}$" and "" and "&fʟᴏᴄᴀʟɪᴢᴀçãᴏ: <##94fc00>{CORDS}" and "" and "&aᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ ᴘᴇɢᴀʀ!"
+	set {Config::Update35::DropKeysFromFarms} to false # Should keys drop from farms
+	set {Config::Update35::DropKeysChance} to 0.05 # Chance for key
+	set {Config::Update35::DropKeysList::*} to "common", "magical" # Keys
+
+	set {Config::Update35::IsPanel::Default} to "&f七七七七七七七七㈆"
+	set {Config::Update35::IsPanel::Bedrock} to "&8Painel da Ilha"
+	set {Config::Update35::IsPanel::Slot1} to campfire           named "<##fcf932>&lMelhorias" with lore "" and "&fᴄᴏɴᴛɪɴᴜᴇ ᴍᴇʟʜᴏʀᴀɴᴅᴏ sᴜᴀ ɪʟʜᴀ ᴘᴀʀᴀ" and "&fᴄʀɪᴀʀ ᴍᴀɪs ᴇsᴘᴀçᴏ ᴘᴀʀᴀ ᴇxᴘᴀɴsãᴏ" and "&fᴇ ɴᴏᴠᴏs ᴅᴇsᴇɴᴠᴏʟᴠɪᴍᴇɴᴛᴏs" and "" and "<##fcf932>Clique aqui para melhorar!"
+	set {Config::Update35::IsPanel::Slot2} to barrier            named "<##fcf932>&lBorda" with lore "" and "&fᴀᴛɪᴠᴇ ᴏᴜ ᴅᴇsᴀᴛɪᴠᴇ ᴀ ᴠɪsɪʙɪʟɪᴅᴀᴅᴇ" and "&fᴅᴀ ʙᴏʀᴅᴀ ᴅᴀ sᴜᴀ ɪʟʜᴀ ǫᴜᴀɴᴅᴏ ǫᴜɪsᴇʀ" and "" and "<##fcf932>Clique aqui para alternar!"
+	set {Config::Update35::IsPanel::Slot3} to hay block          named "<##fcf932>&lGeradores" with lore "" and "&fᴄᴏɴᴛʀᴏʟᴇ ʀᴀᴘɪᴅᴀᴍᴇɴᴛᴇ ᴛᴏᴅᴏs ᴏs ɢᴇʀᴀᴅᴏʀᴇs" and "&fǫᴜᴇ ᴠᴏᴄᴇ ᴄᴏʟᴏᴄᴏᴜ ɴᴀ sᴜᴀ ɪʟʜᴀ!" and "" and "<##fcf932>Clique aqui para gerenciar!"
+	set {Config::Update35::IsPanel::Slot4} to sunflower          named "<##fcf932>&lFazendas" with lore "" and "&fᴀᴜᴍᴇɴᴛᴇ sᴇᴜ ɴíᴠᴇʟ ғᴀᴢᴇɴᴅᴏ ғᴀʀᴍ" and "&fᴇᴍ ᴅɪғᴇʀᴇɴᴛᴇs ғᴀᴢᴇɴᴅᴀs!" and "" and "<##fcf932>Clique aqui para verificar!"
+	set {Config::Update35::IsPanel::Slot5} to gold ingot         named "<##fcf932>&lMina" with lore "" and "&fᴠá ᴘᴀʀᴀ ᴜᴍᴀ ᴍɪɴᴀ ᴘúʙʟɪᴄᴀ ᴏᴜ ᴘʀɪᴠᴀᴅᴀ" and "&fᴘᴀʀᴀ ᴍɪɴᴇʀᴀʀ ᴍɪɴéʀɪᴏs ǫᴜᴇ ᴀᴊᴜᴅᴀʀãᴏ" and "&fᴠᴏᴄᴇ ᴀ ᴍᴇʟʜᴏʀᴀʀ sᴜᴀs ғᴇʀʀᴀᴍᴇɴᴛᴀs!" and "" and "<##fcf932>Clique aqui para teleportar!"
+	set {Config::Update35::IsPanel::Slot6} to experience bottle  named "<##fcf932>&lPoções" with lore "" and "&fᴄᴏᴍᴘʀᴇ ᴘᴏçõᴇs ᴅᴀ ʙʀᴜxᴀ ᴄᴏᴍ" and "&fғʀᴀɢᴍᴇɴᴛᴏs ᴅᴇ ᴄʀɪsᴛᴀʟ ᴅᴀ ғᴀᴢᴇɴᴅᴀ ᴘᴀʀᴀ" and "&fᴀᴜᴍᴇɴᴛᴀʀ sᴇᴜs sᴛᴀᴛᴜs ᴇ ᴘʀᴏɢʀᴇᴅɪʀ ᴍᴀɪs ʀáᴘɪᴅᴏ!" and "" and "<##fcf932>Clique aqui para abrir!"
+	set {Config::Update35::IsPanel::Slot7} to honeycomb          named "<##fcf932>&lRenascimento" with lore "" and "&fᴠᴏᴄᴇ ᴘᴏᴅᴇ ʀᴇɴᴀsᴄᴇʀ ᴘᴀʀᴀ ᴀᴍᴘʟɪᴀʀ sᴇᴜs ᴀᴛʀɪʙᴜᴛᴏs" and "&fᴇ ɢᴀɴʜᴀʀ ᴍᴀɪs sʟᴏᴛs ᴅᴇ ɢᴇʀᴀᴅᴏʀ!" and "" and "<##fcf932>Clique aqui para renascer!"
+	set {Config::Update35::IsPanel::Slot8} to amethyst shard     named "<##fcf932>&lSkins de Ferramentas" with lore "" and "&fᴍᴜᴅᴇ ᴀs sᴋɪɴs ᴅᴀs sᴜᴀs ғᴇʀʀᴀᴍᴇɴᴛᴀs" and "&fᴘᴀʀᴀ sᴇ ᴅᴇsᴛᴀᴄᴀʀ ᴅᴏs ᴏᴜᴛʀᴏs ɴᴏ sᴇʀᴠɪᴅᴏʀ" and "" and "<##fcf932>Clique aqui para abrir!"
+	set {Config::Update35::IsPanel::Slot9} to firework           named "<##fcf932>&lUpgrades de Ferramenta" with lore "" and "&fsᴜᴀ ғᴇʀʀᴀᴍᴇɴᴛᴀ ᴘᴏᴅᴇ ᴛᴇʀ ʜᴀʙɪʟɪᴅᴀᴅᴇs ᴇsᴘᴇᴄɪᴀɪs" and "&fǫᴜᴇ sᴇʀãᴏ ᴀᴛɪᴠᴀᴅᴀs ᴇɴǫᴜᴀɴᴛᴏ ғᴀʀᴍᴀ" and "" and "<##fcf932>Clique aqui para abrir!"
+	set {Config::Update35::IsPanel::Teleport} to gold nugget with custom model data 7000 named "<##1ef91e>Teleporte" with lore "" and "&fᴛᴇʟᴇᴘᴏʀᴛᴇ ʀᴀᴘɪᴅᴀᴍᴇɴᴛᴇ ᴘᴀʀᴀ ᴜᴍ" and "&fʟᴜɢᴀʀ sᴇɢᴜʀᴏ ɴᴀ sᴜᴀ ɪʟʜᴀ" and "" and "<##fcf932>Clique aqui para teleportar!"
+	wait 1 tick
+
+	set {Config::Update35::CoinflipNumber} to "&cO número que você digitou não é válido!"
+	set {Config::Update35::CoinflipMinimum} to "&cO valor mínimo de Coins é 1000!"
+	set {Config::Update35::CoinflipMax} to "&cO valor máximo de Coins é 2,000,000,000!"
+	set {Config::Update35::CoinflipAlready} to "&cVocê já tem um Coinflip criado!"
+	set {Config::Update35::CoinflipCreated} to "&aCoinflip foi criado com sucesso!"
+	set {Config::Update35::CantType} to "&cVocê não pode digitar comandos agora!"
+
+	set {Config::Update35::CoinFlipInfo::*} to " <##fbf832>&lCrie <##fbf832>Coinflip", " <##eeeb27>Para criar um coinflip digite o comando:", "  <##70d8aa>/coinflip create [value]"
+	set {Config::Update35::CoinFlipExpired} to "&cEste Coinflip expirou!"
+	set {Config::Update35::CoinFlipYourself} to "&cVocê não pode coinflip com você mesmo!"
+	set {Config::Update35::CoinFlipStarted} to "&aCoinFlip começou com &6&l{PLAYER}&a!"
+
+	set {Config::Update35::CoinFlipWin::*} to "&aVocê ganhou!", "&a&lVocê ganhou!"
+	set {Config::Update35::CoinFlipLose::*} to "&cVocê perdeu!", "&c&lVocê perdeu!"
+	set {Config::Update35::CoinFlipDeleted} to "&aSeu Coinflip foi deletado!"
+	set {Config::Update35::CoinFlipNotCreated} to "&cVocê não tem um Coinflip criado!"
+	wait 1 tick
+
+	set {Config::Update35::Coinflip::Default} to "&f"
+	set {Config::Update35::Coinflip::Bedrock} to "&8Cara ou Coroa"
+	set {Config::Update35::Coinflip::PrevPage} to gold nugget with custom model data 7035 named "&aPágina Anterior"
+	set {Config::Update35::Coinflip::NextPage} to gold nugget with custom model data 7036 named "&aPróxima Página"
+	set {Config::Update35::Coinflip::Create} to gold nugget with custom model data 7000 named "<##24fc2a>&lCriar <##24fc2a>Cara ou Coroa" with lore "" and "&fᴘᴀʀᴀ ᴄʀɪᴀʀ ᴜᴍ ᴊᴏɢᴏ ᴅᴇ" and "&fᴄᴀʀᴀ ᴏᴜ ᴄᴏʀᴏᴀ ǫᴜᴇ ᴏᴜᴛʀᴏs" and "&fᴊᴏɢᴀᴅᴏʀᴇs ᴘᴏssᴀᴍ ᴊᴏɢᴀʀ, ᴄʟɪǫᴜᴇ" and "&fɴᴇsᴛᴇ ʙᴏᴛãᴏ ᴇ ᴅɪɢɪᴛᴇ ᴜᴍ ᴠᴀʟᴏʀ!" and "" and "<##24fc2a>Clique aqui para criar!"
+	set {Config::Update35::Coinflip::Game} to "<##fcf932>&l{PLAYER} <##fcf932>Cara ou Coroa"
+	set {Config::Update35::Coinflip::GameLore::*} to "" and "&fᴊᴏɢᴜᴇ ᴄᴀʀᴀ ᴏᴜ ᴄᴏʀᴏᴀ ᴄᴏᴍ {PLAYER}" and "&fᴇ ᴠᴇᴊᴀ ǫᴜᴇᴍ é ᴍᴀɪs sᴏʀᴛᴜᴅᴏ!" and "" and "&fɪɴғᴏʀᴍᴀçõᴇs:" and " <##efc422>$ &fᴠᴀʟᴏʀ: <##efc422>{VALUE}" and "" and "<##24fc2a>Clique aqui para jogar!"
+
+	set {Config::Update35::CoinflipGame::Default} to "&f"
+	set {Config::Update35::CoinflipGame::Bedrock} to "&8Cara ou Coroa em andamento..."
+	set {Config::Update35::CoinflipGame::Slot1} to emerald named "<##fcf932>ᴄᴀʀᴀ ᴏᴜ ᴄᴏʀᴏᴀ ᴇᴍ ᴀɴᴅᴀᴍᴇɴᴛᴏ" with lore "" and "&fᴇᴍ ᴜᴍ ᴍᴏᴍᴇɴᴛᴏ sᴀʙᴇʀᴇᴍᴏs" and "&fǫᴜᴇᴍ ᴠᴀɪ ɢᴀɴʜᴀʀ ᴏ ᴄᴀʀᴀ ᴏᴜ ᴄᴏʀᴏᴀ!"
+	set {Config::Update35::CoinflipGame::Slot2} to diamond named "<##fcf932>ᴄᴀʀᴀ ᴏᴜ ᴄᴏʀᴏᴀ ᴇᴍ ᴀɴᴅᴀᴍᴇɴᴛᴏ" with lore "" and "&fᴇᴍ ᴜᴍ ᴍᴏᴍᴇɴᴛᴏ sᴀʙᴇʀᴇᴍᴏs" and "&fǫᴜᴇᴍ ᴠᴀɪ ɢᴀɴʜᴀʀ ᴏ ᴄᴀʀᴀ ᴏᴜ ᴄᴏʀᴏᴀ!"
+
+	set {Config::Update35::PetFormat::MoneyMulti} to " <##24fc2a>$ &fᴍᴜʟᴛɪᴘʟɪᴄᴀᴅᴏʀ ᴅᴇ ᴍᴏᴇᴅᴀs: <##24fc2a>{MONEY}x"
+
+	set {Config::Update35::Farms::Default} to "&f"
+	set {Config::Update35::Farms::Bedrock} to "&8Fazendas"
+	set {Config::Update35::Farms::Farms} to golden hoe named "<##90f600>Fazendas" with lore "" and "&fᴀǫᴜɪ ᴠᴏᴄᴇ ᴇɴᴄᴏɴᴛʀᴀʀá &eᴘʟᴀɴᴛᴀs&f ᴅᴇ ғᴀᴢᴇɴᴅᴀ." and "&fᴇʟᴀs ᴘᴏᴅᴇᴍ sᴇʀ ᴄᴀᴠᴀᴅᴀs ᴄᴏᴍ ᴜᴍᴀ ᴇɴxᴀᴅᴀ." and "" and "&aClique aqui para selecionar!"
+	set {Config::Update35::Farms::Mine} to golden pickaxe named "<##90f600>Mina" with lore "" and "&fᴀǫᴜɪ ᴠᴏᴄᴇ ᴇɴᴄᴏɴᴛʀᴀʀá ᴠᴀʟɪᴏsᴏs &eᴍɪɴᴇʀɪᴏs&f ᴇ" and "&6ᴍɪɴᴇʀᴀɪs&f ᴜᴛᴇɪs ᴘᴀʀᴀ ᴍᴇʟʜᴏʀᴀʀ ғᴇʀʀᴀᴍᴇɴᴛᴀs." and "&fᴇʟᴇs sᴀᴏ ᴍɪɴᴇʀᴀᴅᴏs ᴄᴏᴍ ᴜᴍᴀ ᴘɪᴄᴀʀᴇᴛᴀ." and "" and "&aClique aqui para selecionar!"
+	set {Config::Update35::Farms::Sawmill} to golden axe named "<##90f600>Serraria" with lore "" and "&fᴀǫᴜɪ ᴠᴏᴄᴇ ᴇɴᴄᴏɴᴛʀᴀʀá &eᴍᴀᴅᴇɪʀᴀ&f ɴᴇᴄᴇssᴀʀɪá ᴘᴀʀᴀ" and "&fᴀ &6ʀᴇғɪɴᴀʀɪᴀ&f. ᴇ ᴍɪɴᴇʀᴀᴅᴀ ᴄᴏᴍ ᴜᴍ ᴍᴀᴄʜᴀᴅᴏ." and "" and "&aClique aqui para selecionar!"
+	set {Config::Update35::Farms::Pond} to fishing rod named "<##90f600>Lago" with lore "" and "&fᴀǫᴜɪ ᴠᴏᴄᴇ ᴇɴᴄᴏɴᴛʀᴀʀá ᴜᴍ &eʟᴀɢᴏ&f. ᴠᴏᴄᴇ" and "&fᴘᴏᴅᴇ ᴘᴇsᴄᴀʀ ᴜsᴀɴᴅᴏ ᴜᴍᴀ ᴠᴀʀᴀ ᴅᴇ ᴘᴇsᴄᴀ" and "" and "&aClique aqui para selecionar!"
+	set {Config::Update35::Farms::FarmName} to "<##90f600>Fazenda {NAME}"
+	set {Config::Update35::Farms::FarmLore::*} to "" and "&fɪɴғᴏʀᴍᴀçõᴇs:" and "  <##90f600>• &fɴíᴠᴇʟ ɴᴇᴄᴇssáʀɪᴏ: <##84e001>{REQ}🔥" and "  <##90f600>• &fᴠᴀʟᴏʀ ᴅᴏ ᴅʀᴏᴘ: <##92f900>{VALUE}$" and "" and "&aClique aqui para teleportar!"
+	wait 1 tick
+
+	set {Config::Update35::Daily::Default} to "&f七七七七七七七七㈁"
+	set {Config::Update35::Daily::Bedrock} to "&8Recompensas Diárias"
+	set {Config::Update35::Daily::RewardName} to   "<##f9f631>Recompensa &l{DAY}"
+	set {Config::Update35::Daily::Desc::*} to "", "&7ᴄᴏʟᴇᴛᴇ ʀᴇᴄᴏᴍᴘᴇɴsᴀs ᴛᴏᴅᴏs", "&7ᴏs ᴅɪᴀs ᴇ ɢᴀɴʜᴇ ᴄʜᴀᴠᴇs!", "", "&fʀᴇᴄᴏᴍᴘᴇɴsᴀs:", "{REWARDS}", "", "{BOTTOM}"
+	set {Config::Update35::Daily::Now} to "&aᴄʟɪǫᴜᴇ ᴀǫᴜɪ ᴘᴀʀᴀ ᴄᴏʟᴇᴛᴀʀ!"
+	set {Config::Update35::Daily::Tomorrow} to "&cᴄᴏʟᴇᴛᴇ ᴇsᴛᴀ ʀᴇᴄᴏᴍᴘᴇɴsᴀ ᴀᴍᴀɴʜã!"
+	set {Config::Update35::Daily::PreviousFirst} to "&cᴄᴏʟᴇᴛᴇ ᴀs ʀᴇᴄᴏᴍᴘᴇɴsᴀs ᴀɴᴛᴇʀɪᴏʀᴇs ᴘʀɪᴍᴇɪʀᴏ!"
+	set {Config::Update35::Daily::AlreadyClaimed} to "&cᴠᴏᴄᴇ ᴊá ᴄᴏʟᴇᴛᴏᴜ ᴇsᴛᴀ ʀᴇᴄᴏᴍᴘᴇɴsᴀ!"
+	set {Config::Update35::Daily::KeyLore} to " <##1ef61e>★ &fx{NUMBER} &b🔱 {KEYNAME} &b🔱"
+	set {Config::Update35::Daily::KeysSequence::*} to "1:Common", "2:Common", "3:Common", "1:Magical", "1:Legendary", "1:Generators", "1:Gens"
+
+	set {Config::Update35::Daily::Key::Common} to "<##28b6fc>&lᴄʜᴀᴠᴇ ᴄᴏᴍᴜᴍ"
+	set {Config::Update35::Daily::Key::Magical} to "<##fc37ec>&lᴄʜᴀᴠᴇ ᴍáɢɪᴄᴀ"
+	set {Config::Update35::Daily::Key::Legendary} to "<##ebb011>&lᴄʜᴀᴠᴇ ʟᴇɴᴅáʀɪᴀ"
+	set {Config::Update35::Daily::Key::Generators} to "<##bc60fc>&lᴄʜᴀᴠᴇ ᴅᴇ ɢᴇʀᴀᴅᴏʀᴇs"
+	set {Config::Update35::Daily::Key::Gens} to "<##f9e422>&lᴄʜᴀᴠᴇ ᴅᴇ ɢᴇɴs"
+	wait 1 tick
+	set {Config::Update35::DiscordBot::ResponseTime} to "&cTempo de resposta expirou!"
+	set {Config::Update35::DiscordBot::SendMess} to "&b&l↓ &aEnvie mensagem para &6&l{PLAYER}&a digitando no chat! &b&l↓"
+	set {Config::Update35::DiscordBot::Sent} to "&aA mensagem foi enviada para &6&l{PLAYER}&a!"
+	set {Config::Update35::DiscordBot::Received} to "&6&lDiscord > &a{MESS} &7({USER})   <cmd:/^dcreply ^Server^ {REPLYID}><tooltip:&aQuer responder para {USER}?>&6&lʀᴇsᴘᴏɴᴅᴇʀ"
+	set {Config::Update35::DiscordBot::EnterMess} to "Digite a Mensagem"
+	set {Config::Update35::DiscordBot::SendMessage} to "Enviar Mensagem"
+	set {Config::Update35::DiscordBot::SendMessageTo} to "Enviar mensagem para {USER}!"
+	set {Config::Update35::DiscordBot::CheckStats} to "Verificar status do jogador"
+	set {Config::Update35::DiscordBot::SelectUser} to "Selecione um usuário para verificar"
+	set {Config::Update35::DiscordBot::YourMessage} to "Sua Mensagem"
+	set {Config::Update35::DiscordBot::Reply} to "Responder ({PLAYER})"
+	set {Config::Update35::DiscordBot::ReplyFrom} to "Resposta de {PLAYER}"
+	set {Config::Update35::DiscordBot::Stats::*} to "ɴɪᴄᴋɴᴀᴍᴇ", "ɴɪᴠᴇʟ", "ʀᴇɴᴀsᴄɪᴍᴇɴᴛᴏ", "ᴄʟᴀ", "ᴛᴏᴋᴇɴs", "ɢᴇʀᴀᴅᴏʀᴇs"
+
+	set {Config::Update35::ClanInfo} to "&6Clã: &6[&e{TAG}&6]"
+	set {Config::Update35::ClanLeader} to "&6Líder: &e{LEADER}"
+	set {Config::Update35::ClanMembers} to "&6Membros: {MEMBERS}"
+	set {Config::Update35::ResetWait} to "&cPor favor espere {SECONDS} segundos antes do próximo reset!"
+	set {Config::Update35::Teleporting} to "&aTeleportando..."
+
+	set {Config::Update351::AlreadyActive} to "&4❌ &cVocê já tem um pet ativo!"
+
+	send " <##00f818>○ &aReloaded &eUpdate V3.5" to {ReloadPlayer}
+
+# --------[ Done ]--------
+
+	set {ReloadTime} to true
+
+# Command for reload
+
+command /reloadconfig:
+	permission: *
+	permission message: &4❌ &cYou can't do that!
+	trigger:
+		set {_x} to now
+		set {ReloadPlayer} to player
+		delete {ReloadTime}
+		delete {Config::*}
+		send ""
+		send "&aClearing old Config..."
+		wait 0.5 second
+		send "&aSuccess!"
+		send ""
+		send "&aLoading new config... <##00f818>&l(Gens 3.5)"
+		send ""
+		send player title "" with subtitle "&aReloading..." for 10 seconds
+		execute console command "sk reload /configs/Config.sk"
+		while {ReloadTime} is not set:
+			add 1 to {_stop}
+			if {_stop} > 200:
+				send "&cAn error has occured!"
+				send player title "" with subtitle "&cError!" for 1 seconds
+				delete {ReloadTime}
+				delete {ReloadPlayer}
+				stop loop
+			wait 1 tick
+		send ""
+		send "&aConfig reloaded in <##FCA805>%difference between {_x} and now%&a!"
+		send ""
+		send player title "" with subtitle "<##FCA805>Success!" for 1 seconds
+		delete {ReloadTime}
+		stop
